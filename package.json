@@ -17,6 +17,7 @@
     "react": "^16.12.0",
     "react-admin": "^3.2.0",
     "react-admin-firebase": "github:benwinding/react-admin-firebase#upgrade-to-react-admin-v3",
+    "react-beautiful-dnd": "^13.0.0",
     "react-dom": "^16.12.0",
     "react-scripts": "3.3.0",
     "typescript": "^3.7.4"

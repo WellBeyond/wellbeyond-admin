@@ -1,9 +1,6 @@
 import React, { FunctionComponent } from 'react';
-import { Record } from 'ra-core';
-import PropTypes from 'prop-types';
 import {Photo} from 'cloudinary-react';
 import get from 'lodash.get';
-import { makeStyles } from '@material-ui/core/styles';
 import { FieldProps, InjectedFieldProps, fieldPropTypes } from './types';
 import { cloudinaryConfig } from "../CLOUDINARY_CONFIG";
 

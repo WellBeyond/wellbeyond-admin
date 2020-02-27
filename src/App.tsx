@@ -1,7 +1,10 @@
 import * as React from "react";
-import { SymptomIcon, SymptomList, SymptomShow, SymptomCreate, SymptomEdit } from "./resources/symptom";
-import { PhotoIcon, PhotoList, PhotoShow, PhotoCreate, PhotoEdit } from "./resources/photo";
-import { VideoIcon, VideoList, VideoShow, VideoCreate, VideoEdit } from "./resources/video";
+import systems from "./resources/systems";
+import symptoms from "./resources/symptoms";
+import solutions from "./resources/solutions";
+import facts from "./resources/facts";
+import photos from "./resources/photos";
+import videos from "./resources/videos";
 import { Admin, Resource } from "react-admin";
 import { FirebaseAuthProvider } from "react-admin-firebase";
 import { myDataProvider } from './dataProvider'
@@ -20,30 +23,12 @@ class App extends React.Component {
             dataProvider={myDataProvider}
             authProvider={authProvider}
         >
-          <Resource
-              name="symptoms"
-              icon={SymptomIcon}
-              list={SymptomList}
-              show={SymptomShow}
-              create={SymptomCreate}
-              edit={SymptomEdit}
-          />
-          <Resource
-              name="photos"
-              icon={PhotoIcon}
-              list={PhotoList}
-              show={PhotoShow}
-              create={PhotoCreate}
-              edit={PhotoEdit}
-          />
-          <Resource
-              name="videos"
-              icon={VideoIcon}
-              list={VideoList}
-              show={VideoShow}
-              create={VideoCreate}
-              edit={VideoEdit}
-          />
+          <Resource name="systems" {...systems} />
+          <Resource name="symptoms" {...symptoms} />
+          <Resource name="solutions" {...solutions} />
+          <Resource name="facts" {...facts} />
+          <Resource name="photos" {...photos} />
+          <Resource name="videos" {...videos} />
         </Admin>
     );
   }
