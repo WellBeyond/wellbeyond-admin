@@ -19,6 +19,7 @@ import {
     TextField,
     ImageField
 } from "react-admin";
+import CustomEdit from '../../components/CustomEdit';
 import { AddChildButton } from '../../components/AddChildButton';
 import RichTextInput from "ra-input-rich-text";
 
@@ -27,7 +28,7 @@ interface FormDataConsumerProps {
 }
 
 const FactEdit = (props: any) => (
-    <Edit {...props}>
+    <CustomEdit {...props}>
         <TabbedForm>
             <FormTab label="Summary">
                 <TextInput source="name" fullWidth={true}/>
@@ -73,7 +74,7 @@ const FactEdit = (props: any) => (
                 >
                     <Datagrid>
                         <DateField source="createdate"/>
-                        <TextField source="title" fullWidth={true}/>
+                        <TextField source="name"/>
                         <ImageField source="data.thumbnail_url" label="Thumbnail"/>
                         <EditButton/>
                         <DeleteButton/>
@@ -90,7 +91,7 @@ const FactEdit = (props: any) => (
                 >
                     <Datagrid>
                         <DateField source="createdate"/>
-                        <TextField source="title" fullWidth={true} />
+                        <TextField source="name" />
                         <ImageField source="data.thumbnail_url" label="Thumbnail"/>
                         <EditButton/>
                         <DeleteButton/>
@@ -99,7 +100,7 @@ const FactEdit = (props: any) => (
                 <AddChildButton parent="fact" child="video" />
             </FormTab>
         </TabbedForm>
-    </Edit>
+    </CustomEdit>
 );
 
 export default FactEdit;

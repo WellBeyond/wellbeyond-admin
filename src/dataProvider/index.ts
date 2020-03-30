@@ -1,4 +1,4 @@
-import { firebaseConfig as config } from './FIREBASE_CONFIG';
+import { firebaseConfig as config } from '../FIREBASE_CONFIG';
 import { FirebaseDataProvider } from "react-admin-firebase";
 import {
     CREATE,
@@ -9,7 +9,8 @@ import {
     GET_MANY_REFERENCE,
     GET_ONE,
     UPDATE,
-    UPDATE_MANY
+    UPDATE_MANY,
+    cacheDataProviderProxy
 } from "react-admin";
 
 const options = {
@@ -23,6 +24,9 @@ const handleResults = async (results:any, verb: string, resourceName: string, pa
     return results;
 };
 
-export const myDataProvider = async function(verb: string, resourceName: string, params: any): Promise<any> {
+const myDataProvider = async function(verb: string, resourceName: string, params: any): Promise<any> {
     return firebaseProviderApi(verb, resourceName, params).then((results:any) => {return handleResults(results, verb, resourceName, params)});
 };
+
+export default myDataProvider;
+

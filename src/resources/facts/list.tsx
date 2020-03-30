@@ -10,14 +10,14 @@ import {
 } from "react-admin";
 
 const FactList = (props: object) => (
-    <List {...props}>
-        <Datagrid>
+    <List {...props}
+          perPage={25}
+          sort={{field: 'name', order: 'ASC'}}>
+        <Datagrid optimized rowClick="edit">
             <TextField source="name" label="Fact name"/>
             <BooleanField source="isSystemProperty" label="Remember?" />
             <TextField source="questionText" />
             <TextField source="questionType" />
-            <EditButton label="" />
-            <DeleteButton label="" redirect={false}/>
         </Datagrid>
     </List>
 );

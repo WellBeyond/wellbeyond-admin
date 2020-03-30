@@ -10,11 +10,11 @@ import {
 } from "react-admin";
 
 const SymptomList = (props: object) => (
-    <List {...props}>
-        <Datagrid>
+    <List {...props}
+          perPage={25}
+          sort={{field: 'name', order: 'ASC'}}>
+        <Datagrid optimized rowClick="edit">
             <TextField source="name" label="Symptom name"/>
-            <EditButton label="" />
-            <DeleteButton label="" redirect={false}/>
         </Datagrid>
     </List>
 );

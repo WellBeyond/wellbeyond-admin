@@ -55,7 +55,7 @@ const FactShow = (props: any) => (
                         >
                             <Datagrid>
                                 <DateField source="createdate"/>
-                                <TextField source="title"/>
+                                <TextField source="name"/>
                                 <ImageField source="data.thumbnail_url" label="Thumbnail"/>
                                 <EditButton/>
                             </Datagrid>
@@ -70,7 +70,7 @@ const FactShow = (props: any) => (
                         >
                             <Datagrid>
                                 <DateField source="createdate"/>
-                                <TextField source="title"/>
+                                <TextField source="name"/>
                                 <ImageField source="data.thumbnail_url" label="Thumbnail"/>
                                 <EditButton/>
                             </Datagrid>

@@ -73,7 +73,7 @@ const SystemEdit = (props: any) => (
                 >
                     <Datagrid>
                         <DateField source="createdate"/>
-                        <TextField source="title" fullWidth={true}/>
+                        <TextField source="name"/>
                         <ImageField source="data.thumbnail_url" label="Thumbnail"/>
                         <EditButton/>
                         <DeleteButton/>
@@ -90,7 +90,7 @@ const SystemEdit = (props: any) => (
                 >
                     <Datagrid>
                         <DateField source="createdate"/>
-                        <TextField source="title" fullWidth={true} />
+                        <TextField source="name" />
                         <ImageField source="data.thumbnail_url" label="Thumbnail"/>
                         <EditButton/>
                         <DeleteButton/>

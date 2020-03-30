@@ -19,26 +19,28 @@ import {
     TextField,
     ImageField, SimpleForm, ReferenceInput
 } from "react-admin";
+import CustomEdit from '../../components/CustomEdit';
 import { AddChildButton } from '../../components/AddChildButton';
 import RichTextInput from "ra-input-rich-text";
+import {OrderedFormIterator} from "../../components/OrderedFormIterator";
 
 interface FormDataConsumerProps {
     formData: any;
 }
 
 const SolutionEdit = (props: any) => (
-    <Edit {...props}>
+    <CustomEdit {...props}>
         <TabbedForm>
             <FormTab label="Summary">
                 <TextInput source="name" fullWidth={true}/>
                 <BooleanInput source="askAreYouAble" label="Ask if the user is able to perform the fix first" fullWidth={true}/>
-                <BooleanInput source="askFoPhotoBefore" label="Ask for a before photo" fullWidth={true}/>
-                <BooleanInput source="askFoPhotoAfter" label="Ask for an after photo" fullWidth={true}/>
+                <BooleanInput source="askForPhotoBefore" label="Ask for a before photo" fullWidth={true}/>
+                <BooleanInput source="askForPhotoAfter" label="Ask for an after photo" fullWidth={true}/>
                 <RichTextInput source="description" fullWidth={true}/>
             </FormTab>
             <FormTab label="Preconditions">
                 <ArrayInput source="conditions">
-                    <SimpleFormIterator>
+                    <OrderedFormIterator>
                         <ReferenceInput label="Fact" source="factId" reference="facts">
                             <SelectInput optionText="name" />
                         </ReferenceInput>
@@ -50,14 +52,14 @@ const SolutionEdit = (props: any) => (
                             {id: '>=', name: 'Is Greater Than Or Equal To'}
                         ]}/>
                         <TextInput source="value" label="Value" />
-                    </SimpleFormIterator>
+                    </OrderedFormIterator>
                 </ArrayInput>
             </FormTab>
             <FormTab label="Step By Step">
                 <ArrayInput source="instructions">
-                    <SimpleFormIterator>
+                    <OrderedFormIterator>
                         <RichTextInput source="step" label="Instructions" fullWidth={true}/>
-                    </SimpleFormIterator>
+                    </OrderedFormIterator>
                 </ArrayInput>
             </FormTab>
             <FormTab label="Photos">
@@ -69,7 +71,7 @@ const SolutionEdit = (props: any) => (
                 >
                     <Datagrid>
                         <DateField source="createdate"/>
-                        <TextField source="title" fullWidth={true}/>
+                        <TextField source="name" />
                         <ImageField source="data.thumbnail_url" label="Thumbnail"/>
                         <EditButton/>
                         <DeleteButton/>
@@ -86,7 +88,7 @@ const SolutionEdit = (props: any) => (
                 >
                     <Datagrid>
                         <DateField source="createdate"/>
-                        <TextField source="title" fullWidth={true} />
+                        <TextField source="name" />
                         <ImageField source="data.thumbnail_url" label="Thumbnail"/>
                         <EditButton/>
                         <DeleteButton/>
@@ -95,7 +97,7 @@ const SolutionEdit = (props: any) => (
                 <AddChildButton parent="solution" child="video" />
             </FormTab>
         </TabbedForm>
-    </Edit>
+    </CustomEdit>
 );
 
 export default SolutionEdit;

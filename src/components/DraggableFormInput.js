@@ -6,7 +6,8 @@ import Button from '@material-ui/core/Button';
 import CloseIcon from '@material-ui/icons/RemoveCircleOutline';
 import MoveIcon from '@material-ui/icons/Reorder';
 import { Draggable } from 'react-beautiful-dnd';
-import { translate, FormInput } from 'ra-core';
+import { translate } from 'ra-core';
+import { FormInput } from "react-admin";
 
 const styles = theme => ({
     line: {
@@ -43,7 +44,7 @@ const styles = theme => ({
         paddingTop: '0.5em',
     },
     leftIcon: {
-        marginRight: theme.spacing.unit,
+        marginRight: theme.spacing(1),
     },
 });
 
@@ -58,47 +59,49 @@ export const DraggableFormInput = ({
                                        record,
                                        resource,
                                        translate,
-                                   }) => (
-    <Draggable draggableId={id} index={index}>
-        {provided => (
-            <li
-                className={classes.line}
-                ref={provided.innerRef}
-                {...provided.draggableProps}
-            >
-                <MoveIcon
-                    className={classes.index}
-                    {...provided.dragHandleProps}
-                />
-                <section className={classes.form}>
-                    {Children.map(children, input => (
-                        <FormInput
-                            basePath={basePath}
-                            input={cloneElement(input, {
-                                source: `${member}.${input.props.source}`,
-                                label: input.props.label || input.props.source,
-                            })}
-                            record={record}
-                            resource={resource}
-                        />
-                    ))}
-                </section>
-                <span className={classes.action}>
+                                   }) => {
+    return (
+        <Draggable draggableId={id} index={index}>
+            {provided => (
+                <div
+                    className={classes.line}
+                    ref={provided.innerRef}
+                    {...provided.draggableProps}
+                >
+                    <div
+                        className={classes.index}
+                        {...provided.dragHandleProps}
+                    ><MoveIcon/></div>
+                    <section className={classes.form}>
+                        {Children.map(children, input => (
+                            <FormInput
+                                basePath={basePath}
+                                input={cloneElement(input, {
+                                    source: `${member}.${input.props.source}`,
+                                    label: input.props.label || input.props.source,
+                                })}
+                                record={record}
+                                resource={resource}
+                            />
+                        ))}
+                    </section>
+                    <span className={classes.action}>
                     <Button size="small" onClick={onRemove(index)}>
                         <CloseIcon className={classes.leftIcon} />
                         {translate('ra.action.remove')}
                     </Button>
                 </span>
-            </li>
-        )}
-    </Draggable>
-);
+                </div>
+            )}
+        </Draggable>
+    );
+}
 
 DraggableFormInput.propTypes = {
     basePath: PropTypes.string,
     children: PropTypes.node,
     classes: PropTypes.object,
-    id: PropTypes.number,
+    id: PropTypes.string,
     index: PropTypes.number,
     member: PropTypes.string,
     onRemove: PropTypes.func,

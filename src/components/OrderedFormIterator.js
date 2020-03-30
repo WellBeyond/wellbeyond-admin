@@ -5,7 +5,6 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import AddIcon from '@material-ui/icons/AddCircleOutline';
-import { translate } from 'ra-core';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
 import DraggableFormInput from './DraggableFormInput';
@@ -20,36 +19,12 @@ const styles = theme => ({
             borderBottom: 'none',
         },
     },
-    line: {
-        display: 'flex',
-        listStyleType: 'none',
-        borderBottom: `solid 1px ${theme.palette.divider}`,
-        [theme.breakpoints.down('xs')]: { display: 'block' },
-        '&.fade-enter': {
-            opacity: 0.01,
-            transform: 'translateX(100vw)',
-        },
-        '&.fade-enter-active': {
-            opacity: 1,
-            transform: 'translateX(0)',
-            transition: 'all 500ms ease-in',
-        },
-        '&.fade-exit': {
-            opacity: 1,
-            transform: 'translateX(0)',
-        },
-        '&.fade-exit-active': {
-            opacity: 0.01,
-            transform: 'translateX(100vw)',
-            transition: 'all 500ms ease-in',
-        },
-    },
     form: { flex: 2 },
     action: {
         paddingTop: '0.5em',
     },
     leftIcon: {
-        marginRight: theme.spacing.unit,
+        marginRight: theme.spacing(1),
     },
 });
 
@@ -60,45 +35,51 @@ export class OrderedFormIterator extends Component {
         // but redux-form doesn't provide one (cf https://github.com/erikras/redux-form/issues/2735)
         // so we keep an internal map between the field position and an autoincrement id
         this.nextId = 0;
-        this.ids = props.fields ? props.fields.map(() => this.nextId++) : [];
+        this.fieldName = props.fields.name;
+        this.ids = props.fields ? props.fields.map(() => this.fieldName + '-' + this.nextId++) : [];
+        this.disableAdd = props.disableAdd;
     }
 
     removeField = index => () => {
-        const { fields } = this.props;
+        const { fields, onChange } = this.props;
         this.ids.splice(index, 1);
         fields.remove(index);
+        onChange && onChange(fields);
     };
 
     addField = () => {
-        const { fields } = this.props;
-        this.ids.push(this.nextId++);
+        const { fields, onChange } = this.props;
+        this.ids.push(this.fieldName + '-' + this.nextId++);
         fields.push({});
+        onChange && onChange(fields);
     };
 
     onDragEnd = result => {
         if (!result.destination) {
             return;
         }
-        const { fields } = this.props;
+        const { fields, onChange } = this.props;
         const startIndex = result.source.index;
         const endIndex = result.destination.index;
         const [removed] = this.ids.splice(startIndex, 1);
         this.ids.splice(endIndex, 0, removed);
         fields.move(startIndex, endIndex);
+        onChange && onChange(fields);
     };
 
     render() {
         const {
             classes = {},
             fields,
-            meta: { error, submitFailed },
-            translate,
+            meta: { error, submitFailed }
         } = this.props;
         return fields ? (
             <DragDropContext onDragEnd={this.onDragEnd}>
                 <Droppable droppableId="droppable">
                     {provided => (
-                        <ul className={classes.root} ref={provided.innerRef}>
+                        <div
+                            {...provided.droppableProps}
+                            ref={provided.innerRef} className={classes.root}>
                             {submitFailed && error && <span>{error}</span>}
                             <TransitionGroup>
                                 {fields.map((member, index) => (
@@ -117,18 +98,21 @@ export class OrderedFormIterator extends Component {
                                     </CSSTransition>
                                 ))}
                             </TransitionGroup>
-                            <li className={classes.line}>
-                                <span className={classes.action}>
-                                    <Button
-                                        size="small"
-                                        onClick={this.addField}
-                                    >
-                                        <AddIcon className={classes.leftIcon} />
-                                        {translate('ra.action.add')}
-                                    </Button>
-                                </span>
-                            </li>
-                        </ul>
+                            {provided.placeholder}
+                            {!this.disableAdd && (
+                                <div className={classes.line}>
+                                    <span className={classes.action}>
+                                        <Button
+                                            size="small"
+                                            onClick={this.addField}
+                                        >
+                                            <AddIcon className={classes.leftIcon} />
+                                            Add
+                                        </Button>
+                                    </span>
+                                </div>
+                            )}
+                        </div>
                     )}
                 </Droppable>
             </DragDropContext>
@@ -144,8 +128,7 @@ OrderedFormIterator.propTypes = {
     fields: PropTypes.object,
     meta: PropTypes.object,
     record: PropTypes.object,
-    resource: PropTypes.string,
-    translate: PropTypes.func,
+    resource: PropTypes.string
 };
 
-export default compose(translate, withStyles(styles))(OrderedFormIterator);
+export default compose(withStyles(styles))(OrderedFormIterator);

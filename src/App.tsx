@@ -1,14 +1,20 @@
 import * as React from "react";
+import { Admin, Resource } from "react-admin";
+import { FirebaseAuthProvider } from "react-admin-firebase";
+import { firebaseConfig as config } from './FIREBASE_CONFIG';
+import themeReducer from './themeReducer';
+import { Login, Layout } from './layout';
+import { Dashboard } from './dashboard';
+import customRoutes from './routes';
+import englishMessages from './i18n/en';
 import systems from "./resources/systems";
 import symptoms from "./resources/symptoms";
 import solutions from "./resources/solutions";
 import facts from "./resources/facts";
 import photos from "./resources/photos";
 import videos from "./resources/videos";
-import { Admin, Resource } from "react-admin";
-import { FirebaseAuthProvider } from "react-admin-firebase";
-import { myDataProvider } from './dataProvider'
-import { firebaseConfig as config } from './FIREBASE_CONFIG';
+import dataProvider from './dataProvider'
+import polyglotI18nProvider from 'ra-i18n-polyglot';
 
 const options = {
   logging: true,
@@ -16,12 +22,27 @@ const options = {
 };
 const authProvider = FirebaseAuthProvider(config, options);
 
+const i18nProvider = polyglotI18nProvider(locale => {
+  if (locale === 'fr') {
+    // return import('./i18n/fr').then(messages => messages.default);
+  }
+
+  // Always fallback on english
+  return englishMessages;
+}, 'en');
+
 class App extends React.Component {
   render() {
     return (
         <Admin
-            dataProvider={myDataProvider}
+            dataProvider={dataProvider}
             authProvider={authProvider}
+            customReducers={{ theme: themeReducer }}
+            customRoutes={customRoutes}
+            dashboard={Dashboard}
+            loginPage={Login}
+            layout={Layout}
+            i18nProvider={i18nProvider}
         >
           <Resource name="systems" {...systems} />
           <Resource name="symptoms" {...symptoms} />

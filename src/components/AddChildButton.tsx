@@ -19,7 +19,7 @@ export const AddChildButton: FunctionComponent<Props & InjectedFieldProps> = ({
     let buttonText:string = 'Add a ' + child;
     return (
         <Button
-            variant="raised"
+            variant="contained"
             component={Link}
             to={url}
             title={buttonText}
