@@ -31,7 +31,7 @@ import {
     Loading,
     Error
 } from 'react-admin';
-import {OrderedFormIterator} from "../../components/OrderedFormIterator";
+import OrderedFormIterator from "../../components/OrderedFormIterator";
 import SolutionCreate from "./create";
 
 const useStyles = makeStyles(
@@ -78,15 +78,15 @@ const SolutionArrayInput = props => {
     const {reference, record} = props;
     const translate = useTranslate();
     const classes = useStyles();
+    const [solutions, setSolutions] = useState(record[reference] || []);
     const [open, setOpen] = useState(false);
-    const [newSolution, setNewSolution] = useState();
     const [existingSolution, setExistingSolution] = useState('');
     const [allSolutions, setAllSolutions] = useState([]);
     const [solutionList, setSolutionList] = useState([]);
     const [loading, setLoading] = useState(true);
     const dataProvider = useDataProvider();
     const {
-        input: { onChange },
+        input: { value, onChange },
         meta: { touched, error },
         isRequired
     } = useInput(props);
@@ -98,12 +98,22 @@ const SolutionArrayInput = props => {
             pagination: { page: 1, perPage: 1000 },
         }).then(({ data }) => {
                 setAllSolutions(data);
+                filterExistingSolutions(data, record[reference]);
                 setLoading(false);
             })
             .catch(error => {
                 setLoading(false);
             })
     }, []);
+
+    const filterExistingSolutions = (existing, used) => {
+        const usedMap = {};
+        used && used.length && used.forEach(val => {
+            usedMap[val.solutionId] = true;
+        });
+        const available = existing && existing.filter(solution => !usedMap[solution.id]);
+        setSolutionList(available);
+    };
 
     const handleClickOpen = useCallback(
         event => {
@@ -117,13 +127,14 @@ const SolutionArrayInput = props => {
     };
     const [create] = useCreate('solutions');
     const notify = useNotify();
-    const handleArrayChanged = (fields) => {
-        const foo = fields;
+    const handleArrayChanged = (values) => {
+        filterExistingSolutions(allSolutions, values);
     };
     const handleSolutionSelected = useCallback(
         event => {
             record[reference] = record[reference] || [];
             record[reference].push({solutionId: event.target.value});
+            handleArrayChanged(record[reference]);
             onChange(record[reference]);
         });
 
@@ -135,8 +146,11 @@ const SolutionArrayInput = props => {
             {
                 onSuccess: ({ data: newSolution }) => {
                     notify('New solution created', 'info', {});
+                    record[reference] = record[reference] || [];
+                    record[reference].push({solutionId: newSolution.id});
+                    handleArrayChanged(record[reference]);
+                    onChange(record[reference]);
                     closeModal();
-                    setNewSolution(newSolution);
                 },
             }
         );
@@ -149,13 +163,8 @@ const SolutionArrayInput = props => {
 
     return (
         <Fragment>
-            <TopToolbar>
-                <Button onClick={handleClickOpen} label="ra.action.create">
-                    <IconContentAdd />
-                </Button>
-            </TopToolbar>
             <ArrayInput source={reference}>
-                <OrderedFormIterator disableAdd={true} onChange={handleArrayChanged}>
+                <OrderedFormIterator disableAdd={true} onChange={onChange}>
                     <ReferenceField {...props}>
                         <TextField source="name" />
                     </ReferenceField>
@@ -175,11 +184,13 @@ const SolutionArrayInput = props => {
                     <MenuItem value="" disabled>
                         Select an existing solution
                     </MenuItem>
-                    {allSolutions.map(solution => (
-                        <MenuItem value={solution.id} key={solution.id}>
-                            {solution.name}
-                        </MenuItem>
-                    ))}
+                    {solutionList.map(solution => {
+                        return (
+                            <MenuItem value={solution.id} key={solution.id}>
+                                {solution.name}
+                            </MenuItem>
+                        )
+                    })}
                 </Select>
             </FormControl>
             <Dialog

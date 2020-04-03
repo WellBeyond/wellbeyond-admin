@@ -4,8 +4,10 @@ import {
     SaveButton,
     Toolbar,
     useTranslate
-} from 'react-admin';import Button from '@material-ui/core/Button';
+} from 'react-admin';
+import Button from '@material-ui/core/Button';
 import IconCancel from '@material-ui/icons/Cancel';
+import IconSave from '@material-ui/icons/Save';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
@@ -20,19 +22,24 @@ const useStyles = makeStyles({
 
 const ModalToolbar = props => {
     const sanitizeProps = ({ onSave, onCancel, ...props }) => props;
-    const { onSave, onCancel, label='ra.action.cancel' } = props;
+    const { onSave, onCancel, cancelLabel='ra.action.cancel' } = props;
     const translate = useTranslate();
     const classes = useStyles();
 
     const ModalSaveButton = props => {
-        return <SaveButton {...props} onSave={onSave}/>;
+        return props.handleSubmitWithRedirect ?
+            <SaveButton {...props} onSave={onSave}/> :
+            <Button className={classes.button} onClick={onSave} variant={'contained'} color={'primary'}>
+                <IconSave className={classes.iconPaddingStyle} />
+                {translate('ra.action.save')}
+            </Button>;
     };
 
     const ModalCancelButton = props => {
         return (
             <Button className={classes.button} onClick={onCancel}>
                 <IconCancel className={classes.iconPaddingStyle} />
-                {label && translate(label, { _: label })}
+                {translate('ra.action.cancel')}
             </Button>
         );
     };
@@ -47,6 +54,7 @@ const ModalToolbar = props => {
 
 ModalToolbar.propTypes = {
     onCancel: PropTypes.func.isRequired,
+    onSave: PropTypes.func.isRequired
 };
 
 export default ModalToolbar;

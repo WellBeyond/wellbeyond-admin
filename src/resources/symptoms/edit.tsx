@@ -1,4 +1,4 @@
-import React, {Fragment} from "react";
+import React, {Fragment, useCallback, useState} from "react";
 // tslint:disable-next-line:no-var-requires
 import {
     Datagrid,
@@ -18,20 +18,20 @@ import {
     DateField,
     TextField,
     ImageField,
+    ReferenceField,
     ReferenceInput,
-    crudGetMatching
+    crudGetMatching, useCreate, useNotify
 } from "react-admin";
 import CustomEdit  from '../../components/CustomEdit';
 import { AddChildButton } from '../../components/AddChildButton';
-import { OrderedFormIterator } from '../../components/OrderedFormIterator';
-import SolutionArrayInput from '../solutions/SolutionArrayInput';
+import OrderedFormIterator from '../../components/OrderedFormIterator';
 import RichTextInput from "ra-input-rich-text";
+import AddSolution from "./AddSolution";
 
 interface FormDataConsumerProps {
     formData: any;
 }
 const SymptomEdit = (props: any) => {
-
     return (
         <CustomEdit {...props}>
             <TabbedForm>
@@ -40,11 +40,18 @@ const SymptomEdit = (props: any) => {
                     <RichTextInput source="description" fullWidth={true}/>
                 </FormTab>
                 <FormTab label="Potential Solutions">
-                    <SolutionArrayInput label="Solution"
-                                        source="solutionId"
-                                        reference="solutions"
-                                        sort={{ field: 'name', order: 'ASC' }}
-                                        />
+                    <ArrayInput source="solutions">
+                        <OrderedFormIterator addButton={<AddSolution />}>
+                            <ReferenceInput label="Solution"
+                                            source="solutionId"
+                                            reference="solutions"
+                                            disabled={true}
+                                            sort={{ field: 'name', order: 'ASC' }}
+                                            fullWidth={true}>
+                                <SelectInput optionText="name"/>
+                            </ReferenceInput>
+                        </OrderedFormIterator>
+                    </ArrayInput>
                 </FormTab>
                 <FormTab label="Potential Root Causes">
                     <ArrayInput source="causes">

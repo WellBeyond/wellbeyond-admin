@@ -22,7 +22,7 @@ import {
 import CustomEdit from '../../components/CustomEdit';
 import { AddChildButton } from '../../components/AddChildButton';
 import RichTextInput from "ra-input-rich-text";
-import {OrderedFormIterator} from "../../components/OrderedFormIterator";
+import OrderedFormIterator from "../../components/OrderedFormIterator";
 
 interface FormDataConsumerProps {
     formData: any;

@@ -10,8 +10,8 @@ import { parse } from 'query-string';
 import RichTextInput from "ra-input-rich-text";
 
 type MyProps = {
-    location: {[index: string]:any},
-    toolbar: object
+    location?: {[index: string]:any},
+    toolbar?: object
 }
 
 const SolutionCreate = (props: MyProps) => {
