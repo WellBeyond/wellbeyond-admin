@@ -1,6 +1,9 @@
 import React, { FC, useState } from 'react';
 import { useSelector } from 'react-redux';
 import SettingsIcon from '@material-ui/icons/Settings';
+import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
+import BookIcon from '@material-ui/icons/Book';
+import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
 import LabelIcon from '@material-ui/icons/Label';
 import { useMediaQuery, Theme } from '@material-ui/core';
 import { useTranslate, DashboardMenuItem, MenuItemLink } from 'react-admin';
@@ -9,12 +12,14 @@ import systems from "../resources/systems";
 import symptoms from "../resources/symptoms";
 import solutions from "../resources/solutions";
 import facts from "../resources/facts";
+import subjects from "../resources/subjects";
+import lessons from "../resources/lessons";
 import photos from "../resources/photos";
 import videos from "../resources/videos";
 import SubMenu from './SubMenu';
 import { AppState } from '../types';
 
-type MenuName = ('menuSystems' | 'menuRules' | 'menuAssets');
+type MenuName = ('menuSystems' | 'menuRules' | 'menuTraining' | 'menuAssets');
 
 interface Props {
     dense: boolean;
@@ -26,6 +31,7 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
     const [state, setState] = useState({
         menuSystems: false,
         menuRules: false,
+        menuTraining: false,
         menuAssets: false,
     });
     const translate = useTranslate();
@@ -96,6 +102,35 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
                         smart_count: 2,
                     })}
                     leftIcon={<facts.icon />}
+                    onClick={onMenuClick}
+                    sidebarIsOpen={open}
+                    dense={dense}
+                />
+            </SubMenu>
+            <SubMenu
+                handleToggle={() => handleToggle('menuTraining')}
+                isOpen={state.menuTraining}
+                sidebarIsOpen={open}
+                name="pos.menu.training"
+                icon={<LibraryBooksIcon />}
+                dense={dense}
+            >
+                <MenuItemLink
+                    to={`/subjects`}
+                    primaryText={translate(`resources.subjects.name`, {
+                        smart_count: 2,
+                    })}
+                    leftIcon={<BookIcon />}
+                    onClick={onMenuClick}
+                    sidebarIsOpen={open}
+                    dense={dense}
+                />
+                <MenuItemLink
+                    to={`/lessons`}
+                    primaryText={translate(`resources.lessons.name`, {
+                        smart_count: 2,
+                    })}
+                    leftIcon={<BookmarkBorderIcon />}
                     onClick={onMenuClick}
                     sidebarIsOpen={open}
                     dense={dense}

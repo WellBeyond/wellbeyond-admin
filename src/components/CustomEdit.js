@@ -4,12 +4,12 @@ import inflection from 'inflection';
 import PropTypes from 'prop-types';
 
 const sanitizeRestProps = ({
-                               basePath,
-                               className,
-                               hasList,
-                               hasShow,
-                               resource,
-                               ...rest
+                             basePath,
+                             className,
+                             hasList,
+                             hasShow,
+                             resource,
+                             ...rest
                            }) => rest;
 
 

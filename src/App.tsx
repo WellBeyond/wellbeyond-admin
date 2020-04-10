@@ -11,6 +11,8 @@ import systems from "./resources/systems";
 import symptoms from "./resources/symptoms";
 import solutions from "./resources/solutions";
 import facts from "./resources/facts";
+import subjects from "./resources/subjects";
+import lessons from "./resources/lessons";
 import photos from "./resources/photos";
 import videos from "./resources/videos";
 import dataProvider from './dataProvider'
@@ -48,6 +50,8 @@ class App extends React.Component {
           <Resource name="symptoms" {...symptoms} />
           <Resource name="solutions" {...solutions} />
           <Resource name="facts" {...facts} />
+          <Resource name="subjects" {...subjects} />
+          <Resource name="lessons" {...lessons} />
           <Resource name="photos" {...photos} />
           <Resource name="videos" {...videos} />
         </Admin>

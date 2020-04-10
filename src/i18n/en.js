@@ -23,6 +23,7 @@ export default {
         menu: {
             systems: 'Water Systems',
             rules: 'Diagnostic Rules',
+            training: 'Training Classes',
             assets: 'Photos and Videos',
         },
     },
@@ -70,6 +71,32 @@ export default {
             name: 'Fact |||| Facts',
             amount: '1 fact |||| %{smart_count} facts',
             title: 'Fact %{reference}',
+            fields: {
+            },
+            tabs: {
+            },
+            action: {
+            },
+            notification: {
+            }
+        },
+        subjects: {
+            name: 'Subject |||| Subjects',
+            amount: '1 subject |||| %{smart_count} subjects',
+            title: 'Subject %{reference}',
+            fields: {
+            },
+            tabs: {
+            },
+            action: {
+            },
+            notification: {
+            }
+        },
+        lessons: {
+            name: 'Lesson |||| Lessons',
+            amount: '1 lesson |||| %{smart_count} lessons',
+            title: 'Lesson %{reference}',
             fields: {
             },
             tabs: {

@@ -27,7 +27,7 @@ const VideoEdit = (props: any) => (
                 <SelectInput optionText="name" fullWidth={true}  />
             </ReferenceInput>
             <TextInput source="name" fullWidth={true} />
-            <CloudinaryVideoInput  source='data'>Upload Vide</CloudinaryVideoInput>
+            <CloudinaryVideoInput  source='data'>Upload Video</CloudinaryVideoInput>
             <RichTextInput source="description" />
         </SimpleForm>
     </Edit>

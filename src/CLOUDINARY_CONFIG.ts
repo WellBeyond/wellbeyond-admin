@@ -1,5 +1,5 @@
 export const cloudinaryConfig = {
-    cloudName: 'daveh',
-    photoUploadPreset: 'ckamflfk',
-    videoUploadPreset: 'ckamflfk'
+    cloudName: 'wellbeyond',
+    photoUploadPreset: 'z2lxfc1h',
+    videoUploadPreset: 'mc5aczwb'
 };
