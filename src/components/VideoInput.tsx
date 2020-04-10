@@ -112,11 +112,13 @@ export const VideoInput: React.FunctionComponent<MyProps> = ({record, source, la
                         <Grid container spacing={2}>
                             <Grid item className={classes.half}>
                                 {value ?
-                                    <Video
-                                        cloudName={cloudinaryConfig.cloudName}
-                                        publicId={value}
-                                        controls={true}
-                                    /> :
+                                    <div className={classes.video}>
+                                        <Video className={classes.video}
+                                               cloudName={cloudinaryConfig.cloudName}
+                                               publicId={value}
+                                               controls={true}
+                                        />
+                                    </div> :
                                     undefined
                                 }
                             </Grid>

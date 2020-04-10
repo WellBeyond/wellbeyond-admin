@@ -49,6 +49,7 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
         <div>
             {' '}
             <DashboardMenuItem onClick={onMenuClick} sidebarIsOpen={open} />
+            {/*
             <SubMenu
                 handleToggle={() => handleToggle('menuSystems')}
                 isOpen={state.menuSystems}
@@ -107,6 +108,7 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
                     dense={dense}
                 />
             </SubMenu>
+            */}
             <SubMenu
                 handleToggle={() => handleToggle('menuTraining')}
                 isOpen={state.menuTraining}
@@ -136,6 +138,7 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
                     dense={dense}
                 />
             </SubMenu>
+            {/*
             <SubMenu
                 handleToggle={() => handleToggle('menuAssets')}
                 isOpen={state.menuAssets}
@@ -165,6 +168,7 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
                     dense={dense}
                 />
             </SubMenu>
+            */}
             {isXSmall && (
                 <MenuItemLink
                     to="/configuration"

@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
         minHeight: '100vh',
         alignItems: 'center',
         justifyContent: 'flex-start',
-        background: 'url(https://source.unsplash.com/random/1600x900)',
+        background: 'url(https://static.wixstatic.com/media/69b78a_b402cd5e353c4ba3b1fa539e8ef9db58~mv2.jpg/v1/fill/w_1200,h_455,al_c,q_85/69b78a_b402cd5e353c4ba3b1fa539e8ef9db58~mv2.webp)',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
     },
@@ -127,9 +127,6 @@ const Login = () => {
                                 <Avatar className={classes.icon}>
                                     <LockIcon />
                                 </Avatar>
-                            </div>
-                            <div className={classes.hint}>
-                                Hint: demo / demo
                             </div>
                             <div className={classes.form}>
                                 <div className={classes.input}>

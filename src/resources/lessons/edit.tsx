@@ -40,6 +40,18 @@ const LessonEdit = (props: any) => (
                 <RichTextInput source="description" fullWidth={true}/>
                 <PhotoInput source='photo' />
             </FormTab>
+            <FormTab label="Questions">
+                <ArrayInput source="questions">
+                    <OrderedFormIterator>
+                        <TextInput source="questionText" fullWidth={true} label="Question Text"/>
+
+                        <SelectInput source="correctAnswer" label="Correct Answer" fullWidth={true} choices={[
+                            {id: 'yes', name: 'Yes'},
+                            {id: 'no', name: 'No'}
+                        ]}/>
+                    </OrderedFormIterator>
+                </ArrayInput>
+            </FormTab>
             <FormTab label="Pages">
                 <ArrayInput source="pages">
                     <OrderedFormIterator>
