@@ -1,57 +1,65 @@
 import React, {Fragment, useCallback, useState} from "react";
 // tslint:disable-next-line:no-var-requires
 import {
-    Datagrid,
     FormDataConsumer,
-    Edit,
     TabbedForm,
     FormTab,
-    ReferenceManyField,
     TextInput,
-    BooleanInput,
-    SelectInput,
     ArrayInput,
-    SimpleFormIterator,
-    NumberInput,
-    EditButton,
-    DeleteButton,
-    DateField,
     TextField,
-    ImageField,
-    ReferenceField,
-    ReferenceInput,
-    crudGetMatching, useCreate, useNotify
+    ReferenceField
 } from "react-admin";
 import CustomEdit  from '../../components/CustomEdit';
 import OrderedFormIterator from '../../components/OrderedFormIterator';
 import RichTextInput from "ra-input-rich-text";
 import AddLesson from "./AddLesson";
 import {PhotoInput} from "../../components/PhotoInput";
-import {VideoInput} from "../../components/VideoInput";
+import CustomEditToolbar from "../../components/CustomEditToolbar";
+import {makeStyles} from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+
+const useStyles = makeStyles(theme => ({
+    paper: {
+        padding: theme.spacing(2),
+        margin: 'auto',
+        marginTop: 10,
+        marginBottom: 10
+    }
+}));
+
 
 interface FormDataConsumerProps {
     formData: any;
 }
 const SubjectEdit = (props: any) => {
+    const classes = useStyles();
     return (
         <CustomEdit {...props}>
-            <TabbedForm>
+            <TabbedForm toolbar={<CustomEditToolbar />} warnWhenUnsavedChanges>
                 <FormTab label="Summary">
                     <TextInput source="name" fullWidth={true}/>
                     <RichTextInput source="description" fullWidth={true}/>
                     <PhotoInput source='photo' />
                 </FormTab>
                 <FormTab label="Lessons">
-                    <ArrayInput source="lessons">
+                    <ArrayInput source="lessons" label={false}>
                         <OrderedFormIterator addButton={<AddLesson />}>
-                            <ReferenceInput label="Lesson"
-                                            source="lessonId"
+                            <FormDataConsumer {...props}>
+                                {({ scopedFormData }:any) => {
+                                    return (
+                                        <Paper className={classes.paper}>
+                                        <ReferenceField
+                                            source={'lessonId'}
+                                            basePath={'/lessons'}
                                             reference="lessons"
-                                            disabled={true}
-                                            sort={{ field: 'name', order: 'ASC' }}
-                                            fullWidth={true}>
-                                <SelectInput optionText="name"/>
-                            </ReferenceInput>
+                                            record={scopedFormData}
+                                        >
+                                            <TextField source="name"/>
+                                        </ReferenceField>
+                                        </Paper>
+                                    );
+                                }}
+                            </FormDataConsumer>
                         </OrderedFormIterator>
                     </ArrayInput>
                 </FormTab>

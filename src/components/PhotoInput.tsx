@@ -7,6 +7,7 @@ import {makeStyles} from '@material-ui/core/styles';
 import { cloudinary, ICloudinaryUploadResult } from "../lib/cloudinary";
 import { cloudinaryConfig } from "../CLOUDINARY_CONFIG";
 import get from 'lodash.get';
+import {Labeled} from "react-admin";
 
 type MyProps = {
     record?: {[index: string]:any},
@@ -21,7 +22,8 @@ const useStyles = makeStyles(theme => ({
     },
     root: {
         flexGrow: 100,
-        marginTop: 20
+        marginTop: 10,
+        marginBottom: 10,
     },
     paper: {
         padding: theme.spacing(2),
@@ -91,38 +93,45 @@ export const PhotoInput: React.FunctionComponent<MyProps> = ({record, source, la
     const handleClick = () => {
         widget.open();
     };
+    const handleDelete = () => {
+        setUrl('');
+        onChange('');
+    };
 
     return (
         <Fragment>
-            <div className="MuiFormControl-root MuiTextField-root MuiFormControl-marginDense MuiFormControl-fullWidth">
-                {label !== '' && (
-                    <label
-                        className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-marginDense"
-                        data-shrink="true">
-                        <FieldTitle
-                            label={label}
-                            source={source}
-                            isRequired={isRequired}
-                        />
-                    </label>)
-                }
-                <div className={classes.root}>
-                    <Paper className={classes.paper}>
-                        <Grid container spacing={2}>
-                            <Grid item className={classes.half}>
+            <div className={classes.root}>
+                <Labeled
+                    label={label}
+                    source={source}
+                    isRequired={isRequired}
+                />
+                <Paper className={classes.paper}>
+                    <Grid container spacing={2}>
+                        <Grid item className={classes.half}>
+                            {value ?
+                                <div>
+                                    <img className={classes.img} alt="Image" src={value}/>
+                                </div>
+                                : undefined
+                            }
+                        </Grid>
+                        <Grid item className={classes.half}>
+                            <Grid container spacing={2}>
+                                <Grid item>
+                                    <Button variant="contained" onClick={handleClick}>{value ? 'Change Photo' : 'Upload Photo'}</Button>
+                                </Grid>
                                 {value ?
-                                    <div>
-                                        <img className={classes.img} alt="Image" src={value}/>
-                                    </div>
+                                    <Grid item>
+                                        <Button variant="contained"
+                                                onClick={handleDelete}>Remove Photo</Button>
+                                    </Grid>
                                     : undefined
                                 }
                             </Grid>
-                            <Grid item className={classes.half}>
-                                <Button variant="contained" onClick={handleClick}>{value ? 'Change Photo' : 'Upload Photo'}</Button>
-                            </Grid>
                         </Grid>
-                    </Paper>
-                </div>
+                    </Grid>
+                </Paper>
             </div>
         </Fragment>
     );

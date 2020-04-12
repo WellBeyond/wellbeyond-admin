@@ -27,6 +27,7 @@ import {CloudinaryPhotoInput} from "../../components/CloudinaryPhotoInput";
 import {CloudinaryVideoInput} from "../../components/CloudinaryVideoInput";
 import {PhotoInput} from "../../components/PhotoInput";
 import {VideoInput} from "../../components/VideoInput";
+import CustomEditToolbar from "../../components/CustomEditToolbar";
 
 interface FormDataConsumerProps {
     formData: any;
@@ -34,14 +35,14 @@ interface FormDataConsumerProps {
 
 const LessonEdit = (props: any) => (
     <CustomEdit {...props}>
-        <TabbedForm>
+        <TabbedForm toolbar={<CustomEditToolbar />} warnWhenUnsavedChanges>
             <FormTab label="Summary">
                 <TextInput source="name" fullWidth={true}/>
                 <RichTextInput source="description" fullWidth={true}/>
                 <PhotoInput source='photo' />
             </FormTab>
             <FormTab label="Questions">
-                <ArrayInput source="questions">
+                <ArrayInput source="questions" label={false}>
                     <OrderedFormIterator>
                         <TextInput source="questionText" fullWidth={true} label="Question Text"/>
 
@@ -53,7 +54,7 @@ const LessonEdit = (props: any) => (
                 </ArrayInput>
             </FormTab>
             <FormTab label="Pages">
-                <ArrayInput source="pages">
+                <ArrayInput source="pages" label={false}>
                     <OrderedFormIterator>
                         <TextInput source="title" fullWidth={true} label="Page Title"/>
                         <RichTextInput source="text" label="Lesson Text" fullWidth={true}/>

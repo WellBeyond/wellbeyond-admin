@@ -77,9 +77,10 @@ export const DraggableFormInput = ({
                             <FormInput
                                 basePath={basePath}
                                 input={cloneElement(input, {
-                                    source: `${member}.${input.props.source}`,
+                                    source: `${member + (input.props.source ? ('.'+input.props.source) : '')}`,
                                     label: input.props.label || input.props.source,
                                 })}
+                                index={index}
                                 record={record}
                                 resource={resource}
                             />
