@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useInput } from 'ra-core';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
@@ -92,7 +92,7 @@ export const CloudinaryPhotoInput: React.FunctionComponent<MyProps> = ({record, 
     };
 
     const [upload, setUpload] = React.useState(get(record, source));
-    const [widget, setWidget] = React.useState();
+    const [widget, setWidget] = useState<ICloudinaryWidget|null>();
     React.useEffect(() => {
         let widget = createWidget();
         setWidget(widget);
@@ -102,7 +102,7 @@ export const CloudinaryPhotoInput: React.FunctionComponent<MyProps> = ({record, 
     }, []);
 
     const handleClick = () => {
-        widget.open();
+        widget && widget.open();
     };
 
     if (inline && !upload) {

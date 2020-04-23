@@ -4,18 +4,22 @@ import {
     Create,
     SimpleForm,
     TextInput,
-    BooleanInput, Tab
+    BooleanInput, Tab, SelectInput, FormTab
 } from "react-admin";
 import RichTextInput from "ra-input-rich-text";
 import CustomCreateToolbar from "../../components/CustomCreateToolbar";
 import {PhotoInput} from "../../components/PhotoInput";
-const subjectDefaultValue = { lessons: [] };
+const subjectDefaultValue = { locale: 'en', lessons: [] };
 const SubjectCreate = (props: object) => (
     <Create {...props} >
         <SimpleForm initialValues={subjectDefaultValue} toolbar={<CustomCreateToolbar />}>
             <TextInput source="name" fullWidth={true}/>
+            <SelectInput source="locale" label="Language" fullWidth={true} choices={[
+                {id: 'en', name: 'English'},
+                {id: 'sw', name: 'Swahili'}
+            ]}/>
             <RichTextInput source="description" fullWidth={true}/>
-            <PhotoInput source='photo' />
+            <PhotoInput source='photo' label="Icon" />
         </SimpleForm>
     </Create>
 );

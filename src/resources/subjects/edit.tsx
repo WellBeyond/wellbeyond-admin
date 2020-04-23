@@ -7,7 +7,7 @@ import {
     TextInput,
     ArrayInput,
     TextField,
-    ReferenceField
+    ReferenceField, SelectInput
 } from "react-admin";
 import CustomEdit  from '../../components/CustomEdit';
 import OrderedFormIterator from '../../components/OrderedFormIterator';
@@ -38,8 +38,12 @@ const SubjectEdit = (props: any) => {
             <TabbedForm toolbar={<CustomEditToolbar />} warnWhenUnsavedChanges>
                 <FormTab label="Summary">
                     <TextInput source="name" fullWidth={true}/>
+                    <SelectInput source="locale" label="Language" fullWidth={true} choices={[
+                        {id: 'en', name: 'English'},
+                        {id: 'sw', name: 'Swahili'}
+                    ]}/>
                     <RichTextInput source="description" fullWidth={true}/>
-                    <PhotoInput source='photo' />
+                    <PhotoInput source='photo' label="Icon" />
                 </FormTab>
                 <FormTab label="Lessons">
                     <ArrayInput source="lessons" label={false}>

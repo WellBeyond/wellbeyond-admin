@@ -4,7 +4,7 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import {makeStyles} from '@material-ui/core/styles';
-import { cloudinary, ICloudinaryUploadResult } from "../lib/cloudinary";
+import {cloudinary, ICloudinaryUploadResult, ICloudinaryWidget} from "../lib/cloudinary";
 import { cloudinaryConfig } from "../CLOUDINARY_CONFIG";
 import get from 'lodash.get';
 import {Labeled} from "react-admin";
@@ -53,7 +53,6 @@ export const PhotoInput: React.FunctionComponent<MyProps> = ({record, source, la
 
     const handleUploadResult = (uploadResult: ICloudinaryUploadResult) =>{
         console.log("uploadResult", uploadResult);
-        setUrl(uploadResult.secure_url);
         onChange(uploadResult.secure_url);
     };
 
@@ -83,18 +82,16 @@ export const PhotoInput: React.FunctionComponent<MyProps> = ({record, source, la
         });
     };
 
-    const [url, setUrl] = useState(get(record, source));
-    const [widget, setWidget] = useState();
+    const [widget, setWidget] = useState<ICloudinaryWidget|null>();
     useEffect(() => {
         let widget = createWidget();
         setWidget(widget);
     }, []);
 
     const handleClick = () => {
-        widget.open();
+        widget && widget.open();
     };
     const handleDelete = () => {
-        setUrl('');
         onChange('');
     };
 
@@ -119,12 +116,12 @@ export const PhotoInput: React.FunctionComponent<MyProps> = ({record, source, la
                         <Grid item className={classes.half}>
                             <Grid container spacing={2}>
                                 <Grid item>
-                                    <Button variant="contained" onClick={handleClick}>{value ? 'Change Photo' : 'Upload Photo'}</Button>
+                                    <Button variant="contained" onClick={handleClick}>{(value ? 'Change ' : 'Upload ') + (label || 'Photo')}</Button>
                                 </Grid>
                                 {value ?
                                     <Grid item>
                                         <Button variant="contained"
-                                                onClick={handleDelete}>Remove Photo</Button>
+                                                onClick={handleDelete}>Remove {label || 'Photo'}</Button>
                                     </Grid>
                                     : undefined
                                 }

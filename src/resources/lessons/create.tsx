@@ -23,8 +23,12 @@ const LessonCreate = (props: MyProps) => {
         <Create {...props} >
             <SimpleForm toolbar={toolbar || <CustomCreateToolbar />} initialValues={lessonDefaultValue}>
                 <TextInput source="name" fullWidth={true}/>
+                <SelectInput source="locale" label="Language" fullWidth={true} choices={[
+                    {id: 'en', name: 'English'},
+                    {id: 'sw', name: 'Swahili'}
+                ]}/>
                 <RichTextInput source="description" fullWidth={true}/>
-                <PhotoInput source='photo' />
+                <PhotoInput source='photo' label="Photo" />
             </SimpleForm>
         </Create>
     );

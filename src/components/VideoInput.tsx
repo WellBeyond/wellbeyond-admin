@@ -5,9 +5,9 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import {makeStyles} from '@material-ui/core/styles';
-import { cloudinary, ICloudinaryUploadResult } from "../lib/cloudinary";
+import {cloudinary, ICloudinaryUploadResult, ICloudinaryWidget} from "../lib/cloudinary";
 import { cloudinaryConfig } from "../CLOUDINARY_CONFIG";
-import {Video} from "cloudinary-react";
+import VideoPlayer from "./VideoPlayer";
 
 type MyProps = {
     record?: {[index: string]:any},
@@ -38,7 +38,7 @@ const useStyles = makeStyles(theme => ({
     },
     video: {
         display: 'block',
-        maxWidth: '100%',
+        maxWidth: 400,
         maxHeight: 300,
     }
 }));
@@ -82,15 +82,18 @@ export const VideoInput: React.FunctionComponent<MyProps> = ({record, source, la
         });
     };
 
-    const [widget, setWidget] = useState();
+    const [widget, setWidget] = useState<ICloudinaryWidget|null>();
     const [videoId, setVideoId] = useState('video-' + Date.now());
     useEffect(() => {
-        let widget = createWidget();
+        const widget = createWidget();
         setWidget(widget);
     }, []);
 
     const handleClick = () => {
-        widget.open();
+        widget && widget.open();
+    };
+    const handleDelete = () => {
+        onChange('');
     };
 
     return (
@@ -105,19 +108,27 @@ export const VideoInput: React.FunctionComponent<MyProps> = ({record, source, la
                     <Grid container spacing={2}>
                         <Grid item className={classes.half}>
                             {value ?
-                                <div className={classes.video + ' cld-video-player cld-responsive'}>
-                                    <Video className={classes.video}
-                                           id={videoId}
-                                           cloudName={cloudinaryConfig.cloudName}
-                                           publicId={value}
-                                           controls={true}
+                                <div className={classes.video}>
+                                    <VideoPlayer id={videoId}
+                                           src={value}
                                     />
                                 </div> :
                                 undefined
                             }
                         </Grid>
                         <Grid item className={classes.half}>
-                            <Button variant="contained" onClick={handleClick}>{value ? 'Change Video' : 'Upload Video'}</Button>
+                            <Grid container spacing={2}>
+                                <Grid item>
+                                    <Button variant="contained" onClick={handleClick}>{(value ? 'Change ' : 'Upload ') + (label || 'Video')}</Button>
+                                </Grid>
+                                {value ?
+                                    <Grid item>
+                                        <Button variant="contained"
+                                                onClick={handleDelete}>Remove {label || 'Video'}</Button>
+                                    </Grid>
+                                    : undefined
+                                }
+                            </Grid>
                         </Grid>
                     </Grid>
                 </Paper>
