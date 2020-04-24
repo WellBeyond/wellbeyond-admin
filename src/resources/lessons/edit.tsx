@@ -68,7 +68,7 @@ const LessonEdit = (props: any) => (
                                                     scopedFormData.choices ? scopedFormData.choices.map((choice: any) => {
                                                         return {id: choice && choice.value, name: choice && choice.value}
                                                     }) : []
-                                                }/>);
+                                                }/>
                                             </Fragment>);
                                     } else if (scopedFormData.questionType === 'yes-no') {
                                         return (
