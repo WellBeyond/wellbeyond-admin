@@ -16,13 +16,8 @@ import lessons from "./resources/lessons";
 import photos from "./resources/photos";
 import videos from "./resources/videos";
 import dataProvider from './dataProvider'
+import authProvider from './authProvider'
 import polyglotI18nProvider from 'ra-i18n-polyglot';
-
-const options = {
-  logging: true,
-  rootRef: '/'
-};
-const authProvider = FirebaseAuthProvider(config, options);
 
 const i18nProvider = polyglotI18nProvider(locale => {
   if (locale === 'fr') {
@@ -37,12 +32,12 @@ class App extends React.Component {
   render() {
     return (
         <Admin
+            loginPage={Login}
             dataProvider={dataProvider}
             authProvider={authProvider}
             customReducers={{ theme: themeReducer }}
             customRoutes={customRoutes}
             dashboard={Dashboard}
-            loginPage={Login}
             layout={Layout}
             i18nProvider={i18nProvider}
         >

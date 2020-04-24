@@ -13,9 +13,13 @@ import { createMuiTheme, makeStyles } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import LockIcon from '@material-ui/icons/Lock';
 
-import { Notification } from 'react-admin';
+import {LoginForm, Notification} from 'react-admin';
 import { useTranslate, useLogin, useNotify } from 'ra-core';
 import { lightTheme } from './themes';
+
+import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
+import firebase from 'firebase';
+import ForgotPasswordButton from './ForgotPassword'
 
 const useStyles = makeStyles(theme => ({
     main: {
@@ -166,6 +170,9 @@ const Login = () => {
                                     )}
                                     {translate('ra.auth.sign_in')}
                                 </Button>
+                            </CardActions>
+                            <CardActions className={classes.actions}>
+                                <ForgotPasswordButton />
                             </CardActions>
                         </Card>
                         <Notification />

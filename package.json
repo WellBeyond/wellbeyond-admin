@@ -21,6 +21,7 @@
     "react-admin-firebase": "^3.1.11",
     "react-beautiful-dnd": "^13.0.0",
     "react-dom": "^16.13.1",
+    "react-firebaseui": "^4.1.0",
     "react-scripts": "3.3.0",
     "typescript": "^3.8.3",
     "video-react": "^0.14.1"
