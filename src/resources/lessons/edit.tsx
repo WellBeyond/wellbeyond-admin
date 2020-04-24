@@ -28,6 +28,7 @@ import {CloudinaryVideoInput} from "../../components/CloudinaryVideoInput";
 import {PhotoInput} from "../../components/PhotoInput";
 import {VideoInput} from "../../components/VideoInput";
 import CustomEditToolbar from "../../components/CustomEditToolbar";
+import { Fragment } from "react";
 
 interface FormDataConsumerProps {
     formData: any;
@@ -42,13 +43,47 @@ const LessonEdit = (props: any) => (
                 <PhotoInput source='photo' label="Photo"/>
             </FormTab>
             <FormTab label="Questions">
-                <ArrayInput source="questions" label={false}>
+                <ArrayInput source="questions" label=''>
                     <OrderedFormIterator>
-                        <TextInput source="questionText" fullWidth={true} label="Question Text"/>
-                        <SelectInput source="correctAnswer" label="Correct Answer" fullWidth={true} choices={[
-                            {id: 'yes', name: 'Yes'},
-                            {id: 'no', name: 'No'}
+                        <SelectInput source="questionType" fullWidth={true} label="What type of question?" choices={[
+                            {id: 'yes-no', name: 'Yes or No'},
+                            {id: 'choose-one', name: 'Multiple Choice'},
+                            {id: 'number', name: 'Number Input'}
                         ]}/>
+                        <TextInput source="questionText" fullWidth={true} label="Question Text"/>
+                        <FormDataConsumer {...props}>
+                            {({ scopedFormData, getSource }:any) => {
+                                if (scopedFormData && scopedFormData.questionType) {
+                                    if (scopedFormData.questionType === 'choose-one') {
+                                        return (
+                                            <Fragment>
+                                                <ArrayInput source={getSource('choices')} label={`Possible choices for: ${scopedFormData.questionText}`}>
+                                                    <SimpleFormIterator>
+                                                        <TextInput source="value" label="Choice Value"
+                                                                   fullWidth={true}/>
+                                                    </SimpleFormIterator>
+                                                </ArrayInput>
+                                                <SelectInput source={getSource('correctAnswer')} label="Correct Answer"
+                                                             fullWidth={true} choices={
+                                                    scopedFormData.choices ? scopedFormData.choices.map((choice: any) => {
+                                                        return {id: choice && choice.value, name: choice && choice.value}
+                                                    }) : []
+                                                }/>);
+                                            </Fragment>);
+                                    } else if (scopedFormData.questionType === 'yes-no') {
+                                        return (
+                                            <SelectInput source={getSource('correctAnswer')} label="Correct Answer" fullWidth={true}
+                                                         choices={[
+                                                             {id: 'yes', name: 'Yes'},
+                                                             {id: 'no', name: 'No'}
+                                                         ]}/>);
+                                    } else if (scopedFormData.questionType === 'number') {
+                                        return <NumberInput source={getSource('correctAnswer')} label="Correct Answer"
+                                                            fullWidth={true}/>;
+                                    }
+                                }
+                            }}
+                        </FormDataConsumer>
                     </OrderedFormIterator>
                 </ArrayInput>
             </FormTab>
