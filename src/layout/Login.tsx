@@ -17,8 +17,6 @@ import {LoginForm, Notification} from 'react-admin';
 import { useTranslate, useLogin, useNotify } from 'ra-core';
 import { lightTheme } from './themes';
 
-import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
-import firebase from 'firebase';
 import ForgotPasswordButton from './ForgotPassword'
 
 const useStyles = makeStyles(theme => ({
@@ -120,18 +118,18 @@ const Login = () => {
     };
 
     return (
-        <Form
-            onSubmit={handleSubmit}
-            validate={validate}
-            render={({ handleSubmit }) => (
-                <form onSubmit={handleSubmit} noValidate>
-                    <div className={classes.main}>
-                        <Card className={classes.card}>
-                            <div className={classes.avatar}>
-                                <Avatar className={classes.icon}>
-                                    <LockIcon />
-                                </Avatar>
-                            </div>
+        <div className={classes.main}>
+            <Card className={classes.card}>
+                <div className={classes.avatar}>
+                    <Avatar className={classes.icon}>
+                        <LockIcon />
+                    </Avatar>
+                </div>
+                <Form
+                    onSubmit={handleSubmit}
+                    validate={validate}
+                    render={({ handleSubmit }) => (
+                        <form onSubmit={handleSubmit} noValidate>
                             <div className={classes.form}>
                                 <div className={classes.input}>
                                     <Field
@@ -171,15 +169,15 @@ const Login = () => {
                                     {translate('ra.auth.sign_in')}
                                 </Button>
                             </CardActions>
-                            <CardActions className={classes.actions}>
-                                <ForgotPasswordButton />
-                            </CardActions>
-                        </Card>
-                        <Notification />
-                    </div>
-                </form>
-            )}
-        />
+                        </form>
+                    )}
+                />
+                <CardActions className={classes.actions}>
+                    <ForgotPasswordButton />
+                </CardActions>
+            </Card>
+            <Notification />
+        </div>
     );
 };
 
