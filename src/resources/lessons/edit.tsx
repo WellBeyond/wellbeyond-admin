@@ -84,6 +84,8 @@ const LessonEdit = (props: any) => (
                                 }
                             }}
                         </FormDataConsumer>
+
+                        <RichTextInput source="explanation" fullWidth={true} label={"Explanation for the correct answer"}/>
                     </OrderedFormIterator>
                 </ArrayInput>
             </FormTab>
@@ -93,7 +95,10 @@ const LessonEdit = (props: any) => (
                         <TextInput source="title" fullWidth={true} label="Page Title"/>
                         <RichTextInput source="text" label="Lesson Text" fullWidth={true}/>
                         <PhotoInput source='photo' />
+                        <TextInput source="photoCaption" fullWidth={true} label="Photo Caption"/>
                         <VideoInput source='video' />
+                        <TextInput source="videoCaption" fullWidth={true} label="Video Caption"/>
+                        <TextInput source="attestation" fullWidth={true} label="User attests to... (must be checked to continue)"/>
                     </OrderedFormIterator>
                 </ArrayInput>
             </FormTab>
