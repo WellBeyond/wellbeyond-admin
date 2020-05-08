@@ -5,7 +5,7 @@ import {
     List,
     TextField, SelectField,
     ArrayField,
-    SingleFieldList, ChipField, ReferenceField, ImageField
+    SingleFieldList, ChipField, ReferenceField, ImageField, BooleanField
 } from "react-admin";
 import { makeStyles } from '@material-ui/core';
 
@@ -31,9 +31,10 @@ const LessonList = (props: object) => {
               sort={{field: 'name', order: 'ASC'}}>
             <Datagrid optimized rowClick="edit">
                 <TextField source="name" label="Lesson name" className={classes.nameColumn}/>
+                <BooleanField source="isPublished" label="Published?"/>
                 <ImageField source="photo" label="Photo" className={classes.photoColumn}/>
                 <ArrayField label="Pages" source="pages">
-                    <SingleFieldList>
+                    <SingleFieldList linkType={false}>
                         <ChipField source="title" clickable={false}/>
                     </SingleFieldList>
                 </ArrayField>

@@ -39,6 +39,7 @@ const LessonEdit = (props: any) => (
         <TabbedForm toolbar={<CustomEditToolbar />} warnWhenUnsavedChanges>
             <FormTab label="Summary">
                 <TextInput source="name" fullWidth={true}/>
+                <BooleanInput source="isPublished" label="Published?" fullWidth={true}/>
                 <RichTextInput source="description" fullWidth={true}/>
                 <PhotoInput source='photo' label="Photo"/>
             </FormTab>

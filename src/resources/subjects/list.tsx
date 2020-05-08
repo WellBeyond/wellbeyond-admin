@@ -5,7 +5,7 @@ import {
     List,
     TextField, SelectField,
     ArrayField,
-    SingleFieldList, ChipField, ReferenceField
+    SingleFieldList, ChipField, ReferenceField, BooleanField
 } from "react-admin";
 import { makeStyles } from '@material-ui/core';
 
@@ -25,6 +25,7 @@ const SubjectList = (props: object) => {
               sort={{field: 'name', order: 'ASC'}}>
             <Datagrid optimized rowClick="edit">
                 <TextField source="name" label="Subject name" className={classes.nameColumn}/>
+                <BooleanField source="isPublished" label="Published?"/>
                 <SelectField source="locale" label="Language" choices={[
                     {id: 'en', name: 'English'},
                     {id: 'sw', name: 'Swahili'}
