@@ -12,6 +12,7 @@ const UserShow = (props: any) => (
                         <TextField source="name" label="Name"/>
                         <TextField source="email" label="Email Address"/>
                         <TextField source="organization" label="Organization"/>
+                        <TextField source="community" label="Community"/>
                         <BooleanField source="acceptedTerms" label="Accepted Terms?"/>
                     </Tab>
                 </TabbedShowLayout>
