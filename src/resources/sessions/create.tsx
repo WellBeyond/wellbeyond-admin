@@ -10,12 +10,12 @@ type MyProps = {
     toolbar?: object
 }
 
-const lessonDefaultValue = { pages: [] };
-const LessonCreate = (props: MyProps) => {
+const sessionDefaultValue = { pages: [] };
+const SessionCreate = (props: MyProps) => {
     const {toolbar} = props;
     return (
         <Create {...props} >
-            <SimpleForm toolbar={toolbar || <CustomCreateToolbar />} initialValues={lessonDefaultValue}>
+            <SimpleForm toolbar={toolbar || <CustomCreateToolbar />} initialValues={sessionDefaultValue}>
                 <TextInput source="name" fullWidth={true}/>
                 <SelectInput source="locale" label="Language" fullWidth={true} choices={[
                     {id: 'en', name: 'English'},
@@ -28,4 +28,4 @@ const LessonCreate = (props: MyProps) => {
     );
 };
 
-export default LessonCreate;
+export default SessionCreate;

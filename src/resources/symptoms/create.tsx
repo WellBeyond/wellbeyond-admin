@@ -1,12 +1,6 @@
 import * as React from "react";
 // tslint:disable-next-line:no-var-requires
-import {
-    Create,
-    SimpleForm,
-    TextInput,
-    BooleanInput, Tab
-} from "react-admin";
-import RichTextInput from "ra-input-rich-text";
+import {Create, SimpleForm, TextInput} from "react-admin";
 
 const SymptomCreate = (props: object) => (
     <Create {...props} >

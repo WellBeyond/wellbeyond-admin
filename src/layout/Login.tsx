@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
-import { Field, withTypes } from 'react-final-form';
-import { useLocation } from 'react-router-dom';
+import {Field, withTypes} from 'react-final-form';
+import {useLocation} from 'react-router-dom';
 
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -9,13 +9,13 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import TextField from '@material-ui/core/TextField';
-import { createMuiTheme, makeStyles } from '@material-ui/core/styles';
-import { ThemeProvider } from '@material-ui/styles';
+import {createMuiTheme, makeStyles} from '@material-ui/core/styles';
+import {ThemeProvider} from '@material-ui/styles';
 import LockIcon from '@material-ui/icons/Lock';
 
-import {LoginForm, Notification} from 'react-admin';
-import { useTranslate, useLogin, useNotify } from 'ra-core';
-import { lightTheme } from './themes';
+import {Notification} from 'react-admin';
+import {useLogin, useNotify, useTranslate} from 'ra-core';
+import {lightTheme} from './themes';
 
 import ForgotPasswordButton from './ForgotPassword'
 

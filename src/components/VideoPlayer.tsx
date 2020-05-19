@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import "./VideoPlayer.css";
-import { Player, BigPlayButton, ControlBar } from 'video-react';
-import {ICloudinaryWidget} from "../lib/cloudinary";
+import {BigPlayButton, ControlBar, Player} from 'video-react';
 
 interface VideoPlayerProps {
     id: string;

@@ -1,49 +1,21 @@
-import React, { useCallback } from 'react';
-import PropTypes from 'prop-types';
-import {
-  DeleteButton,
-  SaveButton,
-  Toolbar,
-  useTranslate
-} from 'react-admin';
+import React from 'react';
+import {DeleteButton, SaveButton, Toolbar} from 'react-admin';
 import Grid from '@material-ui/core/Grid';
 import IconSave from '@material-ui/icons/Save';
 import IconSaveAlt from '@material-ui/icons/SaveAlt';
-import { makeStyles } from '@material-ui/core/styles';
-
-const useStyles = makeStyles(
-  theme => ({
-    defaultToolbar: {
-      flex: 1,
-      display: 'flex',
-      justifyContent: 'space-between',
-    },
-    buttonGroup: {
-
-    }
-  })
-);
 
 const CustomEditToolbar = props => {
-  const classes = useStyles(props);
-  const translate = useTranslate();
   const {
     basePath,
-    children,
-    className,
-    classes: classesOverride,
     handleSubmit,
     handleSubmitWithRedirect,
     invalid,
-    pristine,
     record,
     redirect,
     resource,
     saving,
     submitOnEnter,
     undoable,
-    width,
-    ...rest
   } = props;
 
   return (

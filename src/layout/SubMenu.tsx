@@ -1,4 +1,4 @@
-import React, { FC, Fragment, ReactElement } from 'react';
+import React, {FC, Fragment, ReactElement} from 'react';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import List from '@material-ui/core/List';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -7,8 +7,8 @@ import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import Collapse from '@material-ui/core/Collapse';
 import Tooltip from '@material-ui/core/Tooltip';
-import { makeStyles } from '@material-ui/core/styles';
-import { useTranslate } from 'react-admin';
+import {makeStyles} from '@material-ui/core/styles';
+import {useTranslate} from 'react-admin';
 
 const useStyles = makeStyles(theme => ({
     icon: { minWidth: theme.spacing(5) },

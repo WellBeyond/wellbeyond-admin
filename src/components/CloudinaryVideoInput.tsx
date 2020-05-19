@@ -1,16 +1,12 @@
-import React, {useState} from 'react';
-import {useInput } from 'ra-core';
-import Button from '@material-ui/core/Button';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
+import React, {useCallback, useState} from 'react';
+import {useInput} from 'ra-core';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import {makeStyles} from '@material-ui/core/styles';
 import {Video} from 'cloudinary-react';
-import { cloudinary, ICloudinaryUploadResult, ICloudinaryWidget } from "../lib/cloudinary";
-import { cloudinaryConfig } from "../CLOUDINARY_CONFIG";
+import {cloudinary, ICloudinaryUploadResult, ICloudinaryWidget} from "../lib/cloudinary";
+import {cloudinaryConfig} from "../CLOUDINARY_CONFIG";
 import get from 'lodash.get';
 import {NumberInput, TextInput} from "react-admin";
 
@@ -51,23 +47,19 @@ const useStyles = makeStyles(theme => ({
 export const CloudinaryVideoInput: React.FunctionComponent<MyProps> = ({record, source, id, inline, ...rest}) => {
     const classes = useStyles();
     const {
-        input: { value, onChange },
+        input: { onChange },
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         meta: { touched, error },
     } = useInput({ source, ...rest });
 
-    const setUploadResult = (uploadResult: ICloudinaryUploadResult) =>{
+    const setUploadResult = useCallback((uploadResult: ICloudinaryUploadResult) =>{
         console.log("uploadResult", uploadResult);
         setUpload(uploadResult);
         onChange(uploadResult);
-        if (inline) {
-            inline = false;
-            setWidget(createWidget());
-        }
-    };
+    },[onChange]);
 
-    const createWidget = () => {
-        let options ={
+    const createWidget = useCallback(() => {
+        let options = {
             cloudName: cloudinaryConfig.cloudName,
             uploadPreset: cloudinaryConfig.videoUploadPreset,
             showPoweredBy: false,
@@ -79,10 +71,10 @@ export const CloudinaryVideoInput: React.FunctionComponent<MyProps> = ({record, 
             singleUploadAutoClose: true,
             showAdvancedOptions: false,
             cropping: true,
-            inlineContainer: inline ? ('#'+id+'-upload-widget') : undefined
+            inlineContainer: inline ? ('#' + id + '-upload-widget') : undefined
 
         };
-        return cloudinary.createUploadWidget(options, function(err: object, result: any) {
+        return cloudinary.createUploadWidget(options, function (err: object, result: any) {
             if (err) {
                 return console.log(err);
             }
@@ -90,7 +82,7 @@ export const CloudinaryVideoInput: React.FunctionComponent<MyProps> = ({record, 
                 setUploadResult(result.info);
             }
         });
-    };
+    }, [id, inline, setUploadResult]);
 
     const [upload, setUpload] = useState(get(record, source));
     const [widget, setWidget] = useState<ICloudinaryWidget|null>();
@@ -100,7 +92,7 @@ export const CloudinaryVideoInput: React.FunctionComponent<MyProps> = ({record, 
         if (inline) {
             widget.open();
         }
-    }, []);
+    }, [createWidget, inline]);
 
     const handleClick = () => {
         widget && widget.open();

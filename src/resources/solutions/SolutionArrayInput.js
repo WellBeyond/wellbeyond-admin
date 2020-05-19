@@ -1,8 +1,6 @@
-import React, { Fragment, useState, useCallback, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import React, {Fragment, useCallback, useEffect, useState} from 'react';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
+import {makeStyles} from '@material-ui/core/styles';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
@@ -10,26 +8,17 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
-import IconContentAdd from '@material-ui/icons/Add';
-import DialogActions from '@material-ui/core/DialogActions';
 import ModalToolbar from '../../components/ModalToolbar';
-import SolutionPreview from './SolutionPreview'
 
 import {
     ArrayInput,
-    crudGetMatching,
-    ReferenceInput,
-    SelectInput,
     ReferenceField,
     TextField,
-    TopToolbar,
     useCreate,
-    useNotify,
-    useTranslate,
     useDataProvider,
     useInput,
-    Loading,
-    Error
+    useNotify,
+    useTranslate
 } from 'react-admin';
 import OrderedFormIterator from "../../components/OrderedFormIterator";
 import SolutionCreate from "./create";

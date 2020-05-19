@@ -1,10 +1,8 @@
 import * as React from "react";
-import { Admin, Resource } from "react-admin";
-import { FirebaseAuthProvider } from "react-admin-firebase";
-import { firebaseConfig as config } from './FIREBASE_CONFIG';
+import {Admin, Resource} from "react-admin";
 import themeReducer from './themeReducer';
-import { Login, Layout } from './layout';
-import { Dashboard } from './dashboard';
+import {Layout, Login} from './layout';
+import {Dashboard} from './dashboard';
 import customRoutes from './routes';
 import englishMessages from './i18n/en';
 import systems from "./resources/systems";
@@ -13,8 +11,10 @@ import solutions from "./resources/solutions";
 import facts from "./resources/facts";
 import subjects from "./resources/subjects";
 import lessons from "./resources/lessons";
+import sessions from "./resources/sessions";
 import photos from "./resources/photos";
-import videos from "./resources/videos";
+import videos from "./resources/videos"
+import users from "./resources/users";
 import dataProvider from './dataProvider'
 import authProvider from './authProvider'
 import polyglotI18nProvider from 'ra-i18n-polyglot';
@@ -46,9 +46,11 @@ class App extends React.Component {
           <Resource name="solutions" {...solutions} />
           <Resource name="facts" {...facts} />
           <Resource name="subjects" {...subjects} />
+          <Resource name="sessions" {...sessions} />
           <Resource name="lessons" {...lessons} />
           <Resource name="photos" {...photos} />
           <Resource name="videos" {...videos} />
+          <Resource name="users" {...users} />
         </Admin>
     );
   }

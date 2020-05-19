@@ -17,14 +17,14 @@ const useStyles = makeStyles({
     }
 });
 
-const LessonList = (props: object) => {
+const SessionList = (props: object) => {
     const classes = useStyles();
     return (
         <List {...props}
               perPage={25}
               sort={{field: 'name', order: 'ASC'}}>
             <Datagrid optimized rowClick="edit">
-                <TextField source="name" label="Lesson name" className={classes.nameColumn}/>
+                <TextField source="name" label="Session name" className={classes.nameColumn}/>
                 <BooleanField source="isPublished" label="Published?"/>
                 <ImageField source="photo" label="Photo" className={classes.photoColumn}/>
                 <ArrayField label="Pages" source="pages">
@@ -37,4 +37,4 @@ const LessonList = (props: object) => {
     );
 }
 
-export default LessonList;
+export default SessionList;

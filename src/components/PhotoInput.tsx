@@ -1,12 +1,11 @@
-import React, {useState, useEffect, Fragment} from 'react';
-import {useInput, FieldTitle } from 'ra-core';
+import React, {Fragment, useEffect, useCallback, useState} from 'react';
+import {useInput} from 'ra-core';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import {makeStyles} from '@material-ui/core/styles';
 import {cloudinary, ICloudinaryUploadResult, ICloudinaryWidget} from "../lib/cloudinary";
-import { cloudinaryConfig } from "../CLOUDINARY_CONFIG";
-import get from 'lodash.get';
+import {cloudinaryConfig} from "../CLOUDINARY_CONFIG";
 import {Labeled} from "react-admin";
 
 type MyProps = {
@@ -51,12 +50,12 @@ export const PhotoInput: React.FunctionComponent<MyProps> = ({record, source, la
         meta: { touched, error },
     } = useInput({ source, ...rest });
 
-    const handleUploadResult = (uploadResult: ICloudinaryUploadResult) =>{
+    const handleUploadResult = useCallback((uploadResult: ICloudinaryUploadResult) =>{
         console.log("uploadResult", uploadResult);
         onChange(uploadResult.secure_url);
-    };
+    }, [onChange]);
 
-    const createWidget = () => {
+    const createWidget = useCallback(() => {
         let options ={
             cloudName: cloudinaryConfig.cloudName,
             uploadPreset: cloudinaryConfig.photoUploadPreset,
@@ -80,13 +79,13 @@ export const PhotoInput: React.FunctionComponent<MyProps> = ({record, source, la
                 handleUploadResult(result.info);
             }
         });
-    };
+    },[handleUploadResult]);
 
     const [widget, setWidget] = useState<ICloudinaryWidget|null>();
     useEffect(() => {
         let widget = createWidget();
         setWidget(widget);
-    }, []);
+    }, [createWidget]);
 
     const handleClick = () => {
         widget && widget.open();
@@ -108,7 +107,7 @@ export const PhotoInput: React.FunctionComponent<MyProps> = ({record, source, la
                         <Grid item className={classes.half}>
                             {value ?
                                 <div>
-                                    <img className={classes.img} alt="Image" src={value}/>
+                                    <img className={classes.img} alt="Uploaded file" src={value}/>
                                 </div>
                                 : undefined
                             }

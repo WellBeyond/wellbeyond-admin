@@ -1,4 +1,4 @@
-import React, {useState, useEffect, Fragment} from 'react';
+import React, {Fragment, useCallback, useEffect, useState} from 'react';
 import {useInput} from 'ra-core';
 import {Labeled} from 'react-admin';
 import Button from '@material-ui/core/Button';
@@ -6,7 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import {makeStyles} from '@material-ui/core/styles';
 import {cloudinary, ICloudinaryUploadResult, ICloudinaryWidget} from "../lib/cloudinary";
-import { cloudinaryConfig } from "../CLOUDINARY_CONFIG";
+import {cloudinaryConfig} from "../CLOUDINARY_CONFIG";
 import VideoPlayer from "./VideoPlayer";
 
 type MyProps = {
@@ -51,13 +51,13 @@ export const VideoInput: React.FunctionComponent<MyProps> = ({record, source, la
         meta: { touched, error },
     } = useInput({ source, ...rest });
 
-    const handleUploadResult = (uploadResult: ICloudinaryUploadResult) =>{
+    const handleUploadResult = useCallback((uploadResult: ICloudinaryUploadResult) =>{
         console.log("uploadResult", uploadResult);
         onChange(uploadResult.secure_url);
-    };
+    },[onChange]);
 
-    const createWidget = () => {
-        let options ={
+    const createWidget = useCallback(() => {
+        let options = {
             cloudName: cloudinaryConfig.cloudName,
             uploadPreset: cloudinaryConfig.videoUploadPreset,
             showPoweredBy: false,
@@ -71,7 +71,7 @@ export const VideoInput: React.FunctionComponent<MyProps> = ({record, source, la
             cropping: false
 
         };
-        return cloudinary.createUploadWidget(options, function(err: object, result: any) {
+        return cloudinary.createUploadWidget(options, function (err: object, result: any) {
             if (err) {
                 return console.log(err);
             }
@@ -80,14 +80,13 @@ export const VideoInput: React.FunctionComponent<MyProps> = ({record, source, la
                 handleUploadResult(result.info);
             }
         });
-    };
+    }, [handleUploadResult]);
 
     const [widget, setWidget] = useState<ICloudinaryWidget|null>();
-    const [videoId, setVideoId] = useState('video-' + Date.now());
     useEffect(() => {
         const widget = createWidget();
         setWidget(widget);
-    }, []);
+    }, [createWidget]);
 
     const handleClick = () => {
         widget && widget.open();
@@ -109,9 +108,7 @@ export const VideoInput: React.FunctionComponent<MyProps> = ({record, source, la
                         <Grid item className={classes.half}>
                             {value ?
                                 <div className={classes.video}>
-                                    <VideoPlayer id={videoId}
-                                           src={value}
-                                    />
+                                    <VideoPlayer id={'video-' + Date.now()} src={value} />
                                 </div> :
                                 undefined
                             }

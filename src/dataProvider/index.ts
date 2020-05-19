@@ -1,17 +1,5 @@
-import { firebaseConfig as config } from '../FIREBASE_CONFIG';
-import { FirebaseDataProvider } from "react-admin-firebase";
-import {
-    CREATE,
-    DELETE,
-    DELETE_MANY,
-    GET_LIST,
-    GET_MANY,
-    GET_MANY_REFERENCE,
-    GET_ONE,
-    UPDATE,
-    UPDATE_MANY,
-    cacheDataProviderProxy
-} from "react-admin";
+import {firebaseConfig as config} from '../FIREBASE_CONFIG';
+import {FirebaseDataProvider} from "react-admin-firebase";
 
 const options = {
     logging: true,

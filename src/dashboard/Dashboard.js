@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { useVersion, useDataProvider } from 'react-admin';
-import { useMediaQuery } from '@material-ui/core';
+import React from 'react';
+import {useMediaQuery} from '@material-ui/core';
 
 import Welcome from './Welcome';
 
@@ -13,9 +12,6 @@ const styles = {
 };
 
 const Dashboard = () => {
-    const [state, setState] = useState({});
-    const version = useVersion();
-    const dataProvider = useDataProvider();
     const isXSmall = useMediaQuery(theme => theme.breakpoints.down('xs'));
     const isSmall = useMediaQuery(theme => theme.breakpoints.down('sm'));
 

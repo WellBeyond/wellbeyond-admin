@@ -23,7 +23,7 @@ interface FormDataConsumerProps {
     formData: any;
 }
 
-const LessonEdit = (props: any) => (
+const SessionEdit = (props: any) => (
     <CustomEdit {...props}>
         <TabbedForm toolbar={<CustomEditToolbar />} warnWhenUnsavedChanges>
             <FormTab label="Summary">
@@ -83,7 +83,7 @@ const LessonEdit = (props: any) => (
                 <ArrayInput source="pages" label={false}>
                     <OrderedFormIterator>
                         <TextInput source="title" fullWidth={true} label="Page Title"/>
-                        <RichTextInput source="text" label="Lesson Text" fullWidth={true}/>
+                        <RichTextInput source="text" label="Session Text" fullWidth={true}/>
                         <PhotoInput source='photo' />
                         <TextInput source="photoCaption" fullWidth={true} label="Photo Caption"/>
                         <VideoInput source='video' />
@@ -96,4 +96,4 @@ const LessonEdit = (props: any) => (
     </CustomEdit>
 );
 
-export default LessonEdit;
+export default SessionEdit;

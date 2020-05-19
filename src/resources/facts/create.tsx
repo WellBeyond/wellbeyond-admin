@@ -1,12 +1,6 @@
 import * as React from "react";
 // tslint:disable-next-line:no-var-requires
-import {
-    Create,
-    SimpleForm,
-    TextInput,
-    BooleanInput, Tab, SelectInput, FormTab
-} from "react-admin";
-import RichTextInput from "ra-input-rich-text";
+import {BooleanInput, Create, SelectInput, SimpleForm, TextInput} from "react-admin";
 
 const FactCreate = (props: object) => (
     <Create {...props} >

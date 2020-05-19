@@ -1,20 +1,14 @@
 import * as React from "react";
 // tslint:disable-next-line:no-var-requires
 import {
-    Datagrid,
+    DateField,
+    ImageField,
+    RichTextField,
     ShowController,
     ShowView,
-    TabbedShowLayout,
     Tab,
-    ReferenceManyField,
-    TextField,
-    BooleanField,
-    ArrayField,
-    NumberField,
-    EditButton,
-    RichTextField,
-    DateField,
-    ImageField
+    TabbedShowLayout,
+    TextField
 } from "react-admin";
 
 const LessonShow = (props: any) => (

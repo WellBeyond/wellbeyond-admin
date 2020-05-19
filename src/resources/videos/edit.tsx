@@ -1,12 +1,6 @@
 import * as React from "react";
 // tslint:disable-next-line:no-var-requires
-import {
-    Edit,
-    TextInput,
-    SelectInput,
-    SimpleForm,
-    ReferenceInput
-} from "react-admin";
+import {Edit, ReferenceInput, SelectInput, SimpleForm, TextInput} from "react-admin";
 import RichTextInput from "ra-input-rich-text";
 import {CloudinaryVideoInput} from "../../components/CloudinaryVideoInput";
 

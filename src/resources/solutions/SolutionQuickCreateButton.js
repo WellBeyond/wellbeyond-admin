@@ -1,7 +1,7 @@
-import React, { FC, ReactElement, MouseEvent, useCallback, useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { makeStyles } from '@material-ui/core/styles';
-import {Button, crudGetMatching, SimpleForm, useCreate, useNotify} from 'react-admin';
+import React, {useCallback, useEffect, useState} from 'react';
+import {useDispatch} from 'react-redux';
+import {makeStyles} from '@material-ui/core/styles';
+import {Button, crudGetMatching, useCreate, useNotify} from 'react-admin';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';

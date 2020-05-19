@@ -1,4 +1,4 @@
-import { ReduxState, Record, Identifier } from 'ra-core';
+import {Identifier, Record, ReduxState} from 'ra-core';
 
 export type ThemeName = 'light' | 'dark';
 

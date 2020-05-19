@@ -1,17 +1,8 @@
-import React, { useCallback } from 'react';
+import React, {useCallback} from 'react';
 import PropTypes from 'prop-types';
-import { useSelector, useDispatch } from 'react-redux';
-import { makeStyles } from '@material-ui/core/styles';
-import {
-    CREATE,
-    SaveButton,
-    SimpleForm,
-    TextInput,
-    Toolbar,
-    required,
-    showNotification, BooleanInput,
-} from 'react-admin'; // eslint-disable-line import/no-unresolved
-
+import {useDispatch, useSelector} from 'react-redux';
+import {makeStyles} from '@material-ui/core/styles';
+import {BooleanInput, CREATE, showNotification, SimpleForm, TextInput,} from 'react-admin'; // eslint-disable-line import/no-unresolved
 import ModalToolbar from '../../components/ModalToolbar';
 
 const useStyles = makeStyles({

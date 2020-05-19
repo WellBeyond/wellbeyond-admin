@@ -1,13 +1,6 @@
 import * as React from "react";
 // tslint:disable-next-line:no-var-requires
-import {
-    Datagrid,
-    List,
-    TextField,
-    BooleanField,
-    EditButton,
-    DeleteButton, ImageField, NumberField, DateField
-} from "react-admin";
+import {Datagrid, DateField, ImageField, List, NumberField, TextField} from "react-admin";
 
 const VideoList = (props: object) => (
     <List {...props}

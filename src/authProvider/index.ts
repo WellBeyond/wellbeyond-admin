@@ -1,6 +1,6 @@
-import { firebaseConfig as config } from '../FIREBASE_CONFIG';
-import { FirebaseAuthProvider } from "react-admin-firebase";
-import  * as firebase from 'firebase';
+import {firebaseConfig as config} from '../FIREBASE_CONFIG';
+import {FirebaseAuthProvider} from "react-admin-firebase";
+import * as firebase from 'firebase';
 
 const options = {
     logging: true,

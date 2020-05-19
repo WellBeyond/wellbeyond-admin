@@ -1,13 +1,17 @@
 import * as React from "react";
 // tslint:disable-next-line:no-var-requires
 import {
+    ArrayField,
+    BooleanField,
+    ChipField,
     Datagrid,
     List,
-    TextField, SelectField,
-    ArrayField,
-    SingleFieldList, ChipField, ReferenceField, BooleanField
+    ReferenceField,
+    SelectField,
+    SingleFieldList,
+    TextField
 } from "react-admin";
-import { makeStyles } from '@material-ui/core';
+import {makeStyles} from '@material-ui/core';
 
 const useStyles = makeStyles({
     nameColumn: {

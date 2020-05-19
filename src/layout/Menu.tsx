@@ -1,25 +1,18 @@
-import React, { FC, useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, {FC, useState} from 'react';
+import {useSelector} from 'react-redux';
 import SettingsIcon from '@material-ui/icons/Settings';
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
 import BookIcon from '@material-ui/icons/Book';
 import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
-import LabelIcon from '@material-ui/icons/Label';
-import { useMediaQuery, Theme } from '@material-ui/core';
-import { useTranslate, DashboardMenuItem, MenuItemLink } from 'react-admin';
+import TrainIcon from '@material-ui/icons/Train';
+import PersonIcon from '@material-ui/icons/Person';
+import {Theme, useMediaQuery} from '@material-ui/core';
+import {DashboardMenuItem, MenuItemLink, useTranslate} from 'react-admin';
 
-import systems from "../resources/systems";
-import symptoms from "../resources/symptoms";
-import solutions from "../resources/solutions";
-import facts from "../resources/facts";
-import subjects from "../resources/subjects";
-import lessons from "../resources/lessons";
-import photos from "../resources/photos";
-import videos from "../resources/videos";
 import SubMenu from './SubMenu';
-import { AppState } from '../types';
+import {AppState} from '../types';
 
-type MenuName = ('menuSystems' | 'menuRules' | 'menuTraining' | 'menuAssets');
+type MenuName = ('menuSystems' | 'menuRules' | 'menuTraining' | 'menuAssets' | 'menuUsers');
 
 interface Props {
     dense: boolean;
@@ -29,6 +22,7 @@ interface Props {
 
 const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
     const [state, setState] = useState({
+        menuUsers: false,
         menuSystems: false,
         menuRules: false,
         menuTraining: false,
@@ -137,6 +131,16 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
                     sidebarIsOpen={open}
                     dense={dense}
                 />
+                <MenuItemLink
+                    to={`/sessions`}
+                    primaryText={translate(`resources.sessions.name`, {
+                        smart_count: 2,
+                    })}
+                    leftIcon={<TrainIcon />}
+                    onClick={onMenuClick}
+                    sidebarIsOpen={open}
+                    dense={dense}
+                />
             </SubMenu>
             {/*
             <SubMenu
@@ -169,6 +173,25 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
                 />
             </SubMenu>
             */}
+            <SubMenu
+                handleToggle={() => handleToggle('menuUsers')}
+                isOpen={state.menuUsers}
+                sidebarIsOpen={open}
+                name="pos.menu.users"
+                icon={<PersonIcon />}
+                dense={dense}
+            >
+                <MenuItemLink
+                    to={`/users`}
+                    primaryText={translate(`resources.users.name`, {
+                        smart_count: 2,
+                    })}
+                    leftIcon={<PersonIcon />}
+                    onClick={onMenuClick}
+                    sidebarIsOpen={open}
+                    dense={dense}
+                />
+            </SubMenu>
             {isXSmall && (
                 <MenuItemLink
                     to="/configuration"

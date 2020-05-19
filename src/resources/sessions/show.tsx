@@ -11,7 +11,7 @@ import {
     TextField
 } from "react-admin";
 
-const SubjectShow = (props: any) => (
+const SessionShow = (props: any) => (
     <ShowController {...props}>
         {(controllerProps: any) =>
             <ShowView {...props} {...controllerProps}>
@@ -32,4 +32,4 @@ const SubjectShow = (props: any) => (
     </ShowController>
 );
 
-export default SubjectShow;
+export default SessionShow;

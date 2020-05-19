@@ -1,15 +1,17 @@
-import React, {Fragment, useCallback, useState} from "react";
+import React from "react";
 // tslint:disable-next-line:no-var-requires
 import {
-    FormDataConsumer,
-    TabbedForm,
-    FormTab,
-    TextInput,
     ArrayInput,
+    BooleanInput,
+    FormDataConsumer,
+    FormTab,
+    ReferenceField,
+    SelectInput,
+    TabbedForm,
     TextField,
-    ReferenceField, SelectInput, BooleanInput
+    TextInput
 } from "react-admin";
-import CustomEdit  from '../../components/CustomEdit';
+import CustomEdit from '../../components/CustomEdit';
 import OrderedFormIterator from '../../components/OrderedFormIterator';
 import RichTextInput from "ra-input-rich-text";
 import AddLesson from "./AddLesson";

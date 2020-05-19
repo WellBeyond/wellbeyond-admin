@@ -21,6 +21,7 @@ export default {
             },
         },
         menu: {
+            users: 'Application Users',
             systems: 'Water Systems',
             rules: 'Diagnostic Rules',
             training: 'Training Classes',
@@ -106,6 +107,19 @@ export default {
             notification: {
             }
         },
+        sessions: {
+            name: 'Training Session |||| Training Sessions',
+            amount: '1 session |||| %{smart_count} sessions',
+            title: 'Training Session %{reference}',
+            fields: {
+            },
+            tabs: {
+            },
+            action: {
+            },
+            notification: {
+            }
+        },
         photos: {
             name: 'Photo |||| Photos',
             amount: '1 photo |||| %{smart_count} photos',
@@ -123,6 +137,19 @@ export default {
             name: 'Video |||| Videos',
             amount: '1 video |||| %{smart_count} videos',
             title: 'Video %{reference}',
+            fields: {
+            },
+            tabs: {
+            },
+            action: {
+            },
+            notification: {
+            }
+        },
+        users: {
+            name: 'User |||| Users',
+            amount: '1 user |||| %{smart_count} users',
+            title: 'User %{reference}',
             fields: {
             },
             tabs: {

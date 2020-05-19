@@ -1,11 +1,6 @@
 import * as React from "react";
 // tslint:disable-next-line:no-var-requires
-import {
-    Create,
-    SimpleForm,
-    TextInput,
-    BooleanInput, Tab
-} from "react-admin";
+import {BooleanInput, Create, SimpleForm, TextInput} from "react-admin";
 import RichTextInput from "ra-input-rich-text";
 
 const SystemCreate = (props: object) => (

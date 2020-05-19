@@ -1,4 +1,4 @@
-import { ThemeName } from '../types';
+import {ThemeName} from '../types';
 
 export const CHANGE_THEME = 'CHANGE_THEME';
 

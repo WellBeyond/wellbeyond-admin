@@ -1,4 +1,4 @@
-import { Record } from 'ra-core';
+import {Record} from 'ra-core';
 import PropTypes from 'prop-types';
 
 type TextAlign = 'right' | 'left';

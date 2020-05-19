@@ -1,12 +1,6 @@
 import * as React from "react";
 // tslint:disable-next-line:no-var-requires
-import {
-    Datagrid,
-    List,
-    TextField,
-    NumberField,
-    ImageField, DateField
-} from "react-admin";
+import {Datagrid, DateField, ImageField, List, NumberField, TextField} from "react-admin";
 
 const PhotoList = (props: object) => (
     <List {...props}

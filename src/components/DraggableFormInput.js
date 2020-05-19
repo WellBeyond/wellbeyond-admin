@@ -1,13 +1,13 @@
-import React, { Children, cloneElement } from 'react';
+import React, {Children, cloneElement} from 'react';
 import PropTypes from 'prop-types';
 import compose from 'recompose/compose';
-import { withStyles } from '@material-ui/core/styles';
+import {withStyles} from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import CloseIcon from '@material-ui/icons/RemoveCircleOutline';
 import MoveIcon from '@material-ui/icons/Reorder';
-import { Draggable } from 'react-beautiful-dnd';
-import { translate } from 'ra-core';
-import { FormInput } from "react-admin";
+import {Draggable} from 'react-beautiful-dnd';
+import {translate} from 'ra-core';
+import {FormInput} from "react-admin";
 
 const styles = theme => ({
     line: {

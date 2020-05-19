@@ -1,4 +1,3 @@
-import { cloudinaryConfig } from "../CLOUDINARY_CONFIG";
 export interface ICloudinaryUploadResult {
     access_mode: 'string';      //The accessibility mode of the media asset: public, or authenticated.
     aggregations: 'array';      //The aggregation counts data requested when using the Search API. For aggregation fields without discrete values, the results are divided into categories:

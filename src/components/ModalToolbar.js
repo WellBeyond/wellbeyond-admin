@@ -1,14 +1,10 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import {
-    SaveButton,
-    Toolbar,
-    useTranslate
-} from 'react-admin';
+import {SaveButton, Toolbar, useTranslate} from 'react-admin';
 import Button from '@material-ui/core/Button';
 import IconCancel from '@material-ui/icons/Cancel';
 import IconSave from '@material-ui/icons/Save';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
     button: {
@@ -22,7 +18,7 @@ const useStyles = makeStyles({
 
 const ModalToolbar = props => {
     const sanitizeProps = ({ onSave, onCancel, ...props }) => props;
-    const { onSave, onCancel, cancelLabel='ra.action.cancel' } = props;
+    const { onSave, onCancel } = props;
     const translate = useTranslate();
     const classes = useStyles();
 

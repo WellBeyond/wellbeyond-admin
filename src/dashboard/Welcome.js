@@ -7,8 +7,8 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import HomeIcon from '@material-ui/icons/Home';
 import CodeIcon from '@material-ui/icons/Code';
-import { makeStyles } from '@material-ui/core/styles';
-import { useTranslate } from 'react-admin';
+import {makeStyles} from '@material-ui/core/styles';
+import {useTranslate} from 'react-admin';
 
 const useStyles = makeStyles({
     media: {

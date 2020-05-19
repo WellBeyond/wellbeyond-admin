@@ -1,6 +1,6 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import {BooleanField, RichTextField, SimpleShowLayout, Tab, TextField} from 'react-admin';
+import {useSelector} from 'react-redux';
+import {BooleanField, RichTextField, SimpleShowLayout, TextField} from 'react-admin';
 
 const SolutionPreview = props => {
     const record = useSelector(

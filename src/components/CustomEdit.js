@@ -1,6 +1,5 @@
 import React from 'react';
-import {Edit, TopToolbar, ListButton, useTranslate} from 'react-admin';
-import inflection from 'inflection';
+import {Edit, ListButton, TopToolbar, useTranslate} from 'react-admin';
 import PropTypes from 'prop-types';
 
 const sanitizeRestProps = ({

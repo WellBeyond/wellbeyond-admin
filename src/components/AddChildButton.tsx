@@ -1,7 +1,7 @@
 import React, {FunctionComponent} from 'react';
 import {Link} from 'react-router-dom';
 import {Button} from 'react-admin';
-import {FieldProps, InjectedFieldProps, fieldPropTypes} from './types';
+import {FieldProps, fieldPropTypes, InjectedFieldProps} from './types';
 import AddIcon from '@material-ui/icons/AddCircleOutline';
 
 interface Props extends FieldProps {

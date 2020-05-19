@@ -1,26 +1,23 @@
 import * as React from "react";
 // tslint:disable-next-line:no-var-requires
 import {
-    Datagrid,
-    FormDataConsumer,
-    Edit,
-    TabbedForm,
-    FormTab,
-    ReferenceManyField,
-    TextInput,
-    BooleanInput,
-    SelectInput,
     ArrayInput,
-    SimpleFormIterator,
-    NumberInput,
-    EditButton,
-    DeleteButton,
+    BooleanInput,
+    Datagrid,
     DateField,
+    DeleteButton,
+    EditButton,
+    FormTab,
+    ImageField,
+    ReferenceInput,
+    ReferenceManyField,
+    SelectInput,
+    TabbedForm,
     TextField,
-    ImageField, SimpleForm, ReferenceInput
+    TextInput
 } from "react-admin";
 import CustomEdit from '../../components/CustomEdit';
-import { AddChildButton } from '../../components/AddChildButton';
+import {AddChildButton} from '../../components/AddChildButton';
 import RichTextInput from "ra-input-rich-text";
 import OrderedFormIterator from "../../components/OrderedFormIterator";
 

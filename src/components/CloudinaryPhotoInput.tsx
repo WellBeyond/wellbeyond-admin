@@ -1,15 +1,11 @@
-import React, {useState} from 'react';
-import {useInput } from 'ra-core';
-import Button from '@material-ui/core/Button';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
+import React, {useCallback, useState} from 'react';
+import {useInput} from 'ra-core';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import {makeStyles} from '@material-ui/core/styles';
-import { cloudinary, ICloudinaryUploadResult, ICloudinaryWidget } from "../lib/cloudinary";
-import { cloudinaryConfig } from "../CLOUDINARY_CONFIG";
+import {cloudinary, ICloudinaryUploadResult, ICloudinaryWidget} from "../lib/cloudinary";
+import {cloudinaryConfig} from "../CLOUDINARY_CONFIG";
 import get from 'lodash.get';
 import {NumberInput, TextInput} from "react-admin";
 
@@ -50,22 +46,18 @@ const useStyles = makeStyles(theme => ({
 export const CloudinaryPhotoInput: React.FunctionComponent<MyProps> = ({record, source, id, inline, ...rest}) => {
     const classes = useStyles();
     const {
-        input: { value, onChange },
+        input: { onChange },
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         meta: { touched, error },
     } = useInput({ source, ...rest });
 
-    const setUploadResult = (uploadResult: ICloudinaryUploadResult) =>{
+    const setUploadResult = useCallback((uploadResult: ICloudinaryUploadResult) =>{
         console.log("uploadResult", uploadResult);
         setUpload(uploadResult);
         onChange(uploadResult);
-        if (inline) {
-            inline = false;
-            setWidget(createWidget());
-        }
-    };
+    },[onChange]);
 
-    const createWidget = () => {
+    const createWidget = useCallback(() => {
         let options ={
             cloudName: cloudinaryConfig.cloudName,
             uploadPreset: cloudinaryConfig.photoUploadPreset,
@@ -89,7 +81,7 @@ export const CloudinaryPhotoInput: React.FunctionComponent<MyProps> = ({record, 
                 setUploadResult(result.info);
             }
         });
-    };
+    },[id, inline, setUploadResult]);
 
     const [upload, setUpload] = React.useState(get(record, source));
     const [widget, setWidget] = useState<ICloudinaryWidget|null>();
@@ -99,7 +91,7 @@ export const CloudinaryPhotoInput: React.FunctionComponent<MyProps> = ({record, 
         if (inline) {
             widget.open();
         }
-    }, []);
+    }, [createWidget, inline]);
 
     const handleClick = () => {
         widget && widget.open();
@@ -119,7 +111,7 @@ export const CloudinaryPhotoInput: React.FunctionComponent<MyProps> = ({record, 
                     <Grid item>
                         <ButtonBase onClick={handleClick} title="Click to update the image">
                             <div className={classes.image}>
-                                <img className={classes.img} alt="Image" src={upload.secure_url}/>
+                                <img className={classes.img} alt="Uploaded file" src={upload.secure_url}/>
                             </div>
                         </ButtonBase>
                     </Grid>

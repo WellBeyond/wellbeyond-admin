@@ -1,20 +1,20 @@
 import * as React from "react";
 // tslint:disable-next-line:no-var-requires
 import {
+    ArrayField,
+    BooleanField,
     Datagrid,
+    DateField,
+    EditButton,
+    ImageField,
+    NumberField,
+    ReferenceManyField,
+    RichTextField,
     ShowController,
     ShowView,
-    TabbedShowLayout,
     Tab,
-    ReferenceManyField,
-    TextField,
-    BooleanField,
-    ArrayField,
-    NumberField,
-    EditButton,
-    RichTextField,
-    DateField,
-    ImageField
+    TabbedShowLayout,
+    TextField
 } from "react-admin";
 
 const SystemShow = (props: any) => (

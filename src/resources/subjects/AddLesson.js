@@ -1,28 +1,7 @@
 import React, {Fragment, useCallback, useEffect, useState} from "react";
 // tslint:disable-next-line:no-var-requires
-import {
-    Datagrid,
-    FormDataConsumer,
-    Edit,
-    TabbedForm,
-    FormTab,
-    ReferenceManyField,
-    TextInput,
-    BooleanInput,
-    SelectInput,
-    ArrayInput,
-    SimpleFormIterator,
-    NumberInput,
-    EditButton,
-    DeleteButton,
-    DateField,
-    TextField,
-    ImageField,
-    ReferenceField,
-    ReferenceInput,
-    crudGetMatching, useCreate, useNotify, useDataProvider
-} from "react-admin";
-import { makeStyles } from '@material-ui/core/styles';
+import {useCreate, useDataProvider, useNotify} from "react-admin";
+import {makeStyles} from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
@@ -34,8 +13,6 @@ import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import LessonCreate from "../lessons/create";
 import ModalToolbar from "../../components/ModalToolbar";
-import PropTypes from "prop-types";
-import {FieldProps, InjectedFieldProps} from "../../components/types";
 
 const useStyles = makeStyles(theme => ({
     leftIcon: {
@@ -52,7 +29,6 @@ const AddLesson = (props) => {
     const [allLessons, setAllLessons] = useState([]);
     const [lessonList, setLessonList] = useState([]);
     const [existingLesson, setExistingLesson] = useState('');
-    const [loading, setLoading] = useState(true);
     const dataProvider = useDataProvider();
     useEffect(() => {
         dataProvider.getList('lessons', {
@@ -61,12 +37,10 @@ const AddLesson = (props) => {
             pagination: { page: 1, perPage: 1000 },
         }).then(({ data }) => {
             setAllLessons(data || []);
-            setLoading(false);
         })
             .catch(error => {
-                setLoading(false);
             })
-    }, []);
+    }, [dataProvider]);
 
     const openCreateModal = () => {
         setExistingOpen(false);
@@ -112,7 +86,7 @@ const AddLesson = (props) => {
     const handleLessonSelected = useCallback(
         event => {
             setExistingLesson(event.target.value);
-        });
+        }, []);
     const handleExistingSave =  () => {
         props.addField({lessonId: existingLesson});
         notify('Lesson added', 'info', {});

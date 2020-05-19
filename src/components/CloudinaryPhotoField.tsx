@@ -1,8 +1,8 @@
-import React, { FunctionComponent } from 'react';
+import React, {FunctionComponent} from 'react';
 import {Photo} from 'cloudinary-react';
 import get from 'lodash.get';
-import { FieldProps, InjectedFieldProps, fieldPropTypes } from './types';
-import { cloudinaryConfig } from "../CLOUDINARY_CONFIG";
+import {FieldProps, fieldPropTypes, InjectedFieldProps} from './types';
+import {cloudinaryConfig} from "../CLOUDINARY_CONFIG";
 
 export const CloudinaryPhotoField: FunctionComponent<FieldProps & InjectedFieldProps> = ({
                                                               record,

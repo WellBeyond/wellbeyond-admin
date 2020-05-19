@@ -1,13 +1,8 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  ListButton,
-  SaveButton,
-  Toolbar,
-  useTranslate
-} from 'react-admin';
+import {ListButton, SaveButton, Toolbar} from 'react-admin';
 import IconCancel from '@material-ui/icons/Cancel';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 
 const useStyles = makeStyles(
   theme => ({
@@ -21,7 +16,6 @@ const useStyles = makeStyles(
 
 const CustomCreateToolbar = props => {
   const classes = useStyles(props);
-  const translate = useTranslate();
   const sanitizeProps = ({ cancelLabel, ...props }) => props;
   const {cancelLabel='ra.action.cancel' } = props;
 

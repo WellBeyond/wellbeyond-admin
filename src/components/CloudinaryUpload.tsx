@@ -1,7 +1,7 @@
 import React from 'react';
-import {useInput } from 'ra-core';
+import {useInput} from 'ra-core';
 import Button from '@material-ui/core/Button';
-import { cloudinary, ICloudinaryUploadResult, ICloudinaryWidget } from "../lib/cloudinary";
+import {cloudinary, ICloudinaryUploadResult, ICloudinaryWidget} from "../lib/cloudinary";
 import get from 'lodash.get';
 
 type MyProps = {

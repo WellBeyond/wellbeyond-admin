@@ -1,13 +1,6 @@
 import * as React from "react";
 // tslint:disable-next-line:no-var-requires
-import {
-    Datagrid,
-    List,
-    TextField,
-    BooleanField,
-    EditButton,
-    DeleteButton
-} from "react-admin";
+import {BooleanField, Datagrid, List, TextField} from "react-admin";
 
 const FactList = (props: object) => (
     <List {...props}

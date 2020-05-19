@@ -1,21 +1,6 @@
 import * as React from "react";
 // tslint:disable-next-line:no-var-requires
-import {
-    Datagrid,
-    ShowController,
-    ShowView,
-    TabbedShowLayout,
-    Tab,
-    ReferenceManyField,
-    TextField,
-    BooleanField,
-    ArrayField,
-    NumberField,
-    EditButton,
-    RichTextField,
-    DateField,
-    ImageField, Show, SimpleShowLayout
-} from "react-admin";
+import {RichTextField, Show, SimpleShowLayout, TextField} from "react-admin";
 import {CloudinaryVideoField} from "../../components/CloudinaryVideoField";
 
 const VideoShow = (props: any) => (
