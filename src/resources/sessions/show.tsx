@@ -1,18 +1,9 @@
 import * as React from "react";
-// tslint:disable-next-line:no-var-requires
-import {
-    BooleanField,
-    DateField, FormTab,
-    ImageField, ReferenceField,
-    RichTextField,
-    ShowController,
-    ShowView,
-    Tab,
-    TabbedShowLayout,
-    TextField
-} from "react-admin";
 
-const SessionShow = (props: any) => (
+import {BooleanField, ReferenceField, ShowController, ShowView, Tab, TabbedShowLayout, TextField} from "react-admin";
+
+const SessionShow = (props: any) => {
+    return (
     <ShowController {...props}>
         {(controllerProps: any) =>
             <ShowView {...props} {...controllerProps}>
@@ -32,6 +23,7 @@ const SessionShow = (props: any) => (
             </ShowView>
         }
     </ShowController>
-);
+    );
+}
 
 export default SessionShow;

@@ -1,5 +1,5 @@
 import * as React from "react";
-// tslint:disable-next-line:no-var-requires
+
 import {BooleanInput, Create, SelectInput, SimpleForm, TextInput} from "react-admin";
 
 const FactCreate = (props: object) => (

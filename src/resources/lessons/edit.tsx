@@ -1,6 +1,6 @@
 import * as React from "react";
 import {Fragment} from "react";
-// tslint:disable-next-line:no-var-requires
+
 import {
     ArrayInput,
     BooleanInput,

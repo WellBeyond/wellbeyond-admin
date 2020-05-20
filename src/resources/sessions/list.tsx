@@ -1,47 +1,29 @@
 import * as React from "react";
-// tslint:disable-next-line:no-var-requires
-import {
-    ArrayField,
-    BooleanField,
-    ChipField,
-    Datagrid, DateField, FormTab,
-    ImageField,
-    List,
-    ReferenceField,
-    SingleFieldList,
-    TextField
-} from "react-admin";
-import {makeStyles} from '@material-ui/core';
 
-const useStyles = makeStyles({
-    nameColumn: {
-        display: 'inline-block',
-        minWidth: 300,
-    },
-    photoColumn: {
-        maxWidth: 80,
-        maxHeight: 80,
-        '& img': {
-            maxWidth: '100%'
-        }
-    }
-});
+import {Datagrid, DateField, List, ReferenceField, TextField} from "react-admin";
 
 const SessionList = (props: object) => {
-    const classes = useStyles();
     return (
         <List {...props}
               perPage={25}
               sort={{field: 'name', order: 'ASC'}}>
-            <Datagrid optimized rowClick="show">
-                <ReferenceField label="Subject" source="subjectId" reference="subjects" >
+            <Datagrid optimized rowClick="edit">
+                <ReferenceField label="Subject" source="subjectId" reference="subjects" link={false}>
                     <TextField source="name" />
                 </ReferenceField>
-                <TextField source="name" label="Description" className={classes.nameColumn}/>
-                <ReferenceField label="Trainer" source="userId" reference="users" >
+                <ReferenceField label="Trainer" source="userId" reference="users" link={false}>
                     <TextField source="name" />
                 </ReferenceField>
-                <BooleanField source="isCompleted" label="Completed?"/>
+                <ReferenceField label="Organization" source="userId" reference="users" link={false}>
+                    <TextField source="organization" />
+                </ReferenceField>
+                <ReferenceField label="Community" source="userId" reference="users" link={false}>
+                    <TextField source="community" />
+                </ReferenceField>
+                <TextField source="groupType" label="Group Type" fullWidth={true}/>
+                <TextField source="groupSize" label="Group Size" fullWidth={true}/>
+                <DateField source="started" label="Started"/>
+                <DateField source="completed" label="Completed"/>
             </Datagrid>
         </List>
     );

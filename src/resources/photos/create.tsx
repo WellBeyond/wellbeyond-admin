@@ -1,5 +1,5 @@
 import * as React from "react";
-// tslint:disable-next-line:no-var-requires
+
 import {Create, ReferenceInput, SelectInput, SimpleForm, TextInput} from "react-admin";
 import {validatePhoto} from './photo';
 import {CloudinaryPhotoInput} from "../../components/CloudinaryPhotoInput";

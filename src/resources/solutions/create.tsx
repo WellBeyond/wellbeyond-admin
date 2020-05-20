@@ -1,5 +1,5 @@
 import * as React from "react";
-// tslint:disable-next-line:no-var-requires
+
 import {BooleanInput, Create, SimpleForm, TextInput} from "react-admin";
 
 type MyProps = {

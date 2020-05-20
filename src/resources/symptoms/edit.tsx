@@ -1,5 +1,5 @@
 import React from "react";
-// tslint:disable-next-line:no-var-requires
+
 import {
     ArrayInput,
     Datagrid,

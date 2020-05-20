@@ -1,6 +1,19 @@
 import React, {useEffect, useState} from "react";
-// tslint:disable-next-line:no-var-requires
-import {BooleanInput, FormTab, TabbedForm, TextInput, Loading, Error, ArrayField, DateField, Datagrid, NumberField, ReferenceField, TextField} from "react-admin";
+
+import {
+    ArrayField,
+    BooleanInput,
+    Datagrid,
+    DateField,
+    Error,
+    FormTab,
+    Loading,
+    NumberField,
+    ReferenceField,
+    TabbedForm,
+    TextField,
+    TextInput
+} from "react-admin";
 import CustomEdit from '../../components/CustomEdit';
 import CustomEditToolbar from "../../components/CustomEditToolbar";
 import * as firebase from 'firebase';
@@ -35,7 +48,12 @@ const UserEdit: React.FunctionComponent<MyProps> = (props) => {
                             lessons.push(lesson);
                         }
                     });
-                    setUserLessons({lessons: lessons.sort((a,b) => (a && b && a.started < b.started) ? -1 : 1)});
+                    lessons = lessons.sort((a:any,b:any) => {
+                        if (!b || !b.started) return -1;
+                        if (!a || !a.started) return 1;
+                        return (a.started > b.started) ? 1 : -1
+                    });
+                    setUserLessons({lessons: lessons});
                     setLoading(false);
                 })
                 .catch(error => {

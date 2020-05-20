@@ -1,5 +1,5 @@
 import * as React from "react";
-// tslint:disable-next-line:no-var-requires
+
 import {ArrayField, BooleanField, ChipField, Datagrid, ImageField, List, SingleFieldList, TextField} from "react-admin";
 import {makeStyles} from '@material-ui/core';
 

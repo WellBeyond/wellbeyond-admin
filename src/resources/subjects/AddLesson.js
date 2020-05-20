@@ -1,5 +1,5 @@
 import React, {Fragment, useCallback, useEffect, useState} from "react";
-// tslint:disable-next-line:no-var-requires
+
 import {useCreate, useDataProvider, useNotify} from "react-admin";
 import {makeStyles} from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';

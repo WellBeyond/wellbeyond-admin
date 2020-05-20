@@ -1,5 +1,5 @@
 import * as React from "react";
-// tslint:disable-next-line:no-var-requires
+
 import {Datagrid, List, TextField} from "react-admin";
 
 const SolutionList = (props: object) => (

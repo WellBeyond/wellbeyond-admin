@@ -1,5 +1,5 @@
 import * as React from "react";
-// tslint:disable-next-line:no-var-requires
+
 import {RichTextField, Show, SimpleShowLayout, TextField} from "react-admin";
 import {CloudinaryVideoField} from "../../components/CloudinaryVideoField";
 

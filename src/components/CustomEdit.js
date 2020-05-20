@@ -23,6 +23,10 @@ const CustomEdit = (props) => {
         </TopToolbar>
     );
     const CustomTitle = ({ record }) => {
+      if (props.resource === 'sessions') {
+        return <span>{record ? ('Training for ' + record.groupType + ' group of ' + record.groupSize + ' people on ' +
+                Intl.DateTimeFormat('en', {month: "long", day: "numeric", year: "numeric"}).format(record.started)) : ''}</span>
+      }
         return <span>{resourceName}: {record ? `"${record.name}"` : ''}</span>;
     };
 

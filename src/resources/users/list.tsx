@@ -1,6 +1,6 @@
 import * as React from "react";
-// tslint:disable-next-line:no-var-requires
-import {BooleanField, Datagrid, List, Tab, TextField} from "react-admin";
+
+import {BooleanField, Datagrid, List, TextField} from "react-admin";
 
 const UserList = (props: object) => {
     return (

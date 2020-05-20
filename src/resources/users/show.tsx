@@ -1,5 +1,5 @@
 import * as React from "react";
-// tslint:disable-next-line:no-var-requires
+
 import {BooleanField, ShowController, ShowView, Tab, TabbedShowLayout, TextField} from "react-admin";
 
 const UserShow = (props: any) => (

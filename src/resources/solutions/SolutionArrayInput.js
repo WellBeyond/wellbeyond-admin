@@ -11,14 +11,14 @@ import DialogContent from '@material-ui/core/DialogContent';
 import ModalToolbar from '../../components/ModalToolbar';
 
 import {
-    ArrayInput,
-    ReferenceField,
-    TextField,
-    useCreate,
-    useDataProvider,
-    useInput,
-    useNotify,
-    useTranslate
+  ArrayInput,
+  ReferenceField,
+  TextField,
+  useCreate,
+  useDataProvider,
+  useInput,
+  useNotify,
+  useTranslate
 } from 'react-admin';
 import OrderedFormIterator from "../../components/OrderedFormIterator";
 import SolutionCreate from "./create";
