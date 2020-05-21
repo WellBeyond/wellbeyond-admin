@@ -32,6 +32,8 @@ const SubjectList = (props: object) => {
                 <BooleanField source="isPublished" label="Published?"/>
                 <SelectField source="locale" label="Language" choices={[
                     {id: 'en', name: 'English'},
+                    {id: 'fr', name: 'French'},
+                    {id: 'hi', name: 'Hindi'},
                     {id: 'sw', name: 'Swahili'}
                 ]}/>
                 <ArrayField label="Lessons" source="lessons">

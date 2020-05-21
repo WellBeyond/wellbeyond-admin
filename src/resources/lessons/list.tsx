@@ -1,6 +1,16 @@
 import * as React from "react";
 
-import {ArrayField, BooleanField, ChipField, Datagrid, ImageField, List, SingleFieldList, TextField} from "react-admin";
+import {
+    ArrayField,
+    BooleanField,
+    ChipField,
+    Datagrid,
+    ImageField,
+    List,
+    SelectField,
+    SingleFieldList,
+    TextField
+} from "react-admin";
 import {makeStyles} from '@material-ui/core';
 
 const useStyles = makeStyles({
@@ -26,6 +36,12 @@ const LessonList = (props: object) => {
             <Datagrid optimized rowClick="edit">
                 <TextField source="name" label="Lesson name" className={classes.nameColumn}/>
                 <BooleanField source="isPublished" label="Published?"/>
+                <SelectField source="locale" label="Language" choices={[
+                    {id: 'en', name: 'English'},
+                    {id: 'fr', name: 'French'},
+                    {id: 'hi', name: 'Hindi'},
+                    {id: 'sw', name: 'Swahili'}
+                ]}/>
                 <ImageField source="photo" label="Photo" className={classes.photoColumn}/>
                 <ArrayField label="Pages" source="pages">
                     <SingleFieldList linkType={false}>
