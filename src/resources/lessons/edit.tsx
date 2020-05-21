@@ -7,7 +7,7 @@ import {
     FormDataConsumer,
     FormTab,
     NumberInput,
-    SelectInput,
+    SelectInput, SimpleForm,
     SimpleFormIterator,
     TabbedForm,
     TextInput
@@ -28,6 +28,12 @@ const LessonEdit = (props: any) => (
         <TabbedForm toolbar={<CustomEditToolbar />} warnWhenUnsavedChanges>
             <FormTab label="Summary">
                 <TextInput source="name" fullWidth={true}/>
+                <SelectInput source="locale" label="Language" fullWidth={true} choices={[
+                    {id: 'en', name: 'English'},
+                    {id: 'fr', name: 'French'},
+                    {id: 'hi', name: 'Hindi'},
+                    {id: 'sw', name: 'Swahili'}
+                ]}/>
                 <BooleanInput source="isPublished" label="Published?" fullWidth={true}/>
                 <RichTextInput source="description" fullWidth={true}/>
                 <PhotoInput source='photo' label="Photo"/>

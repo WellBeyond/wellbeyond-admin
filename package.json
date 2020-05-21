@@ -7,23 +7,25 @@
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "@types/jest": "^24.9.1",
-    "@types/node": "^12.12.38",
-    "@types/react": "^16.9.34",
-    "@types/react-dom": "^16.9.7",
+    "@types/node": "^12.12.41",
+    "@types/react": "^16.9.35",
+    "@types/react-dom": "^16.9.8",
     "cloudinary-core": "^2.8.2",
     "cloudinary-react": "^1.5.0",
-    "firebase": "^7.14.3",
+    "firebase": "^7.14.4",
+    "firebase-admin": "^8.12.1",
     "lodash": "^4.17.15",
     "lodash.get": "^4.4.2",
     "ra-input-rich-text": "^3.3.1",
     "react": "^16.13.1",
-    "react-admin": "^3.5.0",
-    "react-admin-firebase": "^3.1.20",
+    "react-admin": "^3.5.2",
+    "react-admin-firebase": "^3.1.23",
     "react-beautiful-dnd": "^13.0.0",
     "react-dom": "^16.13.1",
     "react-firebaseui": "^4.1.0",
     "react-scripts": "3.4.1",
-    "typescript": "^3.8.3",
+    "translate-json-object": "^2.3.6",
+    "typescript": "^3.9.3",
     "video-react": "^0.14.1"
   },
   "scripts": {
@@ -47,5 +49,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@google-cloud/translate": "^5.3.0"
   }
 }

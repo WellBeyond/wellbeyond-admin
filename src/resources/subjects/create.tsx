@@ -12,6 +12,8 @@ const SubjectCreate = (props: object) => (
             <TextInput source="name" fullWidth={true}/>
             <SelectInput source="locale" label="Language" fullWidth={true} choices={[
                 {id: 'en', name: 'English'},
+                {id: 'fr', name: 'French'},
+                {id: 'hi', name: 'Hindi'},
                 {id: 'sw', name: 'Swahili'}
             ]}/>
             <RichTextInput source="description" fullWidth={true}/>

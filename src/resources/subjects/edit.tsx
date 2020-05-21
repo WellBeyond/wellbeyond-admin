@@ -6,7 +6,7 @@ import {
     FormDataConsumer,
     FormTab,
     ReferenceField,
-    SelectInput,
+    SelectInput, SimpleForm,
     TabbedForm,
     TextField,
     TextInput
@@ -43,6 +43,8 @@ const SubjectEdit = (props: any) => {
                     <BooleanInput source="isPublished" label="Published?" fullWidth={true}/>
                     <SelectInput source="locale" label="Language" fullWidth={true} choices={[
                         {id: 'en', name: 'English'},
+                        {id: 'fr', name: 'French'},
+                        {id: 'hi', name: 'Hindi'},
                         {id: 'sw', name: 'Swahili'}
                     ]}/>
                     <RichTextInput source="description" fullWidth={true}/>
