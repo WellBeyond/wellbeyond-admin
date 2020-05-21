@@ -51,7 +51,7 @@ const SubjectEdit = (props: any) => {
                     <PhotoInput source='photo' label="Icon" />
                 </FormTab>
                 <FormTab label="Lessons">
-                    <ArrayInput source="lessons" label={false}>
+                    <ArrayInput source="lessons" label=''>
                         <OrderedFormIterator addButton={<AddLesson />}>
                             <FormDataConsumer {...props}>
                                 {({ scopedFormData }:any) => {

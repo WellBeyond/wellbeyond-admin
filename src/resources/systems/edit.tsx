@@ -66,7 +66,7 @@ const SystemEdit = (props: any) => (
             </FormTab>
             <FormTab label="Photos">
                 <ReferenceManyField
-                    addLabel={false}
+                    addlabel=''
                     reference="photos"
                     target="systemId"
                     sort={{field: 'createdate', order: 'DESC'}}
@@ -83,7 +83,7 @@ const SystemEdit = (props: any) => (
             </FormTab>
             <FormTab label="Videos">
                 <ReferenceManyField
-                    addLabel={false}
+                    addlabel=''
                     reference="videos"
                     target="systemId"
                     sort={{field: 'createdate', order: 'DESC'}}

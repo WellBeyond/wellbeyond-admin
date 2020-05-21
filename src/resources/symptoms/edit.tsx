@@ -73,7 +73,7 @@ const SymptomEdit = (props: any) => {
                 </FormTab>
                 <FormTab label="Photos">
                     <ReferenceManyField
-                        addLabel={false}
+                        addlabel=''
                         reference="photos"
                         target="symptomId"
                         sort={{field: 'createdate', order: 'DESC'}}
@@ -90,7 +90,7 @@ const SymptomEdit = (props: any) => {
                 </FormTab>
                 <FormTab label="Videos">
                     <ReferenceManyField
-                        addLabel={false}
+                        addlabel=''
                         reference="videos"
                         target="symptomId"
                         sort={{field: 'createdate', order: 'DESC'}}

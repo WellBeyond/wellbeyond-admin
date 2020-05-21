@@ -61,7 +61,7 @@ const SolutionEdit = (props: any) => (
             </FormTab>
             <FormTab label="Photos">
                 <ReferenceManyField
-                    addLabel={false}
+                    addlabel=''
                     reference="photos"
                     target="solutionId"
                     sort={{field: 'createdate', order: 'DESC'}}
@@ -78,7 +78,7 @@ const SolutionEdit = (props: any) => (
             </FormTab>
             <FormTab label="Videos">
                 <ReferenceManyField
-                    addLabel={false}
+                    addlabel=''
                     reference="videos"
                     target="solutionId"
                     sort={{field: 'createdate', order: 'DESC'}}

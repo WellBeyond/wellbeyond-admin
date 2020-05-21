@@ -115,11 +115,12 @@ export class OrderedFormIterator extends Component {
                             <TransitionGroup>
                                 {fields.map((member, index) => (
                                     <CSSTransition
-                                        key={this.ids[index]}
+                                        key={this.ids[index]+'-css'}
                                         timeout={500}
                                         classNames="fade"
                                     >
                                         <DraggableFormInput
+                                            key={this.ids[index]+'-draggable'}
                                             id={this.ids[index]}
                                             index={index}
                                             member={member}

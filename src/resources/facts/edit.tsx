@@ -66,7 +66,7 @@ const FactEdit = (props: any) => (
             </FormTab>
             <FormTab label="Photos">
                 <ReferenceManyField
-                    addLabel={false}
+                    addlabel=''
                     reference="photos"
                     target="factId"
                     sort={{field: 'createdate', order: 'DESC'}}
@@ -83,7 +83,7 @@ const FactEdit = (props: any) => (
             </FormTab>
             <FormTab label="Videos">
                 <ReferenceManyField
-                    addLabel={false}
+                    addlabel=''
                     reference="videos"
                     target="factId"
                     sort={{field: 'createdate', order: 'DESC'}}

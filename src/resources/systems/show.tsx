@@ -48,7 +48,7 @@ const SystemShow = (props: any) => (
                     </Tab>
                     <Tab label="Photos">
                         <ReferenceManyField
-                            addLabel={false}
+                            addlabel=''
                             reference="photos"
                             target="systemId"
                             sort={{field: 'created_at', order: 'DESC'}}
@@ -63,7 +63,7 @@ const SystemShow = (props: any) => (
                     </Tab>
                     <Tab label="Videos">
                         <ReferenceManyField
-                            addLabel={false}
+                            addlabel=''
                             reference="videos"
                             target="systemId"
                             sort={{field: 'created_at', order: 'DESC'}}

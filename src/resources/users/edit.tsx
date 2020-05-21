@@ -78,7 +78,7 @@ return (
             </FormTab>
             {userLessons && <FormTab label="Training">
                 {/* eslint-disable-next-line react/jsx-no-undef */}
-                <ArrayField record={userLessons} source="lessons" fullWidth={true} label={false}>
+                <ArrayField record={userLessons} source="lessons" fullWidth={true} label=''>
                     <Datagrid>
                         <ReferenceField label="Lesson" source="lessonId" reference="lessons" >
                             <TextField source="name" />

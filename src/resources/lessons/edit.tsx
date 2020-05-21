@@ -6,7 +6,7 @@ import {
     BooleanInput,
     FormDataConsumer,
     FormTab,
-    NumberInput,
+    NumberInput, RadioButtonGroupInput,
     SelectInput, SimpleForm,
     SimpleFormIterator,
     TabbedForm,
@@ -41,7 +41,7 @@ const LessonEdit = (props: any) => (
             <FormTab label="Questions">
                 <ArrayInput source="questions" label=''>
                     <OrderedFormIterator>
-                        <SelectInput source="questionType" fullWidth={true} label="What type of question?" choices={[
+                        <RadioButtonGroupInput source="questionType" fullWidth={true} label="What type of question?" choices={[
                             {id: 'yes-no', name: 'Yes or No'},
                             {id: 'choose-one', name: 'Multiple Choice'},
                             {id: 'number', name: 'Number Input'}
@@ -59,7 +59,7 @@ const LessonEdit = (props: any) => (
                                                                    fullWidth={true}/>
                                                     </SimpleFormIterator>
                                                 </ArrayInput>
-                                                <SelectInput source={getSource('correctAnswer')} label="Correct Answer"
+                                                <RadioButtonGroupInput source={getSource('correctAnswer')} label="Correct Answer"
                                                              fullWidth={true} choices={
                                                     scopedFormData.choices ? scopedFormData.choices.map((choice: any) => {
                                                         return {id: choice && choice.value, name: choice && choice.value}
@@ -68,7 +68,7 @@ const LessonEdit = (props: any) => (
                                             </Fragment>);
                                     } else if (scopedFormData.questionType === 'yes-no') {
                                         return (
-                                            <SelectInput source={getSource('correctAnswer')} label="Correct Answer" fullWidth={true}
+                                            <RadioButtonGroupInput source={getSource('correctAnswer')} label="Correct Answer" fullWidth={true}
                                                          choices={[
                                                              {id: 'yes', name: 'Yes'},
                                                              {id: 'no', name: 'No'}
@@ -86,7 +86,7 @@ const LessonEdit = (props: any) => (
                 </ArrayInput>
             </FormTab>
             <FormTab label="Pages">
-                <ArrayInput source="pages" label={false}>
+                <ArrayInput source="pages" label=''>
                     <OrderedFormIterator>
                         <TextInput source="title" fullWidth={true} label="Page Title"/>
                         <RichTextInput source="text" label="Lesson Text" fullWidth={true}/>
