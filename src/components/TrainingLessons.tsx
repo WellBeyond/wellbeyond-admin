@@ -1,6 +1,5 @@
-import React, {useEffect, useState, useCallback} from 'react';
-import {useGetOne, Loading} from 'react-admin';
-import {ArrayField, Datagrid, DateField, FormTab, NumberField, ReferenceField, TextField} from "react-admin";
+import React, {useCallback} from 'react';
+import {ArrayField, Datagrid, DateField, Loading, NumberField, ReferenceField, TextField, useGetOne} from 'react-admin';
 
 type MyProps = {
     record?: {[index: string]:any},
@@ -34,7 +33,8 @@ export const TrainingLessons: React.FunctionComponent<MyProps> = ({record, sourc
                 </ReferenceField>
                 <DateField showTime={true} source="started"/>
                 <DateField showTime={true} source="completed"/>
-                <NumberField source="score"/>
+                <NumberField source="preScore" label="Initial Score"/>
+                <NumberField source="score" label="Final Score"/>
             </Datagrid>
         </ArrayField>
     );

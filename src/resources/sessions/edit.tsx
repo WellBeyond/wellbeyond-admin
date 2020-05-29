@@ -1,14 +1,5 @@
-import React, {useEffect, useState} from "react";
-import {
-    ArrayField,
-    BooleanInput, Datagrid, DateField,
-    DateTimeInput,
-    FormTab, NumberField,
-    ReferenceField,
-    TabbedForm,
-    TextField,
-    TextInput
-} from "react-admin";
+import React, {useState} from "react";
+import {BooleanInput, DateTimeInput, FormTab, ReferenceField, TabbedForm, TextField, TextInput} from "react-admin";
 import CustomEdit from '../../components/CustomEdit';
 import CustomEditToolbar from "../../components/CustomEditToolbar";
 import {TrainingLessons} from "../../components/TrainingLessons";

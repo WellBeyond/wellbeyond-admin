@@ -6,7 +6,7 @@ import {
     FormDataConsumer,
     FormTab,
     ReferenceField,
-    SelectInput, SimpleForm,
+    SelectInput,
     TabbedForm,
     TextField,
     TextInput

@@ -6,6 +6,7 @@ import BookIcon from '@material-ui/icons/Book';
 import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
 import TrainIcon from '@material-ui/icons/Train';
 import PersonIcon from '@material-ui/icons/Person';
+import DomainIcon from '@material-ui/icons/Domain';
 import {Theme, useMediaQuery} from '@material-ui/core';
 import {DashboardMenuItem, MenuItemLink, useTranslate} from 'react-admin';
 
@@ -181,6 +182,16 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
                 icon={<PersonIcon />}
                 dense={dense}
             >
+                <MenuItemLink
+                    to={`/organizations`}
+                    primaryText={translate(`resources.organizations.name`, {
+                        smart_count: 2,
+                    })}
+                    leftIcon={<DomainIcon />}
+                    onClick={onMenuClick}
+                    sidebarIsOpen={open}
+                    dense={dense}
+                />
                 <MenuItemLink
                     to={`/users`}
                     primaryText={translate(`resources.users.name`, {

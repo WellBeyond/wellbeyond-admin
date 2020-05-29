@@ -10,6 +10,8 @@ import {
     Loading,
     NumberField,
     ReferenceField,
+    ReferenceInput,
+    SelectInput,
     TabbedForm,
     TextField,
     TextInput
@@ -22,7 +24,8 @@ interface FormDataConsumerProps {
     formData: any;
 }
 type MyProps = {
-    id: string
+    id: string,
+    record: any,
 }
 
 
@@ -61,36 +64,40 @@ const UserEdit: React.FunctionComponent<MyProps> = (props) => {
                     setError(true);
                 });
         }
-}, [props.id]);
+    }, [props.id]);
 
-if (loading) return <Loading />;
-if (error) return <Error />;
+    if (loading) return <Loading />;
+    if (error) return <Error />;
 
-return (
-    <CustomEdit {...props}>
-        <TabbedForm toolbar={<CustomEditToolbar />} warnWhenUnsavedChanges>
-            <FormTab label="Summary">
-                <TextInput source="name" label="Name" fullWidth={true}/>
-                <TextInput type="email" source="email" label="Email Address" fullWidth={true}/>
-                <TextInput source="organization" label="Organization" fullWidth={true}/>
-                <TextInput source="community" label="Community" fullWidth={true}/>
-                <BooleanInput source="acceptedTerms" label="Accepted Terms?" fullWidth={true}/>
-            </FormTab>
-            {userLessons && <FormTab label="Training">
-                {/* eslint-disable-next-line react/jsx-no-undef */}
-                <ArrayField record={userLessons} source="lessons" fullWidth={true} label=''>
+    return (
+        <CustomEdit {...props}>
+            <TabbedForm toolbar={<CustomEditToolbar />} warnWhenUnsavedChanges>
+                <FormTab label="Summary">
+                    <TextInput source="name" label="Name" fullWidth={true}/>
+                    <TextInput type="email" source="email" label="Email Address" fullWidth={true}/>
+                    <ReferenceInput label="Organization (selected) " source="organizationId" reference="organizations" fullWidth={true} allowEmpty={true}>
+                        <SelectInput optionText="name" fullWidth={true} allowEmpty={true} />
+                    </ReferenceInput>
+                    <TextInput source="organization" label="Organization" fullWidth={true}/>
+                    <TextInput source="community" label="Community" fullWidth={true}/>
+                    <BooleanInput source="acceptedTerms" label="Accepted Terms?" fullWidth={true}/>
+                </FormTab>
+                {userLessons && <FormTab label="Training">
+                    {/* eslint-disable-next-line react/jsx-no-undef */}
+                  <ArrayField record={userLessons} source="lessons" fullWidth={true} label=''>
                     <Datagrid>
-                        <ReferenceField label="Lesson" source="lessonId" reference="lessons" >
-                            <TextField source="name" />
-                        </ReferenceField>
-                        <DateField showTime={true} source="started"/>
-                        <DateField showTime={true} source="completed"/>
-                        <NumberField source="score"/>
+                      <ReferenceField label="Lesson" source="lessonId" reference="lessons" >
+                        <TextField source="name" />
+                      </ReferenceField>
+                      <DateField showTime={true} source="started"/>
+                      <DateField showTime={true} source="completed"/>
+                      <NumberField source="preScore" label="Initial Score"/>
+                      <NumberField source="score" label="Final Score"/>
                     </Datagrid>
-                </ArrayField>
-            </FormTab>}
-        </TabbedForm>
-    </CustomEdit>);
+                  </ArrayField>
+                </FormTab>}
+            </TabbedForm>
+        </CustomEdit>);
 }
 
 export default UserEdit;

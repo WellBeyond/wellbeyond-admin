@@ -159,5 +159,18 @@ export default {
             notification: {
             }
         },
+        organizations: {
+            name: 'Organization |||| Organizations',
+            amount: '1 organization |||| %{smart_count} organizations',
+            title: 'Organization %{reference}',
+            fields: {
+            },
+            tabs: {
+            },
+            action: {
+            },
+            notification: {
+            }
+        },
     },
 };

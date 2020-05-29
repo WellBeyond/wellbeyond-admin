@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import {BooleanField, Datagrid, List, TextField} from "react-admin";
+import OrganizationField from '../../components/OrganizationField'
 
 const UserList = (props: object) => {
     return (
@@ -10,7 +11,7 @@ const UserList = (props: object) => {
             <Datagrid optimized rowClick="edit">
                 <TextField source="name" label="Name"/>
                 <TextField source="email" label="Email Address"/>
-                <TextField source="organization" label="Organization"/>
+                <OrganizationField label="Organization"/>
                 <TextField source="community" label="Community"/>
                 <BooleanField source="acceptedTerms" label="Accepted Terms?"/>
             </Datagrid>

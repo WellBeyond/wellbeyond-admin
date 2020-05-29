@@ -15,6 +15,7 @@ import sessions from "./resources/sessions";
 import photos from "./resources/photos";
 import videos from "./resources/videos"
 import users from "./resources/users";
+import organizations from "./resources/organizations";
 import dataProvider from './dataProvider'
 import authProvider from './authProvider'
 import polyglotI18nProvider from 'ra-i18n-polyglot';
@@ -51,6 +52,7 @@ class App extends React.Component {
           <Resource name="photos" {...photos} />
           <Resource name="videos" {...videos} />
           <Resource name="users" {...users} />
+          <Resource name="organizations" {...organizations} />
         </Admin>
     );
   }

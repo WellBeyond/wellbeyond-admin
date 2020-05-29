@@ -6,8 +6,8 @@ import {
     BooleanInput,
     FormDataConsumer,
     FormTab,
-    NumberInput, RadioButtonGroupInput,
-    SelectInput, SimpleForm,
+    NumberInput,
+    SelectInput,
     SimpleFormIterator,
     TabbedForm,
     TextInput
@@ -41,7 +41,7 @@ const LessonEdit = (props: any) => (
             <FormTab label="Questions">
                 <ArrayInput source="questions" label=''>
                     <OrderedFormIterator>
-                        <RadioButtonGroupInput source="questionType" fullWidth={true} label="What type of question?" choices={[
+                        <SelectInput source="questionType" fullWidth={true} label="What type of question?" choices={[
                             {id: 'yes-no', name: 'Yes or No'},
                             {id: 'choose-one', name: 'Multiple Choice'},
                             {id: 'number', name: 'Number Input'}
@@ -59,7 +59,7 @@ const LessonEdit = (props: any) => (
                                                                    fullWidth={true}/>
                                                     </SimpleFormIterator>
                                                 </ArrayInput>
-                                                <RadioButtonGroupInput source={getSource('correctAnswer')} label="Correct Answer"
+                                                <SelectInput source={getSource('correctAnswer')} label="Correct Answer"
                                                              fullWidth={true} choices={
                                                     scopedFormData.choices ? scopedFormData.choices.map((choice: any) => {
                                                         return {id: choice && choice.value, name: choice && choice.value}
@@ -68,7 +68,7 @@ const LessonEdit = (props: any) => (
                                             </Fragment>);
                                     } else if (scopedFormData.questionType === 'yes-no') {
                                         return (
-                                            <RadioButtonGroupInput source={getSource('correctAnswer')} label="Correct Answer" fullWidth={true}
+                                            <SelectInput source={getSource('correctAnswer')} label="Correct Answer" fullWidth={true}
                                                          choices={[
                                                              {id: 'yes', name: 'Yes'},
                                                              {id: 'no', name: 'No'}
