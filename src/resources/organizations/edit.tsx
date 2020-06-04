@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import {
     ArrayInput,
     Datagrid,
@@ -16,16 +16,6 @@ interface FormDataConsumerProps {
     formData: any;
 }
 const OrganizationEdit = (props: any) => {
-
-
-    const [lessons, setLessons] = useState<any>();
-
-    // @ts-ignore
-    const WithProps = ({children,...props}) => {
-        setLessons({lessons: []})
-        return children(props);
-    }
-
     return (
         <CustomEdit {...props}>
             <TabbedForm toolbar={<CustomEditToolbar />} warnWhenUnsavedChanges>

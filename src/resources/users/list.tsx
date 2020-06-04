@@ -1,11 +1,33 @@
 import * as React from "react";
 
-import {BooleanField, Datagrid, List, TextField} from "react-admin";
+import {
+    BooleanField,
+    BooleanInput,
+    Datagrid,
+    Filter, FormTab,
+    List,
+    ReferenceInput,
+    SelectInput,
+    TextField,
+    TextInput
+} from "react-admin";
 import OrganizationField from '../../components/OrganizationField'
+
+
+const UserFilter = (props:any) => (
+    <Filter {...props}>
+        <TextInput source="name" label="Name" />
+        <TextInput type="email" source="email" label="Email Address" />
+        <ReferenceInput label="Organization" source="organizationId" reference="organizations">
+            <SelectInput optionText="name" />
+        </ReferenceInput>
+    </Filter>
+);
 
 const UserList = (props: object) => {
     return (
         <List {...props}
+            filters={<UserFilter/>}
               perPage={25}
               sort={{field: 'name', order: 'ASC'}}>
             <Datagrid optimized rowClick="edit">

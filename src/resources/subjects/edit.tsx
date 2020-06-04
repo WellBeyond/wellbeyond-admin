@@ -5,7 +5,7 @@ import {
     BooleanInput,
     FormDataConsumer,
     FormTab,
-    ReferenceField,
+    ReferenceField, ReferenceInput,
     SelectInput,
     TabbedForm,
     TextField,
@@ -40,13 +40,16 @@ const SubjectEdit = (props: any) => {
             <TabbedForm toolbar={<CustomEditToolbar />} warnWhenUnsavedChanges>
                 <FormTab label="Summary">
                     <TextInput source="name" fullWidth={true}/>
-                    <BooleanInput source="isPublished" label="Published?" fullWidth={true}/>
+                    <ReferenceInput label="Organization" source="organizationId" reference="organizations" fullWidth={true} allowEmpty={false}>
+                        <SelectInput optionText="name" fullWidth={true} allowEmpty={false} />
+                    </ReferenceInput>
                     <SelectInput source="locale" label="Language" fullWidth={true} choices={[
                         {id: 'en', name: 'English'},
                         {id: 'fr', name: 'French'},
                         {id: 'hi', name: 'Hindi'},
                         {id: 'sw', name: 'Swahili'}
                     ]}/>
+                    <BooleanInput source="isPublished" label="Published?" fullWidth={true}/>
                     <RichTextInput source="description" fullWidth={true}/>
                     <PhotoInput source='photo' label="Icon" />
                 </FormTab>

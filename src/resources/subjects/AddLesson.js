@@ -28,6 +28,7 @@ const AddLesson = (props) => {
     const notify = useNotify();
     const [allLessons, setAllLessons] = useState([]);
     const [lessonList, setLessonList] = useState([]);
+    const [organizations, setOrganizations] = useState({});
     const [existingLesson, setExistingLesson] = useState('');
     const dataProvider = useDataProvider();
     useEffect(() => {
@@ -39,7 +40,18 @@ const AddLesson = (props) => {
             setAllLessons(data || []);
         })
             .catch(error => {
-            })
+        })
+        dataProvider.getList('organizations', {
+            filter: { },
+            sort: { field: 'name', order: 'ASC' },
+            pagination: { page: 1, perPage: 1000 },
+        }).then(({ data }) => {
+            let organizations = {};
+            data.forEach((org) => organizations[org.id] = org);
+            setOrganizations(organizations);
+        })
+          .catch(error => {
+          })
     }, [dataProvider]);
 
     const openCreateModal = () => {
@@ -124,7 +136,7 @@ const AddLesson = (props) => {
             >
                 <DialogTitle id="create-lesson-dialog-title">New Lesson</DialogTitle>
                 <DialogContent>
-                    <LessonCreate basePath="/" resource="lessons" toolbar={<ModalToolbar onCancel={handleCreateCancel} onSave={handleCreateSave}/>}>
+                    <LessonCreate basePath="/" resource="lessons" subject={props.record} toolbar={<ModalToolbar onCancel={handleCreateCancel} onSave={handleCreateSave}/>}>
                     </LessonCreate>
                 </DialogContent>
             </Dialog>
@@ -152,11 +164,14 @@ const AddLesson = (props) => {
                             <MenuItem value="" disabled>
                                 Select an existing lesson
                             </MenuItem>
-                            {lessonList.map(lesson => {
+                            {lessonList.filter(lesson => {
+                                return (!props.record || !props.record.locale || props.record.locale === lesson.locale) &&
+                                       (!props.record || !props.record.organizationId || !lesson.organizationId || props.record.organizationId === lesson.organizationId);
+                            }).map(lesson => {
                                 return (
-                                    <MenuItem value={lesson.id} key={lesson.id}>
-                                        {lesson.name}
-                                    </MenuItem>
+                                  <MenuItem value={lesson.id} key={lesson.id}>
+                                      {lesson.name + (lesson.organizationId ? (' - (' + organizations[lesson.organizationId].name + ')') : '')}
+                                  </MenuItem>
                                 )
                             })}
                         </Select>

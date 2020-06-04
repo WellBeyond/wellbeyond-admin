@@ -2,12 +2,12 @@ import * as React from "react";
 
 import {
     ArrayField,
-    BooleanField,
+    BooleanField, BooleanInput,
     ChipField,
-    Datagrid,
+    Datagrid, Filter,
     List,
-    ReferenceField,
-    SelectField,
+    ReferenceField, ReferenceInput,
+    SelectField, SelectInput,
     SingleFieldList,
     TextField
 } from "react-admin";
@@ -20,22 +20,43 @@ const useStyles = makeStyles({
     }
 });
 
+const SubjectFilter = (props:any) => (
+    <Filter {...props}>
+        <ReferenceInput label="Organization" source="organizationId" reference="organizations">
+            <SelectInput optionText="name" />
+        </ReferenceInput>
+        <SelectInput source="locale" label="Language" choices={[
+            {id: 'en', name: 'English'},
+            {id: 'fr', name: 'French'},
+            {id: 'hi', name: 'Hindi'},
+            {id: 'sw', name: 'Swahili'}
+        ]}/>
+        <BooleanInput source="isPublished" label="Published?" />
+    </Filter>
+);
 
 const SubjectList = (props: object) => {
     const classes = useStyles();
     return (
         <List {...props}
+            filters={<SubjectFilter/>}
               perPage={25}
               sort={{field: 'name', order: 'ASC'}}>
             <Datagrid optimized rowClick="edit">
                 <TextField source="name" label="Subject name" className={classes.nameColumn}/>
-                <BooleanField source="isPublished" label="Published?"/>
+                <ReferenceField
+                    source={'organizationId'}
+                    basePath={'/organizations'}
+                    reference="organizations">
+                    <TextField source="name"/>
+                </ReferenceField>
                 <SelectField source="locale" label="Language" choices={[
                     {id: 'en', name: 'English'},
                     {id: 'fr', name: 'French'},
                     {id: 'hi', name: 'Hindi'},
                     {id: 'sw', name: 'Swahili'}
                 ]}/>
+                <BooleanField source="isPublished" label="Published?"/>
                 <ArrayField label="Lessons" source="lessons">
                     <SingleFieldList>
                         <ReferenceField

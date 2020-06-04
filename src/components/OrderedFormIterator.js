@@ -61,6 +61,7 @@ export class OrderedFormIterator extends Component {
         this.nextId = 0;
         this.fieldName = props.fields.name;
         this.ids = props.fields ? props.fields.map(() => this.fieldName + '-' + this.nextId++) : [];
+        this.record = props.record;
     }
 
     removeField = index => () => {
@@ -137,6 +138,7 @@ export class OrderedFormIterator extends Component {
                                     React.cloneElement(addButton, {
                                         getExistingFields: this.getExistingFields,
                                         addField: this.addField,
+                                        record: this.record,
                                         //  Ensure we don't override any user provided props
                                         ...addButton.props,
                                     }) :

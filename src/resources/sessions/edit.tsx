@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import {BooleanInput, DateTimeInput, FormTab, ReferenceField, TabbedForm, TextField, TextInput} from "react-admin";
 import CustomEdit from '../../components/CustomEdit';
 import CustomEditToolbar from "../../components/CustomEditToolbar";
@@ -8,15 +8,6 @@ interface FormDataConsumerProps {
     formData: any;
 }
 const SessionEdit = (props: any) => {
-
-
-    const [lessons, setLessons] = useState<any>();
-
-    // @ts-ignore
-    const WithProps = ({children,...props}) => {
-        setLessons({lessons: []})
-        return children(props);
-    }
 
     return (
         <CustomEdit {...props}>

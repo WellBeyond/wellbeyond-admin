@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import {Create, SelectInput, SimpleForm, TextInput} from "react-admin";
+import {Create, ReferenceInput, SelectInput, SimpleForm, TextInput} from "react-admin";
 import RichTextInput from "ra-input-rich-text";
 import CustomCreateToolbar from "../../components/CustomCreateToolbar";
 import {PhotoInput} from "../../components/PhotoInput";
@@ -10,6 +10,9 @@ const SubjectCreate = (props: object) => (
     <Create {...props} >
         <SimpleForm initialValues={subjectDefaultValue} toolbar={<CustomCreateToolbar />}>
             <TextInput source="name" fullWidth={true}/>
+            <ReferenceInput label="Organization" source="organizationId" reference="organizations" fullWidth={true} allowEmpty={false}>
+                <SelectInput optionText="name" fullWidth={true} allowEmpty={false} />
+            </ReferenceInput>
             <SelectInput source="locale" label="Language" fullWidth={true} choices={[
                 {id: 'en', name: 'English'},
                 {id: 'fr', name: 'French'},
