@@ -2,9 +2,8 @@ import * as React from "react";
 
 import {
     BooleanField,
-    BooleanInput,
     Datagrid,
-    Filter, FormTab,
+    Filter, 
     List,
     ReferenceInput,
     SelectInput,
