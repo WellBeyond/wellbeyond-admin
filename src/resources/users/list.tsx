@@ -3,7 +3,7 @@ import * as React from "react";
 import {
     BooleanField,
     Datagrid,
-    Filter, 
+    Filter,
     List,
     ReferenceInput,
     SelectInput,

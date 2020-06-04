@@ -13,8 +13,7 @@
     ],
     "source": "functions"
   },
-  "hosting": [{
-    "target": "production",
+  "hosting": {
     "site": "wellbeyond-admin",
     "public": "build",
     "ignore": [
@@ -28,7 +27,7 @@
         "destination": "/index.html"
       }
     ]
-  }],
+  },
   "storage": {
     "rules": "storage.rules"
   },
