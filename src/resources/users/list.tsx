@@ -11,12 +11,14 @@ import {
     TextInput
 } from "react-admin";
 import OrganizationField from '../../components/OrganizationField'
+import EmailOrPhoneField from "../../components/EmailOrPhoneField";
 
 
 const UserFilter = (props:any) => (
     <Filter {...props}>
         <TextInput source="name" label="Name" />
         <TextInput type="email" source="email" label="Email Address" />
+        <TextInput type="phoneNumber" source="phoneNumber" label="Phone Number" />
         <ReferenceInput label="Organization" source="organizationId" reference="organizations">
             <SelectInput optionText="name" />
         </ReferenceInput>
@@ -31,7 +33,8 @@ const UserList = (props: object) => {
               sort={{field: 'name', order: 'ASC'}}>
             <Datagrid optimized rowClick="edit">
                 <TextField source="name" label="Name"/>
-                <TextField source="email" label="Email Address"/>
+                {/* eslint-disable-next-line react/jsx-no-undef */}
+                <EmailOrPhoneField label="Email/Phone"/>
                 <OrganizationField label="Organization"/>
                 <TextField source="community" label="Community"/>
                 <BooleanField source="acceptedTerms" label="Accepted Terms?"/>

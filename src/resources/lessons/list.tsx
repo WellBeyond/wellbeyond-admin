@@ -10,7 +10,7 @@ import {
     SelectField,
     SingleFieldList,
     TextField,
-    CloneButton, TextInput, ReferenceInput, SelectInput, BooleanInput, Filter
+    CloneButton, ReferenceInput, SelectInput, BooleanInput, Filter
 } from "react-admin";
 import {makeStyles} from '@material-ui/core';
 
