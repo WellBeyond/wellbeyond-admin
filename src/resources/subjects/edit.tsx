@@ -37,7 +37,7 @@ const SubjectEdit = (props: any) => {
     const classes = useStyles();
     return (
         <CustomEdit {...props}>
-            <TabbedForm toolbar={<CustomEditToolbar />} warnWhenUnsavedChanges>
+            <TabbedForm toolbar={<CustomEditToolbar />} >
                 <FormTab label="Summary">
                     <TextInput source="name" fullWidth={true}/>
                     <ReferenceInput label="Organization" source="organizationId" reference="organizations" fullWidth={true} allowEmpty={false}>

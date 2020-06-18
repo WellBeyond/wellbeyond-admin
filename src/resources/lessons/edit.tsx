@@ -25,7 +25,7 @@ interface FormDataConsumerProps {
 
 const LessonEdit = (props: any) => (
     <CustomEdit {...props}>
-        <TabbedForm toolbar={<CustomEditToolbar />} warnWhenUnsavedChanges>
+        <TabbedForm toolbar={<CustomEditToolbar />} >
             <FormTab label="Summary">
                 <TextInput source="name" fullWidth={true}/>
                 <ReferenceInput label="Organization" source="organizationId" reference="organizations" fullWidth={true} allowEmpty={false}>

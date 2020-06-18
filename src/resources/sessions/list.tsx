@@ -3,6 +3,23 @@ import * as React from "react";
 import {Datagrid, DateField, List, ReferenceField, TextField, downloadCSV} from "react-admin";
 import jsonExport from 'jsonexport/dist';
 
+const addLessonData = (row:any, session:any, subject:any) => {
+    if (subject.lessons) {
+        subject.lessons.forEach((lesson:any, idx:number) => {
+            if (lesson && lesson.lessonId) {
+                const progress = session.lessons[lesson.lessonId];
+                const prefix = 'lesson-'+(idx+1)+'-';
+                if (progress) {
+                    row[prefix+'started'] = progress.started;
+                    row[prefix+'completed'] = progress.completed;
+                    row[prefix+'preScore'] = progress.preScore;
+                    row[prefix+'score'] = progress.score;
+                }
+            }
+        });
+    }
+}
+
 const exporter = (records:any, fetchRelatedRecords:any, dataProvider: any) => {
     records.forEach((record:any) => {
         record.userId = record.userId || 'NOUSERID';
@@ -35,6 +52,7 @@ const exporter = (records:any, fetchRelatedRecords:any, dataProvider: any) => {
                         started: record.started,
                         completed: record.completed,
                     }
+                    addLessonData(row, record, subject);
                     return row;
                 });
                 jsonExport(data, {}, (err:any, csv:any) => {;

@@ -18,7 +18,7 @@ interface FormDataConsumerProps {
 const OrganizationEdit = (props: any) => {
     return (
         <CustomEdit {...props}>
-            <TabbedForm toolbar={<CustomEditToolbar />} warnWhenUnsavedChanges>
+            <TabbedForm toolbar={<CustomEditToolbar />} >
                 <FormTab label="Summary">
                     <TextInput source="name" fullWidth={true}/>
                 </FormTab>

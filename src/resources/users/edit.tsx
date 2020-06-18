@@ -71,7 +71,7 @@ const UserEdit: React.FunctionComponent<MyProps> = (props) => {
 
     return (
         <CustomEdit {...props}>
-            <TabbedForm toolbar={<CustomEditToolbar />} warnWhenUnsavedChanges>
+            <TabbedForm toolbar={<CustomEditToolbar />} >
                 <FormTab label="Summary">
                     <TextInput source="name" label="Name" fullWidth={true}/>
                     <TextInput type="email" source="email" label="Email Address" fullWidth={true}/>

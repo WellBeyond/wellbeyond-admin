@@ -11,7 +11,7 @@ const SessionEdit = (props: any) => {
 
     return (
         <CustomEdit {...props}>
-            <TabbedForm toolbar={<CustomEditToolbar />} warnWhenUnsavedChanges>
+            <TabbedForm toolbar={<CustomEditToolbar />} >
                 <FormTab label="Summary">
                     <ReferenceField label="Subject" source="subjectId" reference="subjects" >
                         <TextField source="name" />
