@@ -17,7 +17,8 @@ const SubjectCreate = (props: object) => (
                 {id: 'en', name: 'English'},
                 {id: 'fr', name: 'French'},
                 {id: 'hi', name: 'Hindi'},
-                {id: 'sw', name: 'Swahili'}
+                {id: 'sw', name: 'Swahili'},
+                {id: 'am', name: 'Amharic'}
             ]}/>
             <RichTextInput source="description" fullWidth={true}/>
             <PhotoInput source='photo' label="Icon" />

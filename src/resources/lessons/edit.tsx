@@ -35,7 +35,8 @@ const LessonEdit = (props: any) => (
                     {id: 'en', name: 'English'},
                     {id: 'fr', name: 'French'},
                     {id: 'hi', name: 'Hindi'},
-                    {id: 'sw', name: 'Swahili'}
+                    {id: 'sw', name: 'Swahili'},
+                    {id: 'am', name: 'Amharic'}
                 ]}/>
                 <BooleanInput source="isPublished" label="Published?" fullWidth={true}/>
                 <RichTextInput source="description" fullWidth={true}/>

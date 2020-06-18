@@ -29,7 +29,8 @@ const SubjectFilter = (props:any) => (
             {id: 'en', name: 'English'},
             {id: 'fr', name: 'French'},
             {id: 'hi', name: 'Hindi'},
-            {id: 'sw', name: 'Swahili'}
+            {id: 'sw', name: 'Swahili'},
+            {id: 'am', name: 'Amharic'}
         ]}/>
         <BooleanInput source="isPublished" label="Published?" />
     </Filter>
@@ -54,7 +55,8 @@ const SubjectList = (props: object) => {
                     {id: 'en', name: 'English'},
                     {id: 'fr', name: 'French'},
                     {id: 'hi', name: 'Hindi'},
-                    {id: 'sw', name: 'Swahili'}
+                    {id: 'sw', name: 'Swahili'},
+                    {id: 'am', name: 'Amharic'}
                 ]}/>
                 <BooleanField source="isPublished" label="Published?"/>
                 <ArrayField label="Lessons" source="lessons">

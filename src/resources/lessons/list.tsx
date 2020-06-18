@@ -36,7 +36,8 @@ const LessonFilter = (props:any) => (
             {id: 'en', name: 'English'},
             {id: 'fr', name: 'French'},
             {id: 'hi', name: 'Hindi'},
-            {id: 'sw', name: 'Swahili'}
+            {id: 'sw', name: 'Swahili'},
+            {id: 'am', name: 'Amharic'}
         ]}/>
         <BooleanInput source="isPublished" label="Published?" />
     </Filter>
@@ -62,7 +63,8 @@ const LessonList = (props: object) => {
                     {id: 'en', name: 'English'},
                     {id: 'fr', name: 'French'},
                     {id: 'hi', name: 'Hindi'},
-                    {id: 'sw', name: 'Swahili'}
+                    {id: 'sw', name: 'Swahili'},
+                    {id: 'am', name: 'Amharic'}
                 ]}/>
                 <BooleanField source="isPublished" label="Published?"/>
                 <ImageField source="photo" label="Photo" className={classes.photoColumn}/>

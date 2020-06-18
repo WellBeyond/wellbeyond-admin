@@ -138,7 +138,7 @@ const xlateSubject = async (subjectId, target) => {
     });
 }
 
-xlateSubject('2UitIGRK9Dr6E2kYmGbq', 'hi');
+xlateSubject('2YRBNdUBBsI210xQ0jrp', 'am');
 
 setTimeout(function() {
   process.exit(0)
