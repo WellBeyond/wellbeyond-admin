@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import {BooleanField, ReferenceField, ShowController, ShowView, Tab, TabbedShowLayout, TextField} from "react-admin";
+import {BooleanField, ReferenceField, ShowController, ShowView, Tab, TabbedShowLayout, TextField, NumberField} from "react-admin";
 
 const SessionShow = (props: any) => {
     return (
@@ -16,7 +16,7 @@ const SessionShow = (props: any) => {
                             <TextField source="name" />
                         </ReferenceField>
                         <TextField source="groupType" fullWidth={true}/>
-                        <TextField source="groupSize" fullWidth={true}/>
+                        <NumberField source="groupSizeNum" fullWidth={true}/>
                         <BooleanField source="isArchived" label="Archived?" fullWidth={true}/>
                     </Tab>
                 </TabbedShowLayout>

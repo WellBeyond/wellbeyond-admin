@@ -1,5 +1,5 @@
 import React from "react";
-import {BooleanInput, DateTimeInput, FormTab, ReferenceField, TabbedForm, TextField, TextInput} from "react-admin";
+import {BooleanInput, DateTimeInput, FormTab, ReferenceField, TabbedForm, TextField, TextInput, NumberInput} from "react-admin";
 import CustomEdit from '../../components/CustomEdit';
 import CustomEditToolbar from "../../components/CustomEditToolbar";
 import {TrainingLessons} from "../../components/TrainingLessons";
@@ -20,7 +20,7 @@ const SessionEdit = (props: any) => {
                         <TextField source="name" />
                     </ReferenceField>
                     <TextInput source="groupType" fullWidth={true}/>
-                    <TextInput source="groupSize" fullWidth={true}/>
+                    <NumberInput source="groupSizeNum" fullWidth={true} label="Group size"/>
                     <DateTimeInput source="started" fullWidth={true}/>
                     <DateTimeInput source="completed" fullWidth={true}/>
                     <BooleanInput source="isArchived" label="Archived?" fullWidth={true}/>

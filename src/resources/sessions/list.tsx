@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import {Datagrid, DateField, List, ReferenceField, TextField, downloadCSV} from "react-admin";
+import {Datagrid, DateField, List, ReferenceField, TextField, NumberField, downloadCSV} from "react-admin";
 import jsonExport from 'jsonexport/dist';
 
 const addLessonData = (row:any, session:any, subject:any) => {
@@ -48,7 +48,7 @@ const exporter = (records:any, fetchRelatedRecords:any, dataProvider: any) => {
                         trainer_organization: user.organization,
                         trainer_community: user.community,
                         groupType: record.groupType,
-                        groupSize: record.groupSize,
+                        groupSize: record.groupSizeNum,
                         started: record.started,
                         completed: record.completed,
                     }
@@ -68,7 +68,7 @@ const SessionList = (props: object) => {
     return (
         <List {...props} exporter={exporter}
               perPage={25}
-              sort={{field: 'name', order: 'ASC'}}>
+              sort={{field: 'started', order: 'DESC'}}>
             <Datagrid optimized rowClick="edit">
                 <ReferenceField label="Subject" source="subjectId" reference="subjects" link={false}>
                     <TextField source="name" />
@@ -83,7 +83,7 @@ const SessionList = (props: object) => {
                     <TextField source="community" />
                 </ReferenceField>
                 <TextField source="groupType" label="Group Type" fullWidth={true}/>
-                <TextField source="groupSize" label="Group Size" fullWidth={true}/>
+                <NumberField source="groupSizeNum" label="Group Size" fullWidth={true}/>
                 <DateField source="started" label="Started"/>
                 <DateField source="completed" label="Completed"/>
             </Datagrid>
