@@ -2,6 +2,10 @@ import * as React from "react";
 
 import {Datagrid, DateField, List, ReferenceField, TextField, NumberField, downloadCSV} from "react-admin";
 import jsonExport from 'jsonexport/dist';
+import {useEffect, useState} from "react";
+import * as firebase from "firebase";
+import EmailOrPhoneField from "../../components/EmailOrPhoneField";
+import OrganizationField from "../../components/OrganizationField";
 
 const addLessonData = (row:any, session:any, subject:any) => {
     if (subject.lessons) {
@@ -27,40 +31,47 @@ const exporter = (records:any, fetchRelatedRecords:any, dataProvider: any) => {
     });
     let subjects:any = {};
     let lessons:any = {};
-    dataProvider.getList('subjects', {
+    let organizations:any = {};
+    dataProvider.getList('organizations', {
         filter: { },
         pagination: { page: 1, perPage: 1000 },
     }).then(({ data }:any) => {
-        data.forEach((row:any) => {subjects[row.id] = row});
-        dataProvider.getList('lessons', {
+        data.forEach((row:any) => {organizations[row.id] = row});
+        dataProvider.getList('subjects', {
             filter: { },
             pagination: { page: 1, perPage: 1000 },
         }).then(({ data }:any) => {
-            data.forEach((row:any) => {lessons[row.id] = row});
-            fetchRelatedRecords(records, 'userId', 'users').then((users:any) => {
-                const data = records.map((record:any) => {
-                    const user:any = users[record.userId] || {};
-                    const subject:any = subjects[record.subjectId] || {};
-                    let row:any = {
-                        subject: subject.name,
-                        trainer_name: user.name,
-                        trainer_email: user.email,
-                        trainer_organization: user.organization,
-                        trainer_community: user.community,
-                        groupType: record.groupType,
-                        groupSize: record.groupSizeNum,
-                        started: record.started,
-                        completed: record.completed,
-                    }
-                    addLessonData(row, record, subject);
-                    return row;
-                });
-                jsonExport(data, {}, (err:any, csv:any) => {;
-                    downloadCSV(csv, 'sessions');
+            data.forEach((row:any) => {subjects[row.id] = row});
+            dataProvider.getList('lessons', {
+                filter: { },
+                pagination: { page: 1, perPage: 1000 },
+            }).then(({ data }:any) => {
+                data.forEach((row:any) => {lessons[row.id] = row});
+                fetchRelatedRecords(records, 'userId', 'users').then((users:any) => {
+                    const data = records.map((record:any) => {
+                        const user:any = users[record.userId] || {};
+                        const subject:any = subjects[record.subjectId] || {};
+                        let row:any = {
+                            subject: subject.name,
+                            trainer_name: user.name,
+                            trainer_email: user.email,
+                            trainer_organization: user.organizationId && organizations[user.organizationId] ? organizations[user.organizationId].name : user.organization,
+                            trainer_community: user.community,
+                            groupType: record.groupType,
+                            groupSize: record.groupSizeNum,
+                            started: record.started,
+                            completed: record.completed,
+                        }
+                        addLessonData(row, record, subject);
+                        return row;
+                    });
+                    jsonExport(data, {}, (err:any, csv:any) => {;
+                        downloadCSV(csv, 'sessions');
+                    });
                 });
             });
         });
-    })
+    });
 };
 
 
@@ -77,7 +88,7 @@ const SessionList = (props: object) => {
                     <TextField source="name" />
                 </ReferenceField>
                 <ReferenceField label="Organization" source="userId" reference="users" link={false}>
-                    <TextField source="organization" />
+                    <OrganizationField label="Organization"/>
                 </ReferenceField>
                 <ReferenceField label="Community" source="userId" reference="users" link={false}>
                     <TextField source="community" />
