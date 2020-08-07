@@ -1,11 +1,7 @@
 import * as React from "react";
 
-import {Datagrid, DateField, List, ReferenceField, TextField, NumberField, downloadCSV} from "react-admin";
+import {Datagrid, DateField, downloadCSV, List, NumberField, ReferenceField, TextField} from "react-admin";
 import jsonExport from 'jsonexport/dist';
-import {useEffect, useState} from "react";
-import * as firebase from "firebase";
-import EmailOrPhoneField from "../../components/EmailOrPhoneField";
-import OrganizationField from "../../components/OrganizationField";
 
 const addLessonData = (row:any, session:any, subject:any) => {
     if (subject.lessons) {
@@ -55,8 +51,9 @@ const exporter = (records:any, fetchRelatedRecords:any, dataProvider: any) => {
                             subject: subject.name,
                             trainer_name: user.name,
                             trainer_email: user.email,
-                            trainer_organization: user.organizationId && organizations[user.organizationId] ? organizations[user.organizationId].name : user.organization,
-                            trainer_community: user.community,
+                            trainer_organization: record.organization || (user.organizationId && organizations[user.organizationId] ? organizations[user.organizationId].name : user.organization),
+                            trainer_community: record.community || user.community,
+                            sessionName: record.name,
                             groupType: record.groupType,
                             groupSize: record.groupSizeNum,
                             started: record.started,
@@ -81,20 +78,16 @@ const SessionList = (props: object) => {
               perPage={25}
               sort={{field: 'started', order: 'DESC'}}>
             <Datagrid optimized rowClick="edit">
-                <ReferenceField label="Subject" source="subjectId" reference="subjects" link={false}>
+                <ReferenceField label="Subject" source="subjectId" reference="subjects" link={false} >
                     <TextField source="name" />
                 </ReferenceField>
-                <ReferenceField label="Trainer" source="userId" reference="users" link={false}>
+                <ReferenceField label="Trainer" source="userId" reference="users" link={false} sortBy="name">
                     <TextField source="name" />
                 </ReferenceField>
-                <ReferenceField label="Organization" source="userId" reference="users" link={false}>
-                    <OrganizationField label="Organization"/>
-                </ReferenceField>
-                <ReferenceField label="Community" source="userId" reference="users" link={false}>
-                    <TextField source="community" />
-                </ReferenceField>
-                <TextField source="groupType" label="Group Type" fullWidth={true}/>
-                <NumberField source="groupSizeNum" label="Group Size" fullWidth={true}/>
+                <TextField source="organization"  label="Organization"/>
+                <TextField source="community"  label="Community"/>
+                <TextField source="groupType" label="Group Type"/>
+                <NumberField source="groupSizeNum" label="Group Size"/>
                 <DateField source="started" label="Started"/>
                 <DateField source="completed" label="Completed"/>
             </Datagrid>

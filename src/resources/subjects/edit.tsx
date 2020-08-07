@@ -6,7 +6,7 @@ import {
     FormDataConsumer,
     FormTab,
     ReferenceField, ReferenceInput,
-    SelectInput,
+    SelectInput, SimpleFormIterator,
     TabbedForm,
     TextField,
     TextInput
@@ -19,6 +19,7 @@ import {PhotoInput} from "../../components/PhotoInput";
 import CustomEditToolbar from "../../components/CustomEditToolbar";
 import {makeStyles} from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles(theme => ({
     paper: {
@@ -26,6 +27,10 @@ const useStyles = makeStyles(theme => ({
         margin: 'auto',
         marginTop: 10,
         marginBottom: 10
+    },
+    header: {
+        textAlign: 'center',
+        width: '100%'
     }
 }));
 
@@ -74,6 +79,14 @@ const SubjectEdit = (props: any) => {
                                 }}
                             </FormDataConsumer>
                         </OrderedFormIterator>
+                    </ArrayInput>
+                </FormTab>
+                <FormTab label="Group Types">
+                    <Typography variant="h6" className={classes.header} gutterBottom>You can override the standard group types for training sessions</Typography>
+                    <ArrayInput source="groupTypes" label="">
+                        <SimpleFormIterator>
+                            <TextInput source="name" label="Group Type"/>
+                        </SimpleFormIterator>
                     </ArrayInput>
                 </FormTab>
             </TabbedForm>

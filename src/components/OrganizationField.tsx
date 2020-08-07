@@ -8,11 +8,11 @@ const OrganizationField: React.FunctionComponent<FieldProps & InjectedFieldProps
     return (
         <Fragment>
             { hasOrganizationId ?
-                <ReferenceField source="organizationId" reference="organizations" {...props}>
+                <ReferenceField source="organizationId" reference="organizations" sortBy="name" {...props}>
                     <TextField source="name"/>
                 </ReferenceField>
                 :
-                <TextField source="organization" {...props}/>
+                <TextField source="organization" sortBy="organization" {...props}/>
             }
         </Fragment>
     )

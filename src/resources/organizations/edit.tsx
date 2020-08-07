@@ -1,8 +1,8 @@
 import React from "react";
 import {
     ArrayInput,
-    Datagrid,
-    FormTab,
+    Datagrid, DateField,
+    FormTab, NumberField, ReferenceField,
     ReferenceManyField,
     SimpleFormIterator,
     TabbedForm,
@@ -40,6 +40,29 @@ const OrganizationEdit = (props: any) => {
                         <Datagrid>
                             <TextField source="name" />
                             <TextField source="email" />
+                        </Datagrid>
+                    </ReferenceManyField>
+                </FormTab>
+                <FormTab label="Training Sessions">
+                    <ReferenceManyField
+                        label=""
+                        addlabel=''
+                        reference="sessions"
+                        target="organizationId"
+                        sort={{field: 'started', order: 'DESC'}}
+                    >
+                        <Datagrid rowClick="edit">
+                            <ReferenceField label="Subject" source="subjectId" reference="subjects" link={false} >
+                                <TextField source="name" />
+                            </ReferenceField>
+                            <ReferenceField label="Trainer" source="userId" reference="users" link={false} sortBy="name">
+                                <TextField source="name" />
+                            </ReferenceField>
+                            <TextField source="community"  label="Community"/>
+                            <TextField source="groupType" label="Group Type"/>
+                            <NumberField source="groupSizeNum" label="Group Size"/>
+                            <DateField source="started" label="Started"/>
+                            <DateField source="completed" label="Completed"/>
                         </Datagrid>
                     </ReferenceManyField>
                 </FormTab>

@@ -1,16 +1,14 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 
 import {
-    ArrayField,
     BooleanInput,
     Datagrid,
     DateField,
-    Error,
     FormTab,
-    Loading,
     NumberField,
     ReferenceField,
     ReferenceInput,
+    ReferenceManyField,
     SelectInput,
     TabbedForm,
     TextField,
@@ -18,7 +16,6 @@ import {
 } from "react-admin";
 import CustomEdit from '../../components/CustomEdit';
 import CustomEditToolbar from "../../components/CustomEditToolbar";
-import * as firebase from 'firebase';
 
 interface FormDataConsumerProps {
     formData: any;
@@ -30,45 +27,6 @@ type MyProps = {
 
 
 const UserEdit: React.FunctionComponent<MyProps> = (props) => {
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(false);
-    const [userLessons, setUserLessons] = useState<any>();
-    useEffect(() => {
-        let lessons:any[] =[];
-        if (props.id) {
-            firebase
-                .firestore()
-                .collection("users")
-                .doc(props.id)
-                .collection('lessons')
-                .get()
-                .then(querySnapshot => {
-                    querySnapshot.forEach(function (doc) {
-                        if (doc.exists) {
-                            let lesson = doc.data();
-                            lesson.started = lesson.started ? lesson.started.toDate() : undefined;
-                            lesson.completed = lesson.completed ? lesson.completed.toDate() : undefined;
-                            lessons.push(lesson);
-                        }
-                    });
-                    lessons = lessons.sort((a:any,b:any) => {
-                        if (!b || !b.started) return -1;
-                        if (!a || !a.started) return 1;
-                        return (a.started > b.started) ? 1 : -1
-                    });
-                    setUserLessons({lessons: lessons});
-                    setLoading(false);
-                })
-                .catch(error => {
-                    setLoading(false);
-                    setError(true);
-                });
-        }
-    }, [props.id]);
-
-    if (loading) return <Loading />;
-    if (error) return <Error />;
-
     return (
         <CustomEdit {...props}>
             <TabbedForm toolbar={<CustomEditToolbar />} >
@@ -83,20 +41,27 @@ const UserEdit: React.FunctionComponent<MyProps> = (props) => {
                     <TextInput source="community" label="Community" fullWidth={true}/>
                     <BooleanInput source="acceptedTerms" label="Accepted Terms?" fullWidth={true}/>
                 </FormTab>
-                {userLessons && <FormTab label="Training">
-                    {/* eslint-disable-next-line react/jsx-no-undef */}
-                  <ArrayField record={userLessons} source="lessons" fullWidth={true} label=''>
-                    <Datagrid>
-                      <ReferenceField label="Lesson" source="lessonId" reference="lessons" >
-                        <TextField source="name" />
-                      </ReferenceField>
-                      <DateField showTime={true} source="started"/>
-                      <DateField showTime={true} source="completed"/>
-                      <NumberField source="preScore" label="Initial Score"/>
-                      <NumberField source="score" label="Final Score"/>
-                    </Datagrid>
-                  </ArrayField>
-                </FormTab>}
+                <FormTab label="Training">
+                    <ReferenceManyField
+                        label=""
+                        addlabel=''
+                        reference="sessions"
+                        target="userId"
+                        sort={{field: 'started', order: 'DESC'}}
+                    >
+                        <Datagrid rowClick="edit">
+                            <ReferenceField label="Subject" source="subjectId" reference="subjects" link={false} >
+                                <TextField source="name" />
+                            </ReferenceField>
+                            <TextField source="organization"  label="Organization"/>
+                            <TextField source="community"  label="Community"/>
+                            <TextField source="groupType" label="Group Type"/>
+                            <NumberField source="groupSizeNum" label="Group Size"/>
+                            <DateField source="started" label="Started"/>
+                            <DateField source="completed" label="Completed"/>
+                        </Datagrid>
+                    </ReferenceManyField>
+                </FormTab>
             </TabbedForm>
         </CustomEdit>);
 }

@@ -106,6 +106,15 @@ const xlateSubject = async (subjectId, target) => {
       copy.isPublished = false;
       copy.name = await translateText(original.name || '', target);
       copy.description = await translateText(original.description || '', target);
+
+      // Translate the groupTypes
+      if (original.groupTypes && original.groupTypes.length) {
+        const groupTypes = await translateText(original.groupTypes.map((gt) => gt.name || ''), target);
+        copy.groupTypes = [];
+        groupTypes.forEach((gt) => copy.groupTypes.push({name: gt}))
+      }
+
+      // Translate each lesson
       if (original.lessons && original.lessons.length) {
         copy.lessons = new Array(original.lessons.length);
         await Promise.all(original.lessons.map((ol, i) => {

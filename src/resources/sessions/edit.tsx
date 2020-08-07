@@ -4,9 +4,6 @@ import CustomEdit from '../../components/CustomEdit';
 import CustomEditToolbar from "../../components/CustomEditToolbar";
 import {TrainingLessons} from "../../components/TrainingLessons";
 
-interface FormDataConsumerProps {
-    formData: any;
-}
 const SessionEdit = (props: any) => {
 
     return (
@@ -19,6 +16,9 @@ const SessionEdit = (props: any) => {
                     <ReferenceField label="Trainer" source="userId" reference="users" >
                         <TextField source="name" />
                     </ReferenceField>
+                    <TextInput source="name" fullWidth={true}/>
+                    <TextInput source="organization" fullWidth={true}/>
+                    <TextInput source="community" fullWidth={true}/>
                     <TextInput source="groupType" fullWidth={true}/>
                     <NumberInput source="groupSizeNum" fullWidth={true} label="Group size"/>
                     <DateTimeInput source="started" fullWidth={true}/>
