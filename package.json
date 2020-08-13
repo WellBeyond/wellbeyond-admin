@@ -24,6 +24,7 @@
     "react-dom": "^16.13.1",
     "react-firebaseui": "^4.1.0",
     "react-scripts": "3.4.1",
+    "recompose": "^0.30.0",
     "typescript": "^3.9.7",
     "video-react": "^0.14.1"
   },
