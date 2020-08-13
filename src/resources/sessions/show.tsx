@@ -1,6 +1,15 @@
 import * as React from "react";
 
-import {BooleanField, ReferenceField, ShowController, ShowView, Tab, TabbedShowLayout, TextField, NumberField} from "react-admin";
+import {
+    BooleanField,
+    NumberField,
+    ReferenceField,
+    ShowController,
+    ShowView,
+    Tab,
+    TabbedShowLayout,
+    TextField
+} from "react-admin";
 
 const SessionShow = (props: any) => {
     return (

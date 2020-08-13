@@ -2,12 +2,16 @@ import * as React from "react";
 
 import {
     ArrayField,
-    BooleanField, BooleanInput,
+    BooleanField,
+    BooleanInput,
     ChipField,
-    Datagrid, Filter,
+    Datagrid,
+    Filter,
     List,
-    ReferenceField, ReferenceInput,
-    SelectField, SelectInput,
+    ReferenceField,
+    ReferenceInput,
+    SelectField,
+    SelectInput,
     SingleFieldList,
     TextField
 } from "react-admin";

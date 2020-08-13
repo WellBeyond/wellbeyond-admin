@@ -5,8 +5,10 @@ import {
     BooleanInput,
     FormDataConsumer,
     FormTab,
-    ReferenceField, ReferenceInput,
-    SelectInput, SimpleFormIterator,
+    ReferenceField,
+    ReferenceInput,
+    SelectInput,
+    SimpleFormIterator,
     TabbedForm,
     TextField,
     TextInput
@@ -24,9 +26,10 @@ import Typography from '@material-ui/core/Typography';
 const useStyles = makeStyles(theme => ({
     paper: {
         padding: theme.spacing(2),
-        margin: 'auto',
         marginTop: 10,
-        marginBottom: 10
+        marginRight: '20px',
+        marginBottom: 10,
+        width: '95%'
     },
     header: {
         textAlign: 'center',
@@ -82,7 +85,13 @@ const SubjectEdit = (props: any) => {
                     </ArrayInput>
                 </FormTab>
                 <FormTab label="Group Types">
-                    <Typography variant="h6" className={classes.header} gutterBottom>You can override the standard group types for training sessions</Typography>
+                    <Paper className={classes.paper}>
+                        <Typography variant="body1" className={classes.header} gutterBottom>
+                            You can override the standard group types for training sessions here.  If you provide any
+                            values, then this list will be shown when someone goes to start a training session instead
+                            of the predefined list.  Be sure to enter these in the correct language for this subject.
+                        </Typography>
+                    </Paper>
                     <ArrayInput source="groupTypes" label="">
                         <SimpleFormIterator>
                             <TextInput source="name" label="Group Type"/>

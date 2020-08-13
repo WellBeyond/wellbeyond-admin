@@ -3,38 +3,57 @@ import * as React from "react";
 import {
     ArrayInput,
     BooleanInput,
-    Datagrid,
-    DateField,
-    DeleteButton,
-    EditButton,
     FormDataConsumer,
     FormTab,
-    ImageField,
     NumberInput,
-    ReferenceManyField,
     SelectInput,
     SimpleFormIterator,
     TabbedForm,
-    TextField,
     TextInput
 } from "react-admin";
 import CustomEdit from '../../components/CustomEdit';
-import {AddChildButton} from '../../components/AddChildButton';
 import RichTextInput from "ra-input-rich-text";
+import {PhotoInput} from "../../components/PhotoInput";
+import {VideoInput} from "../../components/VideoInput";
+import {makeStyles} from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
 
 interface FormDataConsumerProps {
     formData: any;
 }
+const useStyles = makeStyles(theme => ({
+    paper: {
+        padding: theme.spacing(2),
+        marginTop: 10,
+        marginRight: '20px',
+        marginBottom: 10,
+        width: '95%'
+    },
+    header: {
+        textAlign: 'center',
+        width: '100%'
+    }
+}));
 
-const FactEdit = (props: any) => (
-    <CustomEdit {...props}>
+const FactEdit = (props: any) => {
+    const classes = useStyles();
+    return <CustomEdit {...props}>
         <TabbedForm>
             <FormTab label="Summary">
                 <TextInput source="name" fullWidth={true}/>
-                <BooleanInput source="isSystemProperty" label="Remember this fact on the system's profile" fullWidth={true}/>
+                <BooleanInput source="isSystemProperty" label="Remember this fact on the system's profile"
+                              fullWidth={true}/>
                 <RichTextInput source="description" fullWidth={true}/>
             </FormTab>
             <FormTab label="Question">
+                <Paper className={classes.paper}>
+                    <Typography variant="body1" className={classes.header} gutterBottom>
+                        You can override the standard group types for training sessions here. If you provide any
+                        values, then this list will be shown when someone goes to start a training session instead
+                        of the predefined list. Be sure to enter these in the correct language for this subject.
+                    </Typography>
+                </Paper>
                 <SelectInput source="questionType" fullWidth={true} choices={[
                     {id: 'yes-no', name: 'Yes or No'},
                     {id: 'choose-one', name: 'Select List'},
@@ -42,64 +61,48 @@ const FactEdit = (props: any) => (
                     {id: 'number', name: 'Number Input'}
                 ]}/>
                 <TextInput source="questionText" fullWidth={true}/>
-                <FormDataConsumer subscription={{ values: true }}>
-                    {({formData, ...rest }:FormDataConsumerProps) => formData.questionType === 'number' &&
-                        <NumberInput source="minValue" />
+                <FormDataConsumer subscription={{values: true}}>
+                    {({formData, ...rest}: FormDataConsumerProps) => formData.questionType === 'number' &&
+                      <NumberInput source="minValue"/>
                     }
                 </FormDataConsumer>
-                <FormDataConsumer subscription={{ values: true }}>
-                    {({formData, ...rest }:FormDataConsumerProps) => formData.questionType === 'number' &&
-                        <NumberInput source="maxValue" />
+                <FormDataConsumer subscription={{values: true}}>
+                    {({formData, ...rest}: FormDataConsumerProps) => formData.questionType === 'number' &&
+                      <NumberInput source="maxValue"/>
                     }
                 </FormDataConsumer>
-                <FormDataConsumer subscription={{ values: true }}>
-                    {({formData, ...rest }:FormDataConsumerProps) => formData.questionType === 'choose-one' &&
-                        <ArrayInput source="choices">
-                            <SimpleFormIterator>
-                                <TextInput source="label" label="Choice Label" fullWidth={true}/>
-                                <TextInput source="value"  label="Choice Value" fullWidth={true}/>
-                            </SimpleFormIterator>
-                        </ArrayInput>
+                <FormDataConsumer subscription={{values: true}}>
+                    {({formData, ...rest}: FormDataConsumerProps) => formData.questionType === 'choose-one' &&
+                      <ArrayInput source="choices">
+                        <SimpleFormIterator>
+                          <TextInput source="label" label="Choice Label" fullWidth={true}/>
+                          <TextInput source="value" label="Choice Value" fullWidth={true}/>
+                        </SimpleFormIterator>
+                      </ArrayInput>
                     }
                 </FormDataConsumer>
                 <RichTextInput source="helpText"/>
             </FormTab>
             <FormTab label="Photos">
-                <ReferenceManyField
-                    addlabel=''
-                    reference="photos"
-                    target="factId"
-                    sort={{field: 'createdate', order: 'DESC'}}
-                >
-                    <Datagrid>
-                        <DateField source="createdate"/>
-                        <TextField source="name"/>
-                        <ImageField source="data.thumbnail_url" label="Thumbnail"/>
-                        <EditButton/>
-                        <DeleteButton/>
-                    </Datagrid>
-                </ReferenceManyField>
-                <AddChildButton parent="fact" child="photo" />
+                <ArrayInput source="photos" label="">
+                    <SimpleFormIterator>
+                        <PhotoInput source="url" label="Photo"/>
+                        <TextInput source="title" label="Photo Title" fullWidth={true}/>
+                        <RichTextInput source="description" label="Photo Description" fullWidth={true}/>
+                    </SimpleFormIterator>
+                </ArrayInput>
             </FormTab>
             <FormTab label="Videos">
-                <ReferenceManyField
-                    addlabel=''
-                    reference="videos"
-                    target="factId"
-                    sort={{field: 'createdate', order: 'DESC'}}
-                >
-                    <Datagrid>
-                        <DateField source="createdate"/>
-                        <TextField source="name" />
-                        <ImageField source="data.thumbnail_url" label="Thumbnail"/>
-                        <EditButton/>
-                        <DeleteButton/>
-                    </Datagrid>
-                </ReferenceManyField>
-                <AddChildButton parent="fact" child="video" />
+                <ArrayInput source="photos" label="">
+                    <SimpleFormIterator>
+                        <VideoInput source="url" label="Video"/>
+                        <TextInput source="title" label="Video Title" fullWidth={true}/>
+                        <RichTextInput source="description" label="Video Description" fullWidth={true}/>
+                    </SimpleFormIterator>
+                </ArrayInput>
             </FormTab>
         </TabbedForm>
     </CustomEdit>
-);
+};
 
 export default FactEdit;

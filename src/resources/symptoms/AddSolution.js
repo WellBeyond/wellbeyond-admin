@@ -71,7 +71,7 @@ const AddSolution = (props) => {
 
     const openExistingModal = () => {
         const usedMap = {};
-        const existing = props.getExistingFields ? props.getExistingFields() : [];
+        const existing = (props.getExistingFields ? props.getExistingFields() : []) || [];
         existing.forEach(field => {
             usedMap[field.solutionId] = true;
         });

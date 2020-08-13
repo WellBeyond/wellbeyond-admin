@@ -1,5 +1,14 @@
 import React from "react";
-import {BooleanInput, DateTimeInput, FormTab, ReferenceField, TabbedForm, TextField, TextInput, NumberInput} from "react-admin";
+import {
+    BooleanInput,
+    DateTimeInput,
+    FormTab,
+    NumberInput,
+    ReferenceField,
+    TabbedForm,
+    TextField,
+    TextInput
+} from "react-admin";
 import CustomEdit from '../../components/CustomEdit';
 import CustomEditToolbar from "../../components/CustomEditToolbar";
 import {TrainingLessons} from "../../components/TrainingLessons";

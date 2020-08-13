@@ -1,15 +1,6 @@
 import * as React from "react";
 
-import {
-    BooleanField,
-    Datagrid,
-    Filter,
-    List,
-    ReferenceInput,
-    SelectInput,
-    TextField,
-    TextInput
-} from "react-admin";
+import {BooleanField, Datagrid, Filter, List, ReferenceInput, SelectInput, TextField, TextInput} from "react-admin";
 import OrganizationField from '../../components/OrganizationField'
 import EmailOrPhoneField from "../../components/EmailOrPhoneField";
 

@@ -3,14 +3,19 @@ import * as React from "react";
 import {
     ArrayField,
     BooleanField,
+    BooleanInput,
     ChipField,
+    CloneButton,
     Datagrid,
+    Filter,
     ImageField,
-    List, ReferenceField,
+    List,
+    ReferenceField,
+    ReferenceInput,
     SelectField,
+    SelectInput,
     SingleFieldList,
-    TextField,
-    CloneButton, ReferenceInput, SelectInput, BooleanInput, Filter
+    TextField
 } from "react-admin";
 import {makeStyles} from '@material-ui/core';
 

@@ -1,16 +1,16 @@
 import * as React from "react";
 
-import {BooleanInput, Create, SimpleForm, TextInput} from "react-admin";
-import RichTextInput from "ra-input-rich-text";
+import {Create, FormTab, ReferenceInput, SelectInput, SimpleForm, TextInput} from "react-admin";
 
 const SystemCreate = (props: object) => (
     <Create {...props} >
         <SimpleForm>
-            <TextInput source="name" />
-            <TextInput source="questionType"/>
-            <TextInput source="questionText"/>
-            <BooleanInput source="isSystemProperty"/>
-            <RichTextInput source="description"/>
+            <FormTab label="Summary">
+                <TextInput source="name" fullWidth={true}/>
+                <ReferenceInput label="Organization" source="organizationId" reference="organizations" fullWidth={true} allowEmpty={false}>
+                    <SelectInput optionText="name" fullWidth={true} allowEmpty={false} />
+                </ReferenceInput>
+            </FormTab>
         </SimpleForm>
     </Create>
 );

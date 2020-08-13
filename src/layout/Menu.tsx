@@ -4,6 +4,15 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
 import BookIcon from '@material-ui/icons/Book';
 import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
+import SentimentVerySatisfiedIcon from '@material-ui/icons/SentimentVerySatisfied';
+import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
+import LocalDrinkIcon from '@material-ui/icons/LocalDrink';
+import InfoIcon from '@material-ui/icons/Info';
+/*
+import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary';
+import VideoLibraryIcon from '@material-ui/icons/VideoLibrary';
+*/
+import AccountTreeIcon from '@material-ui/icons/AccountTree';
 import TrainIcon from '@material-ui/icons/Train';
 import PersonIcon from '@material-ui/icons/Person';
 import DomainIcon from '@material-ui/icons/Domain';
@@ -44,13 +53,12 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
         <div>
             {' '}
             <DashboardMenuItem onClick={onMenuClick} sidebarIsOpen={open} />
-            {/*
             <SubMenu
                 handleToggle={() => handleToggle('menuSystems')}
                 isOpen={state.menuSystems}
                 sidebarIsOpen={open}
                 name="pos.menu.systems"
-                icon={<systems.icon />}
+                icon={<LocalDrinkIcon />}
                 dense={dense}
             >
                 <MenuItemLink
@@ -58,7 +66,7 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
                     primaryText={translate(`resources.systems.name`, {
                         smart_count: 2,
                     })}
-                    leftIcon={<systems.icon />}
+                    leftIcon={<LocalDrinkIcon />}
                     onClick={onMenuClick}
                     sidebarIsOpen={open}
                     dense={dense}
@@ -69,7 +77,7 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
                 isOpen={state.menuRules}
                 sidebarIsOpen={open}
                 name="pos.menu.rules"
-                icon={<solutions.icon />}
+                icon={<AccountTreeIcon />}
                 dense={dense}
             >
                 <MenuItemLink
@@ -77,7 +85,7 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
                     primaryText={translate(`resources.symptoms.name`, {
                         smart_count: 2,
                     })}
-                    leftIcon={<symptoms.icon />}
+                    leftIcon={<SentimentVeryDissatisfiedIcon />}
                     onClick={onMenuClick}
                     sidebarIsOpen={open}
                     dense={dense}
@@ -87,7 +95,7 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
                     primaryText={translate(`resources.solutions.name`, {
                         smart_count: 2,
                     })}
-                    leftIcon={<solutions.icon />}
+                    leftIcon={<SentimentVerySatisfiedIcon />}
                     onClick={onMenuClick}
                     sidebarIsOpen={open}
                     dense={dense}
@@ -97,13 +105,12 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
                     primaryText={translate(`resources.facts.name`, {
                         smart_count: 2,
                     })}
-                    leftIcon={<facts.icon />}
+                    leftIcon={<InfoIcon />}
                     onClick={onMenuClick}
                     sidebarIsOpen={open}
                     dense={dense}
                 />
             </SubMenu>
-            */}
             <SubMenu
                 handleToggle={() => handleToggle('menuTraining')}
                 isOpen={state.menuTraining}
@@ -149,7 +156,7 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
                 isOpen={state.menuAssets}
                 sidebarIsOpen={open}
                 name="pos.menu.assets"
-                icon={<photos.icon />}
+                icon={<PhotoLibraryIcon />}
                 dense={dense}
             >
                 <MenuItemLink
@@ -157,7 +164,7 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
                     primaryText={translate(`resources.photos.name`, {
                         smart_count: 2,
                     })}
-                    leftIcon={<photos.icon />}
+                    leftIcon={<PhotoLibraryIcon />}
                     onClick={onMenuClick}
                     sidebarIsOpen={open}
                     dense={dense}
@@ -167,7 +174,7 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
                     primaryText={translate(`resources.videos.name`, {
                         smart_count: 2,
                     })}
-                    leftIcon={<LabelIcon />}
+                    leftIcon={<VideoLibraryIcon />}
                     onClick={onMenuClick}
                     sidebarIsOpen={open}
                     dense={dense}
