@@ -23,6 +23,14 @@
     ],
     "rewrites": [
       {
+        "source": "/get-ionic-tags",
+        "function": "getIonicTags"
+      },
+      {
+        "source": "/get-ionic-companies",
+        "function": "getIonicCompanies"
+      },
+      {
         "source": "**",
         "destination": "/index.html"
       }

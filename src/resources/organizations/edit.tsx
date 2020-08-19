@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from 'react';
 import {
     ArrayInput,
     Datagrid,
@@ -7,6 +7,7 @@ import {
     NumberField,
     ReferenceField,
     ReferenceManyField,
+    SelectInput,
     SimpleFormIterator,
     TabbedForm,
     TextField,
@@ -14,21 +15,50 @@ import {
 } from "react-admin";
 import CustomEdit from '../../components/CustomEdit';
 import CustomEditToolbar from "../../components/CustomEditToolbar";
+import * as firebase from "firebase/app";
+import 'firebase/functions';
 
 interface FormDataConsumerProps {
     formData: any;
 }
+
 const OrganizationEdit = (props: any) => {
+
+    const [companies, setCompanies] = useState();
+    const [tags, setTags] = useState();
+
+    useEffect(() => {
+        const getIntercomTags = firebase.functions().httpsCallable('getIntercomTags');
+        const getIntercomCompanies = firebase.functions().httpsCallable('getIntercomCompanies');
+        getIntercomTags().then(function (tags) {
+            setTags(tags.data.map((tag:any) => {
+                return {id: tag.id, name: tag.name};
+            }).sort((a: any, b: any) => {
+                return a.name < b.name ? -1 : +1;
+            }));
+            getIntercomCompanies().then(function (companies) {
+                setCompanies(companies.data.map((c:any) => {
+                    return {id: c.id, name: c.name};
+                }).sort((a: any, b: any) => {
+                    return a.name < b.name ? -1 : +1;
+                }));
+            });
+        });
+    }, []);
+
     return (
         <CustomEdit {...props}>
             <TabbedForm toolbar={<CustomEditToolbar />} >
                 <FormTab label="Summary">
                     <TextInput source="name" fullWidth={true}/>
+                    <SelectInput source="intercomTag" fullWidth={true} label="Intercom Tag" choices={tags}  allowEmpty={true}/>
+                    <SelectInput source="intercomCompany" fullWidth={true} label="Default Intercom Company" choices={companies} allowEmpty={true}/>
                 </FormTab>
                 <FormTab label="Communities">
                     <ArrayInput source="communities" label="">
                         <SimpleFormIterator>
-                            <TextInput source="name" label="Community Name"/>
+                            <TextInput source="name" label="Community Name" fullWidth={true} />
+                            <SelectInput source="intercomCompany" fullWidth={true} label="Intercom Company" choices={companies} allowEmpty={true}/>
                         </SimpleFormIterator>
                     </ArrayInput>
                 </FormTab>
