@@ -53,6 +53,13 @@ const OrganizationEdit = (props: any) => {
                     <TextInput source="name" fullWidth={true}/>
                     <SelectInput source="intercomTag" fullWidth={true} label="Intercom Tag" choices={tags}  allowEmpty={true}/>
                     <SelectInput source="intercomCompany" fullWidth={true} label="Default Intercom Company" choices={companies} allowEmpty={true}/>
+
+                    <TextInput source="password" fullWidth={true} label="Organization Password"
+                               helperText="Use this to require users who register for this organization to provide a password at signup"/>
+                    <TextInput source="contactName" fullWidth={true} label="Contact Name"
+                               helperText="Contact information at the organization to help with the registration password"/>
+                    <TextInput source="contactEmail" fullWidth={true} label="Contact Email" type="email"
+                               helperText="Contact information at the organization to help with the registration password"/>
                 </FormTab>
                 <FormTab label="Communities">
                     <ArrayInput source="communities" label="">
