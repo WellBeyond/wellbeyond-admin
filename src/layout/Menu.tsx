@@ -181,35 +181,26 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
                 />
             </SubMenu>
             */}
-            <SubMenu
-                handleToggle={() => handleToggle('menuUsers')}
-                isOpen={state.menuUsers}
+            <MenuItemLink
+                to={`/organizations`}
+                primaryText={translate(`resources.organizations.name`, {
+                    smart_count: 2,
+                })}
+                leftIcon={<DomainIcon />}
+                onClick={onMenuClick}
                 sidebarIsOpen={open}
-                name="pos.menu.users"
-                icon={<PersonIcon />}
                 dense={dense}
-            >
-                <MenuItemLink
-                    to={`/organizations`}
-                    primaryText={translate(`resources.organizations.name`, {
-                        smart_count: 2,
-                    })}
-                    leftIcon={<DomainIcon />}
-                    onClick={onMenuClick}
-                    sidebarIsOpen={open}
-                    dense={dense}
-                />
-                <MenuItemLink
-                    to={`/users`}
-                    primaryText={translate(`resources.users.name`, {
-                        smart_count: 2,
-                    })}
-                    leftIcon={<PersonIcon />}
-                    onClick={onMenuClick}
-                    sidebarIsOpen={open}
-                    dense={dense}
-                />
-            </SubMenu>
+            />
+            <MenuItemLink
+                to={`/users`}
+                primaryText={translate(`resources.users.name`, {
+                    smart_count: 2,
+                })}
+                leftIcon={<PersonIcon />}
+                onClick={onMenuClick}
+                sidebarIsOpen={open}
+                dense={dense}
+            />
             {isXSmall && (
                 <MenuItemLink
                     to="/configuration"

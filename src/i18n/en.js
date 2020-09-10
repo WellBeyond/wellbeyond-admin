@@ -21,7 +21,8 @@ export default {
             },
         },
         menu: {
-            users: 'Application Users',
+            users: 'Users',
+            organizations: 'Organizations',
             systems: 'Water Systems',
             rules: 'Diagnostic Rules',
             training: 'Training Classes',

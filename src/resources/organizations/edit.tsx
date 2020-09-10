@@ -1,14 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import {
-    ArrayInput,
+    ArrayField,
+    ArrayInput, BooleanField, ChipField, CloneButton,
     Datagrid,
     DateField,
-    FormTab,
+    FormTab, ImageField,
     NumberField,
     ReferenceField,
-    ReferenceManyField,
+    ReferenceManyField, SelectField,
     SelectInput,
-    SimpleFormIterator,
+    SimpleFormIterator, SingleFieldList,
     TabbedForm,
     TextField,
     TextInput
@@ -17,6 +18,22 @@ import CustomEdit from '../../components/CustomEdit';
 import CustomEditToolbar from "../../components/CustomEditToolbar";
 import * as firebase from "firebase/app";
 import 'firebase/functions';
+import {makeStyles} from '@material-ui/core';
+import EmailOrPhoneField from "../../components/EmailOrPhoneField";
+
+const useStyles = makeStyles({
+    nameColumn: {
+        display: 'inline-block',
+        minWidth: 300,
+    },
+    photoColumn: {
+        maxWidth: 80,
+        maxHeight: 80,
+        '& img': {
+            maxWidth: '100%'
+        }
+    }
+});
 
 interface FormDataConsumerProps {
     formData: any;
@@ -24,6 +41,7 @@ interface FormDataConsumerProps {
 
 const OrganizationEdit = (props: any) => {
 
+    const classes = useStyles();
     const [companies, setCompanies] = useState();
     const [tags, setTags] = useState();
 
@@ -69,6 +87,66 @@ const OrganizationEdit = (props: any) => {
                         </SimpleFormIterator>
                     </ArrayInput>
                 </FormTab>
+                <FormTab label="Subjects">
+                    <ReferenceManyField
+                        label=""
+                        addlabel=''
+                        reference="subjects"
+                        target="organizationId"
+                        sort={{field: 'name', order: 'ASC'}}
+                    >
+                        <Datagrid rowClick="edit">
+                            <TextField source="name" label="Subject name"  className={classes.nameColumn}/>
+                            <SelectField source="locale" label="Language" choices={[
+                                {id: 'en', name: 'English'},
+                                {id: 'fr', name: 'French'},
+                                {id: 'hi', name: 'Hindi'},
+                                {id: 'sw', name: 'Swahili'},
+                                {id: 'am', name: 'Amharic'}
+                            ]}/>
+                            <BooleanField source="isPublished" label="Published?"/>
+                            <ArrayField label="Lessons" source="lessons">
+                                <SingleFieldList>
+                                    <ReferenceField
+                                        source={'lessonId'}
+                                        basePath={'/lessons'}
+                                        reference="lessons"
+                                    >
+                                        <ChipField source="name"/>
+                                    </ReferenceField>
+                                </SingleFieldList>
+                            </ArrayField>
+                        </Datagrid>
+                    </ReferenceManyField>
+                </FormTab>
+                <FormTab label="Lessons">
+                    <ReferenceManyField
+                        label=""
+                        addlabel=''
+                        reference="lessons"
+                        target="organizationId"
+                        sort={{field: 'name', order: 'ASC'}}
+                    >
+                        <Datagrid rowClick="edit">
+                            <TextField source="name" label="Lesson name" className={classes.nameColumn}/>
+                            <CloneButton />
+                            <SelectField source="locale" label="Language" choices={[
+                                {id: 'en', name: 'English'},
+                                {id: 'fr', name: 'French'},
+                                {id: 'hi', name: 'Hindi'},
+                                {id: 'sw', name: 'Swahili'},
+                                {id: 'am', name: 'Amharic'}
+                            ]}/>
+                            <BooleanField source="isPublished" label="Published?"/>
+                            <ImageField source="photo" label="Photo" className={classes.photoColumn}/>
+                            <ArrayField label="Pages" source="pages">
+                                <SingleFieldList linkType={false}>
+                                    <ChipField source="title" clickable={false}/>
+                                </SingleFieldList>
+                            </ArrayField>
+                        </Datagrid>
+                    </ReferenceManyField>
+                </FormTab>
                 <FormTab label="Users">
                     <ReferenceManyField
                         label=""
@@ -78,8 +156,11 @@ const OrganizationEdit = (props: any) => {
                         sort={{field: 'name', order: 'ASC'}}
                     >
                         <Datagrid>
-                            <TextField source="name" />
-                            <TextField source="email" />
+                            <TextField source="name" label="Name"/>
+                            {/* eslint-disable-next-line react/jsx-no-undef */}
+                            <EmailOrPhoneField label="Email/Phone"/>
+                            <TextField source="community" label="Community"/>
+                            <BooleanField source="acceptedTerms" label="Accepted Terms?"/>
                         </Datagrid>
                     </ReferenceManyField>
                 </FormTab>
