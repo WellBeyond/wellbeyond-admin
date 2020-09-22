@@ -1,16 +1,7 @@
 import * as React from "react";
-
-import {
-    BooleanInput,
-    Create,
-    FormTab,
-    ReferenceInput,
-    AutocompleteInput,
-    SimpleForm,
-    TextInput,
-    useDataProvider
-} from "react-admin";
 import {useEffect, useState} from "react";
+
+import {AutocompleteInput, BooleanInput, Create, SimpleForm, useDataProvider} from "react-admin";
 
 const AdminCreate = (props: object) => {
 
