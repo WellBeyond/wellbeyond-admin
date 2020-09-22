@@ -160,6 +160,19 @@ export default {
             notification: {
             }
         },
+        admins: {
+            name: 'Administrator |||| Administrators',
+            amount: '1 administrator |||| %{smart_count} administrators',
+            title: 'Administrator %{reference}',
+            fields: {
+            },
+            tabs: {
+            },
+            action: {
+            },
+            notification: {
+            }
+        },
         organizations: {
             name: 'Organization |||| Organizations',
             amount: '1 organization |||| %{smart_count} organizations',

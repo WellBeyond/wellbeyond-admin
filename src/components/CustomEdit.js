@@ -27,7 +27,12 @@ const CustomEdit = (props) => {
         return <span>{record ? ((record.groupType === 'self' ? 'Self training on ' : ('Training for ' + record.groupType + ' group of ' + record.groupSizeNum + ' people on ')) +
                 Intl.DateTimeFormat('en', {month: "long", day: "numeric", year: "numeric"}).format(record.started)) : ''}</span>
       }
+      if (record.name) {
         return <span>{resourceName}: {record ? `"${record.name}"` : ''}</span>;
+      }
+      else {
+        return <span>{resourceName}: {record ? `"${record.id}"` : ''}</span>;
+      }
     };
 
     return (

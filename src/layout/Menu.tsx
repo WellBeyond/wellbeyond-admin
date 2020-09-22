@@ -8,6 +8,7 @@ import SentimentVerySatisfiedIcon from '@material-ui/icons/SentimentVerySatisfie
 import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
 import LocalDrinkIcon from '@material-ui/icons/LocalDrink';
 import InfoIcon from '@material-ui/icons/Info';
+import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 /*
 import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary';
 import VideoLibraryIcon from '@material-ui/icons/VideoLibrary';
@@ -197,6 +198,16 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
                     smart_count: 2,
                 })}
                 leftIcon={<PersonIcon />}
+                onClick={onMenuClick}
+                sidebarIsOpen={open}
+                dense={dense}
+            />
+            <MenuItemLink
+                to={`/admins`}
+                primaryText={translate(`resources.admins.name`, {
+                    smart_count: 2,
+                })}
+                leftIcon={<SupervisorAccountIcon />}
                 onClick={onMenuClick}
                 sidebarIsOpen={open}
                 dense={dense}

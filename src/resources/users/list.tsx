@@ -1,9 +1,31 @@
 import * as React from "react";
 
-import {BooleanField, Datagrid, Filter, List, ReferenceInput, SelectInput, TextField, TextInput} from "react-admin";
+import {
+    BooleanField,
+    Datagrid,
+    downloadCSV,
+    Filter,
+    List,
+    ReferenceInput,
+    SelectInput,
+    TextField,
+    TextInput
+} from "react-admin";
 import OrganizationField from '../../components/OrganizationField'
 import EmailOrPhoneField from "../../components/EmailOrPhoneField";
+import jsonExport from "jsonexport/dist";
 
+const exporter = (records:any, fetchRelatedRecords:any) => {
+    fetchRelatedRecords(records, 'organizationId', 'organizations').then((organizations:any) => {
+        records.forEach((record:any) => {
+            const organization:any = (record.organizationId && organizations[record.organizationId]);
+            record.organization = organization ? organization.name : record.organization;
+        });
+        jsonExport(records, {}, (err:any, csv:any) => {
+            downloadCSV(csv, 'users');
+        });
+    });
+};
 
 const UserFilter = (props:any) => (
     <Filter {...props}>
@@ -18,7 +40,7 @@ const UserFilter = (props:any) => (
 
 const UserList = (props: object) => {
     return (
-        <List {...props}
+        <List {...props} exporter={exporter}
             filters={<UserFilter/>}
               perPage={25}
               sort={{field: 'name', order: 'ASC'}}>
