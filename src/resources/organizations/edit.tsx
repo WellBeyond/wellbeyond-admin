@@ -102,6 +102,7 @@ const OrganizationEdit = (props: any) => {
                                 {id: 'fr', name: 'French'},
                                 {id: 'hi', name: 'Hindi'},
                                 {id: 'sw', name: 'Swahili'},
+                                {id: 'so', name: 'Somali'},
                                 {id: 'am', name: 'Amharic'}
                             ]}/>
                             <BooleanField source="isPublished" label="Published?"/>
@@ -135,6 +136,7 @@ const OrganizationEdit = (props: any) => {
                                 {id: 'fr', name: 'French'},
                                 {id: 'hi', name: 'Hindi'},
                                 {id: 'sw', name: 'Swahili'},
+                                {id: 'so', name: 'Somali'},
                                 {id: 'am', name: 'Amharic'}
                             ]}/>
                             <BooleanField source="isPublished" label="Published?"/>

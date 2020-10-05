@@ -22,6 +22,7 @@ import {DashboardMenuItem, MenuItemLink, useTranslate} from 'react-admin';
 
 import SubMenu from './SubMenu';
 import {AppState} from '../types';
+import { usePermissions } from 'react-admin';
 
 type MenuName = ('menuSystems' | 'menuRules' | 'menuTraining' | 'menuAssets' | 'menuUsers');
 
@@ -39,6 +40,7 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
         menuTraining: false,
         menuAssets: false,
     });
+    const { permissions } = usePermissions();
     const translate = useTranslate();
     const isXSmall = useMediaQuery((theme: Theme) =>
         theme.breakpoints.down('xs')
@@ -54,7 +56,7 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
         <div>
             {' '}
             <DashboardMenuItem onClick={onMenuClick} sidebarIsOpen={open} />
-            <SubMenu
+            {permissions && permissions.admin && permissions.admin.isAdmin && <SubMenu
                 handleToggle={() => handleToggle('menuSystems')}
                 isOpen={state.menuSystems}
                 sidebarIsOpen={open}
@@ -72,8 +74,8 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
                     sidebarIsOpen={open}
                     dense={dense}
                 />
-            </SubMenu>
-            <SubMenu
+            </SubMenu>}
+            {permissions && permissions.admin && permissions.admin.isAdmin && <SubMenu
                 handleToggle={() => handleToggle('menuRules')}
                 isOpen={state.menuRules}
                 sidebarIsOpen={open}
@@ -111,7 +113,7 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
                     sidebarIsOpen={open}
                     dense={dense}
                 />
-            </SubMenu>
+            </SubMenu>}
             <SubMenu
                 handleToggle={() => handleToggle('menuTraining')}
                 isOpen={state.menuTraining}
@@ -202,7 +204,7 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
                 sidebarIsOpen={open}
                 dense={dense}
             />
-            <MenuItemLink
+            {permissions && permissions.admin && permissions.admin.isAdmin && <MenuItemLink
                 to={`/admins`}
                 primaryText={translate(`resources.admins.name`, {
                     smart_count: 2,
@@ -211,7 +213,7 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
                 onClick={onMenuClick}
                 sidebarIsOpen={open}
                 dense={dense}
-            />
+            />}
             {isXSmall && (
                 <MenuItemLink
                     to="/configuration"

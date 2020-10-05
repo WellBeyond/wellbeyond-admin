@@ -43,18 +43,22 @@ class App extends React.Component {
             layout={Layout}
             i18nProvider={i18nProvider}
         >
-          <Resource name="systems" {...systems} />
-          <Resource name="symptoms" {...symptoms} />
-          <Resource name="solutions" {...solutions} />
-          <Resource name="facts" {...facts} />
-          <Resource name="subjects" {...subjects} />
-          <Resource name="sessions" {...sessions} />
-          <Resource name="lessons" {...lessons} />
-          <Resource name="photos" {...photos} />
-          <Resource name="videos" {...videos} />
-          <Resource name="users" {...users} />
-          <Resource name="admins" {...admins} />
-          <Resource name="organizations" {...organizations} />
+          {(permissions:any) => {
+            return ([
+              <Resource name="systems" {...systems} />,
+              <Resource name="symptoms" {...symptoms} />,
+              <Resource name="solutions" {...solutions} />,
+              <Resource name="facts" {...facts} />,
+              <Resource name="subjects" {...subjects} />,
+              <Resource name="sessions" {...sessions} />,
+              <Resource name="lessons" {...lessons} />,
+              <Resource name="photos" {...photos} />,
+              <Resource name="videos" {...videos} />,
+              <Resource name="users" {...users} />,
+              permissions.admin && permissions.admin.isAdmin ? <Resource name="admins" {...admins} /> : null,
+              <Resource name="organizations" {...organizations} />
+            ]);
+          }}
         </Admin>
     );
   }

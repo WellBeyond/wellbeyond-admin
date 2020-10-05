@@ -24,9 +24,13 @@ const handleLogin = (results:any, params: any) => {
         .get()
         .then(doc => {
             if (doc.exists) {
-                const admin:any = doc.data();
-                if (admin.isAdmin) {
-                    results.user.isAdmin = admin.isAdmin;
+                const admin:any = {
+                    id: doc.id,
+                    ...doc.data()
+                };
+                localStorage.setItem('admin_permissions', JSON.stringify(admin));
+                if (admin.isAdmin || admin.isClientAdmin) {
+                    results.user.admin = admin;
                     return results;
                 }
                 throw new Error('Login error: unauthorized');
@@ -42,6 +46,7 @@ const handleLogin = (results:any, params: any) => {
 };
 
 const handleLogout = (results:any, params: any) => {
+    localStorage.removeItem('admin_permissions');
     return results;
 };
 
@@ -54,6 +59,14 @@ const handleCheckError = (results:any, error: any) => {
 };
 
 const handleGetPermissions = (results:any, params: any) => {
+    const admin = localStorage.getItem('admin_permissions');
+    results = results || {};
+    try {
+        if (admin) {
+            results.admin = JSON.parse(admin);
+        }
+    }
+    catch (e) {}
     return results;
 };
 

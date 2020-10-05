@@ -1,5 +1,6 @@
 rules_version = '2';
 service cloud.firestore {
+
   match /databases/{database}/documents {
 
     // This rule allows anyone on the internet to view, edit, and delete
@@ -11,7 +12,53 @@ service cloud.firestore {
     // Make sure to write security rules for your app before that time, or else
     // your app will lose access to your Firestore database
     match /{document=**} {
-      allow read, write: if request.time < timestamp.date(2020, 5, 7);
+      allow read, write: if get(/databases/$(database)/documents/admins/$(request.auth.uid)).data.isAdmin == true;
+    }
+
+    // Match any document in the 'subjects' collection
+    match /subjects/{subject} {
+      allow read: if true;
+      allow write: if get(/databases/$(database)/documents/admins/$(request.auth.uid)).data.isAdmin == true;
+      allow write: if resource.data.organizationId in get(/databases/$(database)/documents/admins/$(request.auth.uid)).data.organizations;
+      allow create: if request.resource.data.organizationId in get(/databases/$(database)/documents/admins/$(request.auth.uid)).data.organizations;
+    }
+
+    // Match any document in the 'lessons' collection
+    match /lessons/{lessons} {
+      allow read: if true;
+      allow write: if get(/databases/$(database)/documents/admins/$(request.auth.uid)).data.isAdmin == true;
+      allow write: if resource.data.organizationId in get(/databases/$(database)/documents/admins/$(request.auth.uid)).data.organizations;
+      allow create: if request.resource.data.organizationId in get(/databases/$(database)/documents/admins/$(request.auth.uid)).data.organizations;
+    }
+
+    // Match any document in the 'organizations' collection
+    match /organizations/{organizations} {
+      allow read: if true;
+      allow write: if get(/databases/$(database)/documents/admins/$(request.auth.uid)).data.isAdmin == true;
+      allow write: if resource.data.organizationId in get(/databases/$(database)/documents/admins/$(request.auth.uid)).data.organizations;
+    }
+
+    // Make sure the uid of the requesting user matches name of the user
+    // document. The wildcard expression {userId} makes the userId variable
+    // available in rules.
+    match /admins/{userId} {
+      allow read: if request.auth.uid != null && request.auth.uid == userId;
+    }
+    match /users/{userId} {
+      allow read, update, delete: if request.auth.uid == userId;
+      allow create: if request.auth.uid != null && userId == request.auth.id;
+      allow read: if get(/databases/$(database)/documents/admins/$(request.auth.uid)).data.isClientAdmin == true
+      allow read, write: if resource.data.organizationId in get(/databases/$(database)/documents/admins/$(request.auth.uid)).data.organizations;
+    }
+    match /users/{userId}/{collectionName}/{document=**} {
+      allow read: if request.auth.uid == userId;
+      allow write: if request.auth.uid == userId;
+      allow read, write: if get(/databases/$(database)/documents/users/$(userId)).data.organizationId in get(/databases/$(database)/documents/admins/$(request.auth.uid)).data.organizations;
+    }
+    match /sessions/{document=**} {
+      allow read, update, delete: if request.auth.uid == resource.data.userId;
+      allow create: if request.auth.uid != null && request.resource.data.userId == request.auth.uid;
+      allow read, write: if resource.data.organizationId in get(/databases/$(database)/documents/admins/$(request.auth.uid)).data.organizations;
     }
   }
 }

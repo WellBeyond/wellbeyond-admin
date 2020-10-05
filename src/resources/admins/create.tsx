@@ -1,7 +1,11 @@
 import * as React from "react";
 import {useEffect, useState} from "react";
 
-import {AutocompleteInput, BooleanInput, Create, SimpleForm, useDataProvider} from "react-admin";
+import {AutocompleteInput, Create, SimpleForm, useDataProvider} from "react-admin";
+
+interface FormDataConsumerProps {
+    formData: any;
+}
 
 const AdminCreate = (props: object) => {
 
@@ -29,7 +33,6 @@ const AdminCreate = (props: object) => {
        <Create {...props} >
             <SimpleForm>
                 <AutocompleteInput source="id" choices={userList} optionText={optionRenderer} fullWidth={true} limitChoicesToValue={true} translateChoice={false} allowEmpty={false} label="Begin typing the name of an existing user"/>
-                <BooleanInput source="isAdmin" label="System Administrator?" fullWidth={true}/>
             </SimpleForm>
         </Create>
     );
