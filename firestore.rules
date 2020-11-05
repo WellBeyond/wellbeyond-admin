@@ -46,7 +46,7 @@ service cloud.firestore {
     }
     match /users/{userId} {
       allow read, update, delete: if request.auth.uid == userId;
-      allow create: if request.auth.uid != null && userId == request.auth.id;
+      allow create: if request.auth.uid != null;
       allow read: if get(/databases/$(database)/documents/admins/$(request.auth.uid)).data.isClientAdmin == true
       allow read, write: if resource.data.organizationId in get(/databases/$(database)/documents/admins/$(request.auth.uid)).data.organizations;
     }

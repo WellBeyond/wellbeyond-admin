@@ -2,6 +2,7 @@ import React, {FC, useState} from 'react';
 import {useSelector} from 'react-redux';
 import SettingsIcon from '@material-ui/icons/Settings';
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
+import SubjectIcon from '@material-ui/icons/Subject';
 import BookIcon from '@material-ui/icons/Book';
 import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
 import SentimentVerySatisfiedIcon from '@material-ui/icons/SentimentVerySatisfied';
@@ -123,11 +124,21 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
                 dense={dense}
             >
                 <MenuItemLink
+                    to={`/topics`}
+                    primaryText={translate(`resources.topics.name`, {
+                        smart_count: 2,
+                    })}
+                    leftIcon={<BookIcon />}
+                    onClick={onMenuClick}
+                    sidebarIsOpen={open}
+                    dense={dense}
+                />
+                <MenuItemLink
                     to={`/subjects`}
                     primaryText={translate(`resources.subjects.name`, {
                         smart_count: 2,
                     })}
-                    leftIcon={<BookIcon />}
+                    leftIcon={<SubjectIcon />}
                     onClick={onMenuClick}
                     sidebarIsOpen={open}
                     dense={dense}

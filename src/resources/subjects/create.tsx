@@ -10,6 +10,9 @@ const SubjectCreate = (props: object) => (
     <Create {...props} >
         <SimpleForm initialValues={subjectDefaultValue} toolbar={<CustomCreateToolbar />}>
             <TextInput source="name" fullWidth={true}/>
+            <ReferenceInput label="Topic" source="topicId" reference="topics" fullWidth={true} allowEmpty={false}>
+                <SelectInput optionText="name" fullWidth={true} allowEmpty={false} />
+            </ReferenceInput>
             <ReferenceInput label="Organization" source="organizationId" reference="organizations" fullWidth={true} allowEmpty={false}>
                 <SelectInput optionText="name" fullWidth={true} allowEmpty={false} />
             </ReferenceInput>

@@ -82,6 +82,19 @@ export default {
             notification: {
             }
         },
+        topics: {
+            name: 'Topic |||| Topics',
+            amount: '1 topic |||| %{smart_count} topics',
+            title: 'Topic %{reference}',
+            fields: {
+            },
+            tabs: {
+            },
+            action: {
+            },
+            notification: {
+            }
+        },
         subjects: {
             name: 'Subject |||| Subjects',
             amount: '1 subject |||| %{smart_count} subjects',

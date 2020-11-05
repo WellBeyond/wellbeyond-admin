@@ -9,6 +9,7 @@ import systems from "./resources/systems";
 import symptoms from "./resources/symptoms";
 import solutions from "./resources/solutions";
 import facts from "./resources/facts";
+import topics from "./resources/topics";
 import subjects from "./resources/subjects";
 import lessons from "./resources/lessons";
 import sessions from "./resources/sessions";
@@ -49,6 +50,7 @@ class App extends React.Component {
               <Resource name="symptoms" {...symptoms} />,
               <Resource name="solutions" {...solutions} />,
               <Resource name="facts" {...facts} />,
+            <Resource name="topics" {...topics} />,
               <Resource name="subjects" {...subjects} />,
               <Resource name="sessions" {...sessions} />,
               <Resource name="lessons" {...lessons} />,

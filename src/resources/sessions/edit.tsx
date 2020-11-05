@@ -4,7 +4,7 @@ import {
     DateTimeInput,
     FormTab,
     NumberInput,
-    ReferenceField,
+    ReferenceField, ReferenceInput, SelectInput,
     TabbedForm,
     TextField,
     TextInput
@@ -26,7 +26,9 @@ const SessionEdit = (props: any) => {
                         <TextField source="name" />
                     </ReferenceField>
                     <TextInput source="name" fullWidth={true}/>
-                    <TextInput source="organization" fullWidth={true}/>
+                    <ReferenceInput label="Organization" source="organizationId" reference="organizations" fullWidth={true} allowEmpty={false}>
+                        <SelectInput optionText="name" fullWidth={true} allowEmpty={false} />
+                    </ReferenceInput>
                     <TextInput source="community" fullWidth={true}/>
                     <TextInput source="groupType" fullWidth={true}/>
                     <NumberInput source="groupSizeNum" fullWidth={true} label="Group size"/>

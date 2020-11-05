@@ -51,6 +51,12 @@ const SubjectList = (props: object) => {
             <Datagrid optimized rowClick="edit">
                 <TextField source="name" label="Subject name" className={classes.nameColumn}/>
                 <ReferenceField
+                    source={'topicId'}
+                    basePath={'/topics'}
+                    reference="topics">
+                    <TextField source="name"/>
+                </ReferenceField>
+                <ReferenceField
                     source={'organizationId'}
                     basePath={'/organizations'}
                     reference="organizations">
