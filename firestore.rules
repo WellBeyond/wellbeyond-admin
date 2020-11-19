@@ -15,6 +15,12 @@ service cloud.firestore {
       allow read, write: if get(/databases/$(database)/documents/admins/$(request.auth.uid)).data.isAdmin == true;
     }
 
+    // Match any document in the 'topics' collection
+    match /topics/{topic} {
+      allow read: if true;
+      allow write: if get(/databases/$(database)/documents/admins/$(request.auth.uid)).data.isAdmin == true;
+    }
+
     // Match any document in the 'subjects' collection
     match /subjects/{subject} {
       allow read: if true;
