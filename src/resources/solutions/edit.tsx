@@ -94,7 +94,7 @@ const SolutionEdit = (props: any) => {
                 </ArrayInput>
             </FormTab>
             <FormTab label="Videos">
-                <ArrayInput source="photos" label="">
+                <ArrayInput source="videos" label="">
                     <SimpleFormIterator>
                         <VideoInput source="url" label="Video"/>
                         <TextInput source="title" label="Video Title" fullWidth={true}/>

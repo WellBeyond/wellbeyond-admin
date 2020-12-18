@@ -10,6 +10,10 @@ import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissa
 import LocalDrinkIcon from '@material-ui/icons/LocalDrink';
 import InfoIcon from '@material-ui/icons/Info';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
+import AssignmentTurnedInIcon from '@material-ui/icons/AssignmentTurnedIn';
+import PlaylistAddCheckIcon from '@material-ui/icons/PlaylistAddCheck';
+import NetworkCheckIcon from '@material-ui/icons/NetworkCheck';
+import CategoryIcon from '@material-ui/icons/Category';
 /*
 import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary';
 import VideoLibraryIcon from '@material-ui/icons/VideoLibrary';
@@ -19,13 +23,12 @@ import TrainIcon from '@material-ui/icons/Train';
 import PersonIcon from '@material-ui/icons/Person';
 import DomainIcon from '@material-ui/icons/Domain';
 import {Theme, useMediaQuery} from '@material-ui/core';
-import {DashboardMenuItem, MenuItemLink, useTranslate} from 'react-admin';
+import {DashboardMenuItem, MenuItemLink, usePermissions, useTranslate} from 'react-admin';
 
 import SubMenu from './SubMenu';
 import {AppState} from '../types';
-import { usePermissions } from 'react-admin';
 
-type MenuName = ('menuSystems' | 'menuRules' | 'menuTraining' | 'menuAssets' | 'menuUsers');
+type MenuName = ('menuSystems' | 'menuRules' | 'menuMaintenance' | 'menuTraining' | 'menuAssets' | 'menuUsers');
 
 interface Props {
     dense: boolean;
@@ -38,6 +41,7 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
         menuUsers: false,
         menuSystems: false,
         menuRules: false,
+        menuMaintenance: false,
         menuTraining: false,
         menuAssets: false,
     });
@@ -65,6 +69,16 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
                 icon={<LocalDrinkIcon />}
                 dense={dense}
             >
+                  <MenuItemLink
+                    to={`/systemTypes`}
+                    primaryText={translate(`resources.systemTypes.name`, {
+                        smart_count: 2,
+                    })}
+                    leftIcon={<CategoryIcon />}
+                    onClick={onMenuClick}
+                    sidebarIsOpen={open}
+                    dense={dense}
+                  />
                 <MenuItemLink
                     to={`/systems`}
                     primaryText={translate(`resources.systems.name`, {
@@ -115,6 +129,35 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
                     dense={dense}
                 />
             </SubMenu>}
+            <SubMenu
+                handleToggle={() => handleToggle('menuMaintenance')}
+                isOpen={state.menuMaintenance}
+                sidebarIsOpen={open}
+                name="pos.menu.maintenance"
+                icon={<NetworkCheckIcon />}
+                dense={dense}
+            >
+                <MenuItemLink
+                    to={`/checklists`}
+                    primaryText={translate(`resources.checklists.name`, {
+                        smart_count: 2,
+                    })}
+                    leftIcon={<PlaylistAddCheckIcon />}
+                    onClick={onMenuClick}
+                    sidebarIsOpen={open}
+                    dense={dense}
+                />
+                <MenuItemLink
+                    to={`/maintenanceLogs`}
+                    primaryText={translate(`resources.maintenanceLogs.name`, {
+                        smart_count: 2,
+                    })}
+                    leftIcon={<AssignmentTurnedInIcon />}
+                    onClick={onMenuClick}
+                    sidebarIsOpen={open}
+                    dense={dense}
+                />
+            </SubMenu>
             <SubMenu
                 handleToggle={() => handleToggle('menuTraining')}
                 isOpen={state.menuTraining}

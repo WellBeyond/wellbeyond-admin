@@ -2,7 +2,7 @@ import * as React from "react";
 
 import {DateField, RichTextField, ShowController, ShowView, Tab, TabbedShowLayout, TextField} from "react-admin";
 
-const SymptomShow = (props: any) => (
+const ChecklistShow = (props: any) => (
     <ShowController {...props}>
         {(controllerProps: any) =>
             <ShowView {...props} {...controllerProps}>
@@ -22,4 +22,4 @@ const SymptomShow = (props: any) => (
     </ShowController>
 );
 
-export default SymptomShow;
+export default ChecklistShow;

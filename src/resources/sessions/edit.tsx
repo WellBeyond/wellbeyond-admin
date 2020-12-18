@@ -4,7 +4,9 @@ import {
     DateTimeInput,
     FormTab,
     NumberInput,
-    ReferenceField, ReferenceInput, SelectInput,
+    ReferenceField,
+    ReferenceInput,
+    SelectInput,
     TabbedForm,
     TextField,
     TextInput

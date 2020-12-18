@@ -25,11 +25,25 @@ export default {
             organizations: 'Organizations',
             systems: 'Water Systems',
             rules: 'Diagnostic Rules',
+            maintenance: 'Maintenance Checklists',
             training: 'Training Classes',
             assets: 'Photos and Videos',
         },
     },
     resources: {
+        systemTypes: {
+            name: 'System Type |||| System Types',
+            amount: '1 system type |||| %{smart_count} system types',
+            title: 'System Type %{reference}',
+            fields: {
+            },
+            tabs: {
+            },
+            action: {
+            },
+            notification: {
+            }
+        },
         systems: {
             name: 'System |||| Systems',
             amount: '1 system |||| %{smart_count} systems',
@@ -73,6 +87,32 @@ export default {
             name: 'Fact |||| Facts',
             amount: '1 fact |||| %{smart_count} facts',
             title: 'Fact %{reference}',
+            fields: {
+            },
+            tabs: {
+            },
+            action: {
+            },
+            notification: {
+            }
+        },
+        checklists: {
+            name: 'Checklist |||| Checklists',
+            amount: '1 checklist |||| %{smart_count} checklists',
+            title: 'Checklist %{reference}',
+            fields: {
+            },
+            tabs: {
+            },
+            action: {
+            },
+            notification: {
+            }
+        },
+        maintenanceLogs: {
+            name: 'Maintenance Log |||| Maintenance Logs',
+            amount: '1 maintenance Log |||| %{smart_count} maintenance Logs',
+            title: 'Maintenance Log %{reference}',
             fields: {
             },
             tabs: {

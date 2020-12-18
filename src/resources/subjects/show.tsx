@@ -2,7 +2,8 @@ import * as React from "react";
 
 import {
     DateField,
-    ImageField, ReferenceField,
+    ImageField,
+    ReferenceField,
     RichTextField,
     ShowController,
     ShowView,

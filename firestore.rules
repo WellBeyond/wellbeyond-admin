@@ -20,6 +20,11 @@ service cloud.firestore {
       allow read: if true;
       allow write: if get(/databases/$(database)/documents/admins/$(request.auth.uid)).data.isAdmin == true;
     }
+    // Match any document in the 'systemTypes' collection
+    match /systemTypes/{sysType} {
+      allow read: if true;
+      allow write: if get(/databases/$(database)/documents/admins/$(request.auth.uid)).data.isAdmin == true;
+    }
 
     // Match any document in the 'subjects' collection
     match /subjects/{subject} {
@@ -30,7 +35,23 @@ service cloud.firestore {
     }
 
     // Match any document in the 'lessons' collection
-    match /lessons/{lessons} {
+    match /lessons/{lesson} {
+      allow read: if true;
+      allow write: if get(/databases/$(database)/documents/admins/$(request.auth.uid)).data.isAdmin == true;
+      allow write: if resource.data.organizationId in get(/databases/$(database)/documents/admins/$(request.auth.uid)).data.organizations;
+      allow create: if request.resource.data.organizationId in get(/databases/$(database)/documents/admins/$(request.auth.uid)).data.organizations;
+    }
+
+    // Match any document in the 'checklists' collection
+    match /checklists/{listId} {
+      allow read: if true;
+      allow write: if get(/databases/$(database)/documents/admins/$(request.auth.uid)).data.isAdmin == true;
+      allow write: if resource.data.organizationId in get(/databases/$(database)/documents/admins/$(request.auth.uid)).data.organizations;
+      allow create: if request.resource.data.organizationId in get(/databases/$(database)/documents/admins/$(request.auth.uid)).data.organizations;
+    }
+
+    // Match any document in the 'systems' collection
+    match /systems/{systemId} {
       allow read: if true;
       allow write: if get(/databases/$(database)/documents/admins/$(request.auth.uid)).data.isAdmin == true;
       allow write: if resource.data.organizationId in get(/databases/$(database)/documents/admins/$(request.auth.uid)).data.organizations;
@@ -62,6 +83,11 @@ service cloud.firestore {
       allow read, write: if get(/databases/$(database)/documents/users/$(userId)).data.organizationId in get(/databases/$(database)/documents/admins/$(request.auth.uid)).data.organizations;
     }
     match /sessions/{document=**} {
+      allow read, update, delete: if request.auth.uid == resource.data.userId;
+      allow create: if request.auth.uid != null && request.resource.data.userId == request.auth.uid;
+      allow read, write: if resource.data.organizationId in get(/databases/$(database)/documents/admins/$(request.auth.uid)).data.organizations;
+    }
+    match /maintenanceLogs/{document=**} {
       allow read, update, delete: if request.auth.uid == resource.data.userId;
       allow create: if request.auth.uid != null && request.resource.data.userId == request.auth.uid;
       allow read, write: if resource.data.organizationId in get(/databases/$(database)/documents/admins/$(request.auth.uid)).data.organizations;

@@ -1,17 +1,9 @@
 import * as React from 'react';
-import { FC } from 'react';
-import { Card, CardHeader, CardContent } from '@material-ui/core';
-import {
-    ResponsiveContainer,
-    AreaChart,
-    Area,
-    XAxis,
-    YAxis,
-    CartesianGrid,
-    Tooltip,
-} from 'recharts';
-import { useTranslate } from 'react-admin';
-import { format, subDays, addDays } from 'date-fns';
+import {FC} from 'react';
+import {Card, CardContent, CardHeader} from '@material-ui/core';
+import {Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis,} from 'recharts';
+import {useTranslate} from 'react-admin';
+import {addDays, format, subDays} from 'date-fns';
 import {TrainingSession} from "../types";
 
 const lastDay = new Date();

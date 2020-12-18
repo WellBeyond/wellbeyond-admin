@@ -5,10 +5,13 @@ import {Layout, Login} from './layout';
 import {Dashboard} from './dashboard';
 import customRoutes from './routes';
 import englishMessages from './i18n/en';
+import systemTypes from "./resources/systemTypes";
 import systems from "./resources/systems";
 import symptoms from "./resources/symptoms";
 import solutions from "./resources/solutions";
 import facts from "./resources/facts";
+import checklists from "./resources/checklists";
+import maintenanceLogs from "./resources/maintenanceLogs";
 import topics from "./resources/topics";
 import subjects from "./resources/subjects";
 import lessons from "./resources/lessons";
@@ -46,11 +49,14 @@ class App extends React.Component {
         >
           {(permissions:any) => {
             return ([
+            <Resource name="systemTypes" {...systemTypes} />,
               <Resource name="systems" {...systems} />,
               <Resource name="symptoms" {...symptoms} />,
               <Resource name="solutions" {...solutions} />,
               <Resource name="facts" {...facts} />,
-            <Resource name="topics" {...topics} />,
+              <Resource name="checklists" {...checklists} />,
+              <Resource name="maintenanceLogs" {...maintenanceLogs} />,
+              <Resource name="topics" {...topics} />,
               <Resource name="subjects" {...subjects} />,
               <Resource name="sessions" {...sessions} />,
               <Resource name="lessons" {...lessons} />,
