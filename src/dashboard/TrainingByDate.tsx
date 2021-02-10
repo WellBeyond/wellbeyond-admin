@@ -79,7 +79,7 @@ const TrainingChart: FC<{ sessions?: TrainingSession[] }> = ({ sessions }) => {
                             <CartesianGrid strokeDasharray="3 3" />
                             <Tooltip
                                 cursor={{ strokeDasharray: '3 3' }}
-                                formatter={value =>
+                                formatter={(value: any) =>
                                     new Intl.NumberFormat(undefined, {
                                         style: 'currency',
                                         currency: 'USD',

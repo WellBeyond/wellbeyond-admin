@@ -1,5 +1,16 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+It makes heavy use of [react-admin](https://marmelab.com/react-admin/Readme.html).
+
+## Project Documentation
+
+-  [Prerequisites](./docs/prerequisites.md)
+-  [Testing and Debugging](./docs/debugging.md)
+-  [Building for Production and Deploying](./docs/building.md)
+-  [Authentication and Authorization](./docs/authorization.md)
+-  [Translating Training Modules](./docs/translations.md)
+
+
 ## Available Scripts
 
 In the project directory, you can run:
@@ -26,6 +37,10 @@ The build is minified and the filenames include the hashes.<br />
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+### `npm run deploy`
+
+Deploys the project to Firebase hosting.
 
 ### `npm run eject`
 
