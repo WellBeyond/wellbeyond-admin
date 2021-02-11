@@ -10,6 +10,7 @@ import {PhotoInput} from "../../components/PhotoInput";
 import {VideoInput} from "../../components/VideoInput";
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import CustomEditToolbar from "../../components/CustomEditToolbar";
 
 interface FormDataConsumerProps {
     formData: any;
@@ -32,7 +33,7 @@ const SymptomEdit = (props: any) => {
     const classes = useStyles();
     return (
         <CustomEdit {...props}>
-            <TabbedForm>
+            <TabbedForm toolbar={<CustomEditToolbar />}>
                 <FormTab label="Summary">
                     <TextInput source="name" fullWidth={true}/>
                     <RichTextInput source="description" fullWidth={true}/>

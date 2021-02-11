@@ -8,7 +8,7 @@ import {
     NumberField,
     ReferenceField,
     ReferenceInput,
-    ReferenceManyField,
+    ReferenceManyField, required,
     SelectInput,
     TabbedForm,
     TextField,
@@ -31,7 +31,7 @@ const UserEdit: React.FunctionComponent<MyProps> = (props) => {
         <CustomEdit {...props}>
             <TabbedForm toolbar={<CustomEditToolbar />} >
                 <FormTab label="Summary">
-                    <TextInput source="name" label="Name" fullWidth={true}/>
+                    <TextInput source="name" label="Name" fullWidth={true} validate={required('Name is required')}/>
                     <TextInput type="email" source="email" label="Email Address" fullWidth={true}/>
                     <TextInput type="tel" source="phoneNumber" label="Phone Number" fullWidth={true}/>
                     <ReferenceInput label="Organization (selected) " source="organizationId" reference="organizations" fullWidth={true} allowEmpty={true}>

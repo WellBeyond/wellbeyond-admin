@@ -2,10 +2,12 @@ import * as React from "react";
 
 import {
     ArrayInput,
-    Edit,
     FormTab,
     NumberInput,
+    ReferenceArrayInput,
     ReferenceInput,
+    required,
+    SelectArrayInput,
     SelectInput,
     SimpleFormIterator,
     TabbedForm,
@@ -14,25 +16,27 @@ import {
 import RichTextInput from "ra-input-rich-text";
 import {PhotoInput} from "../../components/PhotoInput";
 import {VideoInput} from "../../components/VideoInput";
+import CustomEditToolbar from "../../components/CustomEditToolbar";
+import CustomEdit from "../../components/CustomEdit";
 
 interface FormDataConsumerProps {
     formData: any;
 }
 
 const SystemEdit = (props: any) => (
-    <Edit {...props}>
-        <TabbedForm>
+    <CustomEdit {...props}>
+        <TabbedForm toolbar={<CustomEditToolbar />}>
             <FormTab label="Summary">
-                <TextInput source="name" fullWidth={true}/>
-                <ReferenceInput label="Organization" source="organizationId" reference="organizations" fullWidth={true} allowEmpty={false}>
+                <TextInput source="name" fullWidth={true} validate={required('System name is required')}/>
+                <ReferenceInput label="Organization" source="organizationId" reference="organizations" fullWidth={true} allowEmpty={false} validate={required('Please select an organization')}>
                     <SelectInput optionText="name" fullWidth={true} allowEmpty={false} />
                 </ReferenceInput>
-                <ReferenceInput label="System Type" source="systemTypeId" reference="systemTypes" fullWidth={true} allowEmpty={true}>
-                    <SelectInput optionText="name" fullWidth={true} allowEmpty={true} />
-                </ReferenceInput>
+                <ReferenceArrayInput label="System Type(s)" source="systemTypeIds" reference="systemTypes" fullWidth={true} allowEmpty={false} validate={required('Please select one or more system type(s)')}>
+                    <SelectArrayInput optionText="name" fullWidth={true} allowEmpty={false} />
+                </ReferenceArrayInput>
                 <TextInput source="country" label="Country" fullWidth={true}/>
-                <NumberInput source="latitude" fullWidth={true} step={.00001} min={-90} max={90}/>
-                <NumberInput source="longitude" fullWidth={true} step={.00001} min={-180} max={180}/>
+                <NumberInput source="latitude" fullWidth={true}/>
+                <NumberInput source="longitude" fullWidth={true}/>
                 <RichTextInput source="description" fullWidth={true}/>
             </FormTab>
             <FormTab label="Photos">
@@ -52,7 +56,7 @@ const SystemEdit = (props: any) => (
                 </ArrayInput>
             </FormTab>
         </TabbedForm>
-    </Edit>
+    </CustomEdit>
 );
 
 export default SystemEdit;

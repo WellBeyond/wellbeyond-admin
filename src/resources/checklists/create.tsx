@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import {BooleanInput, Create, ReferenceInput, SelectInput, SimpleForm, TextInput} from "react-admin";
+import {BooleanInput, Create, ReferenceInput, required, SelectInput, SimpleForm, TextInput} from "react-admin";
 import RichTextInput from "ra-input-rich-text";
 import CustomCreateToolbar from "../../components/CustomCreateToolbar";
 
@@ -16,8 +16,8 @@ const ChecklistCreate = (props: MyProps) => {
     return (
         <Create {...props} >
             <SimpleForm toolbar={toolbar || <CustomCreateToolbar />} initialValues={checklistDefaultValue}>
-                <TextInput source="name" fullWidth={true}/>
-                <ReferenceInput label="Organization" source="organizationId" reference="organizations" fullWidth={true} allowEmpty={false}>
+                <TextInput source="name" fullWidth={true} validate={required('Name is required')}/>
+                <ReferenceInput label="Organization" source="organizationId" reference="organizations" fullWidth={true} allowEmpty={false} validate={required('Please select an organization')}>
                     <SelectInput optionText="name" fullWidth={true} allowEmpty={false} />
                 </ReferenceInput>
                 <ReferenceInput label="System Type" source="systemTypeId" reference="systemTypes" fullWidth={true} allowEmpty={false}>

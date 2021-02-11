@@ -3,10 +3,11 @@ import * as React from "react";
 import {Create, ReferenceInput, SelectInput, SimpleForm, TextInput} from "react-admin";
 import {validatePhoto} from './photo';
 import {CloudinaryPhotoInput} from "../../components/CloudinaryPhotoInput";
+import CustomCreateToolbar from "../../components/CustomCreateToolbar";
 
 const PhotoCreate = (props: object) => (
     <Create {...props} >
-        <SimpleForm validate={validatePhoto}>
+        <SimpleForm validate={validatePhoto} toolbar={<CustomCreateToolbar />}>
             <ReferenceInput label="Symptom" source="symptomId" reference="symptoms" fullWidth={true}>
                 <SelectInput optionText="name" fullWidth={true}  />
             </ReferenceInput>

@@ -1,12 +1,14 @@
 import * as React from "react";
 
-import {Edit, ReferenceInput, SelectInput, SimpleForm, TextInput} from "react-admin";
+import {ReferenceInput, SelectInput, SimpleForm, TextInput} from "react-admin";
 import {CloudinaryPhotoInput} from "../../components/CloudinaryPhotoInput";
 import RichTextInput from "ra-input-rich-text";
+import CustomEditToolbar from "../../components/CustomEditToolbar";
+import CustomEdit from "../../components/CustomEdit";
 
 const PhotoEdit = (props: object) => (
-    <Edit {...props} >
-        <SimpleForm>
+    <CustomEdit {...props} >
+        <SimpleForm toolbar={<CustomEditToolbar />}>
             <ReferenceInput label="Symptom" source="symptomId" reference="symptoms" fullWidth={true}>
                 <SelectInput optionText="name" fullWidth={true}  />
             </ReferenceInput>
@@ -20,7 +22,7 @@ const PhotoEdit = (props: object) => (
             <CloudinaryPhotoInput  source='data'>Upload Photo</CloudinaryPhotoInput>
             <RichTextInput source="description" />
         </SimpleForm>
-    </Edit>
+    </CustomEdit>
 );
 
 export default PhotoEdit;

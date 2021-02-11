@@ -2,6 +2,7 @@ import * as React from "react";
 import {useEffect, useState} from "react";
 
 import {AutocompleteInput, Create, SimpleForm, useDataProvider} from "react-admin";
+import CustomCreateToolbar from "../../components/CustomCreateToolbar";
 
 interface FormDataConsumerProps {
     formData: any;
@@ -31,7 +32,7 @@ const AdminCreate = (props: object) => {
     
     return (
        <Create {...props} >
-            <SimpleForm>
+            <SimpleForm toolbar={<CustomCreateToolbar />}>
                 <AutocompleteInput source="id" choices={userList} optionText={optionRenderer} fullWidth={true} limitChoicesToValue={true} translateChoice={false} allowEmpty={false} label="Begin typing the name of an existing user"/>
             </SimpleForm>
         </Create>

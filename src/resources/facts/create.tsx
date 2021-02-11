@@ -1,10 +1,11 @@
 import * as React from "react";
 
 import {BooleanInput, Create, SelectInput, SimpleForm, TextInput} from "react-admin";
+import CustomCreateToolbar from "../../components/CustomCreateToolbar";
 
 const FactCreate = (props: object) => (
     <Create {...props} >
-        <SimpleForm>
+        <SimpleForm toolbar={<CustomCreateToolbar />}>
             <TextInput source="name" fullWidth={true} />
             <SelectInput source="questionType" fullWidth={true} choices={[
                 {id: 'yes-no', name: 'Yes or No'},

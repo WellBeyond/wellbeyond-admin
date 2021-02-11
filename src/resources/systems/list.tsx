@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import {Datagrid, List, ReferenceField, TextField} from "react-admin";
+import {Datagrid, List, ReferenceArrayField, ReferenceField, TextField} from "react-admin";
 
 const SystemList = (props: object) => (
     <List {...props}
@@ -14,12 +14,12 @@ const SystemList = (props: object) => (
                 reference="organizations">
                 <TextField source="name"/>
             </ReferenceField>
-            <ReferenceField
-                source={'systemTypeId'}
+            <ReferenceArrayField
+                source={'systemTypeIds'}
                 basePath={'/systemTypes'}
                 reference="systemTypes">
                 <TextField source="name"/>
-            </ReferenceField>
+            </ReferenceArrayField>
             <TextField source="country" label="Country"/>
         </Datagrid>
     </List>

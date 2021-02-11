@@ -5,7 +5,6 @@ import CustomCreateToolbar from "../../components/CustomCreateToolbar";
 
 type MyProps = {
     location?: {[index: string]:any},
-    subject?: any,
     toolbar?: object
 }
 

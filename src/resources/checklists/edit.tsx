@@ -1,6 +1,15 @@
 import * as React from "react";
 
-import {ArrayInput, BooleanInput, FormTab, ReferenceInput, SelectInput, TabbedForm, TextInput} from "react-admin";
+import {
+    ArrayInput,
+    BooleanInput,
+    FormTab,
+    ReferenceInput,
+    required,
+    SelectInput,
+    TabbedForm,
+    TextInput
+} from "react-admin";
 import CustomEdit from '../../components/CustomEdit';
 import RichTextInput from "ra-input-rich-text";
 import OrderedFormIterator from "../../components/OrderedFormIterator";
@@ -16,8 +25,8 @@ const ChecklistEdit = (props: any) => (
     <CustomEdit {...props}>
         <TabbedForm toolbar={<CustomEditToolbar />} >
             <FormTab label="Summary">
-                <TextInput source="name" fullWidth={true}/>
-                <ReferenceInput label="Organization" source="organizationId" reference="organizations" fullWidth={true} allowEmpty={false}>
+                <TextInput source="name" fullWidth={true} validate={required('Name is required')}/>
+                <ReferenceInput label="Organization" source="organizationId" reference="organizations" fullWidth={true} allowEmpty={false} validate={required('Please select an organization')}>
                     <SelectInput optionText="name" fullWidth={true} allowEmpty={false} />
                 </ReferenceInput>
                 <ReferenceInput label="System Type" source="systemTypeId" reference="systemTypes" fullWidth={true} allowEmpty={true}>
