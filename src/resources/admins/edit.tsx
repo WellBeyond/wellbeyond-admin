@@ -42,7 +42,7 @@ const UserEdit: React.FunctionComponent<MyProps> = (props) => {
                 </FormDataConsumer>
 
                 <FormDataConsumer subscription={{values: true}}>
-                    {({formData, ...rest}: FormDataConsumerProps) => formData.isClientAdmin &&
+                    {({formData, ...rest}: FormDataConsumerProps) => (formData.isClientAdmin || formData.isMaintenanceUser)&&
                       <ReferenceArrayInput label="Which Organizations?" source="organizations" reference="organizations"
                                            fullWidth={true}>
                         <SelectArrayInput optionText="name"/>

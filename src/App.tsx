@@ -49,7 +49,7 @@ class App extends React.Component {
         >
           {(permissions:any) => {
             return ([
-            <Resource name="systemTypes" {...systemTypes} />,
+              <Resource name="systemTypes" {...systemTypes} />,
               <Resource name="systems" {...systems} />,
               <Resource name="symptoms" {...symptoms} />,
               <Resource name="solutions" {...solutions} />,
