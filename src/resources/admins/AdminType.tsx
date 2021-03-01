@@ -11,7 +11,7 @@ export const choices = [
  export const onSelectChoice = (choice: string, form: any) => {
      choices.map(option => {
          form.change(option._id, option._id === choice)
-         if(choice === 'isAdmin') form.change('organizations',[])
+         if(choice != 'isClientAdmin') form.change('organizations',[])
      })
  }
 
