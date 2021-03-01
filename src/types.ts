@@ -78,6 +78,7 @@ export interface User extends Record {
 export interface Admin extends Record {
     isAdmin?: boolean;
     isClientAdmin?: boolean;
+    isMaintenanceUser?: boolean;
     organizations?: string[];
 }
 
