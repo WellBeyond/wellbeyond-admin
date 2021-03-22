@@ -17,6 +17,7 @@ import {
     TextField
 } from "react-admin";
 import {makeStyles} from '@material-ui/core';
+import { ImageField } from "react-admin";
 
 const useStyles = makeStyles({
     nameColumn: {
@@ -80,6 +81,7 @@ const MaintenanceLogList = (props: object) => {
                         <ChipField source="name" clickable={false}/>
                     </SingleFieldList>
                 </ArrayField>
+                <ImageField source="photo"/>
             </Datagrid>
         </List>
     );
