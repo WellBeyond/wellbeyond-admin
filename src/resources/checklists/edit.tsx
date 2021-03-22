@@ -51,6 +51,7 @@ const ChecklistEdit = (props: any) => (
                 ]}/>
                 <BooleanInput source="isPublished" label="Published?" fullWidth={true}/>
                 <RichTextInput source="description" fullWidth={true}/>
+                <PhotoInput source='photo' label="Photo" />
             </FormTab>
             <FormTab label="Steps">
                 <ArrayInput source="steps" label=''>
