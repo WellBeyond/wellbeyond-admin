@@ -13,6 +13,7 @@ import {
 } from "react-admin";
 import CustomEdit from '../../components/CustomEdit';
 import CustomEditToolbar from "../../components/CustomEditToolbar";
+import { PhotoInput } from "../../components/PhotoInput";
 
 interface FormDataConsumerProps {
     formData: any;
@@ -39,6 +40,7 @@ const MaintenanceLogEdit = (props: any) => (
                 <DateTimeInput source="completed" fullWidth={true}/>
                 <NumberInput source="stepCount" fullWidth={true} step={1} min={0}/>
                 <NumberInput source="completedCount" fullWidth={true} step={1} min={0}/>
+                <PhotoInput source='photo' label="Photo" />
             </FormTab>
             <FormTab label="Steps">
                 <ArrayInput source="steps" label=''>

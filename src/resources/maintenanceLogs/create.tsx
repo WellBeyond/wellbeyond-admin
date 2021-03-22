@@ -2,6 +2,7 @@ import * as React from "react";
 
 import {Create, DateTimeInput, ReferenceInput, SelectInput, SimpleForm, TextInput} from "react-admin";
 import CustomCreateToolbar from "../../components/CustomCreateToolbar";
+import { PhotoInput } from "../../components/PhotoInput";
 
 type MyProps = {
     location?: {[index: string]:any},
@@ -29,6 +30,7 @@ const MaintenanceLogCreate = (props: MyProps) => {
                 </ReferenceInput>
                 <DateTimeInput source="started" fullWidth={true}/>
                 <DateTimeInput source="completed" fullWidth={true}/>
+                <PhotoInput source='photo' label="Photo" />
             </SimpleForm>
         </Create>
     );
