@@ -1,15 +1,8 @@
 import * as React from "react";
 
 import {Datagrid, DateField, Filter, List, ReferenceField, ReferenceInput, SelectInput, TextField} from "react-admin";
-import {makeStyles} from '@material-ui/core';
 import { NumberField } from "react-admin";
 
-const useStyles = makeStyles({
-    nameColumn: {
-        display: 'inline-block',
-        minWidth: 300,
-    }
-});
 const MaintenanceLogFilter = (props:any) => (
     <Filter {...props}>
         <ReferenceInput label="Organization" source="organizationId" reference="organizations">
@@ -25,7 +18,6 @@ const MaintenanceLogFilter = (props:any) => (
 );
 
 const MaintenanceLogList = (props: object) => {
-    const classes = useStyles();
     return (
         <List {...props}
             filters={<MaintenanceLogFilter />}
