@@ -30,6 +30,7 @@ const UserList = (props: object) => {
                     </SingleFieldList>
                 </ReferenceArrayField>
                 <BooleanField source="isAdmin" label="System Administrator?"/>
+                <BooleanField source="isMaintenanceUser" label="Maintenance User?"/>
             </Datagrid>
         </List>
     );
