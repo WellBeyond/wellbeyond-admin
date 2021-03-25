@@ -15,9 +15,6 @@ const styles = {
     singleCol: { marginTop: '2em', marginBottom: '2em' },
 };
 
-const Spacer = () => <span style={{ width: '1em' }} />;
-const VerticalSpacer = () => <span style={{ height: '1em' }} />;
-
 const Dashboard = () => {
     const [sessions, setSessions] = useState<TrainingSession[]>([]);
     const [users, setUsers] = useState<User[]>([]);

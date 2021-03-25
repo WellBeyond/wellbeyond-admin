@@ -13,6 +13,7 @@ import {
 } from "react-admin";
 import CustomEdit from '../../components/CustomEdit';
 import CustomEditToolbar from "../../components/CustomEditToolbar";
+import {PhotoInput} from "../../components/PhotoInput";
 
 interface FormDataConsumerProps {
     formData: any;
@@ -49,8 +50,9 @@ const MaintenanceLogEdit = (props: any) => (
                             {id: 'incomplete', name: 'Unable to Complete'},
                             {id: 'repairs-needed', name: 'Repairs Needed'}
                         ]}/>
-                        <DateTimeInput source="completed" fullWidth={true}/>
-                        <TextInput source="information" multiline fullWidth={true}/>
+                        <DateTimeInput source="completed" fullWidth={true} label={"Time Completed"}/>
+                        <TextInput source="information" multiline fullWidth={true} label={"Information"}/>
+                        <PhotoInput source='photo' label={"Photo"}/>
                     </SimpleFormIterator>
                 </ArrayInput>
             </FormTab>

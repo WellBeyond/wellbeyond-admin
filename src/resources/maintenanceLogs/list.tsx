@@ -1,22 +1,8 @@
 import * as React from "react";
 
-import {
-    ArrayField,
-    BooleanField,
-    BooleanInput,
-    ChipField,
-    CloneButton,
-    Datagrid,
-    Filter,
-    List,
-    ReferenceField,
-    ReferenceInput,
-    SelectField,
-    SelectInput,
-    SingleFieldList,
-    TextField
-} from "react-admin";
+import {Datagrid, DateField, Filter, List, ReferenceField, ReferenceInput, SelectInput, TextField} from "react-admin";
 import {makeStyles} from '@material-ui/core';
+import { NumberField } from "react-admin";
 
 const useStyles = makeStyles({
     nameColumn: {
@@ -29,18 +15,12 @@ const MaintenanceLogFilter = (props:any) => (
         <ReferenceInput label="Organization" source="organizationId" reference="organizations">
             <SelectInput optionText="name" />
         </ReferenceInput>
-        <SelectInput source="locale" label="Language" choices={[
-            {id: 'en', name: 'English'},
-            {id: 'fr', name: 'French'},
-            {id: 'hi', name: 'Hindi'},
-            {id: 'sw', name: 'Swahili'},
-            {id: 'so', name: 'Somali'},
-            {id: 'am', name: 'Amharic'}
-        ]}/>
-        <ReferenceInput label="System Type" source="systemTypeId" reference="systemTypes" fullWidth={true} allowEmpty={false}>
+        <ReferenceInput label="System" source="systemId" reference="systems" fullWidth={true} allowEmpty={false}>
             <SelectInput optionText="name" fullWidth={true} allowEmpty={false} />
         </ReferenceInput>
-        <BooleanInput source="isPublished" label="Published?" />
+        <ReferenceInput label="Checklist" source="checklistId" reference="checklists" fullWidth={true} allowEmpty={false}>
+            <SelectInput optionText="name" fullWidth={true} allowEmpty={false} />
+        </ReferenceInput>
     </Filter>
 );
 
@@ -50,36 +30,40 @@ const MaintenanceLogList = (props: object) => {
         <List {...props}
             filters={<MaintenanceLogFilter />}
               perPage={25}
-              sort={{field: 'name', order: 'ASC'}}>
+              sort={{field: 'started', order: 'DESC'}}>
             <Datagrid optimized rowClick="edit">
-                <TextField source="name" label="MaintenanceLog name" className={classes.nameColumn}/>
-                <CloneButton />
+                <DateField source="started" label="Started" showTime={true}/>
+                <DateField source="completed" label="Completed" showTime={true}/>
+                <NumberField source="stepCount" label="#Steps"/>
+                <NumberField source="completedCount" label="#Completed"/>
                 <ReferenceField
+                    label={"Organization"}
                     source={'organizationId'}
                     basePath={'/organizations'}
                     reference="organizations">
                     <TextField source="name"/>
                 </ReferenceField>
                 <ReferenceField
-                    source={'systemTypeId'}
-                    basePath={'/systemTypes'}
-                    reference="systemTypes">
+                    label={"System"}
+                    source={'systemId'}
+                    basePath={'/systems'}
+                    reference="systems">
                     <TextField source="name"/>
                 </ReferenceField>
-                <SelectField source="locale" label="Language" choices={[
-                    {id: 'en', name: 'English'},
-                    {id: 'fr', name: 'French'},
-                    {id: 'hi', name: 'Hindi'},
-                    {id: 'sw', name: 'Swahili'},
-                    {id: 'so', name: 'Somali'},
-                    {id: 'am', name: 'Amharic'}
-                ]}/>
-                <BooleanField source="isPublished" label="Published?"/>
-                <ArrayField label="Steps" source="steps">
-                    <SingleFieldList linkType={false}>
-                        <ChipField source="name" clickable={false}/>
-                    </SingleFieldList>
-                </ArrayField>
+                <ReferenceField
+                    label={"Performed By"}
+                    source={'userId'}
+                    basePath={'/users'}
+                    reference="users">
+                    <TextField source="name"/>
+                </ReferenceField>
+                <ReferenceField
+                    label={"Checklist"}
+                    source={'checklistId'}
+                    basePath={'/checklists'}
+                    reference="checklists">
+                    <TextField source="name"/>
+                </ReferenceField>
             </Datagrid>
         </List>
     );

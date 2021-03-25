@@ -1,5 +1,5 @@
 import React, {FunctionComponent} from 'react';
-import {Photo} from 'cloudinary-react';
+import {Image} from 'cloudinary-react';
 import get from 'lodash.get';
 import {FieldProps, fieldPropTypes, InjectedFieldProps} from './types';
 import {cloudinaryConfig} from "../CLOUDINARY_CONFIG";
@@ -12,7 +12,7 @@ export const CloudinaryPhotoField: FunctionComponent<FieldProps & InjectedFieldP
                                                           }) => {
     const data = get(record, source);
     return (
-            <Photo
+            <Image
                 cloudName={cloudinaryConfig.cloudName}
                 publicId={data.public_id}
             />
