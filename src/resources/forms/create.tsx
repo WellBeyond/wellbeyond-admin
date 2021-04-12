@@ -10,7 +10,7 @@ type MyProps = {
     toolbar?: object
 }
 
-const formDefaultValue = { locale: 'en', steps: [] };
+const formDefaultValue = { locale: 'en', questions: [] };
 const FormCreate = (props: MyProps) => {
     const {toolbar} = props;
     return (

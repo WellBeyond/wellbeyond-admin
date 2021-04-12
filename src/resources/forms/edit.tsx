@@ -14,36 +14,16 @@ import CustomEdit from "../../components/CustomEdit";
 import RichTextInput from "ra-input-rich-text";
 import OrderedFormIterator from "../../components/OrderedFormIterator";
 import CustomEditToolbar from "../../components/CustomEditToolbar";
-// import { FormQuestionType } from '../../types'
+import { FormDataConsumer } from "react-admin";
+import { SimpleFormIterator } from "react-admin";
+import { Fragment } from "react";
+import { NumberInput } from "react-admin";
 
 interface FormDataConsumerProps {
   formData: any;
 }
 
-const AddChoice = ({ id }: { id: string | number}) => (
-<div>
-    Enter the correct answer
-    <TextInput source={`correctAnswer-${id}`} label="Correct Answer" fullWidth={true} />
-    Enter Other Choices
-    <ArrayInput source={`options-${id}`} label="">
-        <OrderedFormIterator>
-            <TextInput source="option" fullWidth={true} label="Choice" />
-        </OrderedFormIterator>
-    </ArrayInput>
-
-</div>
-);
-
 const FormEdit = (props: any) => {
-  const [optionArray, setOptionArray] =  React.useState<(() => JSX.Element[]) | any>([]);
-
-  const handleChange = (event: any) => {
-    if ((event && event.target && event.target.value) === "mcq") {
-      setOptionArray([...optionArray, AddChoice])
-    }
-    return;
-  };
-
   return (
     <CustomEdit {...props}>
       <TabbedForm toolbar={<CustomEditToolbar />}>
@@ -103,27 +83,57 @@ const FormEdit = (props: any) => {
           />
         </FormTab>
         <FormTab label="Questions">
-          <ArrayInput source="questions" label="">
-            <OrderedFormIterator>
-              <RichTextInput source="question" fullWidth={true} label="Question" />
-              <SelectInput
-                source="questionType"
-                label="Question Type"
-                fullWidth={true}
-                allowEmpty={false}
-                onChange={(event: any) => handleChange(event)}
-                choices={[
-                  { id: "yn", name: "Yes/No Question" },
-                  { id: "mcq", name: "Multiple Choice Question" },
-                  { id: "oe", name: "Open Ended Question(Text Input)" },
-                  { id: "img", name: "Request Image" },
-                  { id: "vid", name: "Request Video" },
-                ]}
-              />
-              {optionArray.map((Choice: typeof AddChoice, index: any) => <Choice id={index} key={index}/>)}
-            </OrderedFormIterator>
-          </ArrayInput>
-        </FormTab>
+                <ArrayInput source="questions" label=''>
+                    <OrderedFormIterator>
+                        <SelectInput source="questionType" fullWidth={true} label="What type of question?" choices={[
+                            {id: 'yes-no', name: 'Yes or No'},
+                            {id: 'choose-one', name: 'Multiple Choice'},
+                            {id: 'number', name: 'Number Input'}
+                        ]}/>
+                        <TextInput source="questionText" fullWidth={true} label="Question Text"/>
+                        <BooleanInput
+                            source="isRequired"
+                            label="Required?"
+                            fullWidth={true}
+                        />
+                        <FormDataConsumer {...props}>
+                            {({ scopedFormData, getSource }:any) => {
+                                if (scopedFormData && scopedFormData.questionType) {
+                                    if (scopedFormData.questionType === 'choose-one') {
+                                        return (
+                                            <Fragment>
+                                                <ArrayInput source={getSource('choices')} label={`Possible choices for: ${scopedFormData.questionText}`}>
+                                                    <SimpleFormIterator>
+                                                        <TextInput source="value" label="Choice Value"
+                                                                   fullWidth={true}/>
+                                                    </SimpleFormIterator>
+                                                </ArrayInput>
+                                                <SelectInput source={getSource('correctAnswer')} label="Correct Answer"
+                                                             fullWidth={true} choices={
+                                                    scopedFormData.choices ? scopedFormData.choices.map((choice: any) => {
+                                                        return {id: choice && choice.value, name: choice && choice.value}
+                                                    }) : []
+                                                }/>
+                                            </Fragment>);
+                                    } else if (scopedFormData.questionType === 'yes-no') {
+                                        return (
+                                            <SelectInput source={getSource('correctAnswer')} label="Correct Answer" fullWidth={true}
+                                                         choices={[
+                                                             {id: 'yes', name: 'Yes'},
+                                                             {id: 'no', name: 'No'}
+                                                         ]}/>);
+                                    } else if (scopedFormData.questionType === 'number') {
+                                        return <NumberInput source={getSource('correctAnswer')} label="Correct Answer"
+                                                            fullWidth={true}/>;
+                                    }
+                                }
+                            }}
+                        </FormDataConsumer>
+
+                        <RichTextInput source="explanation" fullWidth={true} label={"Explanation for the correct answer"}/>
+                    </OrderedFormIterator>
+                </ArrayInput>
+            </FormTab>
       </TabbedForm>
     </CustomEdit>
   );
