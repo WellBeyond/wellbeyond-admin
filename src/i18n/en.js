@@ -27,6 +27,7 @@ export default {
             rules: 'Diagnostic Rules',
             maintenance: 'Maintenance Checklists',
             training: 'Training Classes',
+            forms: 'Forms',
             assets: 'Photos and Videos',
         },
     },
@@ -204,6 +205,19 @@ export default {
             name: 'User |||| Users',
             amount: '1 user |||| %{smart_count} users',
             title: 'User %{reference}',
+            fields: {
+            },
+            tabs: {
+            },
+            action: {
+            },
+            notification: {
+            }
+        },
+        forms: {
+            name: 'Form |||| Forms',
+            amount: '1 form |||| %{smart_count} forms',
+            title: 'Form %{reference}',
             fields: {
             },
             tabs: {

@@ -14,6 +14,7 @@ import AssignmentTurnedInIcon from '@material-ui/icons/AssignmentTurnedIn';
 import PlaylistAddCheckIcon from '@material-ui/icons/PlaylistAddCheck';
 import NetworkCheckIcon from '@material-ui/icons/NetworkCheck';
 import CategoryIcon from '@material-ui/icons/Category';
+import NoteIcon from '@material-ui/icons/Notes'
 /*
 import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary';
 import VideoLibraryIcon from '@material-ui/icons/VideoLibrary';
@@ -254,6 +255,16 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
                     smart_count: 2,
                 })}
                 leftIcon={<PersonIcon />}
+                onClick={onMenuClick}
+                sidebarIsOpen={open}
+                dense={dense}
+            />
+            <MenuItemLink
+                to={`/forms`}
+                primaryText={translate(`resources.forms.name`, {
+                    smart_count: 2,
+                })}
+                leftIcon={<NoteIcon />}
                 onClick={onMenuClick}
                 sidebarIsOpen={open}
                 dense={dense}
