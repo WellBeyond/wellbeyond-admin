@@ -11,6 +11,7 @@ import symptoms from "./resources/symptoms";
 import solutions from "./resources/solutions";
 import facts from "./resources/facts";
 import checklists from "./resources/checklists";
+import forms from "./resources/forms";
 import maintenanceLogs from "./resources/maintenanceLogs";
 import topics from "./resources/topics";
 import subjects from "./resources/subjects";
@@ -55,6 +56,7 @@ class App extends React.Component {
               <Resource name="solutions" {...solutions} />,
               <Resource name="facts" {...facts} />,
               <Resource name="checklists" {...checklists} />,
+              <Resource name="forms" {...forms} />,
               <Resource name="maintenanceLogs" {...maintenanceLogs} />,
               <Resource name="topics" {...topics} />,
               <Resource name="subjects" {...subjects} />,
