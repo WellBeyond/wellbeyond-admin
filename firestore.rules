@@ -50,6 +50,14 @@ service cloud.firestore {
       allow create: if request.resource.data.organizationId in get(/databases/$(database)/documents/admins/$(request.auth.uid)).data.organizations;
     }
 
+     // Match any document in the 'forms' collection
+    match /forms/{formId} {
+      allow read: if true;
+      allow write: if get(/databases/$(database)/documents/admins/$(request.auth.uid)).data.isAdmin == true;
+      allow write: if resource.data.organizationId in get(/databases/$(database)/documents/admins/$(request.auth.uid)).data.organizations;
+      allow create: if request.resource.data.organizationId in get(/databases/$(database)/documents/admins/$(request.auth.uid)).data.organizations;
+    }
+
     // Match any document in the 'systems' collection
     match /systems/{systemId} {
       allow read: if true;
