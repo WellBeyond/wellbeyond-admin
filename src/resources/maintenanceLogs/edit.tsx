@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import {
-    ArrayInput,
+    ArrayInput, BooleanInput,
     DateTimeInput,
     FormTab,
     NumberInput,
@@ -36,6 +36,7 @@ const MaintenanceLogEdit = (props: any) => (
                 <ReferenceInput label="Checklist" source="checklistId" reference="checklists" fullWidth={true} allowEmpty={false}>
                     <SelectInput optionText="name" fullWidth={true} allowEmpty={false} />
                 </ReferenceInput>
+                <BooleanInput source="archived" label="Archived?" fullWidth={true}/>
                 <DateTimeInput source="started" fullWidth={true}/>
                 <DateTimeInput source="completed" fullWidth={true}/>
                 <NumberInput source="stepCount" fullWidth={true} step={1} min={0}/>

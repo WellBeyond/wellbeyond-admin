@@ -2,6 +2,7 @@ import * as React from "react";
 
 import {Datagrid, DateField, Filter, List, ReferenceField, ReferenceInput, SelectInput, TextField} from "react-admin";
 import { NumberField } from "react-admin";
+import { BooleanInput } from "react-admin";
 
 const MaintenanceLogFilter = (props:any) => (
     <Filter {...props}>
@@ -14,6 +15,7 @@ const MaintenanceLogFilter = (props:any) => (
         <ReferenceInput label="Checklist" source="checklistId" reference="checklists" fullWidth={true} allowEmpty={false}>
             <SelectInput optionText="name" fullWidth={true} allowEmpty={false} />
         </ReferenceInput>
+        <BooleanInput label="Archived" source="archived" />
     </Filter>
 );
 
@@ -22,7 +24,8 @@ const MaintenanceLogList = (props: object) => {
         <List {...props}
             filters={<MaintenanceLogFilter />}
               perPage={25}
-              sort={{field: 'started', order: 'DESC'}}>
+              sort={{field: 'started', order: 'DESC'}}
+              filterDefaultValues={{ archived: false }}>
             <Datagrid optimized rowClick="edit">
                 <DateField source="started" label="Started" showTime={true}/>
                 <DateField source="completed" label="Completed" showTime={true}/>
