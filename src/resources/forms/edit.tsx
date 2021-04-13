@@ -130,7 +130,6 @@ const FormEdit = (props: any) => {
                             }}
                         </FormDataConsumer>
 
-                        <RichTextInput source="explanation" fullWidth={true} label={"Explanation for the correct answer"}/>
                     </OrderedFormIterator>
                 </ArrayInput>
             </FormTab>
