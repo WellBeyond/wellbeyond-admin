@@ -14,7 +14,8 @@ import AssignmentTurnedInIcon from '@material-ui/icons/AssignmentTurnedIn';
 import PlaylistAddCheckIcon from '@material-ui/icons/PlaylistAddCheck';
 import NetworkCheckIcon from '@material-ui/icons/NetworkCheck';
 import CategoryIcon from '@material-ui/icons/Category';
-import NoteIcon from '@material-ui/icons/Notes'
+import NoteIcon from '@material-ui/icons/Notes';
+import InputIcon from '@material-ui/icons/InputOutlined';
 /*
 import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary';
 import VideoLibraryIcon from '@material-ui/icons/VideoLibrary';
@@ -29,7 +30,7 @@ import {DashboardMenuItem, MenuItemLink, usePermissions, useTranslate} from 'rea
 import SubMenu from './SubMenu';
 import {AppState} from '../types';
 
-type MenuName = ('menuSystems' | 'menuRules' | 'menuMaintenance' | 'menuTraining' | 'menuAssets' | 'menuUsers');
+type MenuName = ('menuSystems' | 'menuRules' | 'menuMaintenance' | 'menuTraining' | 'menuAssets' | 'menuUsers' | 'menuForms');
 
 interface Props {
     dense: boolean;
@@ -45,6 +46,7 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
         menuMaintenance: false,
         menuTraining: false,
         menuAssets: false,
+        menuForms: false
     });
     const { permissions } = usePermissions();
     const translate = useTranslate();
@@ -259,16 +261,46 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
                 sidebarIsOpen={open}
                 dense={dense}
             />
-            <MenuItemLink
-                to={`/forms`}
-                primaryText={translate(`resources.forms.name`, {
-                    smart_count: 2,
-                })}
-                leftIcon={<NoteIcon />}
-                onClick={onMenuClick}
+            <SubMenu
+                handleToggle={() => handleToggle('menuForms')}
+                isOpen={state.menuForms}
                 sidebarIsOpen={open}
+                name="pos.menu.forms"
+                icon={<InputIcon />}
                 dense={dense}
-            />
+            >
+                <MenuItemLink
+                    to={`/formTypes`}
+                    primaryText={translate(`resources.formTypes.name`, {
+                        smart_count: 2,
+                    })}
+                    leftIcon={<CategoryIcon />}
+                    onClick={onMenuClick}
+                    sidebarIsOpen={open}
+                    dense={dense}
+                />
+                <MenuItemLink
+                    to={`/forms`}
+                    primaryText={translate(`resources.forms.name`, {
+                        smart_count: 2,
+                    })}
+                    leftIcon={<NoteIcon />}
+                    onClick={onMenuClick}
+                    sidebarIsOpen={open}
+                    dense={dense}
+                />
+                <MenuItemLink
+                    to={`/formRecords`}
+                    primaryText={translate(`resources.formRecords.name`, {
+                        smart_count: 2,
+                    })}
+                    leftIcon={<AssignmentTurnedInIcon />}
+                    onClick={onMenuClick}
+                    sidebarIsOpen={open}
+                    dense={dense}
+                />
+            </SubMenu>
+
             {permissions && permissions.admin && permissions.admin.isAdmin && <MenuItemLink
                 to={`/admins`}
                 primaryText={translate(`resources.admins.name`, {

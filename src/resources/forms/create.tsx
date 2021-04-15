@@ -32,22 +32,14 @@ const FormCreate = (props: MyProps) => {
                     {id: 'so', name: 'Somali'},
                     {id: 'am', name: 'Amharic'}
                 ]}/>
-                <SelectInput
-                  source="formType"
-                  label="Form Type"
-                  fullWidth={true}
-                  allowEmpty={false}
-                  choices={[
-                    {id: 'svf', name: 'Site Visit'},
-                    {id: 'wof', name: 'Work Oversight'},
-                    {id: 'fsf', name: 'Facility Survey'},
-                  ]} />
+                <ReferenceInput label="Form Type" source="formTypeId" reference="formTypes" fullWidth={true} allowEmpty={false} validate={required('Please select an organization')}>
+                    <SelectInput optionText="name" fullWidth={true} allowEmpty={false} />
+                </ReferenceInput>
                 <BooleanInput source="isPublished" label="Published?" fullWidth={true}/>
                 <RichTextInput
                   source="description"
                   fullWidth={true}
-                  toolbar={[ ['bold', 'italic', 'underline', 'link'] ]}
-                  />
+                />
             </SimpleForm>
         </Create>
     );

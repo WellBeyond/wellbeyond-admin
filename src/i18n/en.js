@@ -227,6 +227,32 @@ export default {
             notification: {
             }
         },
+        formTypes: {
+            name: 'Form Type |||| Form Types',
+            amount: '1 form type |||| %{smart_count} form types',
+            title: 'Form Type %{reference}',
+            fields: {
+            },
+            tabs: {
+            },
+            action: {
+            },
+            notification: {
+            }
+        },
+        formRecords: {
+            name: 'Form Record |||| Form Records',
+            amount: '1 form record |||| %{smart_count} form records',
+            title: 'Form Record %{reference}',
+            fields: {
+            },
+            tabs: {
+            },
+            action: {
+            },
+            notification: {
+            }
+        },
         admins: {
             name: 'Administrator |||| Administrators',
             amount: '1 administrator |||| %{smart_count} administrators',

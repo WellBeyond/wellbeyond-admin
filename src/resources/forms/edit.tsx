@@ -88,7 +88,11 @@ const FormEdit = (props: any) => {
                         <SelectInput source="questionType" fullWidth={true} label="What type of question?" choices={[
                             {id: 'yes-no', name: 'Yes or No'},
                             {id: 'choose-one', name: 'Multiple Choice'},
-                            {id: 'number', name: 'Number Input'}
+                            {id: 'number', name: 'Number Input'},
+                            {id: 'photo', name: 'Photo Input'},
+                            {id: 'open-ended', name: 'Open Ended'},
+                            {id: 'additional-info', name: 'Additional Information'}
+
                         ]}/>
                         <TextInput source="questionText" fullWidth={true} label="Question Text"/>
                         <BooleanInput
@@ -108,28 +112,11 @@ const FormEdit = (props: any) => {
                                                                    fullWidth={true}/>
                                                     </SimpleFormIterator>
                                                 </ArrayInput>
-                                                <SelectInput source={getSource('correctAnswer')} label="Correct Answer"
-                                                             fullWidth={true} choices={
-                                                    scopedFormData.choices ? scopedFormData.choices.map((choice: any) => {
-                                                        return {id: choice && choice.value, name: choice && choice.value}
-                                                    }) : []
-                                                }/>
                                             </Fragment>);
-                                    } else if (scopedFormData.questionType === 'yes-no') {
-                                        return (
-                                            <SelectInput source={getSource('correctAnswer')} label="Correct Answer" fullWidth={true}
-                                                         choices={[
-                                                             {id: 'yes', name: 'Yes'},
-                                                             {id: 'no', name: 'No'}
-                                                         ]}/>);
-                                    } else if (scopedFormData.questionType === 'number') {
-                                        return <NumberInput source={getSource('correctAnswer')} label="Correct Answer"
-                                                            fullWidth={true}/>;
-                                    }
+                                    } else return
                                 }
                             }}
                         </FormDataConsumer>
-
                     </OrderedFormIterator>
                 </ArrayInput>
             </FormTab>
