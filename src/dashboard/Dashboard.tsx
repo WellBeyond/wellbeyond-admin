@@ -16,6 +16,7 @@ const styles = {
 };
 
 const Dashboard = () => {
+    // eslint-disable-next-line
     const [sessions, setSessions] = useState<TrainingSession[]>([]);
     const [users, setUsers] = useState<User[]>([]);
     const [organizations, setOrganizations] = useState<Organization[]>([]);
