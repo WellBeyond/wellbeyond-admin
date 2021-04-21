@@ -3,6 +3,7 @@ import * as React from "react";
 import {BooleanInput, Create, ReferenceInput, required, SelectInput, SimpleForm, TextInput} from "react-admin";
 import RichTextInput from "ra-input-rich-text";
 import CustomCreateToolbar from "../../components/CustomCreateToolbar";
+import {PhotoInput} from "../../components/PhotoInput";
 
 type MyProps = {
     location?: {[index: string]:any},
@@ -40,6 +41,7 @@ const FormCreate = (props: MyProps) => {
                   source="description"
                   fullWidth={true}
                 />
+                <PhotoInput source='photo' label="Photo" />
             </SimpleForm>
         </Create>
     );

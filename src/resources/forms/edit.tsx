@@ -14,10 +14,10 @@ import CustomEdit from "../../components/CustomEdit";
 import RichTextInput from "ra-input-rich-text";
 import OrderedFormIterator from "../../components/OrderedFormIterator";
 import CustomEditToolbar from "../../components/CustomEditToolbar";
+import {PhotoInput} from "../../components/PhotoInput";
 import { FormDataConsumer } from "react-admin";
 import { SimpleFormIterator } from "react-admin";
 import { Fragment } from "react";
-import { NumberInput } from "react-admin";
 
 interface FormDataConsumerProps {
   formData: any;
@@ -117,6 +117,7 @@ const FormEdit = (props: any) => {
                                 }
                             }}
                         </FormDataConsumer>
+                        <PhotoInput source='photo' label="Photo" />
                     </OrderedFormIterator>
                 </ArrayInput>
             </FormTab>

@@ -7,10 +7,8 @@ import CustomCreateToolbar from "../../components/CustomCreateToolbar";
 const FormTypeCreate = (props: object) => (
     <Create {...props} >
         <SimpleForm toolbar={<CustomCreateToolbar />}>
-            <FormTab label="Summary">
-                <TextInput source="name" fullWidth={true} validate={required('Name is required')}/>
-                <RichTextInput source="description" fullWidth={true}/>
-            </FormTab>
+            <TextInput source="name" fullWidth={true} validate={required('Name is required')}/>
+            <RichTextInput source="description" fullWidth={true}/>
         </SimpleForm>
     </Create>
 );
