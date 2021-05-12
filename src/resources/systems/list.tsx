@@ -14,6 +14,7 @@ const SystemList = (props: object) => (
                 reference="organizations">
                 <TextField source="name"/>
             </ReferenceField>
+            <TextField source="community" label="Community"/>
             <ReferenceArrayField
                 source={'systemTypeIds'}
                 basePath={'/systemTypes'}

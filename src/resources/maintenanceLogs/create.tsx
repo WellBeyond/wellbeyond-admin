@@ -2,6 +2,7 @@ import * as React from "react";
 
 import {Create, DateTimeInput, ReferenceInput, SelectInput, SimpleForm, TextInput} from "react-admin";
 import CustomCreateToolbar from "../../components/CustomCreateToolbar";
+import OrganizationCommunityInput from "../../components/OrganizationCommunityInput";
 
 type MyProps = {
     location?: {[index: string]:any},
@@ -15,9 +16,9 @@ const MaintenanceLogCreate = (props: MyProps) => {
         <Create {...props} >
             <SimpleForm toolbar={toolbar || <CustomCreateToolbar />} initialValues={maintenanceLogDefaultValue}>
                 <TextInput source="name" fullWidth={true}/>
-                <ReferenceInput label="Organization" source="organizationId" reference="organizations" fullWidth={true} allowEmpty={false}>
-                    <SelectInput optionText="name" fullWidth={true} allowEmpty={false} />
-                </ReferenceInput>
+
+                <OrganizationCommunityInput isRequired={true} fullWidth={true}/>
+
                 <ReferenceInput label="System" source="systemId" reference="systems" fullWidth={true} allowEmpty={false}>
                     <SelectInput optionText="name" fullWidth={true} allowEmpty={false} />
                 </ReferenceInput>

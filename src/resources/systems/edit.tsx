@@ -18,6 +18,7 @@ import {PhotoInput} from "../../components/PhotoInput";
 import {VideoInput} from "../../components/VideoInput";
 import CustomEditToolbar from "../../components/CustomEditToolbar";
 import CustomEdit from "../../components/CustomEdit";
+import OrganizationCommunityInput from "../../components/OrganizationCommunityInput";
 
 interface FormDataConsumerProps {
     formData: any;
@@ -28,9 +29,9 @@ const SystemEdit = (props: any) => (
         <TabbedForm toolbar={<CustomEditToolbar />}>
             <FormTab label="Summary">
                 <TextInput source="name" fullWidth={true} validate={required('System name is required')}/>
-                <ReferenceInput label="Organization" source="organizationId" reference="organizations" fullWidth={true} allowEmpty={false} validate={required('Please select an organization')}>
-                    <SelectInput optionText="name" fullWidth={true} allowEmpty={false} />
-                </ReferenceInput>
+
+                <OrganizationCommunityInput isRequired={true} fullWidth={true}/>
+
                 <ReferenceArrayInput label="System Type(s)" source="systemTypeIds" reference="systemTypes" fullWidth={true} allowEmpty={false} validate={required('Please select one or more system type(s)')}>
                     <SelectArrayInput optionText="name" fullWidth={true} allowEmpty={false} />
                 </ReferenceArrayInput>
