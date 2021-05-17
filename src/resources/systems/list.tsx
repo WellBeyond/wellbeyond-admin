@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import {Datagrid, List, ReferenceArrayField, ReferenceField, TextField} from "react-admin";
+import {ChipField, Datagrid, List, ReferenceArrayField, ReferenceField, SingleFieldList, TextField} from "react-admin";
 
 const SystemList = (props: object) => (
     <List {...props}
@@ -16,10 +16,13 @@ const SystemList = (props: object) => (
             </ReferenceField>
             <TextField source="community" label="Community"/>
             <ReferenceArrayField
+                label="System Type(s)"
                 source={'systemTypeIds'}
                 basePath={'/systemTypes'}
                 reference="systemTypes">
-                <TextField source="name"/>
+                <SingleFieldList>
+                    <ChipField source="name" />
+                </SingleFieldList>
             </ReferenceArrayField>
             <TextField source="country" label="Country"/>
         </Datagrid>
