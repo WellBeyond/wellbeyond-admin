@@ -38,6 +38,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "deploy": "firebase deploy --only hosting:wellbeyond-admin",
+    "preview": "firebase hosting:channel:deploy admin-preview",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
