@@ -33,6 +33,17 @@ const FormCreate = (props: MyProps) => {
                     {id: 'so', name: 'Somali'},
                     {id: 'am', name: 'Amharic'}
                 ]}/>
+                <SelectInput
+                    source="formCategory"
+                    label="Form Category"
+                    fullWidth={true}
+                    allowEmpty={false}
+                    choices={[
+                    { id: "water-systems", name: "Water Systems" },
+                    { id: "impact-reporting", name: "Impact Reporting" },
+                    { id: "misc-reporting", name: "Misc Reporting" },
+                    ]}
+                />
                 <ReferenceInput label="Form Type" source="formTypeId" reference="formTypes" fullWidth={true} allowEmpty={false} validate={required('Please select an organization')}>
                     <SelectInput optionText="name" fullWidth={true} allowEmpty={false} />
                 </ReferenceInput>

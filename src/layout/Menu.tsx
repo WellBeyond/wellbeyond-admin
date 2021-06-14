@@ -289,16 +289,16 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
                     sidebarIsOpen={open}
                     dense={dense}
                 />
-                {/* <MenuItemLink
-                    to={`/formRecords`}
-                    primaryText={translate(`resources.formRecords.name`, {
+                <MenuItemLink
+                    to={`/formSessions`}
+                    primaryText={translate(`resources.formSessions.name`, {
                         smart_count: 2,
                     })}
                     leftIcon={<AssignmentTurnedInIcon />}
                     onClick={onMenuClick}
                     sidebarIsOpen={open}
                     dense={dense}
-                /> */}
+                />
             </SubMenu>
 
             {permissions && permissions.admin && permissions.admin.isAdmin && <MenuItemLink

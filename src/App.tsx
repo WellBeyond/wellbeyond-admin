@@ -18,6 +18,7 @@ import topics from "./resources/topics";
 import subjects from "./resources/subjects";
 import lessons from "./resources/lessons";
 import sessions from "./resources/sessions";
+import formSessions from "./resources/formSessions";
 import photos from "./resources/photos";
 import videos from "./resources/videos"
 import users from "./resources/users";
@@ -63,6 +64,7 @@ class App extends React.Component {
               <Resource name="topics" {...topics} />,
               <Resource name="subjects" {...subjects} />,
               <Resource name="sessions" {...sessions} />,
+              <Resource name="formSessions" {...formSessions} />,
               <Resource name="lessons" {...lessons} />,
               <Resource name="photos" {...photos} />,
               <Resource name="videos" {...videos} />,

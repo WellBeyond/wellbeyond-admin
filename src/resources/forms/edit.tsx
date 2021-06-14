@@ -61,16 +61,19 @@ const FormEdit = (props: any) => {
             ]}
           />
           <SelectInput
-            source="formType"
-            label="Form Type"
+            source="formCategory"
+            label="Form Category"
             fullWidth={true}
             allowEmpty={false}
             choices={[
-              { id: "svf", name: "Site Visit" },
-              { id: "wof", name: "Work Oversight" },
-              { id: "fsf", name: "Facility Survey" },
+              { id: "water-systems", name: "Water Systems" },
+              { id: "impact-reporting", name: "Impact Reporting" },
+              { id: "misc-reporting", name: "Misc Reporting" },
             ]}
           />
+          <ReferenceInput label="Form Type" source="formTypeId" reference="formTypes" fullWidth={true} allowEmpty={false} validate={required('Please select an organization')}>
+            <SelectInput optionText="name" fullWidth={true} allowEmpty={false} />
+          </ReferenceInput>
           <BooleanInput
             source="isPublished"
             label="Published?"

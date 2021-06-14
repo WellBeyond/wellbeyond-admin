@@ -240,19 +240,19 @@ export default {
             notification: {
             }
         },
-        // formRecords: {
-        //     name: 'Form Record |||| Form Records',
-        //     amount: '1 form record |||| %{smart_count} form records',
-        //     title: 'Form Record %{reference}',
-        //     fields: {
-        //     },
-        //     tabs: {
-        //     },
-        //     action: {
-        //     },
-        //     notification: {
-        //     }
-        // },
+        formSessions: {
+            name: 'Form Session |||| Form Sessions',
+            amount: '1 form session |||| %{smart_count} form sessions',
+            title: 'Form Session %{reference}',
+            fields: {
+            },
+            tabs: {
+            },
+            action: {
+            },
+            notification: {
+            }
+        },
         admins: {
             name: 'Administrator |||| Administrators',
             amount: '1 administrator |||| %{smart_count} administrators',
