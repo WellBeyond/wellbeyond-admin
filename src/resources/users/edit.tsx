@@ -17,6 +17,7 @@ import {
 } from "react-admin";
 import CustomEdit from '../../components/CustomEdit';
 import CustomEditToolbar from "../../components/CustomEditToolbar";
+import OrganizationCommunityInput from "../../components/OrganizationCommunityInput";
 
 interface FormDataConsumerProps {
     formData: any;
@@ -35,11 +36,9 @@ const UserEdit: React.FunctionComponent<MyProps> = (props) => {
                     <TextInput source="name" label="Name" fullWidth={true} validate={required('Name is required')}/>
                     <TextInput type="email" source="email" label="Email Address" fullWidth={true}/>
                     <TextInput type="tel" source="phoneNumber" label="Phone Number" fullWidth={true}/>
-                    <ReferenceInput label="Organization (selected) " source="organizationId" reference="organizations" fullWidth={true} allowEmpty={true}>
-                        <SelectInput optionText="name" fullWidth={true} allowEmpty={true} />
-                    </ReferenceInput>
-                    <TextInput source="organization" label="Organization" fullWidth={true}/>
-                    <TextInput source="community" label="Community" fullWidth={true}/>
+
+                    <OrganizationCommunityInput isRequired={true} fullWidth={true}/>
+
                     <BooleanInput source="acceptedTerms" label="Accepted Terms?" fullWidth={true}/>
                 </FormTab>
                 <FormTab label="Training">

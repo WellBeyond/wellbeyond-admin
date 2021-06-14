@@ -7,6 +7,7 @@ It makes heavy use of [react-admin](https://marmelab.com/react-admin/Readme.html
 -  [Prerequisites](./docs/prerequisites.md)
 -  [Testing and Debugging](./docs/debugging.md)
 -  [Building for Production and Deploying](./docs/building.md)
+-  [Previewing before deployment](./docs/previewing.md)
 -  [Authentication and Authorization](./docs/authorization.md)
 -  [Translating Training Modules](./docs/translations.md)
 

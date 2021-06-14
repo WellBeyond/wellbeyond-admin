@@ -14,6 +14,7 @@ import {
 import CustomEdit from '../../components/CustomEdit';
 import CustomEditToolbar from "../../components/CustomEditToolbar";
 import {TrainingLessons} from "../../components/TrainingLessons";
+import OrganizationCommunityInput from "../../components/OrganizationCommunityInput";
 
 const SessionEdit = (props: any) => {
 
@@ -28,10 +29,9 @@ const SessionEdit = (props: any) => {
                         <TextField source="name" />
                     </ReferenceField>
                     <TextInput source="name" fullWidth={true}/>
-                    <ReferenceInput label="Organization" source="organizationId" reference="organizations" fullWidth={true} allowEmpty={false}>
-                        <SelectInput optionText="name" fullWidth={true} allowEmpty={false} />
-                    </ReferenceInput>
-                    <TextInput source="community" fullWidth={true}/>
+
+                    <OrganizationCommunityInput isRequired={true} fullWidth={true}/>
+
                     <TextInput source="groupType" fullWidth={true}/>
                     <NumberInput source="groupSizeNum" fullWidth={true} label="Group size"/>
                     <DateTimeInput source="started" fullWidth={true}/>

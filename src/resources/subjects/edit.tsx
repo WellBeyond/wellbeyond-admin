@@ -4,9 +4,9 @@ import {
     ArrayInput,
     BooleanInput,
     FormDataConsumer,
-    FormTab,
+    FormTab, ReferenceArrayInput,
     ReferenceField,
-    ReferenceInput,
+    ReferenceInput, SelectArrayInput,
     SelectInput,
     SimpleFormIterator,
     TabbedForm,
@@ -54,6 +54,10 @@ const SubjectEdit = (props: any) => {
                     <ReferenceInput label="Organization" source="organizationId" reference="organizations" fullWidth={true} allowEmpty={false}>
                         <SelectInput optionText="name" fullWidth={true} allowEmpty={false} />
                     </ReferenceInput>
+                    <ReferenceArrayInput label="Additional Organizations?" source="organizations" reference="organizations"
+                                         fullWidth={true}>
+                        <SelectArrayInput optionText="name"/>
+                    </ReferenceArrayInput>
                     <SelectInput source="locale" label="Language" fullWidth={true} choices={[
                         {id: 'en', name: 'English'},
                         {id: 'fr', name: 'French'},

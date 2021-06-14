@@ -43,22 +43,12 @@ const FactEdit = (props: any) => {
         <TabbedForm toolbar={<CustomEditToolbar />}>
             <FormTab label="Summary">
                 <TextInput source="name" fullWidth={true}/>
-                <BooleanInput source="isSystemProperty" label="Remember this fact on the system's profile"
-                              fullWidth={true}/>
                 <RichTextInput source="description" fullWidth={true}/>
             </FormTab>
             <FormTab label="Question">
-                <Paper className={classes.paper}>
-                    <Typography variant="body1" className={classes.header} gutterBottom>
-                        You can override the standard group types for training sessions here. If you provide any
-                        values, then this list will be shown when someone goes to start a training session instead
-                        of the predefined list. Be sure to enter these in the correct language for this subject.
-                    </Typography>
-                </Paper>
                 <SelectInput source="questionType" fullWidth={true} choices={[
                     {id: 'yes-no', name: 'Yes or No'},
                     {id: 'choose-one', name: 'Select List'},
-                    {id: 'text', name: 'Text Input'},
                     {id: 'number', name: 'Number Input'}
                 ]}/>
                 <TextInput source="questionText" fullWidth={true}/>

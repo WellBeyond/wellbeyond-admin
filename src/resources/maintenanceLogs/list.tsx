@@ -38,6 +38,7 @@ const MaintenanceLogList = (props: object) => {
                     reference="organizations">
                     <TextField source="name"/>
                 </ReferenceField>
+                <TextField source="community" label="Community"/>
                 <ReferenceField
                     label={"System"}
                     source={'systemId'}

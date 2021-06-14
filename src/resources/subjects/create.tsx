@@ -1,9 +1,10 @@
 import * as React from "react";
 
-import {Create, ReferenceInput, SelectInput, SimpleForm, TextInput} from "react-admin";
+import {Create, ReferenceInput, SelectArrayInput, SelectInput, SimpleForm, TextInput} from "react-admin";
 import RichTextInput from "ra-input-rich-text";
 import CustomCreateToolbar from "../../components/CustomCreateToolbar";
 import {PhotoInput} from "../../components/PhotoInput";
+import { ReferenceArrayInput } from "react-admin";
 
 const subjectDefaultValue = { locale: 'en', lessons: [] };
 const SubjectCreate = (props: object) => (
@@ -16,6 +17,10 @@ const SubjectCreate = (props: object) => (
             <ReferenceInput label="Organization" source="organizationId" reference="organizations" fullWidth={true} allowEmpty={false}>
                 <SelectInput optionText="name" fullWidth={true} allowEmpty={false} />
             </ReferenceInput>
+            <ReferenceArrayInput label="Additional Organizations?" source="organizations" reference="organizations"
+                                 fullWidth={true}>
+                <SelectArrayInput optionText="name"/>
+            </ReferenceArrayInput>
             <SelectInput source="locale" label="Language" fullWidth={true} choices={[
                 {id: 'en', name: 'English'},
                 {id: 'fr', name: 'French'},

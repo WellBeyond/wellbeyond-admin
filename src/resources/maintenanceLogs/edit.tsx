@@ -14,6 +14,7 @@ import {
 import CustomEdit from '../../components/CustomEdit';
 import CustomEditToolbar from "../../components/CustomEditToolbar";
 import {PhotoInput} from "../../components/PhotoInput";
+import OrganizationCommunityInput from "../../components/OrganizationCommunityInput";
 
 interface FormDataConsumerProps {
     formData: any;
@@ -24,9 +25,9 @@ const MaintenanceLogEdit = (props: any) => (
         <TabbedForm toolbar={<CustomEditToolbar />} >
             <FormTab label="Summary">
                 <TextInput source="name" fullWidth={true}/>
-                <ReferenceInput label="Organization" source="organizationId" reference="organizations" fullWidth={true} allowEmpty={false}>
-                    <SelectInput optionText="name" fullWidth={true} allowEmpty={false} />
-                </ReferenceInput>
+
+                <OrganizationCommunityInput isRequired={true} fullWidth={true}/>
+
                 <ReferenceInput label="System" source="systemId" reference="systems" fullWidth={true} allowEmpty={false}>
                     <SelectInput optionText="name" fullWidth={true} allowEmpty={false} />
                 </ReferenceInput>

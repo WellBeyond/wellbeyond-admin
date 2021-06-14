@@ -35,6 +35,7 @@ const UserFilter = (props:any) => (
         <ReferenceInput label="Organization" source="organizationId" reference="organizations">
             <SelectInput optionText="name" />
         </ReferenceInput>
+        <TextField source="community" label="Community"/>
     </Filter>
 );
 
