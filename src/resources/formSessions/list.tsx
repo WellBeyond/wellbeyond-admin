@@ -88,9 +88,9 @@ const SessionList = (props: object) => {
                 <ReferenceField label="User" source="userId" reference="users" >
                     <TextField source="name" />
                 </ReferenceField>
-                <ReferenceField label="Form Session ID" source="formSessionId" reference="formSessions" fullWidth={true} allowEmpty={false}>
+                {/* <ReferenceField label="Form Session ID" source="formSessionId" reference="formSessions" fullWidth={true} allowEmpty={false}>
                         <TextField source="name" />
-                    </ReferenceField>
+                    </ReferenceField> */}
                 <TextField source="organization"  label="Organization"/>
                 <TextField source="community"  label="Community"/>
                 <DateField source="started" label="Started"/>
