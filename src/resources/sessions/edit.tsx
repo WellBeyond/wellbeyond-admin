@@ -5,8 +5,6 @@ import {
     FormTab,
     NumberInput,
     ReferenceField,
-    ReferenceInput,
-    SelectInput,
     TabbedForm,
     TextField,
     TextInput

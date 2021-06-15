@@ -1,10 +1,17 @@
 import * as React from "react";
 
-import {Create, ReferenceInput, SelectArrayInput, SelectInput, SimpleForm, TextInput} from "react-admin";
+import {
+    Create,
+    ReferenceArrayInput,
+    ReferenceInput,
+    SelectArrayInput,
+    SelectInput,
+    SimpleForm,
+    TextInput
+} from "react-admin";
 import RichTextInput from "ra-input-rich-text";
 import CustomCreateToolbar from "../../components/CustomCreateToolbar";
 import {PhotoInput} from "../../components/PhotoInput";
-import { ReferenceArrayInput } from "react-admin";
 
 const subjectDefaultValue = { locale: 'en', lessons: [] };
 const SubjectCreate = (props: object) => (

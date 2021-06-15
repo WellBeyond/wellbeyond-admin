@@ -119,8 +119,8 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
                     dense={dense}
                 />
                 <MenuItemLink
-                    to={`/facts`}
-                    primaryText={translate(`resources.facts.name`, {
+                    to={`/diagnostics`}
+                    primaryText={translate(`resources.diagnostics.name`, {
                         smart_count: 2,
                     })}
                     leftIcon={<InfoIcon />}

@@ -58,9 +58,9 @@ export default {
             }
         },
         symptoms: {
-            name: 'Symptom |||| Symptoms',
-            amount: '1 symptom |||| %{smart_count} symptoms',
-            title: 'Symptom %{reference}',
+            name: 'Problem |||| Problems',
+            amount: '1 problem |||| %{smart_count} problems',
+            title: 'Problem %{reference}',
             fields: {
             },
             tabs: {
@@ -87,6 +87,19 @@ export default {
             name: 'Fact |||| Facts',
             amount: '1 fact |||| %{smart_count} facts',
             title: 'Fact %{reference}',
+            fields: {
+            },
+            tabs: {
+            },
+            action: {
+            },
+            notification: {
+            }
+        },
+        diagnostics: {
+            name: 'Question |||| Questions',
+            amount: '1 fact |||| %{smart_count} question',
+            title: 'Question %{reference}',
             fields: {
             },
             tabs: {

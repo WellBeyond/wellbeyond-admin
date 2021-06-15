@@ -9,7 +9,7 @@ import systemTypes from "./resources/systemTypes";
 import systems from "./resources/systems";
 import symptoms from "./resources/symptoms";
 import solutions from "./resources/solutions";
-import facts from "./resources/facts";
+import diagnostics from "./resources/diagnostics";
 import checklists from "./resources/checklists";
 import maintenanceLogs from "./resources/maintenanceLogs";
 import topics from "./resources/topics";
@@ -53,7 +53,7 @@ class App extends React.Component {
               <Resource name="systems" {...systems} />,
               <Resource name="symptoms" {...symptoms} />,
               <Resource name="solutions" {...solutions} />,
-              <Resource name="facts" {...facts} />,
+              <Resource name="diagnostics" {...diagnostics} />,
               <Resource name="checklists" {...checklists} />,
               <Resource name="maintenanceLogs" {...maintenanceLogs} />,
               <Resource name="topics" {...topics} />,

@@ -1,11 +1,8 @@
 import React from "react"
 import {render} from '@testing-library/react';
-import {useForm, Form} from 'react-final-form';
+import {Form} from 'react-final-form';
 
-import {
-  onSelectChoice,
-  AdminType
-} from "../AdminType"
+import {AdminType, onSelectChoice} from "../AdminType"
 
 describe("onSelectChoice", () => {
   const form = {

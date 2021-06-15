@@ -1,22 +1,12 @@
 import * as React from "react";
 
-import {
-    ArrayInput,
-    BooleanInput,
-    FormTab,
-    ReferenceInput,
-    required,
-    SelectInput,
-    SimpleFormIterator,
-    TabbedForm,
-    TextInput
-} from "react-admin";
+import {ArrayInput, FormTab, SimpleFormIterator, TabbedForm, TextInput} from "react-admin";
 import CustomEdit from '../../components/CustomEdit';
-import RichTextInput from "ra-input-rich-text";
-import {PhotoInput} from "../../components/PhotoInput";
-import {VideoInput} from "../../components/VideoInput";
 import {makeStyles} from '@material-ui/core/styles';
 import CustomEditToolbar from "../../components/CustomEditToolbar";
+import {PhotoInput} from "../../components/PhotoInput";
+import RichTextInput from "ra-input-rich-text";
+import {VideoInput} from "../../components/VideoInput";
 
 interface FormDataConsumerProps {
     formData: any;
@@ -35,22 +25,12 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const SolutionEdit = (props: any) => {
+const DiagnosticEdit = (props: any) => {
     const classes = useStyles();
     return <CustomEdit {...props}>
         <TabbedForm toolbar={<CustomEditToolbar />}>
             <FormTab label="Summary">
-                <ReferenceInput label="Symptom" source="symptomId" reference="symptoms" fullWidth={true} allowEmpty={false} validate={required('Please select a symptom')}>
-                    <SelectInput optionText="name" fullWidth={true} allowEmpty={false} />
-                </ReferenceInput>
-                <TextInput source="name" fullWidth={true} label="Solution"/>
-                <BooleanInput source="askDidItWork" label="Ask the user if he/she was able to peform the fix and if it was successful"
-                              fullWidth={true}/>
-                <BooleanInput source="askForPhotoBefore" label="Ask for a photo of the problem before attempting the fix" fullWidth={true}/>
-                <BooleanInput source="askForPhotoAfter" label="Ask for a photo after the problem has been fixed" fullWidth={true}/>
-            </FormTab>
-            <FormTab label="Instructions">
-                <RichTextInput source="instructions" label="Explain how to do the repair" fullWidth={true}/>
+                <TextInput source="name" label="Yes/No Question Text" fullWidth={true}/>
             </FormTab>
             <FormTab label="Photos">
                 <ArrayInput source="photos" label="">
@@ -74,4 +54,4 @@ const SolutionEdit = (props: any) => {
     </CustomEdit>
 };
 
-export default SolutionEdit;
+export default DiagnosticEdit;

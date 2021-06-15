@@ -2,7 +2,7 @@ import * as React from "react";
 
 import {Datagrid, Filter, List, ReferenceField, ReferenceInput, SelectInput, TextField} from "react-admin";
 
-const SolutionFilter = (props:any) => (
+const DiagnosticFilter = (props:any) => (
     <Filter {...props}>
         <ReferenceInput label="Symptom" source="symptomId" reference="symptoms">
             <SelectInput optionText="name" />
@@ -10,13 +10,13 @@ const SolutionFilter = (props:any) => (
     </Filter>
 );
 
-const SolutionList = (props: object) => (
+const DiagnosticList = (props: object) => (
     <List {...props}
           perPage={25}
-          filters={<SolutionFilter />}
+          filters={<DiagnosticFilter />}
           sort={{field: 'name', order: 'ASC'}}>
         <Datagrid optimized rowClick="edit">
-            <TextField source="name" label="Solution"/>
+            <TextField source="name" label="Question Text"/>
             <ReferenceField
                 label="Problem"
                 source={'symptomId'}
@@ -28,4 +28,4 @@ const SolutionList = (props: object) => (
     </List>
 );
 
-export default SolutionList;
+export default DiagnosticList;

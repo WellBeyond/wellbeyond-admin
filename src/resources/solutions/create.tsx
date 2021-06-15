@@ -1,9 +1,9 @@
 import * as React from "react";
 
-import {BooleanInput, Create, SimpleForm, TextInput} from "react-admin";
+import {BooleanInput, Create, ReferenceInput, required, SelectInput, SimpleForm, TextInput} from "react-admin";
+import CustomCreateToolbar from "../../components/CustomCreateToolbar";
 
 type MyProps = {
-    location?: {[index: string]:any},
     toolbar?: object
 }
 
@@ -12,12 +12,15 @@ const SolutionCreate = (props: MyProps) => {
 
     return (
         <Create {...props} >
-            <SimpleForm toolbar={toolbar}>
-                <TextInput source="name" fullWidth={true}/>
-                <BooleanInput source="askAreYouAble" label="Ask if the user is able to perform the fix first"
+            <SimpleForm toolbar={toolbar || <CustomCreateToolbar/>}>
+                <ReferenceInput label="Symptom" source="symptomId" reference="symptoms" fullWidth={true} allowEmpty={false} validate={required('Please select a symptom')}>
+                    <SelectInput optionText="name" fullWidth={true} allowEmpty={false} />
+                </ReferenceInput>
+                <TextInput source="name" fullWidth={true} label="Solution"/>
+                <BooleanInput source="askDidItWork" label="Ask the user if he/she was able to peform the fix and if it was successful"
                               fullWidth={true}/>
-                <BooleanInput source="askForPhotoBefore" label="Ask for a before photo" fullWidth={true}/>
-                <BooleanInput source="askForPhotoAfter" label="Ask for an after photo" fullWidth={true}/>
+                <BooleanInput source="askForPhotoBefore" label="Ask for a photo of the problem before attempting the fix" fullWidth={true}/>
+                <BooleanInput source="askForPhotoAfter" label="Ask for a photo after the problem has been fixed" fullWidth={true}/>
             </SimpleForm>
         </Create>
     );

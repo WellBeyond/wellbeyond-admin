@@ -1,16 +1,6 @@
 import * as React from "react";
 
-import {
-    Create,
-    NumberInput,
-    ReferenceArrayInput,
-    ReferenceInput,
-    required,
-    SelectArrayInput,
-    SelectInput,
-    SimpleForm,
-    TextInput
-} from "react-admin";
+import {Create, NumberInput, ReferenceArrayInput, required, SelectArrayInput, SimpleForm, TextInput} from "react-admin";
 import RichTextInput from "ra-input-rich-text";
 import CustomCreateToolbar from "../../components/CustomCreateToolbar";
 import OrganizationCommunityInput from "../../components/OrganizationCommunityInput";

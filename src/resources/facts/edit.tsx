@@ -2,7 +2,6 @@ import * as React from "react";
 
 import {
     ArrayInput,
-    BooleanInput,
     FormDataConsumer,
     FormTab,
     NumberInput,
@@ -16,8 +15,6 @@ import RichTextInput from "ra-input-rich-text";
 import {PhotoInput} from "../../components/PhotoInput";
 import {VideoInput} from "../../components/VideoInput";
 import {makeStyles} from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
 import CustomEditToolbar from "../../components/CustomEditToolbar";
 
 interface FormDataConsumerProps {

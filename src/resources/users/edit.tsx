@@ -7,10 +7,8 @@ import {
     FormTab,
     NumberField,
     ReferenceField,
-    ReferenceInput,
     ReferenceManyField,
     required,
-    SelectInput,
     TabbedForm,
     TextField,
     TextInput

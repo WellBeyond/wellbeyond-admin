@@ -1,16 +1,29 @@
 import React from "react";
 
-import {ArrayInput, FormTab, ReferenceInput, SelectInput, SimpleFormIterator, TabbedForm, TextInput} from "react-admin";
+import {
+    ArrayInput,
+    Datagrid,
+    DeleteButton,
+    EditButton,
+    FormTab,
+    ReferenceArrayInput,
+    ReferenceInput,
+    ReferenceManyField,
+    SelectArrayInput,
+    SelectInput,
+    TabbedForm,
+    TextField,
+    TextInput
+} from "react-admin";
 import CustomEdit from '../../components/CustomEdit';
-import OrderedFormIterator from '../../components/OrderedFormIterator';
 import RichTextInput from "ra-input-rich-text";
-import AddSolution from "./AddSolution";
 import {makeStyles} from '@material-ui/core/styles';
-import {PhotoInput} from "../../components/PhotoInput";
-import {VideoInput} from "../../components/VideoInput";
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import CustomEditToolbar from "../../components/CustomEditToolbar";
+import AddDiagnosticButton from "./AddDiagnosticButton";
+import AddSolutionButton from "./AddSolutionButton";
+import OrderedFormIterator from "../../components/OrderedFormIterator";
 
 interface FormDataConsumerProps {
     formData: any;
@@ -31,6 +44,7 @@ const useStyles = makeStyles(theme => ({
 }));
 const SymptomEdit = (props: any) => {
     const classes = useStyles();
+    const {id} = props;
     return (
         <CustomEdit {...props}>
             <TabbedForm toolbar={<CustomEditToolbar />}>
@@ -41,72 +55,110 @@ const SymptomEdit = (props: any) => {
                 <FormTab label="Potential Solutions">
                     <Paper className={classes.paper}>
                         <Typography variant="body1" className={classes.header} gutterBottom>
-                            Enter the list of potential solutions to this symptom in the
-                            order in which they should be tried.  You may want to prioritize the
-                            easiest solutions first or the most likely ones first or some combination
-                            of the two.
+                            List any potential solutions for this problem.  Don't worry about
+                            what order they are in; you will prioritize them later under the RULES tab.
                         </Typography>
                     </Paper>
-                    <ArrayInput source="solutions" label="">
-                        <OrderedFormIterator addButton={<AddSolution />}>
-                            <ReferenceInput label="Solution"
-                                            source="solutionId"
-                                            reference="solutions"
-                                            disabled={true}
-                                            sort={{ field: 'name', order: 'ASC' }}
-                                            fullWidth={true}>
+                    <ReferenceManyField
+                        label=""
+                        reference="solutions"
+                        target="symptomId"
+                        fullWidth={true}
+                        sort={{field: 'name', order: 'ASC'}}>
+                        <Datagrid rowClick="edit">
+                            <TextField
+                                source="name"
+                                fullWidth={true}
+                                label="Solution Name"/>
+                            <EditButton />
+                            <DeleteButton redirect={false}/>
+                        </Datagrid>
+                    </ReferenceManyField>
+                    <AddSolutionButton />
+                </FormTab>
+                <FormTab label="Diagnostic Questions">
+                    <Paper className={classes.paper}>
+                        <Typography variant="body1" className={classes.header} gutterBottom>
+                            List any of the questions that you need to ask to help diagnose the problem and
+                            determine which solution(s) you should suggest.  You will connect the questions
+                            to the solutions under the RULES tab.
+                        </Typography>
+                    </Paper>
+                    <ReferenceManyField
+                        label=""
+                        reference="diagnostics"
+                        target="symptomId"
+                        fullWidth={true}
+                        sort={{field: 'name', order: 'ASC'}}>
+                        <Datagrid rowClick="edit">
+                            <TextField
+                                source="name"
+                                fullWidth={true}
+                                label="Question Text"/>
+                            <EditButton />
+                            <DeleteButton redirect={false}/>
+                        </Datagrid>
+                    </ReferenceManyField>
+                    <AddDiagnosticButton />
+                </FormTab>
+                <FormTab label="Rules">
+                    <Paper className={classes.paper}>
+                        <Typography variant="body1" className={classes.header} gutterBottom>
+                            Prioritize the potential solutions and tie them to the relevant questions.  You
+                            may want to prioritize according to how easy the solution is to perform or how
+                            likely it is to fix the problem.
+                        </Typography>
+                    </Paper>
+                    <ArrayInput source="rules" label=''>
+                        <OrderedFormIterator>
+                            <ReferenceArrayInput source='systemTypes'
+                                                 label="If the system is one of these type(s)"
+                                                 fullWidth={true} reference="systemTypes">
+                                <SelectArrayInput optionText="name"/>
+                            </ReferenceArrayInput>
+                            <ReferenceArrayInput source='mustBeYes'
+                                                 label="... and these answers are YES"
+                                                 fullWidth={true} reference="diagnostics" filter={{symptomId: id}}>
+                                <SelectArrayInput optionText="name"/>
+                            </ReferenceArrayInput>
+                            <ReferenceArrayInput source='mustBeNo'
+                                                 label="... and these answers are NO"
+                                                 fullWidth={true} reference="diagnostics" filter={{symptomId: id}}>
+                                <SelectArrayInput optionText="name"/>
+                            </ReferenceArrayInput>
+                            <ReferenceInput source='solutionId' label="... then suggest this as a solution" fullWidth={true} reference="solutions" filter={{symptomId: id}}>
                                 <SelectInput optionText="name"/>
                             </ReferenceInput>
                         </OrderedFormIterator>
                     </ArrayInput>
                 </FormTab>
-                <FormTab label="Potential Root Causes">
+                <FormTab label="Root Causes">
                     <Paper className={classes.paper}>
                         <Typography variant="body1" className={classes.header} gutterBottom>
-                            You can branch off into diagnosing another symptom by setting it as a root cause for this
-                            problem.  You can also specify some conditions to look for before you branch off into that
-                            root cause symptom.
+                            Are there any other problems that might be the actual cause of this symptom?
                         </Typography>
                     </Paper>
-                    <ArrayInput source="causes" label="">
+                    <ArrayInput source="rootCauses" label=''>
                         <OrderedFormIterator>
-                            <ReferenceInput label="Root Cause Symptom" source="symptomId" reference="symptoms" fullWidth={true}>
-                                <SelectInput optionText="name" fullWidth={true}/>
+                            <ReferenceArrayInput source='systemTypes'
+                                                 label="If the system is one of these type(s)"
+                                                 fullWidth={true} reference="systemTypes">
+                                <SelectArrayInput optionText="name"/>
+                            </ReferenceArrayInput>
+                            <ReferenceArrayInput source='mustBeYes'
+                                                 label="... and these answers are YES"
+                                                 fullWidth={true} reference="diagnostics" filter={{symptomId: id}}>
+                                <SelectArrayInput optionText="name"/>
+                            </ReferenceArrayInput>
+                            <ReferenceArrayInput source='mustBeNo'
+                                                 label="... and these answers are NO"
+                                                 fullWidth={true} reference="diagnostics" filter={{symptomId: id}}>
+                                <SelectArrayInput optionText="name"/>
+                            </ReferenceArrayInput>
+                            <ReferenceInput source='symptomId' label="... then this might be the actual problem" fullWidth={true} reference="symptoms" >
+                                <SelectInput optionText="name"/>
                             </ReferenceInput>
-                            <ArrayInput source="conditions" label="What would lead you to think this is the root cause?">
-                                <SimpleFormIterator>
-                                    <ReferenceInput label="Fact" source="factId" reference="facts" fullWidth={true}>
-                                        <SelectInput optionText="name" fullWidth={true} />
-                                    </ReferenceInput>
-                                    <SelectInput source="relationship" label="Relationship" fullWidth={true} choices={[
-                                        {id: '==', name: 'Equals'},
-                                        {id: '<', name: 'Is Less Than'},
-                                        {id: '<=', name: 'Is Less Than Or Equal To'},
-                                        {id: '>', name: 'Is Greater Than'},
-                                        {id: '>=', name: 'Is Greater Than Or Equal To'}
-                                    ]}/>
-                                    <TextInput source="value" label="Value" fullWidth={true} />
-                                </SimpleFormIterator>
-                            </ArrayInput>
                         </OrderedFormIterator>
-                    </ArrayInput>
-                </FormTab>
-                <FormTab label="Photos">
-                    <ArrayInput source="photos" label="">
-                        <SimpleFormIterator>
-                            <PhotoInput source="url" label="Photo" />
-                            <TextInput source="title" label="Photo Title" fullWidth={true}/>
-                            <RichTextInput source="description" label="Photo Description" fullWidth={true}/>
-                        </SimpleFormIterator>
-                    </ArrayInput>
-                </FormTab>
-                <FormTab label="Videos">
-                    <ArrayInput source="photos" label="">
-                        <SimpleFormIterator>
-                            <VideoInput source="url" label="Video" />
-                            <TextInput source="title" label="Video Title" fullWidth={true}/>
-                            <RichTextInput source="description" label="Video Description" fullWidth={true}/>
-                        </SimpleFormIterator>
                     </ArrayInput>
                 </FormTab>
             </TabbedForm>

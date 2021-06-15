@@ -1,8 +1,17 @@
 import * as React from "react";
 
-import {Datagrid, DateField, Filter, List, ReferenceField, ReferenceInput, SelectInput, TextField} from "react-admin";
-import { NumberField } from "react-admin";
-import { BooleanInput } from "react-admin";
+import {
+    BooleanInput,
+    Datagrid,
+    DateField,
+    Filter,
+    List,
+    NumberField,
+    ReferenceField,
+    ReferenceInput,
+    SelectInput,
+    TextField
+} from "react-admin";
 
 const MaintenanceLogFilter = (props:any) => (
     <Filter {...props}>

@@ -1,7 +1,8 @@
 import * as React from "react";
 
 import {
-    ArrayInput, BooleanInput,
+    ArrayInput,
+    BooleanInput,
     DateTimeInput,
     FormTab,
     NumberInput,
