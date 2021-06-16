@@ -49,8 +49,12 @@ const SymptomEdit = (props: any) => {
         <CustomEdit {...props}>
             <TabbedForm toolbar={<CustomEditToolbar />}>
                 <FormTab label="Summary">
-                    <TextInput source="name" fullWidth={true}/>
-                    <RichTextInput source="description" fullWidth={true}/>
+                    <TextInput source="name" fullWidth={true} label="Problem Name"/>
+                    <ReferenceArrayInput label="Is this problem only relevant to certain system type(s)?" source="systemTypeIds" reference="systemTypes" fullWidth={true}
+                                         allowEmpty={true} helperText="Leave this blank if it applies to all types of systems">
+                        <SelectArrayInput optionText="name" fullWidth={true} allowEmpty={false}/>
+                    </ReferenceArrayInput>
+                    <RichTextInput source="description" fullWidth={true} label="Problem Description"/>
                 </FormTab>
                 <FormTab label="Potential Solutions">
                     <Paper className={classes.paper}>

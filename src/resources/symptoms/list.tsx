@@ -1,6 +1,15 @@
 import * as React from "react";
 
-import {ArrayField, ChipField, Datagrid, List, ReferenceField, SingleFieldList, TextField} from "react-admin";
+import {
+    ArrayField,
+    ChipField,
+    Datagrid,
+    List,
+    ReferenceArrayField,
+    ReferenceField,
+    SingleFieldList,
+    TextField
+} from "react-admin";
 import {makeStyles} from '@material-ui/core';
 
 const useStyles = makeStyles({
@@ -18,7 +27,16 @@ const SymptomList = (props: object) => {
               perPage={25}
               sort={{field: 'name', order: 'ASC'}}>
             <Datagrid optimized rowClick="edit">
-                <TextField source="name" label="Problem" className={classes.nameColumn}/>
+                <TextField source="name" label="Problem Name" className={classes.nameColumn}/>
+                <ReferenceArrayField
+                    label="System Type(s)"
+                    source={'systemTypeIds'}
+                    basePath={'/systemTypes'}
+                    reference="systemTypes">
+                    <SingleFieldList>
+                        <ChipField source="name" />
+                    </SingleFieldList>
+                </ReferenceArrayField>
                 <ArrayField label="Potential Solutions" source="rules">
                     <SingleFieldList>
                         <ReferenceField

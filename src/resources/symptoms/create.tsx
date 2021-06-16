@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import {Create, SimpleForm, TextInput} from "react-admin";
+import {Create, ReferenceArrayInput, required, SelectArrayInput, SimpleForm, TextInput} from "react-admin";
 import CustomCreateToolbar from "../../components/CustomCreateToolbar";
 import RichTextInput from "ra-input-rich-text";
 
@@ -13,8 +13,12 @@ const SymptomCreate = (props: MyProps) => {
     return (
         <Create {...props} >
             <SimpleForm toolbar={toolbar || <CustomCreateToolbar/>}>
-                <TextInput source="name" fullWidth={true}/>
-                <RichTextInput source="description" fullWidth={true}/>
+                <TextInput source="name" fullWidth={true} label="Problem Name"/>
+                <ReferenceArrayInput label="Is this problem only relevant to certain system type(s)?" source="systemTypeIds" reference="systemTypes" fullWidth={true}
+                                     allowEmpty={true} helperText="Leave this blank if it applies to all types of systems">
+                    <SelectArrayInput optionText="name" fullWidth={true} allowEmpty={false}/>
+                </ReferenceArrayInput>
+                <RichTextInput source="description" fullWidth={true} label="Problem Description"/>
             </SimpleForm>
         </Create>
     );
