@@ -27,6 +27,7 @@ export default {
             rules: 'Diagnostic Rules',
             maintenance: 'Maintenance Checklists',
             training: 'Training Classes',
+            forms: 'Forms',
             assets: 'Photos and Videos',
         },
     },
@@ -204,6 +205,45 @@ export default {
             name: 'User |||| Users',
             amount: '1 user |||| %{smart_count} users',
             title: 'User %{reference}',
+            fields: {
+            },
+            tabs: {
+            },
+            action: {
+            },
+            notification: {
+            }
+        },
+        forms: {
+            name: 'Form |||| Forms',
+            amount: '1 form |||| %{smart_count} forms',
+            title: 'Form %{reference}',
+            fields: {
+            },
+            tabs: {
+            },
+            action: {
+            },
+            notification: {
+            }
+        },
+        formTypes: {
+            name: 'Form Type |||| Form Types',
+            amount: '1 form type |||| %{smart_count} form types',
+            title: 'Form Type %{reference}',
+            fields: {
+            },
+            tabs: {
+            },
+            action: {
+            },
+            notification: {
+            }
+        },
+        formSessions: {
+            name: 'Form Session |||| Form Sessions',
+            amount: '1 form session |||| %{smart_count} form sessions',
+            title: 'Form Session %{reference}',
             fields: {
             },
             tabs: {

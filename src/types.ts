@@ -24,6 +24,32 @@ export interface Question {
     explanation?: string;
 }
 
+export enum FormQuestionType {
+    Text = "text",
+    Radio = "radio",
+    Checkbox = "checkbox",
+    Photo = "photo",
+    Video = "video"
+}
+
+export interface FormQuestion {
+    questionType: FormQuestionType;
+    questionText: string;
+    isRequired: boolean;
+    choices?: Array<{value: string}>;
+    helpText: string;
+}
+
+export interface Form extends Record {
+    organizationId?: Identifier;
+    locale?: string;
+    type: string;
+    name: string;
+    description: string;
+    isPublished: boolean;
+    questions: FormQuestion[];
+}
+
 export interface Answer {
     question: string;
     answerBefore?: string | number;
