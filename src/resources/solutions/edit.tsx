@@ -15,28 +15,13 @@ import CustomEdit from '../../components/CustomEdit';
 import RichTextInput from "ra-input-rich-text";
 import {PhotoInput} from "../../components/PhotoInput";
 import {VideoInput} from "../../components/VideoInput";
-import {makeStyles} from '@material-ui/core/styles';
 import CustomEditToolbar from "../../components/CustomEditToolbar";
 
 interface FormDataConsumerProps {
     formData: any;
 }
-const useStyles = makeStyles(theme => ({
-    paper: {
-        padding: theme.spacing(2),
-        marginTop: 10,
-        marginRight: '20px',
-        marginBottom: 10,
-        width: '95%'
-    },
-    header: {
-        textAlign: 'center',
-        width: '100%'
-    }
-}));
 
 const SolutionEdit = (props: any) => {
-    const classes = useStyles();
     return <CustomEdit {...props}>
         <TabbedForm toolbar={<CustomEditToolbar />}>
             <FormTab label="Summary">
