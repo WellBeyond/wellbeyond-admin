@@ -31,7 +31,6 @@ const SolutionEdit = (props: any) => {
                 <TextInput source="name" fullWidth={true} label="Solution"/>
                 <BooleanInput source="askDidItWork" label="Ask the user if he/she was able to peform the fix and if it was successful"
                               fullWidth={true}/>
-                <BooleanInput source="askForPhotoBefore" label="Ask for a photo of the problem before attempting the fix" fullWidth={true}/>
                 <BooleanInput source="askForPhotoAfter" label="Ask for a photo after the problem has been fixed" fullWidth={true}/>
             </FormTab>
             <FormTab label="Instructions">
