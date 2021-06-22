@@ -4,7 +4,7 @@ import {Datagrid, Filter, List, ReferenceField, ReferenceInput, SelectInput, Tex
 
 const SolutionFilter = (props:any) => (
     <Filter {...props}>
-        <ReferenceInput label="Symptom" source="symptomId" reference="symptoms">
+        <ReferenceInput label="Problem" source="symptomId" reference="symptoms">
             <SelectInput optionText="name" />
         </ReferenceInput>
     </Filter>

@@ -13,13 +13,13 @@ const SolutionCreate = (props: MyProps) => {
     return (
         <Create {...props} >
             <SimpleForm toolbar={toolbar || <CustomCreateToolbar/>}>
-                <ReferenceInput label="Symptom" source="symptomId" reference="symptoms" fullWidth={true} allowEmpty={false} validate={required('Please select a symptom')}>
+                <ReferenceInput label="Problem" source="symptomId" reference="symptoms" fullWidth={true} allowEmpty={false} validate={required('Please select a problem')}>
                     <SelectInput optionText="name" fullWidth={true} allowEmpty={false} />
                 </ReferenceInput>
-                <TextInput source="name" fullWidth={true} label="Solution"/>
-                <BooleanInput source="askDidItWork" label="Ask the user if he/she was able to peform the fix and if it was successful"
+                <TextInput source="name" fullWidth={true} label="Solution" allowEmpty={false} validate={required('Please enter a name for this solution')}/>
+                <BooleanInput source="askDidItWork" label="Ask the user if he/she was able to perform the fix and if it was successful"
                               fullWidth={true}/>
-                <BooleanInput source="askForPhotoAfter" label="Ask for a photo after the problem has been fixed" fullWidth={true}/>
+                <BooleanInput source="askForPhotoAfter" label="Ask for a photo after the fix has been attempted" fullWidth={true}/>
             </SimpleForm>
         </Create>
     );
