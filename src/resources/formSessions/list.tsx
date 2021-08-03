@@ -3,20 +3,21 @@ import * as React from "react";
 import {Datagrid, DateField, downloadCSV, List, ReferenceField, TextField} from "react-admin";
 import jsonExport from 'jsonexport/dist';
 
-const addLessonData = (row:any, session:any, subject:any) => {
-    if (subject.forms) {
-        subject.forms.forEach((lesson:any, idx:number) => {
-            if (lesson && lesson.lessonId) {
-                const progress = session.forms[lesson.lessonId];
-                const prefix = 'lesson-'+(idx+1)+'-';
-                if (progress) {
-                    row[prefix+'started'] = progress.started;
-                    row[prefix+'completed'] = progress.completed;
-                    row[prefix+'preScore'] = progress.preScore;
-                    row[prefix+'score'] = progress.score;
-                }
-            }
-        });
+const addFormSessionData = (row:any, session:any, formType:any, formSession: any) => {
+    if (formSession.forms) {
+        console.log("66666666666 e get forms in form session",formSession.forms)
+            // formSession.forms.forEach((form:any, idx:number) => {
+            //     if (form && form.formId) {
+            //         const progress = session.forms[form.formId];
+            //         const prefix = 'form-'+(idx+1)+'-';
+            //         if (progress) {
+            //             row[prefix+'started'] = progress.started;
+            //             row[prefix+'completed'] = progress.completed;
+            //             row[prefix+'preScore'] = progress.preScore;
+            //             row[prefix+'score'] = progress.score;
+            //         }
+            //     }
+            // });
     }
 }
 
@@ -24,10 +25,15 @@ const exporter = (records:any, fetchRelatedRecords:any, dataProvider: any) => {
     records.forEach((record:any) => {
         record.userId = record.userId || 'NOUSERID';
         record.formTypeId = record.formTypeId || 'NOformTypeId';
+        record.formSessionId = record.formSessionId || 'NOformSessionId';
+
     });
+
     let formTypes:any = {};
+    let formSessions:any = {};
     let forms:any = {};
     let organizations:any = {};
+
     dataProvider.getList('organizations', {
         filter: { },
         pagination: { page: 1, perPage: 1000 },
@@ -38,32 +44,30 @@ const exporter = (records:any, fetchRelatedRecords:any, dataProvider: any) => {
             pagination: { page: 1, perPage: 1000 },
         }).then(({ data }:any) => {
             data.forEach((row:any) => {formTypes[row.id] = row});
-            dataProvider.getList('forms', {
+            dataProvider.getList('formSessions', {
                 filter: { },
                 pagination: { page: 1, perPage: 1000 },
             }).then(({ data }:any) => {
-                data.forEach((row:any) => {forms[row.id] = row});
+                data.forEach((row:any) => {formSessions[row.id] = row});
                 fetchRelatedRecords(records, 'userId', 'users').then((users:any) => {
                     const data = records.map((record:any) => {
+                        console.log('========== records', record)
                         const user:any = users[record.userId] || {};
-                        const subject:any = formTypes[record.formTypeId] || {};
+                        const formType:any = formTypes[record.formTypeId] || {};
+                        const formSession:any = formSessions[record.id] || {};
+                        console.log('Printing form sessions', formSession)
                         let row:any = {
-                            subject: subject.name,
-                            trainer_name: user.name,
-                            trainer_email: user.email,
-                            trainer_organization: record.organization || (user.organizationId && organizations[user.organizationId] ? organizations[user.organizationId].name : user.organization),
-                            trainer_community: record.community || user.community,
-                            sessionName: record.name,
-                            groupType: record.groupType,
-                            groupSize: record.groupSizeNum,
-                            started: record.started,
-                            completed: record.completed,
+                            form_name: formType.name,
+                            submitted_by: user.email,
+                            for_organization: record.organization || (user.organizationId && organizations[user.organizationId] ? organizations[user.organizationId].name : user.organization),
+                            user_community: record.community || user.community,
+                            filled_on: record.started,
                         }
-                        addLessonData(row, record, subject);
+                        addFormSessionData(row, record, formType, formSession);
                         return row;
                     });
                     jsonExport(data, {}, (err:any, csv:any) => {;
-                        downloadCSV(csv, 'sessions');
+                        downloadCSV(csv, 'formSessions');
                     });
                 });
             });
@@ -73,7 +77,6 @@ const exporter = (records:any, fetchRelatedRecords:any, dataProvider: any) => {
 
 
 const SessionList = (props: object) => {
-    console.log({props})
     return (
         <List {...props} exporter={exporter}
               perPage={25}

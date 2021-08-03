@@ -94,10 +94,13 @@ const FormEdit = (props: any) => {
                             {id: 'number', name: 'Number Input'},
                             {id: 'photo', name: 'Photo Input'},
                             {id: 'open-ended', name: 'Open Ended'},
-                            {id: 'additional-info', name: 'Additional Information'}
+                            {id: 'additional-info', name: 'Additional Information'},
+                            {id: 'multi-select', name: 'Multi-select Question'},
+                            {id: 'multi-step-question', name: 'Multi-step Question'}
 
                         ]}/>
                         <TextInput source="questionText" fullWidth={true} label="Question Text"/>
+                        {/* <TextInput source="questionDescription" fullWidth={true} label="Explain or give more details on your answer"/> */}
                         <BooleanInput
                             source="isRequired"
                             label="Required?"
@@ -116,7 +119,42 @@ const FormEdit = (props: any) => {
                                                     </SimpleFormIterator>
                                                 </ArrayInput>
                                             </Fragment>);
-                                    } else return
+                                    } else if (scopedFormData.questionType === 'multi-select') {
+                                      return (
+                                          <Fragment>
+                                              <ArrayInput source={getSource('choices')} label={`Possible choices for: ${scopedFormData.questionText}`}>
+                                                  <SimpleFormIterator>
+                                                      <TextInput source="value" label="Choice Value"
+                                                                 fullWidth={true}/>
+                                                  </SimpleFormIterator>
+                                              </ArrayInput>
+                                          </Fragment>);
+                                    } else if (scopedFormData.questionType === 'multi-step-question') {
+                                        return(
+                                          <Fragment>
+                                            <ArrayInput source={getSource('multi-step-question')} label='This is a multi step question, add questions in the order you would like them to be'>
+                                              <SimpleFormIterator>
+                                                <SelectInput source="questionType" fullWidth={true} label="Choose the question type for this step" choices={[
+                                                  {id: 'yes-no', name: 'Yes or No'},
+                                                  {id: 'choose-one', name: 'Multiple Choice'},
+                                                  {id: 'number', name: 'Number Input'},
+                                                  {id: 'photo', name: 'Photo Input'},
+                                                  {id: 'open-ended', name: 'Open Ended'},
+                                                  {id: 'additional-info', name: 'Additional Information'},
+                                                  {id: 'multi-select', name: 'Multi-select Question'},
+                                                ]}/>
+                                                <TextInput source="questionText" fullWidth={true} label="Question Text"/>
+                                                <BooleanInput
+                                                  source="isRequired"
+                                                  label="Required?"
+                                                  fullWidth={true}
+                                              />
+                                              </SimpleFormIterator>
+                                            </ArrayInput>
+                                          </Fragment>
+                                        )
+                                    }
+                                    else return
                                 }
                             }}
                         </FormDataConsumer>
