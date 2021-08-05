@@ -110,6 +110,19 @@ export default {
             notification: {
             }
         },
+        diagnosticLogs: {
+            name: 'Diagnostic Log |||| Diagnostic Logs',
+            amount: '1 diagnostic Log |||| %{smart_count} diagnostic Logs',
+            title: 'Diagnostic Log %{reference}',
+            fields: {
+            },
+            tabs: {
+            },
+            action: {
+            },
+            notification: {
+            }
+        },
         checklists: {
             name: 'Checklist |||| Checklists',
             amount: '1 checklist |||| %{smart_count} checklists',

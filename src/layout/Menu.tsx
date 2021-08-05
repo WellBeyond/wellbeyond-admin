@@ -131,6 +131,16 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
                     sidebarIsOpen={open}
                     dense={dense}
                 />
+              <MenuItemLink
+                to={`/diagnosticLogs`}
+                primaryText={translate(`resources.diagnosticLogs.name`, {
+                    smart_count: 2,
+                })}
+                leftIcon={<AssignmentTurnedInIcon />}
+                onClick={onMenuClick}
+                sidebarIsOpen={open}
+                dense={dense}
+              />
             </SubMenu>}
             <SubMenu
                 handleToggle={() => handleToggle('menuMaintenance')}
