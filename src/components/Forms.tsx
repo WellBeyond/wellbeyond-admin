@@ -19,11 +19,7 @@ export const Forms: React.FunctionComponent<MyProps> = ({record, source, ...rest
             let currentFormId = record.formId
             formAnswers = record.forms
 
-            console.log("============>", {currentFormId, formAnswers, source, record, answerObject})
-
             if (formAnswers && formAnswers[currentFormId]) {
-                //  return <p>We did get here</p>; 
-                console.log('========= got here', formAnswers[currentFormId].answers)
                 // formAnswers[currentFormId].answers.forEach((r:any)=> {
                 //     if (r.formId && record[source][r.formId]) {
                 //         forms.push(record[source][r.formId]);

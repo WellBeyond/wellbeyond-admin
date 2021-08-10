@@ -5,7 +5,6 @@ import jsonExport from 'jsonexport/dist';
 
 const addFormSessionData = (row:any, session:any, formType:any, formSession: any) => {
     if (formSession.forms) {
-        console.log("66666666666 e get forms in form session",formSession.forms)
             // formSession.forms.forEach((form:any, idx:number) => {
             //     if (form && form.formId) {
             //         const progress = session.forms[form.formId];
@@ -51,11 +50,9 @@ const exporter = (records:any, fetchRelatedRecords:any, dataProvider: any) => {
                 data.forEach((row:any) => {formSessions[row.id] = row});
                 fetchRelatedRecords(records, 'userId', 'users').then((users:any) => {
                     const data = records.map((record:any) => {
-                        console.log('========== records', record)
                         const user:any = users[record.userId] || {};
                         const formType:any = formTypes[record.formTypeId] || {};
                         const formSession:any = formSessions[record.id] || {};
-                        console.log('Printing form sessions', formSession)
                         let row:any = {
                             form_name: formType.name,
                             submitted_by: user.email,
