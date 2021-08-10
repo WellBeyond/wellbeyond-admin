@@ -136,12 +136,10 @@ const FormEdit = (props: any) => {
                                               <SimpleFormIterator>
                                                 <SelectInput source="questionType" fullWidth={true} label="Choose the question type for this step" choices={[
                                                   {id: 'yes-no', name: 'Yes or No'},
-                                                  {id: 'choose-one', name: 'Multiple Choice'},
                                                   {id: 'number', name: 'Number Input'},
                                                   {id: 'photo', name: 'Photo Input'},
                                                   {id: 'open-ended', name: 'Open Ended'},
                                                   {id: 'additional-info', name: 'Additional Information'},
-                                                  {id: 'multi-select', name: 'Multi-select Question'},
                                                 ]}/>
                                                 <TextInput source="questionText" fullWidth={true} label="Question Text"/>
                                                 <BooleanInput
