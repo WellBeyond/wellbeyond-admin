@@ -14,6 +14,7 @@ import {
     TextField
 } from "react-admin";
 import {makeStyles} from '@material-ui/core';
+import { ReferenceArrayInput, SelectArrayInput } from "react-admin";
 
 const useStyles = makeStyles({
     nameColumn: {
@@ -23,9 +24,9 @@ const useStyles = makeStyles({
 });
 const FormFilter = (props:any) => (
     <Filter {...props}>
-        <ReferenceInput label="Organization" source="organizationId" reference="organizations">
-            <SelectInput optionText="name" />
-        </ReferenceInput>
+        <ReferenceArrayInput label="Organization" source="organizationId" reference="organizations">
+            <SelectArrayInput optionText="name" fullWidth={true} allowEmpty={false}/>
+        </ReferenceArrayInput>
         <SelectInput source="locale" label="Language" choices={[
             {id: 'en', name: 'English'},
             {id: 'fr', name: 'French'},

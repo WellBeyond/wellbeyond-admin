@@ -18,6 +18,7 @@ import {PhotoInput} from "../../components/PhotoInput";
 import { FormDataConsumer } from "react-admin";
 import { SimpleFormIterator } from "react-admin";
 import { Fragment } from "react";
+import { ReferenceArrayInput, SelectArrayInput } from "react-admin";
 
 interface FormDataConsumerProps {
   formData: any;
@@ -33,7 +34,7 @@ const FormEdit = (props: any) => {
             fullWidth={true}
             validate={required("Name is required")}
           />
-          <ReferenceInput
+          <ReferenceArrayInput
             label="Organization"
             source="organizationId"
             reference="organizations"
@@ -41,12 +42,12 @@ const FormEdit = (props: any) => {
             allowEmpty={false}
             validate={required("Please select an organization")}
           >
-            <SelectInput
+            <SelectArrayInput
               optionText="name"
               fullWidth={true}
               allowEmpty={false}
             />
-          </ReferenceInput>
+          </ReferenceArrayInput>
           <SelectInput
             source="locale"
             label="Language"

@@ -4,6 +4,8 @@ import {BooleanInput, Create, ReferenceInput, required, SelectInput, SimpleForm,
 import RichTextInput from "ra-input-rich-text";
 import CustomCreateToolbar from "../../components/CustomCreateToolbar";
 import {PhotoInput} from "../../components/PhotoInput";
+import { ReferenceArrayInput } from "react-admin";
+import { SelectArrayInput } from "react-admin";
 
 type MyProps = {
     location?: {[index: string]:any},
@@ -18,9 +20,9 @@ const FormCreate = (props: MyProps) => {
         <Create {...props} >
             <SimpleForm toolbar={toolbar || <CustomCreateToolbar />} initialValues={formDefaultValue}>
                 <TextInput source="name" fullWidth={true} validate={required('Name is required')}/>
-                <ReferenceInput label="Organization" source="organizationId" reference="organizations" fullWidth={true} allowEmpty={false} validate={required('Please select an organization')}>
-                    <SelectInput optionText="name" fullWidth={true} allowEmpty={false} />
-                </ReferenceInput>
+                <ReferenceArrayInput label="Organization" source="organizationId" reference="organizations" fullWidth={true} allowEmpty={false} validate={required('Please select an organization')}>
+                    <SelectArrayInput optionText="name" fullWidth={true} allowEmpty={false}/>
+                </ReferenceArrayInput>
                 <SelectInput
                   source="locale"
                   label="Language"

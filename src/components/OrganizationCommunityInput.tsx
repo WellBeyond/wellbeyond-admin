@@ -59,7 +59,7 @@ const OrganizationCommunityInput:React.FunctionComponent<MyProps> = ({isRequired
             </div>
             <div className="ra-input">
                 <SelectInput label="Community" source="community"
-                             fullWidth={true} allowEmpty={!isRequired} validate={isRequired ? required('Please select a community') : undefined}
+                             fullWidth={true}
                              choices={values && values.organizationId ? toCommunityChoices(values.organizationId) : []}
                              {...rest}
                 />
