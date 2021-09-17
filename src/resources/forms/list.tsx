@@ -7,14 +7,14 @@ import {
     Datagrid,
     Filter,
     List,
-    ReferenceField,
-    ReferenceInput,
     SelectField,
     SelectInput,
     TextField
 } from "react-admin";
 import {makeStyles} from '@material-ui/core';
 import { ReferenceArrayInput, SelectArrayInput } from "react-admin";
+import { SingleFieldList, ChipField } from "react-admin";
+import { ReferenceArrayField } from "react-admin";
 
 const useStyles = makeStyles({
     nameColumn: {
@@ -49,12 +49,21 @@ const FormList = (props: object) => {
             <Datagrid optimized rowClick="edit">
                 <TextField source="name" label="Form name" className={classes.nameColumn}/>
                 <CloneButton />
-                <ReferenceField
+                {/* <ReferenceField
                     source={'organizationId'}
                     basePath={'/organizations'}
                     reference="organizations">
                     <TextField source="name"/>
-                </ReferenceField>
+                </ReferenceField> */}
+                <ReferenceArrayField
+                    label="Organization(s)"
+                    source={'organizationId'}
+                    basePath={'/organizations'}
+                    reference="organizations">
+                    <SingleFieldList>
+                        <ChipField source="name" />
+                    </SingleFieldList>
+                </ReferenceArrayField>
                 <SelectField source="locale" label="Language" choices={[
                     {id: 'en', name: 'English'},
                     {id: 'fr', name: 'French'},
