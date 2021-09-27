@@ -43,6 +43,8 @@ const DiagnosticLogEdit = (props: any) => (
                 <BooleanInput source="archived" label="Archived?" fullWidth={true}/>
                 <DateTimeInput source="started" fullWidth={true}/>
                 <DateTimeInput source="completed" fullWidth={true}/>
+                <TextInput source="information" multiline fullWidth={true} label={"Information"}/>
+                <PhotoInput source='photo' label={"Photo"}/>
             </FormTab>
             <FormTab label="Problems">
                 <ArrayInput source="symptoms" label=''>
