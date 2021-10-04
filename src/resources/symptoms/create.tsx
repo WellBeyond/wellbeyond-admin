@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import {Create, ReferenceArrayInput, SelectArrayInput, SimpleForm, TextInput} from "react-admin";
+import {BooleanInput, Create, ReferenceArrayInput, SelectArrayInput, SimpleForm, TextInput} from "react-admin";
 import CustomCreateToolbar from "../../components/CustomCreateToolbar";
 import RichTextInput from "ra-input-rich-text";
 
@@ -18,6 +18,7 @@ const SymptomCreate = (props: MyProps) => {
                                      allowEmpty={true} helperText="Leave this blank if it applies to all types of systems">
                     <SelectArrayInput optionText="name" fullWidth={true} allowEmpty={false}/>
                 </ReferenceArrayInput>
+                <BooleanInput source="hidden" label="Hide this problem?" fullWidth={true}  helperText="Useful if the problem is a root cause that you don't want in the initial selection."/>
                 <RichTextInput source="description" fullWidth={true} label="Problem Description"/>
             </SimpleForm>
         </Create>

@@ -1,7 +1,7 @@
 import React from "react";
 
 import {
-    ArrayInput,
+    ArrayInput, BooleanInput,
     Datagrid,
     DeleteButton,
     EditButton,
@@ -54,6 +54,7 @@ const SymptomEdit = (props: any) => {
                                          allowEmpty={true} helperText="Leave this blank if it applies to all types of systems">
                         <SelectArrayInput optionText="name" fullWidth={true} allowEmpty={false}/>
                     </ReferenceArrayInput>
+                    <BooleanInput source="hidden" label="Hide this problem?" fullWidth={true}  helperText="Useful if the problem is a root cause that you don't want in the initial selection."/>
                     <RichTextInput source="description" fullWidth={true} label="Problem Description"/>
                 </FormTab>
                 <FormTab label="Potential Solutions">
