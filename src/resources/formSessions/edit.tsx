@@ -12,7 +12,9 @@ import {
 } from "react-admin";
 import CustomEdit from '../../components/CustomEdit';
 import CustomEditToolbar from "../../components/CustomEditToolbar";
-import {Forms} from "../../components/Forms";
+import { ArrayInput } from "react-admin";
+import { OrderedFormIterator } from "../../components/OrderedFormIterator";
+import { PhotoInput } from "../../components/PhotoInput";
 
 const SessionEdit = (props: any) => {
 
@@ -32,15 +34,20 @@ const SessionEdit = (props: any) => {
                     <ReferenceInput label="Organization" source="organizationId" reference="organizations" fullWidth={true} allowEmpty={false}>
                         <SelectInput optionText="name" fullWidth={true} allowEmpty={false} />
                     </ReferenceInput>
-                    {/* <ReferenceInput label="Form Session ID" source="formSessionId" reference="formSessions" fullWidth={true} allowEmpty={false}>
-                        <SelectInput optionText="name" fullWidth={true} allowEmpty={false} />
-                    </ReferenceInput> */}
                     <TextInput source="community" fullWidth={true}/>
                     <DateTimeInput source="started" fullWidth={true}/>
                     <BooleanInput source="isArchived" label="Archived?" fullWidth={true}/>
                 </FormTab>
                 <FormTab label="Forms">
-                    <Forms source="forms" fullWidth={true} />
+                    <ArrayInput source="formQuestionsWithAnswers" fullWidth={true} >
+                        <OrderedFormIterator>
+                            <TextInput source="questionText" fullWidth={true} label="Question"/>
+                            <TextInput source="questionType" fullWidth={true} label="Question Type" />
+                            <BooleanInput source="isRequired" fullwidth={true} label="isRequired"/>
+                            <TextInput source="answer" fullwidth={true} label="User Answer"/>
+                            <PhotoInput source='photo' />
+                        </OrderedFormIterator>
+                    </ArrayInput>
                 </FormTab>
             </TabbedForm>
         </CustomEdit>

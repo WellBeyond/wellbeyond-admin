@@ -2,6 +2,7 @@ import * as React from "react";
 
 import {Datagrid, DateField, downloadCSV, List, ReferenceField, TextField} from "react-admin";
 import jsonExport from 'jsonexport/dist';
+import { BooleanInput } from "react-admin";
 
 const addFormSessionData = (row:any, session:any, formType:any, formSession: any) => {
     if (formSession.forms) {
@@ -73,30 +74,35 @@ const exporter = (records:any, fetchRelatedRecords:any, dataProvider: any) => {
 };
 
 
-const SessionList = (props: object) => {
+const FormSessionList = (props: object) => {
     return (
-        <List {...props} exporter={exporter}
-              perPage={25}
-              sort={{field: 'started', order: 'DESC'}}>
+        <List {...props}
+            // exporter={exporter}
+            perPage={25}
+            sort={{field: 'started', order: 'DESC'}}
+            filterDefaultValues={{ archived: false }}>
             <Datagrid optimized rowClick="edit">
+                <DateField source="started" label="Filled On"/>
                 <ReferenceField label="Form Type" source="formTypeId" reference="formTypes" >
                     <TextField source="name" />
                 </ReferenceField>
                 <ReferenceField label="Form Name" source="formId" reference="forms" >
                     <TextField source="name" />
                 </ReferenceField>
-                <ReferenceField label="User" source="userId" reference="users" >
+                <ReferenceField label="Filled By" source="userId" reference="users" >
                     <TextField source="name" />
                 </ReferenceField>
-                {/* <ReferenceField label="Form Session ID" source="formSessionId" reference="formSessions" fullWidth={true} allowEmpty={false}>
-                        <TextField source="name" />
-                    </ReferenceField> */}
-                <TextField source="organization"  label="Organization"/>
+                <ReferenceField
+                    label={"Organization"}
+                    source={'organizationId'}
+                    basePath={'/organizations'}
+                    reference="organizations">
+                    <TextField source="name"/>
+                </ReferenceField>
                 <TextField source="community"  label="Community"/>
-                <DateField source="started" label="Started"/>
             </Datagrid>
         </List>
     );
 }
 
-export default SessionList;
+export default FormSessionList;

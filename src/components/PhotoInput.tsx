@@ -63,18 +63,18 @@ export const PhotoInput: React.FunctionComponent<MyProps> = ({record, source, la
             sources: ['local', 'url', 'camera'],
             defaultSource: 'local',
             showCompleteButton: false,
-            showUploadMoreButton: false,
-            multiple: false,
+            showUploadMoreButton: true,
+            multiple: true,
             singleUploadAutoClose: false,
             showAdvancedOptions: false,
-            cropping: true
+            cropping: false
 
         };
         return cloudinary.createUploadWidget(options, function(err: object, result: any) {
             if (err) {
                 return console.log(err);
             }
-            console.log(result);
+            console.log({result});
             if (result && result.event === 'success' && result.info) {
                 handleUploadResult(result.info);
             }
