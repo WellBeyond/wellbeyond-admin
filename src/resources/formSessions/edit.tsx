@@ -38,7 +38,7 @@ const SessionEdit = (props: any) => {
                     <DateTimeInput source="started" fullWidth={true}/>
                     <BooleanInput source="isArchived" label="Archived?" fullWidth={true}/>
                 </FormTab>
-                <FormTab label="Forms">
+                <FormTab label="Form Answers ">
                     <ArrayInput source="formQuestionsWithAnswers" fullWidth={true} >
                         <OrderedFormIterator>
                             <TextInput source="questionText" fullWidth={true} label="Question"/>
