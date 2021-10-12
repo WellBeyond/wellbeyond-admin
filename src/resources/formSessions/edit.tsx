@@ -71,8 +71,6 @@ const SessionEdit = (props: any) => {
                                                     </ArrayInput>
                                                 </Fragment>);
                                         } else if (scopedFormData.questionType === 'multi-step-question') {
-                                                console.log({ scopedFormData})
-
                                             return(
                                             <Fragment>
                                                 <ArrayInput source={getSource('multi-step-question')} label='This is a multi step question, add questions in the order you would like them to be'>
