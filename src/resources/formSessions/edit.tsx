@@ -47,7 +47,6 @@ const SessionEdit = (props: any) => {
                             <BooleanInput source="isRequired" fullwidth={true} label="isRequired"/>
                             <FormDataConsumer {...props}>
                                 {({ scopedFormData, getSource }:any) => {
-                                    console.log({ scopedFormData, getSource })
                                     if (scopedFormData && scopedFormData.questionType) {
                                         if (scopedFormData.questionType === 'multi-select') {
                                             scopedFormData.answer = Object.values(scopedFormData.answer)
@@ -72,6 +71,8 @@ const SessionEdit = (props: any) => {
                                                     </ArrayInput>
                                                 </Fragment>);
                                         } else if (scopedFormData.questionType === 'multi-step-question') {
+                                                console.log({ scopedFormData})
+
                                             return(
                                             <Fragment>
                                                 <ArrayInput source={getSource('multi-step-question')} label='This is a multi step question, add questions in the order you would like them to be'>
@@ -90,6 +91,7 @@ const SessionEdit = (props: any) => {
                                                         fullWidth={true}
                                                     />
                                                     <TextInput source="answer" fullwidth={true} label="User Answer"/>
+                                                    <PhotoInput source='photo' label={"Photo"}/>
                                                 </SimpleFormIterator>
                                                 </ArrayInput>
                                             </Fragment>
