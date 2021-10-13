@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import {BooleanInput, Create, ReferenceInput, required, SelectInput, SimpleForm, TextInput} from "react-admin";
+import {BooleanInput, Create, ReferenceInput, required, SelectInput, SimpleForm, TextInput, TextField} from "react-admin";
 import RichTextInput from "ra-input-rich-text";
 import CustomCreateToolbar from "../../components/CustomCreateToolbar";
 import {PhotoInput} from "../../components/PhotoInput";
@@ -35,6 +35,9 @@ const FormCreate = (props: MyProps) => {
                     {id: 'so', name: 'Somali'},
                     {id: 'am', name: 'Amharic'}
                 ]}/>
+                <ReferenceInput label="Form Type" source="formTypeId" reference="formTypes" fullWidth={true} allowEmpty={false} validate={required('Please select an organization')}>
+                    <SelectInput optionText="name" fullWidth={true} allowEmpty={false} />
+                </ReferenceInput>
                 <SelectInput
                     source="formCategory"
                     label="Form Category"
@@ -46,9 +49,6 @@ const FormCreate = (props: MyProps) => {
                     { id: "misc-reporting", name: "Misc Reporting" },
                     ]}
                 />
-                <ReferenceInput label="Form Type" source="formTypeId" reference="formTypes" fullWidth={true} allowEmpty={false} validate={required('Please select an organization')}>
-                    <SelectInput optionText="name" fullWidth={true} allowEmpty={false} />
-                </ReferenceInput>
                 <BooleanInput source="isPublished" label="Published?" fullWidth={true}/>
                 <RichTextInput
                   source="description"
