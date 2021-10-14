@@ -16,6 +16,7 @@ import { ArrayInput } from "react-admin";
 import { OrderedFormIterator } from "../../components/OrderedFormIterator";
 import { PhotoInput } from "../../components/PhotoInput";
 import { FormDataConsumer, SimpleFormIterator } from "react-admin";
+import { NumberInput } from "react-admin";
 
 const SessionEdit = (props: any) => {
 
@@ -49,17 +50,37 @@ const SessionEdit = (props: any) => {
                                 {({ scopedFormData, getSource }:any) => {
                                     if (scopedFormData && scopedFormData.questionType) {
                                         if (scopedFormData.questionType === 'multi-select') {
-                                            scopedFormData.answer = Object.values(scopedFormData.answer)
-                                        return (
-                                            <Fragment>
-                                                <ArrayInput source={getSource('choices')} label={`Possible choices for: ${scopedFormData.questionText}`}>
-                                                    <SimpleFormIterator disableAdd={true} disableRemove={true}>
-                                                        <TextInput source="value" label="Choice Value"
-                                                                    fullWidth={true}/>
+                                            if (!scopedFormData.answer.map) {
+                                                scopedFormData.answer = Object.values(scopedFormData.answer).map(a => ({value: a}))
+                                            }
+                                            return (
+                                                <Fragment>
+                                                    <ArrayInput source={getSource('choices')} label={`Possible choices for: ${scopedFormData.questionText}`}>
+                                                        <SimpleFormIterator disableAdd={true} disableRemove={true}>
+                                                            <TextInput source="value" label="Choice Value"
+                                                                        fullWidth={true}/>
 
-                                                    </SimpleFormIterator>
+                                                        </SimpleFormIterator>
+                                                    </ArrayInput>
+                                                    <ArrayInput source={getSource('answer')}>
+                                                        <SimpleFormIterator disableAdd={true} disableRemove={true}>
+                                                            <TextInput source="value" label="User Answer" fullWidth={true}/>
+                                                        </SimpleFormIterator>
                                                 </ArrayInput>
-                                            </Fragment>);
+                                                </Fragment>);
+                                        } else if (scopedFormData.questionType === 'yes-no') {
+                                            return (
+                                                <SelectInput source={getSource('answer')} label="User Answer" fullWidth={true}
+                                                             choices={[
+                                                                 {id: 'yes', name: 'Yes'},
+                                                                 {id: 'no', name: 'No'}
+                                                             ]}/>);
+                                        } else if (scopedFormData.questionType === 'number') {
+                                            return <NumberInput source={getSource('answer')} label="User Answer"
+                                                                fullWidth={true}/>
+                                        } else if (scopedFormData.questionType === 'open-ended' || scopedFormData.questionType === 'additional-info' ) {
+                                            return <TextInput source={getSource('answer')} label="User Answer"
+                                                                fullWidth={true}/>
                                         } else if (scopedFormData.questionType === 'choose-one') {
                                             return (
                                                 <Fragment>
@@ -69,8 +90,11 @@ const SessionEdit = (props: any) => {
                                                                        fullWidth={true}/>
                                                         </SimpleFormIterator>
                                                     </ArrayInput>
+                                                    <TextInput source={getSource('answer')} label="User Answer"
+                                                                fullWidth={true}/>
                                                 </Fragment>);
                                         } else if (scopedFormData.questionType === 'multi-step-question') {
+                                            scopedFormData && scopedFormData["multi-step-question"] && scopedFormData["multi-step-question"].map((question: any, index: any) => question.answer = scopedFormData.answer[index])
                                             return(
                                             <Fragment>
                                                 <ArrayInput source={getSource('multi-step-question')} label='This is a multi step question, add questions in the order you would like them to be'>
@@ -94,20 +118,20 @@ const SessionEdit = (props: any) => {
                                                 </ArrayInput>
                                             </Fragment>
                                             )
-                                        }else if (scopedFormData.questionType === 'photo') {
+                                        } else if (scopedFormData.questionType === 'photo') {
                                             return(
                                             <Fragment>
+                                                {typeof(scopedFormData.answer === 'string')?
+                                                <PhotoInput source='photo' label={"Photo"}/> :
                                                 <ArrayInput source={getSource('answer')}>
                                                     <PhotoInput source='photo' label={"Photo"}/>
                                                 </ArrayInput>
+                                            }
                                             </Fragment>)
                                         }
-                                        else return 
                                     }
                                 }}
                             </FormDataConsumer>
-                            <TextInput source="answer" fullwidth={true} label="User Answer"/>
-                            <PhotoInput source='photo' />
                         </OrderedFormIterator>
                     </ArrayInput>
                 </FormTab>

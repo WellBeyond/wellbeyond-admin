@@ -2,7 +2,6 @@ import * as React from "react";
 
 import {Datagrid, DateField, downloadCSV, List, ReferenceField, TextField} from "react-admin";
 import jsonExport from 'jsonexport/dist';
-import { BooleanInput } from "react-admin";
 
 const addFormSessionData = (row:any, session:any, formType:any, formSession: any) => {
     if (formSession.forms) {

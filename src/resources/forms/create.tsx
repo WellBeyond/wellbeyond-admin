@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import {BooleanInput, Create, ReferenceInput, required, SelectInput, SimpleForm, TextInput, TextField} from "react-admin";
+import {BooleanInput, Create, ReferenceInput, required, SelectInput, SimpleForm, TextInput} from "react-admin";
 import RichTextInput from "ra-input-rich-text";
 import CustomCreateToolbar from "../../components/CustomCreateToolbar";
 import {PhotoInput} from "../../components/PhotoInput";
