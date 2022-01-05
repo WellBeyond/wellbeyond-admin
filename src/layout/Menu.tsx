@@ -53,6 +53,10 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
     const isXSmall = useMediaQuery((theme: Theme) =>
         theme.breakpoints.down('xs')
     );
+    const isAdmin = permissions && permissions.admin && permissions.admin.isAdmin
+    const isClientAdmin = permissions && permissions.admin && permissions.admin.isClientAdmin
+    const isMaintenanceUser = permissions && permissions.admin && permissions.admin.isMaintenanceUser
+    const permittedResources = permissions && permissions.admin && permissions.admin.isMaintenanceUser && permissions.admin.permittedResources
     const open = useSelector((state: AppState) => state.admin.ui.sidebarOpen);
     useSelector((state: AppState) => state.theme); // force rerender on theme change
 
@@ -62,9 +66,8 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
 
     return (
         <div>
-            {' '}
             <DashboardMenuItem onClick={onMenuClick} sidebarIsOpen={open} />
-            {permissions && permissions.admin && permissions.admin.isAdmin && <SubMenu
+            {isAdmin && <SubMenu
                 handleToggle={() => handleToggle('menuSystems')}
                 isOpen={state.menuSystems}
                 sidebarIsOpen={open}
@@ -93,14 +96,15 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
                     dense={dense}
                 />
             </SubMenu>}
-            {permissions && permissions.admin && permissions.admin.isAdmin && <SubMenu
+            { isAdmin ?
+                <SubMenu
                 handleToggle={() => handleToggle('menuRules')}
                 isOpen={state.menuRules}
                 sidebarIsOpen={open}
                 name="pos.menu.rules"
                 icon={<AccountTreeIcon />}
                 dense={dense}
-            >
+                >
                 <MenuItemLink
                     to={`/symptoms`}
                     primaryText={translate(`resources.symptoms.name`, {
@@ -141,8 +145,21 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
                 sidebarIsOpen={open}
                 dense={dense}
               />
-            </SubMenu>}
-            <SubMenu
+            </SubMenu>  :   
+                ((isMaintenanceUser || isClientAdmin) && permittedResources.includes('diagnostic-logs') ? 
+                    <MenuItemLink
+                        to={`/diagnosticLogs`}
+                        primaryText={translate(`resources.diagnosticLogs.name`, {
+                            smart_count: 2,
+                        })}
+                        leftIcon={<AssignmentTurnedInIcon />}
+                        onClick={onMenuClick}
+                        sidebarIsOpen={open}
+                        dense={dense}
+                /> : null
+              )
+              }
+            { isAdmin ? <SubMenu
                 handleToggle={() => handleToggle('menuMaintenance')}
                 isOpen={state.menuMaintenance}
                 sidebarIsOpen={open}
@@ -170,8 +187,17 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
                     sidebarIsOpen={open}
                     dense={dense}
                 />
-            </SubMenu>
-            <SubMenu
+            </SubMenu>: ((isMaintenanceUser || isClientAdmin) && permittedResources.includes('maintenance-logs')? <MenuItemLink
+                    to={`/maintenanceLogs`}
+                    primaryText={translate(`resources.maintenanceLogs.name`, {
+                        smart_count: 2,
+                    })}
+                    leftIcon={<AssignmentTurnedInIcon />}
+                    onClick={onMenuClick}
+                    sidebarIsOpen={open}
+                    dense={dense}
+                />: null)}
+            { isAdmin ? <SubMenu
                 handleToggle={() => handleToggle('menuTraining')}
                 isOpen={state.menuTraining}
                 sidebarIsOpen={open}
@@ -219,7 +245,16 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
                     sidebarIsOpen={open}
                     dense={dense}
                 />
-            </SubMenu>
+            </SubMenu>:((isMaintenanceUser || isClientAdmin) && permittedResources.includes('training-sessions') ? <MenuItemLink
+                    to={`/sessions`}
+                    primaryText={translate(`resources.sessions.name`, {
+                        smart_count: 2,
+                    })}
+                    leftIcon={<TrainIcon />}
+                    onClick={onMenuClick}
+                    sidebarIsOpen={open}
+                    dense={dense}
+                />: null)}
             {/*
             <SubMenu
                 handleToggle={() => handleToggle('menuAssets')}
@@ -251,7 +286,7 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
                 />
             </SubMenu>
             */}
-            <MenuItemLink
+            { isAdmin && <MenuItemLink
                 to={`/organizations`}
                 primaryText={translate(`resources.organizations.name`, {
                     smart_count: 2,
@@ -260,8 +295,8 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
                 onClick={onMenuClick}
                 sidebarIsOpen={open}
                 dense={dense}
-            />
-            <MenuItemLink
+            />}
+            { isAdmin && <MenuItemLink
                 to={`/users`}
                 primaryText={translate(`resources.users.name`, {
                     smart_count: 2,
@@ -270,8 +305,8 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
                 onClick={onMenuClick}
                 sidebarIsOpen={open}
                 dense={dense}
-            />
-            <SubMenu
+            />}
+          { isAdmin ? <SubMenu
                 handleToggle={() => handleToggle('menuForms')}
                 isOpen={state.menuForms}
                 sidebarIsOpen={open}
@@ -309,9 +344,18 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
                     sidebarIsOpen={open}
                     dense={dense}
                 />
-            </SubMenu>
+            </SubMenu>:((isMaintenanceUser || isClientAdmin) && permittedResources.includes('form-sessions') ? <MenuItemLink
+                    to={`/formSessions`}
+                    primaryText={translate(`resources.formSessions.name`, {
+                        smart_count: 2,
+                    })}
+                    leftIcon={<AssignmentTurnedInIcon />}
+                    onClick={onMenuClick}
+                    sidebarIsOpen={open}
+                    dense={dense}
+                />: null)}
 
-            {permissions && permissions.admin && permissions.admin.isAdmin && <MenuItemLink
+            {(isAdmin) && <MenuItemLink
                 to={`/admins`}
                 primaryText={translate(`resources.admins.name`, {
                     smart_count: 2,

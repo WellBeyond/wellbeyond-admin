@@ -29,7 +29,7 @@ const handleLogin = (results:any, params: any) => {
                     ...doc.data()
                 };
                 localStorage.setItem('admin_permissions', JSON.stringify(admin));
-                if (admin.isAdmin || admin.isClientAdmin) {
+                if (admin.isAdmin || admin.isClientAdmin || admin.isMaintenanceUser) {
                     results.user.admin = admin;
                     return results;
                 }
