@@ -1,7 +1,7 @@
 import * as React from "react";
 import {useEffect, useState} from "react";
 
-import {AutocompleteInput, Create, SimpleForm, useDataProvider} from "react-admin";
+import {AutocompleteInput, SelectArrayInput, required, Create, SimpleForm, useDataProvider} from "react-admin";
 import CustomCreateToolbar from "../../components/CustomCreateToolbar";
 
 interface FormDataConsumerProps {
@@ -34,6 +34,19 @@ const AdminCreate = (props: object) => {
        <Create {...props} >
             <SimpleForm toolbar={<CustomCreateToolbar />}>
                 <AutocompleteInput source="id" choices={userList} optionText={optionRenderer} fullWidth={true} limitChoicesToValue={true} translateChoice={false} allowEmpty={false} label="Begin typing the name of an existing user"/>
+                <SelectArrayInput
+                    source="permittedResources"
+                    label="Permitted Resources"
+                    fullWidth={true}
+                    allowEmpty={false}
+                    validate={required('Please select one or more system type(s)')}
+                    choices={[
+                    { id: "diagnostic-logs", name: "Diagnostic Logs" },
+                    { id: "maintenance-logs", name: "Maintenance Logs" },
+                    { id: "training-sessions", name: "Training Sessions"},
+                    { id: "form-sessions", name: "For Sessions"}
+                    ]}
+                />
             </SimpleForm>
         </Create>
     );

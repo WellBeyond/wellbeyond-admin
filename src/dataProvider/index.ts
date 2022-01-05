@@ -28,12 +28,15 @@ const checkPermission = async (): Promise<any> => {
         if (permissions.admin.isClientAdmin && permissions.admin.organizations && permissions.admin.organizations.length) {
             return Promise.resolve(permissions);
         }
+        if (permissions.admin.isMaintenanceUser && permissions.admin.organizations && permissions.admin.organizations.length) {
+            return Promise.resolve(permissions);
+        }
         return Promise.reject('Not authorized');
     });
 }
 
 const setFilter = (permissions:any, resource: string, params: any): void => {
-    if (permissions && permissions.admin.isClientAdmin && permissions.admin.organizations && permissions.admin.organizations.length) {
+    if (permissions && (permissions.admin.isClientAdmin || permissions.admin.isMaintenanceUser) && permissions.admin.organizations && permissions.admin.organizations.length) {
         params.filter = params.filter || {};
         if (resource === 'organizations') {
             params.filter.collectionQuery = (resource: any) => {

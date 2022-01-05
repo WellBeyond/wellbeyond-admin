@@ -58,7 +58,7 @@ class App extends React.Component {
               <Resource name="symptoms" {...symptoms} />,
               <Resource name="solutions" {...solutions} />,
               <Resource name="diagnostics" {...diagnostics} />,
-                <Resource name="diagnosticLogs" {...diagnosticLogs} />,
+              <Resource name="diagnosticLogs" {...diagnosticLogs} />,
               <Resource name="checklists" {...checklists} />,
               <Resource name="forms" {...forms} />,
               <Resource name="formTypes" {...formTypes} />,

@@ -1,10 +1,11 @@
-import React from "react";
+import React, { Fragment } from "react";
 
 import {
     FormDataConsumer,
     ReferenceArrayInput,
     ReferenceField,
     SelectArrayInput,
+    required,
     SimpleForm,
     TextField
 } from "react-admin";
@@ -41,12 +42,30 @@ const UserEdit: React.FunctionComponent<MyProps> = (props) => {
                     )}
                 </FormDataConsumer>
 
+                
+
                 <FormDataConsumer subscription={{values: true}}>
-                    {({formData, ...rest}: FormDataConsumerProps) => formData.isClientAdmin &&
+                    {({formData, ...rest}: FormDataConsumerProps) => (formData.isClientAdmin || formData.isMaintenanceUser) &&
+                    <Fragment> 
+
                       <ReferenceArrayInput label="Which Organizations?" source="organizations" reference="organizations"
                                            fullWidth={true}>
                         <SelectArrayInput optionText="name"/>
                       </ReferenceArrayInput>
+                      <SelectArrayInput
+                        source="permittedResources"
+                        label="Permitted Resources"
+                        fullWidth={true}
+                        allowEmpty={false}
+                        validate={required('Please select one or more system type(s)')}
+                        choices={[
+                        { id: "diagnostic-logs", name: "Diagnostic Logs" },
+                        { id: "maintenance-logs", name: "Maintenance Logs" },
+                        { id: "training-sessions", name: "Training Sessions"},
+                        { id: "form-sessions", name: "For Sessions"}
+                        ]}
+                    />
+                    </Fragment>
                     }
                 </FormDataConsumer>
             </SimpleForm>

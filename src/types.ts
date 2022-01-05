@@ -106,6 +106,7 @@ export interface Admin extends Record {
     isClientAdmin?: boolean;
     isMaintenanceUser?: boolean;
     organizations?: string[];
+    permittedResources?: string[];
 }
 
 export interface Organization extends Record {
