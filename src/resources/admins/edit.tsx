@@ -62,7 +62,7 @@ const UserEdit: React.FunctionComponent<MyProps> = (props) => {
                         { id: "diagnostic-logs", name: "Diagnostic Logs" },
                         { id: "maintenance-logs", name: "Maintenance Logs" },
                         { id: "training-sessions", name: "Training Sessions"},
-                        { id: "form-sessions", name: "For Sessions"}
+                        { id: "form-sessions", name: "Form Sessions"}
                         ]}
                     />
                     </Fragment>
