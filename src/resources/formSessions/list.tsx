@@ -1,22 +1,49 @@
 import * as React from "react";
 
-import {Datagrid, DateField, downloadCSV, List, ReferenceField, TextField} from "react-admin";
+import { Datagrid, 
+    DateField, 
+    downloadCSV, 
+    List, 
+    ReferenceField,
+    Filter,
+    SelectInput,
+    ReferenceInput,
+    TextInput, 
+    TextField} from "react-admin";
 import jsonExport from 'jsonexport/dist';
 
 const addFormSessionData = (row:any, session:any, formType:any, formSession: any) => {
-    if (formSession.forms) {
-            // formSession.forms.forEach((form:any, idx:number) => {
-            //     if (form && form.formId) {
-            //         const progress = session.forms[form.formId];
-            //         const prefix = 'form-'+(idx+1)+'-';
-            //         if (progress) {
-            //             row[prefix+'started'] = progress.started;
-            //             row[prefix+'completed'] = progress.completed;
-            //             row[prefix+'preScore'] = progress.preScore;
-            //             row[prefix+'score'] = progress.score;
-            //         }
-            //     }
-            // });
+    if (formSession.formQuestionsWithAnswers) {
+        formSession.formQuestionsWithAnswers.forEach((qwithans:any , idx: number) => {
+            if (qwithans.questionType === 'yes-no') {
+                row[`${qwithans.questionText}`] = qwithans.answer
+            } else if (qwithans.questionType === 'choose-one') {
+                row[`${qwithans.questionText}`] = qwithans.answer
+            } else if (qwithans.questionType === 'additional-info') {
+
+                row[`${qwithans.questionText}`] = qwithans.answer
+            } else if (qwithans.questionType === 'multi-select') {
+                let rawAnswer = qwithans.answer || {}
+                let ans = Object.values(rawAnswer).join()
+                row[`${qwithans.questionText}`] = ans
+            } else if (qwithans.questionType === 'multi-step-question') {
+                let multistepqa = qwithans["multi-step-question"] || []
+                multistepqa.forEach((qa:any, index:number) => {
+                    let idx = qwithans && qwithans.answer && qwithans.answer[index]
+                    if ((typeof(idx)==undefined || typeof(idx)=='boolean')) return
+                    row[`${qa.questionText}`] = qa.answer ? qa.answer : idx
+                })
+            } 
+            else if (qwithans.questionType === 'number') {
+                row[`${qwithans.questionText}`] = qwithans.answer
+            }
+            else if (qwithans.questionType === 'photo') {
+                qwithans.answer && qwithans.answer.forEach((photo:string)=> {
+
+                    row[`${qwithans.questionText}`] = photo
+                })
+            }
+        })
     }
 }
 
@@ -72,14 +99,32 @@ const exporter = (records:any, fetchRelatedRecords:any, dataProvider: any) => {
     });
 };
 
+const UserFilter = (props:any) => (
+    <Filter {...props}>
+        
+        <ReferenceInput label="Form Type" source="formTypeId" reference="formTypes">
+            <SelectInput optionText="name" />
+        </ReferenceInput>
+        <ReferenceInput label="Form Name" source="formId" reference="forms">
+            <SelectInput optionText="name" />
+        </ReferenceInput>
+        <ReferenceInput label="Filled By" source="userId" reference="users">
+            <SelectInput optionText="name" />
+        </ReferenceInput>
+        <ReferenceInput label="Organization" source="organizationId" reference="organizations">
+            <SelectInput optionText="name" />
+        </ReferenceInput>
+    </Filter>
+);
 
 const FormSessionList = (props: object) => {
     return (
         <List {...props}
-            // exporter={exporter}
+            exporter={exporter}
             perPage={25}
             sort={{field: 'started', order: 'DESC'}}
-            filterDefaultValues={{ archived: false }}>
+            filters={<UserFilter/>}
+            >
             <Datagrid optimized rowClick="edit">
                 <DateField source="started" label="Filled On"/>
                 <ReferenceField label="Form Type" source="formTypeId" reference="formTypes" >
