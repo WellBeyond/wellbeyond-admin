@@ -55,7 +55,6 @@ const addMaintenanceLogData = (row:any, session:any, steps:any) => {
 }
 
 const exporter = (records:any, fetchRelatedRecords:any, dataProvider: any) => {
-    console.log({records})
     fetchRelatedRecords(records, 'userId', 'users').then((users:any) => {
         const data = records.map((record:any) => {
 
@@ -70,7 +69,6 @@ const exporter = (records:any, fetchRelatedRecords:any, dataProvider: any) => {
             addMaintenanceLogData(row, record, steps);
             return row;
         });
-        console.log({data})
         jsonExport(data, {}, (err:any, csv:any) => {;
             downloadCSV(csv, 'maintenance logs');
         });
