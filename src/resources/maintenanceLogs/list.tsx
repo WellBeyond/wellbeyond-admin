@@ -4,6 +4,7 @@ import {
     BooleanInput,
     Datagrid,
     DateField,
+    downloadCSV,
     Filter,
     List,
     NumberField,
@@ -12,6 +13,7 @@ import {
     SelectInput,
     TextField
 } from "react-admin";
+import jsonExport from 'jsonexport/dist';
 
 const MaintenanceLogFilter = (props:any) => (
     <Filter {...props}>
@@ -28,12 +30,58 @@ const MaintenanceLogFilter = (props:any) => (
     </Filter>
 );
 
+const addMaintenanceLogData = (row:any, session:any, steps:any) => {
+    if (steps) {
+        steps.forEach((step:any , idx: number) => {
+            if (step.name) {
+                row[`step${idx}.name`] = step.name
+            } if (step.status) {
+                row[`step${idx}.status`] = step.status
+            }
+            if (step.information) {
+                row[`step${idx}.information`] = step.information
+            }
+            if (step.completed) {
+                row[`step${idx}.completed`] = step.completed
+            }
+            if (step.photo) {
+                row[`step${idx}.photo`] = step.photo
+            }
+            if (step.completedByName) {
+                row[`step${idx}.completedByName`] = step.completedByName
+            }
+        })
+    }
+}
+
+const exporter = (records:any, fetchRelatedRecords:any, dataProvider: any) => {
+    fetchRelatedRecords(records, 'userId', 'users').then((users:any) => {
+        const data = records.map((record:any) => {
+
+            const user:any = users[record.userId] || {};
+            const steps:any = record.steps
+            let row:any = {
+                community: record.community || user.community || '',
+                name: record.name,
+                completed: record.started,
+                completedCount: `${record.completedCount} / ${record.stepCount}`
+            }
+            addMaintenanceLogData(row, record, steps);
+            return row;
+        });
+        jsonExport(data, {}, (err:any, csv:any) => {;
+            downloadCSV(csv, 'maintenance logs');
+        });
+    });
+}
+
 const MaintenanceLogList = (props: object) => {
     return (
         <List {...props}
             filters={<MaintenanceLogFilter />}
               perPage={25}
               sort={{field: 'started', order: 'DESC'}}
+              exporter={exporter}
               filterDefaultValues={{ archived: false }}>
             <Datagrid optimized rowClick="edit">
                 <DateField source="started" label="Started" showTime={true}/>

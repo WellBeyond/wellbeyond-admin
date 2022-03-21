@@ -8,7 +8,6 @@ import { Datagrid,
     Filter,
     SelectInput,
     ReferenceInput,
-    TextInput, 
     TextField} from "react-admin";
 import jsonExport from 'jsonexport/dist';
 
@@ -57,7 +56,6 @@ const exporter = (records:any, fetchRelatedRecords:any, dataProvider: any) => {
 
     let formTypes:any = {};
     let formSessions:any = {};
-    let forms:any = {};
     let organizations:any = {};
 
     dataProvider.getList('organizations', {
