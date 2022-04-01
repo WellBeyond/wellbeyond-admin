@@ -38,6 +38,13 @@ const MaintenanceLogEdit = (props: any) => (
                 <ReferenceInput label="Checklist" source="checklistId" reference="checklists" fullWidth={true} allowEmpty={false}>
                     <SelectInput optionText="name" fullWidth={true} allowEmpty={false} />
                 </ReferenceInput>
+                <SelectInput source="organizationStatus" label="Organization Status" fullWidth={true} choices={[
+                    {id: 'functioning', name: 'Functioning'},
+                    {id: 'under-review', name: 'Under Review'},
+                    {id: 'issues-reported', name: 'Issues Reported'},
+                    {id: 'pending-maintenance', name: 'Pending Maintenance'},
+                    {id: 'contact-community', name: 'Contact Community'}
+                ]}/>
                 <BooleanInput source="archived" label="Archived?" fullWidth={true}/>
                 <DateTimeInput source="started" fullWidth={true}/>
                 <DateTimeInput source="completed" fullWidth={true}/>
