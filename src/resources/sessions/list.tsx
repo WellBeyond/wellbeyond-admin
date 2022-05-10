@@ -78,18 +78,18 @@ const SessionList = (props: object) => {
               perPage={25}
               sort={{field: 'started', order: 'DESC'}}>
             <Datagrid optimized rowClick="edit">
+                <TextField source="community"  label="Community"/>
                 <ReferenceField label="Subject" source="subjectId" reference="subjects" link={false} >
                     <TextField source="name" />
                 </ReferenceField>
-                <ReferenceField label="Trainer" source="userId" reference="users" link={false} sortBy="name">
+                <TextField source="groupType" label="Group Type"/>
+                <ReferenceField label="Performed By (Trainer)" source="userId" reference="users" link={false} sortBy="name">
                     <TextField source="name" />
                 </ReferenceField>
-                <TextField source="organization"  label="Organization"/>
-                <TextField source="community"  label="Community"/>
-                <TextField source="groupType" label="Group Type"/>
                 <NumberField source="groupSizeNum" label="Group Size"/>
                 <DateField source="started" label="Started"/>
                 <DateField source="completed" label="Completed"/>
+                {/* <TextField source="organization"  label="Organization"/> */}
             </Datagrid>
         </List>
     );

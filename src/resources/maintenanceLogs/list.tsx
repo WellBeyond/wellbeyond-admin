@@ -123,46 +123,52 @@ const exporter = (records:any, fetchRelatedRecords:any, dataProvider: any) => {
 }
 
 const MaintenanceLogList = (props: object) => {
+    {console.log({props})}
     return (
-        <List {...props}
-            filters={<MaintenanceLogFilter />}
-              perPage={25}
-              sort={{field: 'started', order: 'DESC'}}
-              exporter={exporter}
-              filterDefaultValues={{ archived: false }}>
-            <Datagrid optimized rowClick="edit">
-                <TextField source="community" label="Community"/>
-                <DateField source="completed" label="Completion Date" showTime={true}/>
-                <NumberField source="completedCount" label="Steps Completed"/>
-                <NumberField source="stepCount" label=" Total Steps"/>
-                <ReferenceField
-                    label={"Performed By"}
-                    source={'userId'}
-                    basePath={'/users'}
-                    reference="users">
-                    <TextField source="name"/>
-                </ReferenceField>
-                <ReferenceField
-                    label={"System"}
-                    source={'systemId'}
-                    basePath={'/systems'}
-                    reference="systems">
-                    <TextField source="name"/>
-                </ReferenceField>
-                <ReferenceField
-                    label={"Organization"}
-                    source={'organizationId'}
-                    basePath={'/organizations'}
-                    reference="organizations">
-                    <TextField source="name"/>
-                </ReferenceField>
-                <TextField label={'Organization Status'}
-                    source='organizationStatus' /> 
+        <div>
+            <div>
+                
+            </div>
+            <List {...props}
+                filters={<MaintenanceLogFilter />}
+                perPage={25}
+                sort={{field: 'started', order: 'DESC'}}
+                exporter={exporter}
+                filterDefaultValues={{ archived: false }}>
+                <Datagrid optimized rowClick="edit">
+                    <TextField source="community" label="Community"/>
+                    <DateField source="completed" label="Completion Date" showTime={true}/>
+                    <NumberField source="completedCount" label="Steps Completed"/>
+                    <NumberField source="stepCount" label=" Total Steps"/>
+                    <ReferenceField
+                        label={"Performed By"}
+                        source={'userId'}
+                        basePath={'/users'}
+                        reference="users">
+                        <TextField source="name"/>
+                    </ReferenceField>
+                    <ReferenceField
+                        label={"System"}
+                        source={'systemId'}
+                        basePath={'/systems'}
+                        reference="systems">
+                        <TextField source="name"/>
+                    </ReferenceField>
+                    <ReferenceField
+                        label={"Organization"}
+                        source={'organizationId'}
+                        basePath={'/organizations'}
+                        reference="organizations">
+                        <TextField source="name"/>
+                    </ReferenceField>
+                    <TextField label={'Organization Status'}
+                        source='organizationStatus' /> 
                     <TextField source="updatedby" label={"Updated By"} reference='users'/>
-                <DateField label={'Last Update'}
-                    source='lastupdate' /> 
-            </Datagrid>
-        </List>
+                    <DateField label={'Last Update'}
+                        source='lastupdate' /> 
+                </Datagrid>
+            </List>
+        </div>
     );
 }
 

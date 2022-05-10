@@ -33,37 +33,10 @@ const DiagnosticLogList = (props: object) => {
               sort={{field: 'started', order: 'DESC'}}
               filterDefaultValues={{ archived: false }}>
             <Datagrid optimized rowClick="edit">
-                <DateField source="started" label="Started" showTime={true}/>
+            <TextField source="community" label="Community"/>
+                {/* <DateField source="started" label="Started" showTime={true}/> */}
                 <DateField source="completed" label="Completed" showTime={true}/>
-                <SelectField source="status" label="Status" choices={[
-                    {id: 'open', name: 'Open'},
-                    {id: 'resolved', name: 'Resolved'},
-                    {id: 'partial', name: 'Partially Resolved'},
-                    {id: 'unresolved', name: 'Unresolved'}
-                ]}/>
-                <ReferenceField
-                    label={"Organization"}
-                    source={'organizationId'}
-                    basePath={'/organizations'}
-                    reference="organizations">
-                    <TextField source="name"/>
-                </ReferenceField>
-                <TextField source="community" label="Community"/>
-                <ReferenceField
-                    label={"System"}
-                    source={'systemId'}
-                    basePath={'/systems'}
-                    reference="systems">
-                    <TextField source="name"/>
-                </ReferenceField>
-                <ReferenceField
-                    label={"Diagnosed By"}
-                    source={'userId'}
-                    basePath={'/users'}
-                    reference="users">
-                    <TextField source="name"/>
-                </ReferenceField>
-                <ArrayField label="Problems" source="symptoms">
+                <ArrayField label="Reported Issue" source="symptoms">
                     <SingleFieldList>
                         <ReferenceField
                             source={'symptomId'}
@@ -74,6 +47,45 @@ const DiagnosticLogList = (props: object) => {
                         </ReferenceField>
                     </SingleFieldList>
                 </ArrayField>
+                <ReferenceField
+                    label={"Performed By"}
+                    source={'userId'}
+                    basePath={'/users'}
+                    reference="users">
+                    <TextField source="name"/>
+                </ReferenceField>
+                <SelectField source="status" label="Community Reported Status" choices={[
+                    {id: 'open', name: 'Open'},
+                    {id: 'resolved', name: 'Resolved'},
+                    {id: 'partial', name: 'Partially Resolved'},
+                    {id: 'unresolved', name: 'Unresolved'}
+                ]}/>
+                <SelectField source="adminReportedStatus" label="Organization Status" choices={[
+                    {id: 'underreview', name: 'Under Review'},
+                    {id: 'issuesreported', name: 'Issues Reported'},
+                    {id: 'pendingmaintenance', name: 'Pending Maintenance'},
+                    {id: 'contactcommunity', name: 'Contact Community'}
+                ]}/>
+                {/* <ReferenceField
+                    label={"Organization"}
+                    source={'organizationId'}
+                    basePath={'/organizations'}
+                    reference="organizations">
+                    <TextField source="name"/>
+                </ReferenceField> */}
+                
+                {/* <ReferenceField
+                    label={"System"}
+                    source={'systemId'}
+                    basePath={'/systems'}
+                    reference="systems">
+                    <TextField source="name"/>
+                </ReferenceField> */}
+                
+                <TextField source="updatedby" label={"Updated By"} reference='users'/>
+                <DateField label={'Last Update'}
+                    source='lastupdate' /> 
+                
             </Datagrid>
         </List>
     );

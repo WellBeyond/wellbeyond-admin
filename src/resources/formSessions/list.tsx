@@ -124,14 +124,15 @@ const FormSessionList = (props: object) => {
             filters={<UserFilter/>}
             >
             <Datagrid optimized rowClick="edit">
-                <DateField source="started" label="Filled On"/>
+                <TextField source="community"  label="Community"/>
+                <DateField source="started" label="Submittal Date"/>
                 <ReferenceField label="Form Type" source="formTypeId" reference="formTypes" >
                     <TextField source="name" />
                 </ReferenceField>
                 <ReferenceField label="Form Name" source="formId" reference="forms" >
                     <TextField source="name" />
                 </ReferenceField>
-                <ReferenceField label="Filled By" source="userId" reference="users" >
+                <ReferenceField label="Submitted By" source="userId" reference="users" >
                     <TextField source="name" />
                 </ReferenceField>
                 <ReferenceField
@@ -141,7 +142,6 @@ const FormSessionList = (props: object) => {
                     reference="organizations">
                     <TextField source="name"/>
                 </ReferenceField>
-                <TextField source="community"  label="Community"/>
             </Datagrid>
         </List>
     );

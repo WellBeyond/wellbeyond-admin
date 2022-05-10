@@ -40,6 +40,12 @@ const DiagnosticLogEdit = (props: any) => (
                     {id: 'partial', name: 'Partially Resolved'},
                     {id: 'unresolved', name: 'Unresolved'}
                 ]}/>
+                <SelectInput source="adminReportedStatus" label="Updated Status (Note to Admins: Only update this after confirming the actual status of the water system)" fullWidth={true} choices={[
+                    {id: 'underreview', name: 'Under Review'},
+                    {id: 'issuesreported', name: 'Issues Reported'},
+                    {id: 'pendingmaintenance', name: 'Pending Maintenance'},
+                    {id: 'contactcommunity', name: 'Contact Community'}
+                ]}/>
                 <BooleanInput source="archived" label="Archived?" fullWidth={true}/>
                 <DateTimeInput source="started" fullWidth={true}/>
                 <DateTimeInput source="completed" fullWidth={true}/>
