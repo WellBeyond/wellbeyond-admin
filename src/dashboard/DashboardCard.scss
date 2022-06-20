@@ -1,0 +1,60 @@
+.cardBody {
+    /* Add shadows to create the "card" effect */
+    padding: 1%;
+    margin: 1%;
+    height: 150px;
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    align-items: center;
+
+    .cardContentTitle {
+        font-size: 14px;
+        text-align: center;
+    }
+
+    .cardContent{
+        font-size: 44px;
+        text-align: center;
+    }
+
+    
+    
+  }
+
+.cardPadding{
+    padding: 10px;
+}
+
+.sectionHeader{
+    margin-top: 20px;
+    padding: 0px; 
+
+    .sectionTitle{
+        font-size: 26px;
+        text-align: start;
+        margin: 0px;
+        padding: 0px; 
+    }
+}
+
+.chartContainer{
+    height: auto;
+    width: 100%;
+    padding: 1%;
+    margin: 1%;
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    align-items: center;
+
+    .chartTitle{
+        font-size: 26px;
+        text-align: start;
+        margin: 0px;
+        padding: 0px; 
+    }
+}

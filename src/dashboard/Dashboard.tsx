@@ -1,5 +1,5 @@
 import React, {CSSProperties, useCallback, useEffect, useState,} from 'react';
-import {useDataProvider, useTranslate, useVersion} from 'react-admin';
+import { useDataProvider, useTranslate, useVersion, Title } from 'react-admin';
 import {Theme, useMediaQuery, Card, CardHeader, CardContent} from '@material-ui/core';
 import {Organization, Subject, TrainingSession, User} from '../types'
 
@@ -7,9 +7,24 @@ import Welcome from './Welcome';
 import UsersByCommunity from './UsersByCommunity';
 import {Bar, Chart} from 'react-chartjs-2';
 import { Chart as ChartJS, registerables } from 'chart.js';
+import DashboardCard from './DashboardCard';
+import './DashboardCard.scss';
+import DashboardSectionHeader from './DashboardSectionHeader';
+import DashboardBarChart from './DashboardBarChart';
+import DiagnosticList from '../resources/diagnostics/list';
+import {Datagrid, Filter, List, ReferenceField, ReferenceInput, SelectInput, TextField} from "react-admin";
+import DashboardList from './DashboardList';
 
 ChartJS.register(...registerables);
 
+// data need for dashboard list from react admin
+const DiagnosticFilter = (props:any) => (
+    <Filter {...props}>
+        <ReferenceInput label="Problem" source="symptomId" reference="symptoms">
+            <SelectInput optionText="name" />
+        </ReferenceInput>
+    </Filter>
+);
 
 const styles = {
     flex: { display: 'flex' },
@@ -17,7 +32,9 @@ const styles = {
     leftCol: { flex: 1, marginRight: '1em' },
     rightCol: { flex: 1, marginLeft: '1em' },
     singleCol: { marginTop: '2em', marginBottom: '2em' },
-    margin: {margin: '5%'}
+    margin: {margin: '5%'},
+    marginLef: {marginLeft: '5%'},
+    marginTops: {marginTop: '2%'}
 };
 
 const Dashboard = () => {
@@ -115,6 +132,17 @@ const Dashboard = () => {
 
     return isXSmall ? (
         <div>
+            <div className='cardPadding'>
+                {/* section Title */}
+                <div style={{ marginLeft: '10px' }}>
+                    <DashboardSectionHeader sectionTitle={translate('OVERVIEW')} />
+                </div>
+                {/* detailed cards */}
+                <DashboardCard cardContent={totalCommunities} cardTitle={translate('No. of Communities Served')} />
+                <DashboardCard cardContent={totalTrained} cardTitle={translate('No. of Individuals Trained')} />
+                <DashboardCard cardContent={sessions.length} cardTitle={translate('No. of Maintenance Checklists completed')} />
+                <DashboardCard cardContent={users.length} cardTitle={translate('Total No. of Users')} />
+            </div> 
             <div style={styles.flexColumn as CSSProperties}>
                 <div style={{ marginBottom: '2em' }}>
                     <Welcome />
@@ -128,6 +156,21 @@ const Dashboard = () => {
         </div>
     ) : isSmall ? (
         <div style={styles.flexColumn as CSSProperties}>
+            <div className='cardPadding'>
+                {/* section Title */}
+                <div style={{ marginLeft: '1%' }}>
+                    <DashboardSectionHeader sectionTitle={translate('OVERVIEW')} />
+                </div>
+                {/* detailed cards */}
+                <div style={{'display': 'flex'}}>
+                    <DashboardCard cardContent={totalCommunities} cardTitle={translate('No. of Communities Served')} />
+                    <DashboardCard cardContent={totalTrained} cardTitle={translate('No. of Individuals Trained')} />
+                </div>
+                <div style={{'display': 'flex'}}>
+                    <DashboardCard cardContent={sessions.length} cardTitle={translate('No. of Maintenance Checklists completed')} />
+                    <DashboardCard cardContent={users.length} cardTitle={translate('Total No. of Users')} />
+                </div>
+            </div> 
             <div style={styles.singleCol}>
                 <Welcome />
             </div>
@@ -138,58 +181,80 @@ const Dashboard = () => {
             </div>
         </div>
     ) : (
-        <div style={{'margin': '5%'}}>
-            <div style={{'margin': '5%', 'display': 'flex'}}>
-            <Card style={{'maxWidth': '20%', 'margin': '1%'}}>
-                    <CardHeader title={translate('# of Communities Served')} />
-                    <CardContent>{totalCommunities}</CardContent>
-                </Card>
-                <Card style={{'maxWidth': '20%', 'margin': '1%'}}>
-                    <CardHeader title={translate('# of Individuals Trained')} />
-                    <CardContent>{totalTrained}</CardContent>
-                </Card>
-                <Card style={{'maxWidth': '20%', 'margin': '1%'}}>
-                    <CardHeader title={translate('# of Maintenance Checklists completed')} />
-                    <CardContent>{sessions.length}</CardContent>
-                </Card>
-                <Card style={{'maxWidth': '20%', 'margin': '1%'}}>
-                    <CardHeader title={translate('Total # of Users')} />
-                    <CardContent>{users.length}</CardContent>
-                </Card>
+        <div >
+            {/* section Title */}
+            <div style={{ marginLeft: '6%' }}>
+                    <DashboardSectionHeader sectionTitle={translate('OVERVIEW')} />
             </div>
-            <div style={{'margin': '5%'}}>
-                <Bar
-                    data={barData}
-                    options={{
-                        /* @ts-ignore */
-                        // title:{
-                        // display:true,
-                        // text:'Average Rainfall per month',
-                        // fontSize:20
-                        // },
-                        legend:{
-                        display:true,
-                        position:'right'
-                        }
-                    }}
-                />
+            {/* detailed cards */}
+            <div style={{'marginLeft': '5%', 'display': 'flex'}}>
+                <DashboardCard cardContent={totalCommunities} cardTitle={translate('No. of Communities Served')} />
+                <DashboardCard cardContent={totalTrained} cardTitle={translate('No. of Individuals Trained')} />
+                <DashboardCard cardContent={sessions.length} cardTitle={translate('No. of Maintenance Checklists completed')} />
+                <DashboardCard cardContent={users.length} cardTitle={translate('Total No. of Users')} />
+            </div> 
+
+            {/* section Title */}
+            <div style={{ marginLeft: '6%' }}>
+                <DashboardSectionHeader sectionTitle={translate('SYSTEM OVERVIEW')} />
             </div>
-            <div style={{'margin': '5%'}}>
-                <iframe src='http://localhost:3000/#/diagnosticLogs' width={1000} height={300}/>
+
+            <div style={{ marginLeft: '5%', 'display': 'flex' }}>
+                {/* Piechart components */}
+                <div style={{margin: '1%'}}>
+                    <UsersByCommunity users={users} organizations={organizations} />
+                </div>
+                <div style={{margin: '1%'}}>
+                    <UsersByCommunity users={users} organizations={organizations} />
+                </div>
+                <div style={{margin: '1%'}}>
+                    <UsersByCommunity users={users} organizations={organizations} />
+                </div>
+            </div>
+
+            {/* section Title */}
+            <div style={{ marginLeft: '6%' }}>
+                <DashboardSectionHeader sectionTitle={translate('COMMUNITY TRAININGS')} />
+            </div>
+
+            <div style={{ marginLeft: '5%', 'display': 'flex' }}>
+                <DashboardBarChart title={''} data={barData} />
+                <DashboardBarChart title={''} data={barData} />
+            </div>
+
+            {/* section Title */}
+            <div style={{ marginLeft: '6%' }}>
+                <DashboardSectionHeader sectionTitle={translate('IMPACT MEASUREMENTS')} />
+            </div>
+
+            <div style={{ marginLeft: '5%', 'display': 'flex' }}>
+                {/* barchart components */}
+                <DashboardBarChart title={''} data={barData} />
+                <DashboardBarChart title={''} data={barData} />
+            </div>
+
+            {/* section Title */}
+            <div style={{ marginLeft: '6%' }}>
+                <DashboardSectionHeader sectionTitle={translate('DIAGNOSTIC LIST')} />
+            </div>
+
+            {/* <DiagnosticList/> */}
+            {/* <div style={{ marginLeft: '5%', 'display': 'flex' }}>
+                <DashboardList diagnosticFilter={DiagnosticFilter}/>
+            </div> */}
+
+            <div style={{ marginLeft: '6%', }}>
+                <iframe style={ styles.marginTops} src='http://localhost:3000/#/diagnosticLogs' width={1130} height={300}/>
                 {/* <MaintenanceLogList /> */}
             </div>
-            <div style={styles.flex}>
-                <div style={styles.leftCol}>
+            <div style={{margin: '1%'}}>
+                <div style={ styles.marginLef}>
                     <div style={styles.singleCol}>
                         <Welcome />
                     </div>
                 </div>
-                <div style={styles.rightCol}>
-                    <div style={styles.singleCol}>
-                        <UsersByCommunity users={users} organizations={organizations} />
-                    </div>
-                </div>
             </div>
+
         </div>
     );
 };
