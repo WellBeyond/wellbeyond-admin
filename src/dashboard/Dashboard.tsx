@@ -101,7 +101,12 @@ const Dashboard = () => {
         return sub.name
     } )
 
-    const barData = {
+    const individualsTrainedPerSubject = subjects.map((sub) => {
+        let a = sessions.filter((v) => (v.subjectId === sub.id)).length;
+        return a
+    } )
+
+    const individualsTrainedPerSubjectBarData = {
         labels: subjectNames,
         datasets: [
           {
@@ -109,10 +114,49 @@ const Dashboard = () => {
             backgroundColor: 'rgba(0, 99, 155, 1)',
             borderColor: 'rgba(0,0,0,1)',
             borderWidth: 2,
-            data: [65, 59, 80, 81, 56, 67, 65]
+            data: individualsTrainedPerSubject
           }
         ]
-      }
+    }
+
+    const KnowledgeGainedBarData = {
+        labels: subjectNames,
+        datasets: [
+          {
+            label: 'Knowledge Gained',
+            backgroundColor: 'rgba(0, 99, 155, 1)',
+            borderColor: 'rgba(0,0,0,1)',
+            borderWidth: 2,
+            data: individualsTrainedPerSubject
+          }
+        ]
+    }
+
+    const timeSpentCollectingWaterBarData = {
+        labels: subjectNames,
+        datasets: [
+          {
+            label: 'Total time spent collecting water',
+            backgroundColor: 'rgba(0, 99, 155, 1)',
+            borderColor: 'rgba(0,0,0,1)',
+            borderWidth: 2,
+            data: individualsTrainedPerSubject
+          }
+        ]
+    }
+
+    const totalFunctionalWaterTimeBarData = {
+        labels: subjectNames,
+        datasets: [
+          {
+            label: 'How often is water source functional',
+            backgroundColor: 'rgba(0, 99, 155, 1)',
+            borderColor: 'rgba(0,0,0,1)',
+            borderWidth: 2,
+            data: individualsTrainedPerSubject
+          }
+        ]
+    }
 
     useEffect(() => {
         fetchSessions();
@@ -120,7 +164,7 @@ const Dashboard = () => {
         fetchOrganizations();
         fetchSubjects();
     }, [version]); // eslint-disable-line react-hooks/exhaustive-deps
-    console.log('====================================>', users, organizations, sessions, subjects, subjectNames)
+    console.log('====================================>', users, organizations, sessions, subjects, subjectNames, individualsTrainedPerSubject)
 
     const totalTrained = sessions.reduce((accumulator, session) => {
         return accumulator + Number(session.groupSizeNum)
@@ -140,7 +184,7 @@ const Dashboard = () => {
                 {/* detailed cards */}
                 <DashboardCard cardContent={totalCommunities} cardTitle={translate('No. of Communities Served')} />
                 <DashboardCard cardContent={totalTrained} cardTitle={translate('No. of Individuals Trained')} />
-                <DashboardCard cardContent={sessions.length} cardTitle={translate('No. of Maintenance Checklists completed')} />
+                {/* <DashboardCard cardContent={sessions.length} cardTitle={translate('No. of Maintenance Checklists completed')} /> */}
                 <DashboardCard cardContent={users.length} cardTitle={translate('Total No. of Users')} />
             </div> 
             <div style={styles.flexColumn as CSSProperties}>
@@ -167,7 +211,7 @@ const Dashboard = () => {
                     <DashboardCard cardContent={totalTrained} cardTitle={translate('No. of Individuals Trained')} />
                 </div>
                 <div style={{'display': 'flex'}}>
-                    <DashboardCard cardContent={sessions.length} cardTitle={translate('No. of Maintenance Checklists completed')} />
+                    {/* <DashboardCard cardContent={sessions.length} cardTitle={translate('No. of Maintenance Checklists completed')} /> */}
                     <DashboardCard cardContent={users.length} cardTitle={translate('Total No. of Users')} />
                 </div>
             </div> 
@@ -187,11 +231,14 @@ const Dashboard = () => {
                     <DashboardSectionHeader sectionTitle={translate('OVERVIEW')} />
             </div>
             {/* detailed cards */}
-            <div style={{'marginLeft': '5%', 'display': 'flex'}}>
+            <div style={{'marginLeft': '5%', 'display': 'flex',  'flexGrow': 1, 'flexBasis': '0',}}>
                 <DashboardCard cardContent={totalCommunities} cardTitle={translate('No. of Communities Served')} />
                 <DashboardCard cardContent={totalTrained} cardTitle={translate('No. of Individuals Trained')} />
                 <DashboardCard cardContent={sessions.length} cardTitle={translate('No. of Maintenance Checklists completed')} />
                 <DashboardCard cardContent={users.length} cardTitle={translate('Total No. of Users')} />
+                {/* <div className="cardBody">
+                <UsersByCommunity users={users} organizations={organizations} />
+                </div> */}
             </div> 
 
             {/* section Title */}
@@ -218,8 +265,8 @@ const Dashboard = () => {
             </div>
 
             <div style={{ marginLeft: '5%', 'display': 'flex' }}>
-                <DashboardBarChart title={''} data={barData} />
-                <DashboardBarChart title={''} data={barData} />
+                <DashboardBarChart title={''} data={individualsTrainedPerSubjectBarData} />
+                <DashboardBarChart title={''} data={KnowledgeGainedBarData} />
             </div>
 
             {/* section Title */}
@@ -229,8 +276,8 @@ const Dashboard = () => {
 
             <div style={{ marginLeft: '5%', 'display': 'flex' }}>
                 {/* barchart components */}
-                <DashboardBarChart title={''} data={barData} />
-                <DashboardBarChart title={''} data={barData} />
+                <DashboardBarChart title={''} data={timeSpentCollectingWaterBarData} />
+                <DashboardBarChart title={''} data={totalFunctionalWaterTimeBarData} />
             </div>
 
             {/* section Title */}
@@ -238,22 +285,17 @@ const Dashboard = () => {
                 <DashboardSectionHeader sectionTitle={translate('DIAGNOSTIC LIST')} />
             </div>
 
-            {/* <DiagnosticList/> */}
-            {/* <div style={{ marginLeft: '5%', 'display': 'flex' }}>
-                <DashboardList diagnosticFilter={DiagnosticFilter}/>
-            </div> */}
-
             <div style={{ marginLeft: '6%', }}>
                 <iframe style={ styles.marginTops} src='http://localhost:3000/#/diagnosticLogs' width={1130} height={300}/>
                 {/* <MaintenanceLogList /> */}
             </div>
-            <div style={{margin: '1%'}}>
+            {/* <div style={{margin: '1%'}}>
                 <div style={ styles.marginLef}>
                     <div style={styles.singleCol}>
                         <Welcome />
                     </div>
                 </div>
-            </div>
+            </div> */}
 
         </div>
     );

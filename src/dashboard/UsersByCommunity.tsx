@@ -159,7 +159,7 @@ const UsersByCommunity: FC<{ users?: User[], organizations?: Organization[] }> =
 
     return (
         <Card>
-            <CardHeader title={translate('Users by Organization/Community')} />
+            <h1 className='cardContentTitle' >{translate('Users by Organization/Community')}</h1>
             <CardContent>
                 <div className={classes.cardContent}>
                     <FormControl className={classes.formControl}>
