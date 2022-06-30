@@ -14,6 +14,7 @@ import DashboardBarChart from './DashboardBarChart';
 import DiagnosticList from '../resources/diagnostics/list';
 import {Datagrid, Filter, List, ReferenceField, ReferenceInput, SelectInput, TextField} from "react-admin";
 import DashboardList from './DashboardList';
+import DashboardCardOverall from './DashboardCardOverall';
 
 ChartJS.register(...registerables);
 
@@ -266,7 +267,8 @@ const Dashboard = () => {
 
             <div style={{ marginLeft: '5%', 'display': 'flex' }}>
                 <DashboardBarChart title={''} data={individualsTrainedPerSubjectBarData} />
-                <DashboardBarChart title={''} data={KnowledgeGainedBarData} />
+                <DashboardCardOverall cardContent={totalCommunities} cardTitle={translate('Overall Knowledge gained across all communities & all trainings')} />
+                {/* <DashboardBarChart title={''} data={KnowledgeGainedBarData} /> */}
             </div>
 
             {/* section Title */}
@@ -277,18 +279,20 @@ const Dashboard = () => {
             <div style={{ marginLeft: '5%', 'display': 'flex' }}>
                 {/* barchart components */}
                 <DashboardBarChart title={''} data={timeSpentCollectingWaterBarData} />
-                <DashboardBarChart title={''} data={totalFunctionalWaterTimeBarData} />
+                <DashboardCardOverall cardContent={0} cardTitle={translate('')} />
+                {/* <DashboardBarChart title={''} data={totalFunctionalWaterTimeBarData} /> */}
             </div>
 
             {/* section Title */}
-            <div style={{ marginLeft: '6%' }}>
+            {/* <div style={{ marginLeft: '6%' }}>
                 <DashboardSectionHeader sectionTitle={translate('DIAGNOSTIC LIST')} />
-            </div>
+            </div> */}
 
-            <div style={{ marginLeft: '6%', }}>
+            {/* <MaintenanceLogList /> */}
+            {/* <div style={{ marginLeft: '6%', }}>
                 <iframe style={ styles.marginTops} src='http://localhost:3000/#/diagnosticLogs' width={1130} height={300}/>
-                {/* <MaintenanceLogList /> */}
-            </div>
+                
+            </div> */}
             {/* <div style={{margin: '1%'}}>
                 <div style={ styles.marginLef}>
                     <div style={styles.singleCol}>

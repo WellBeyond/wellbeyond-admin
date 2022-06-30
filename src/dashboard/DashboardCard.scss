@@ -52,9 +52,42 @@
     align-items: center;
 
     .chartTitle{
-        font-size: 26px;
+        font-size: 20px;
         text-align: start;
         margin: 0px;
         padding: 0px; 
     }
 }
+
+.pieChartTitle{
+    font-size: 24px;
+    text-align: start;
+    margin: 10px;
+    padding: 0px; 
+}
+
+.cardOverallBody {
+    /* Add shadows to create the "card" effect */
+    height: auto;
+    width: 100%;
+    padding: 1%;
+    margin: 1%;
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    align-items: center;
+
+    .cardContentOverallTitle {
+        font-size: 24px;
+        text-align: center;
+    }
+
+    .cardOverallContent{
+        font-size: 84px;
+        text-align: center;
+    }
+
+    
+    
+  }
