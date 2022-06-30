@@ -15,11 +15,12 @@ import {
 
 import DashboardBarChart from "../../dashboard/DashboardBarChart";
 import DashboardCardOverall from "../../dashboard/DashboardCardOverall";
-import { User } from "firebase";
-import { Organization, Subject, TrainingSession } from "../../types";
+import {Organization, Subject, TrainingSession, User} from "../../types";
 import { useVersion } from "react-admin";
 import { useDataProvider } from "react-admin";
 import { useTranslate } from "react-admin";
+import UsersByCommunity from "../../dashboard/UsersByCommunity";
+import DashboardSectionHeader from "../../dashboard/DashboardSectionHeader";
 
 const DiagnosticLogFilter = (props:any) => (
     <Filter {...props}>
@@ -127,10 +128,27 @@ const DiagnosticLogList = (props: object) => {
 
     return (
         <div>
-            <h1>Hwhdhiei</h1>
-            <div style={{ marginLeft: '5%', 'display': 'flex' }}>
+            {/* section Title */}
+            <div style={{ marginLeft: '1%' }}>
+                <DashboardSectionHeader sectionTitle={translate('COMMUNITY TRAININGS OVERVIEW')} />
+            </div>
+            {/* Piechart components */}
+            {/* <div style={{ marginLeft: '5%', 'display': 'flex' }}>
+                
+                <div style={{margin: '1%'}}>
+                    <UsersByCommunity users={users} organizations={organizations} />
+                </div>
+                <div style={{margin: '1%'}}>
+                    <UsersByCommunity users={users} organizations={organizations} />
+                </div>
+                <div style={{margin: '1%'}}>
+                    <UsersByCommunity users={users} organizations={organizations} />
+                </div>
+            </div> */}
+            <div style={{ marginLeft: '1%', 'display': 'flex' }}>
+                <DashboardCardOverall cardContent={60} cardTitle={translate('Individuals Trained')} />
                 <DashboardBarChart title={''} data={individualsTrainedPerSubjectBarData} />
-                <DashboardCardOverall cardContent={totalCommunities} cardTitle={translate('Overall Knowledge gained across all communities & all trainings')} />
+                <DashboardCardOverall cardContent={totalCommunities} cardTitle={translate('Knowledge gained')} />
                 {/* <DashboardBarChart title={''} data={KnowledgeGainedBarData} /> */}
             </div>
             <List {...props}
