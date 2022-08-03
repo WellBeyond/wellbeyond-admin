@@ -22,9 +22,9 @@ const DiagnosticLogShow = (props: any) => (
                         <DateField source="started" label="Started" showTime={true}/>
                         <DateField source="completed" label="Completed" showTime={true}/>
                         <SelectField source="status" label="Status" choices={[
-                            {id: 'open', name: 'Open'},
+                            // {id: 'open', name: 'Open'},
                             {id: 'resolved', name: 'Resolved'},
-                            {id: 'partial', name: 'Partially Resolved'},
+                            // {id: 'partial', name: 'Partially Resolved'},
                             {id: 'unresolved', name: 'Unresolved'}
                         ]}/>
                         <ReferenceField

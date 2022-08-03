@@ -124,7 +124,7 @@ const FormSessionList = (props: object) => {
         <div>
             {/* section Title */}
             <div style={{ marginLeft: '1%' }}>
-                <DashboardSectionHeader sectionTitle={translate('FORM SUBMITTIONS LOG')} />
+                <DashboardSectionHeader sectionTitle={translate('FORM SUBMITTIONS LOG')} link=''/>
             </div>
             <List {...props}
                 exporter={exporter}

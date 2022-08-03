@@ -29,6 +29,7 @@ export default {
             training: 'Training Classes',
             forms: 'Forms',
             assets: 'Photos and Videos',
+            systemOverview: 'System Overview',
         },
     },
     resources: {
@@ -267,9 +268,9 @@ export default {
             }
         },
         formSessions: {
-            name: 'Form Session |||| Form Sessions',
-            amount: '1 form session |||| %{smart_count} form sessions',
-            title: 'Form Session %{reference}',
+            name: 'Form Submission |||| Form Submissions',
+            amount: '1 form submission |||| %{smart_count} form submissions',
+            title: 'Form Submission %{reference}',
             fields: {
             },
             tabs: {

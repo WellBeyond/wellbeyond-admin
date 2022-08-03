@@ -15,11 +15,6 @@ const DashboardBarChart : React.FC<DashboardBarChartProps> = ({title, data}) => 
                 data={data}
                 options={{
                     /* @ts-ignore */
-                    // title:{
-                    // display:true,
-                    // text:'Average Rainfall per month',
-                    // fontSize:20
-                    // },
                     legend:{
                     display:true,
                     position:'right'

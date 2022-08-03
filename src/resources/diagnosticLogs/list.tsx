@@ -116,7 +116,6 @@ const DiagnosticLogList = (props: object) => {
         fetchOrganizations();
         fetchSubjects();
     }, [version]); // eslint-disable-line react-hooks/exhaustive-deps
-    console.log('====================================>', users, organizations, sessions, subjects, subjectNames, individualsTrainedPerSubject);
 
     const totalTrained = sessions.reduce((accumulator, session) => {
         return accumulator + Number(session.groupSizeNum)
@@ -130,7 +129,7 @@ const DiagnosticLogList = (props: object) => {
         <div>
             {/* section Title */}
             <div style={{ marginLeft: '1%' }}>
-                <DashboardSectionHeader sectionTitle={translate('COMMUNITY TRAININGS OVERVIEW')} />
+                <DashboardSectionHeader sectionTitle={translate('COMMUNITY TRAININGS OVERVIEW')} link='' />
             </div>
             {/* Piechart components */}
             {/* <div style={{ marginLeft: '5%', 'display': 'flex' }}>
@@ -179,9 +178,9 @@ const DiagnosticLogList = (props: object) => {
                         <TextField source="name"/>
                     </ReferenceField>
                     <SelectField source="status" label="Community Reported Status" choices={[
-                        {id: 'open', name: 'Open'},
+                        // {id: 'open', name: 'Open'},
                         {id: 'resolved', name: 'Resolved'},
-                        {id: 'partial', name: 'Partially Resolved'},
+                        // {id: 'partial', name: 'Partially Resolved'},
                         {id: 'unresolved', name: 'Unresolved'}
                     ]}/>
                     <SelectField source="adminReportedStatus" label="Organization Status" choices={[

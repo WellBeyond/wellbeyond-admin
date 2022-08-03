@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {FC, useEffect, useState} from 'react';
-import {Card, CardContent, CardHeader, Theme} from '@material-ui/core';
+import {Card, CardContent, Theme} from '@material-ui/core';
 import {Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip} from 'recharts';
 import {useTranslate} from 'react-admin';
 import {Organization, User} from "../types";

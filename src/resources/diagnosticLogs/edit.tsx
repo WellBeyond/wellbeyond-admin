@@ -35,9 +35,9 @@ const DiagnosticLogEdit = (props: any) => (
                     <SelectInput optionText="name" fullWidth={true} allowEmpty={false} />
                 </ReferenceInput>
                 <SelectInput source="status" label="Status" fullWidth={true} choices={[
-                    {id: 'open', name: 'Open'},
+                    // {id: 'open', name: 'Open'},
                     {id: 'resolved', name: 'Resolved'},
-                    {id: 'partial', name: 'Partially Resolved'},
+                    // {id: 'partial', name: 'Partially Resolved'},
                     {id: 'unresolved', name: 'Unresolved'}
                 ]}/>
                 <SelectInput source="adminReportedStatus" label="Updated Status (Note to Admins: Only update this after confirming the actual status of the water system)" fullWidth={true} choices={[

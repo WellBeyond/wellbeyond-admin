@@ -1,14 +1,16 @@
 import React from 'react';
 import './DashboardCard.scss';
+import { Link } from 'react-router-dom'
 
 interface DashboardSectionHeaderProps {
     sectionTitle: string;
+    link: string;
 }
 
-const DashboardSectionHeader : React.FC<DashboardSectionHeaderProps> = ({sectionTitle}) => {
+const DashboardSectionHeader : React.FC<DashboardSectionHeaderProps> = ({sectionTitle, link}) => {
     return (
         <div className="sectionHeader">
-            <h1 className='sectionTitle'>{sectionTitle} </h1>
+            <Link to={link} className='sectionTitle'>{sectionTitle} </Link>
         </div>
     );
 }

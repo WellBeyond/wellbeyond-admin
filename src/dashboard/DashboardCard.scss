@@ -19,9 +19,6 @@
         font-size: 44px;
         text-align: center;
     }
-
-    
-    
   }
 
 .cardPadding{
@@ -37,6 +34,11 @@
         text-align: start;
         margin: 0px;
         padding: 0px; 
+        text-decoration: none;
+        color: black;
+    }
+    a:hover {
+        color: rgba(0, 99, 155, 1);
     }
 }
 
@@ -58,12 +60,26 @@
         padding: 0px; 
     }
 }
-
-.pieChartTitle{
-    font-size: 24px;
-    text-align: start;
-    margin: 10px;
-    padding: 0px; 
+.dashboardPieChartContainer {
+    display: flex;
+    width: 100%;
+    margin: 1%;
+    padding: 1%;
+    .pieChartContainer {
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        max-width: 350px;
+        margin-right: 2%;
+        padding: 1%;
+        width: 100%;
+        height: auto;
+    
+        .pieChartTitle{
+            font-size: 14px;
+            text-align: start;
+            margin: 10px;
+            padding: 5px; 
+        }
+    }
 }
 
 .cardOverallBody {
