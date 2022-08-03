@@ -159,26 +159,25 @@ const Dashboard = () => {
         let allLessons = sessions && sessions.map((session) => {
             return session.lessons
         })
+
+        let score = 0
+        let preScore = 0
+
         let scorePrescore = allLessons.map((lesson) => {
-            let score = 0
-            let preScore = 0
-            let knowledgeGained = 0
-           
+            
             let scorePrescoreArray = lesson && Object.keys(lesson).map((key) => {
                 preScore = preScore + (lesson[key].preScore || 0)
                 score = score + (lesson[key].score || 0)
-                // console.log({score,preScore})
                 
-                // knowledgeGained = finalScore/percentageScore;
+
                 return {preScore, score}
               })
-              let finalScore = score - preScore;
-              let percentageScore = 100 - preScore;
             // console.log(scorePrescoreArray?.length)
-            console.log({ finalScore, percentageScore})
-
+    
               return scorePrescoreArray
         }).flat()
+        //show scores
+        console.log({score,preScore})
 
         let reducedScorePrescore = scorePrescore.reduce((accumulator, arrayItem) => {
             //@ts-ignore
