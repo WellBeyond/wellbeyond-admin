@@ -2,6 +2,12 @@ import * as React from "react";
 
 import {Datagrid, DateField, downloadCSV, List, NumberField, ReferenceField, TextField} from "react-admin";
 import jsonExport from 'jsonexport/dist';
+import DashboardCardOverall from "../../dashboard/DashboardCardOverall";
+import DashboardBarChart from "../../dashboard/DashboardBarChart";
+import DashboardSectionHeader from "../../dashboard/DashboardSectionHeader";
+import { User } from "firebase";
+import { useVersion, useDataProvider, useTranslate } from "react-admin";
+import { TrainingSession, Organization, Subject } from "../../types";
 
 const addLessonData = (row:any, session:any, subject:any) => {
     if (subject.lessons) {
@@ -71,27 +77,126 @@ const exporter = (records:any, fetchRelatedRecords:any, dataProvider: any) => {
     });
 };
 
-
 const SessionList = (props: object) => {
+    const [sessions, setSessions] = React.useState<TrainingSession[]>([]);
+    const [users, setUsers] = React.useState<User[]>([]);
+    const [organizations, setOrganizations] = React.useState<Organization[]>([]);
+    const [subjects, setSubjects] = React.useState<Subject[]>([]);
+    const version = useVersion();
+    const dataProvider = useDataProvider();
+    const translate = useTranslate();
+
+    const subjectNames = subjects.map((sub) => {
+        return sub.name
+    } )
+
+    const individualsTrainedPerSubject = subjects.map((sub) => {
+        let a = sessions.filter((v) => (v.subjectId === sub.id)).length;
+        return a
+    } )
+
+    const individualsTrainedPerSubjectBarData = {
+        labels: subjectNames,
+        datasets: [
+          {
+            label: 'Individuals Trained per Subject',
+            backgroundColor: 'rgba(0, 99, 155, 1)',
+            borderColor: 'rgba(0,0,0,1)',
+            borderWidth: 2,
+            data: individualsTrainedPerSubject
+          }
+        ]
+    }
+
+    const fetchSessions = React.useCallback(async () => {
+        dataProvider.getList('sessions', {
+            filter: { },
+            sort: { field: 'started', order: 'ASC' },
+            pagination: { page: 1, perPage: 10000 },
+            // @ts-ignore
+        }).then(({ data }) => {
+            setSessions(data);
+        });
+    }, [dataProvider]);
+
+    const fetchUsers = React.useCallback(async () => {
+        dataProvider.getList('users', {
+            filter: { },
+            sort: { field: 'name', order: 'ASC' },
+            pagination: { page: 1, perPage: 10000 },
+            // @ts-ignore
+        }).then(({ data }) => {
+            setUsers(data);
+        });
+    }, [dataProvider]);
+
+    const fetchOrganizations = React.useCallback(async () => {
+        dataProvider.getList('organizations', {
+            filter: { },
+            sort: { field: 'name', order: 'ASC' },
+            pagination: { page: 1, perPage: 10000 },
+            // @ts-ignore
+        }).then(({ data }) => {
+            setOrganizations(data);
+        });
+    }, [dataProvider]);
+
+    const fetchSubjects = React.useCallback(async () => {
+        dataProvider.getList('subjects', {
+            filter: { },
+            sort: { field: 'name', order: 'ASC' },
+            pagination: { page: 1, perPage: 10000 },
+            // @ts-ignore
+        }).then(({ data }) => {
+            setSubjects(data);
+        });
+    }, [dataProvider]);
+
+    React.useEffect(() => {
+        fetchSessions();
+        fetchUsers();
+        fetchOrganizations();
+        fetchSubjects();
+    }, [version]); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const totalTrained = sessions.reduce((accumulator, session) => {
+        return accumulator + Number(session.groupSizeNum)
+    }, 0)
+
+    const totalCommunities = organizations.reduce((accumulator, org) => {
+        return accumulator + Number(org.communities.length)
+    }, 0)
     return (
-        <List {...props} exporter={exporter}
-              perPage={25}
-              sort={{field: 'started', order: 'DESC'}}>
-            <Datagrid optimized rowClick="edit">
-                <TextField source="community"  label="Community"/>
-                <ReferenceField label="Subject" source="subjectId" reference="subjects" link={false} >
-                    <TextField source="name" />
-                </ReferenceField>
-                <TextField source="groupType" label="Group Type"/>
-                <ReferenceField label="Performed By (Trainer)" source="userId" reference="users" link={false} sortBy="name">
-                    <TextField source="name" />
-                </ReferenceField>
-                <NumberField source="groupSizeNum" label="Group Size"/>
-                <DateField source="started" label="Started"/>
-                <DateField source="completed" label="Completed"/>
-                {/* <TextField source="organization"  label="Organization"/> */}
-            </Datagrid>
-        </List>
+        <div>
+            <div style={{ marginLeft: '1%' }}>
+                <DashboardSectionHeader sectionTitle={translate('COMMUNITY TRAININGS OVERVIEW')} link='' />
+            </div>
+            {/* Piechart components */}
+            <div style={{ marginLeft: '1%', 'display': 'flex' }}>
+                <DashboardCardOverall cardContent={60} cardTitle={translate('Individuals Trained')} />
+                <DashboardBarChart title={''} data={individualsTrainedPerSubjectBarData} />
+                <DashboardCardOverall cardContent={totalCommunities} cardTitle={translate('Knowledge gained')} />
+                {/* <DashboardBarChart title={''} data={KnowledgeGainedBarData} /> */}
+            </div>
+            <List {...props} exporter={exporter}
+                perPage={25}
+                sort={{field: 'started', order: 'DESC'}}>
+                <Datagrid optimized rowClick="edit">
+                    <TextField source="community"  label="Community"/>
+                    <ReferenceField label="Subject" source="subjectId" reference="subjects" link={false} >
+                        <TextField source="name" />
+                    </ReferenceField>
+                    <TextField source="groupType" label="Group Type"/>
+                    <ReferenceField label="Performed By (Trainer)" source="userId" reference="users" link={false} sortBy="name">
+                        <TextField source="name" />
+                    </ReferenceField>
+                    <NumberField source="groupSizeNum" label="Group Size"/>
+                    <DateField source="started" label="Started"/>
+                    <DateField source="completed" label="Completed"/>
+                    {/* <TextField source="organization"  label="Organization"/> */}
+                </Datagrid>
+            </List>
+        </div>
     );
 }
 
