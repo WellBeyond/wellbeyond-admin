@@ -75,8 +75,6 @@ export const PhotoInput: React.FunctionComponent<MyProps> = ({record, source, la
                 return console.log(err);
             }
             if (result && result.event === 'success' && result.info) {
-                console.log(result.info);
-                console.log(result);
                 handleUploadResult(result.info);
             }
         });

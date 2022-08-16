@@ -337,9 +337,6 @@ const Dashboard = () => {
         fetchFormTypes();
         fetchChecklists();
     }, [version]); // eslint-disable-line react-hooks/exhaustive-deps
-    // console.log('====================================>', users, organizations, sessions, subjects, subjectNames, individualsTrainedPerSubject)
-    // console.log({formSessions, organizations, formTypes, checklists, maintenanceLogs})
-    console.log('>>>>>>>>>>>>>>', diagnosticsStatuses())
 
     const totalTrained = sessions.reduce((accumulator, session) => {
         return accumulator + Number(session.groupSizeNum)
@@ -415,7 +412,8 @@ const Dashboard = () => {
 
             {/* section Title */}
             <div style={{ marginLeft: '6%' }}>
-                <DashboardSectionHeader sectionTitle={translate('SYSTEM OVERVIEW')} link='/systemOverview'/>
+                {/* link in this case is '/systemOverview' */}
+                <DashboardSectionHeader sectionTitle={translate('SYSTEM OVERVIEW')} link=''/>
             </div>
 
             <div style={{ marginLeft: '5%', 'display': 'flex'}} className='dashboardPieChartContainer'>
