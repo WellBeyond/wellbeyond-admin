@@ -281,7 +281,7 @@ const Dashboard = () => {
     const communitySystemStatusPieData = {
         labels:["Functioning", "Maintenance Checklist Overdue", "Unresolved Diagnostics", "Maintenance & Diagnostic needs"],
         datasets:[{
-         data: [300, 50, 100, 40],
+         data: [2, 3, 1, 1],
          backgroundColor: [
             "#FF5A5E",
             "#5AD3D1",
