@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {FC, useEffect, useState} from 'react';
-import {Card, CardContent, CardHeader, Theme} from '@material-ui/core';
+import {Card, CardContent, Theme} from '@material-ui/core';
 import {Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip} from 'recharts';
 import {useTranslate} from 'react-admin';
 import {Organization, User} from "../types";
@@ -10,6 +10,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import {Identifier} from "ra-core";
+import './DashboardCard.scss';
 
 interface CommunityCounts {
     name: string;
@@ -159,7 +160,7 @@ const UsersByCommunity: FC<{ users?: User[], organizations?: Organization[] }> =
 
     return (
         <Card>
-            <CardHeader title={translate('Users by Organization/Community')} />
+            <h1 className='pieChartTitle' >{translate('Users by Organization/Community')}</h1>
             <CardContent>
                 <div className={classes.cardContent}>
                     <FormControl className={classes.formControl}>

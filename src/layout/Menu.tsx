@@ -16,6 +16,8 @@ import NetworkCheckIcon from '@material-ui/icons/NetworkCheck';
 import CategoryIcon from '@material-ui/icons/Category';
 import NoteIcon from '@material-ui/icons/Notes';
 import InputIcon from '@material-ui/icons/InputOutlined';
+import LensIcon from '@material-ui/icons/Lens';
+
 /*
 import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary';
 import VideoLibraryIcon from '@material-ui/icons/VideoLibrary';
@@ -30,7 +32,7 @@ import {DashboardMenuItem, MenuItemLink, usePermissions, useTranslate} from 'rea
 import SubMenu from './SubMenu';
 import {AppState} from '../types';
 
-type MenuName = ('menuSystems' | 'menuRules' | 'menuMaintenance' | 'menuTraining' | 'menuAssets' | 'menuUsers' | 'menuForms');
+type MenuName = ('menuSystems' | 'menuRules' | 'menuMaintenance' | 'menuTraining' | 'menuAssets' | 'menuUsers' | 'menuForms' | 'menuSystemOverview');
 
 interface Props {
     dense: boolean;
@@ -46,7 +48,8 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
         menuMaintenance: false,
         menuTraining: false,
         menuAssets: false,
-        menuForms: false
+        menuForms: false,
+        menuSystemOverview: false
     });
     const { permissions } = usePermissions();
     const translate = useTranslate();
@@ -67,6 +70,17 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
     return (
         <div>
             <DashboardMenuItem onClick={onMenuClick} sidebarIsOpen={open} />
+            {isAdmin && <MenuItemLink
+                to={`/systemOverview`}
+                sidebarIsOpen={open}
+                onClick={onMenuClick}
+                leftIcon={<LensIcon />}
+                dense={dense}
+                primaryText={translate(`pos.menu.systemOverview`, {
+                    smart_count: 2,
+                })}
+            >
+            </MenuItemLink>}
             {isAdmin && <SubMenu
                 handleToggle={() => handleToggle('menuSystems')}
                 isOpen={state.menuSystems}

@@ -26,9 +26,9 @@ const DiagnosticLogCreate = (props: MyProps) => {
                     <SelectInput optionText="name" fullWidth={true} allowEmpty={false} />
                 </ReferenceInput>
                 <SelectInput source="status" label="Status" fullWidth={true} choices={[
-                    {id: 'open', name: 'Open'},
+                    // {id: 'open', name: 'Open'},
                     {id: 'resolved', name: 'Resolved'},
-                    {id: 'partial', name: 'Partially Resolved'},
+                    // {id: 'partial', name: 'Partially Resolved'},
                     {id: 'unresolved', name: 'Unresolved'}
                 ]}/>
                 <BooleanInput source="archived" label="Archived?" fullWidth={true}/>

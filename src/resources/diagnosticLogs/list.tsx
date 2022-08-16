@@ -1,5 +1,4 @@
-import * as React from "react";
-
+import React from 'react';
 import {
     ArrayField,
     BooleanInput, ChipField,
@@ -27,67 +26,71 @@ const DiagnosticLogFilter = (props:any) => (
 
 const DiagnosticLogList = (props: object) => {
     return (
-        <List {...props}
-            filters={<DiagnosticLogFilter />}
-              perPage={25}
-              sort={{field: 'started', order: 'DESC'}}
-              filterDefaultValues={{ archived: false }}>
-            <Datagrid optimized rowClick="edit">
-            <TextField source="community" label="Community"/>
-                {/* <DateField source="started" label="Started" showTime={true}/> */}
-                <DateField source="completed" label="Completed" showTime={true}/>
-                <ArrayField label="Reported Issue" source="symptoms">
-                    <SingleFieldList>
-                        <ReferenceField
-                            source={'symptomId'}
-                            basePath={'/symptoms'}
-                            reference="symptoms"
-                        >
-                            <ChipField source="name"/>
-                        </ReferenceField>
-                    </SingleFieldList>
-                </ArrayField>
-                <ReferenceField
-                    label={"Performed By"}
-                    source={'userId'}
-                    basePath={'/users'}
-                    reference="users">
-                    <TextField source="name"/>
-                </ReferenceField>
-                <SelectField source="status" label="Community Reported Status" choices={[
-                    {id: 'open', name: 'Open'},
-                    {id: 'resolved', name: 'Resolved'},
-                    {id: 'partial', name: 'Partially Resolved'},
-                    {id: 'unresolved', name: 'Unresolved'}
-                ]}/>
-                <SelectField source="adminReportedStatus" label="Organization Status" choices={[
-                    {id: 'underreview', name: 'Under Review'},
-                    {id: 'issuesreported', name: 'Issues Reported'},
-                    {id: 'pendingmaintenance', name: 'Pending Maintenance'},
-                    {id: 'contactcommunity', name: 'Contact Community'}
-                ]}/>
-                {/* <ReferenceField
-                    label={"Organization"}
-                    source={'organizationId'}
-                    basePath={'/organizations'}
-                    reference="organizations">
-                    <TextField source="name"/>
-                </ReferenceField> */}
-                
-                {/* <ReferenceField
-                    label={"System"}
-                    source={'systemId'}
-                    basePath={'/systems'}
-                    reference="systems">
-                    <TextField source="name"/>
-                </ReferenceField> */}
-                
-                <TextField source="updatedby" label={"Updated By"} reference='users'/>
-                <DateField label={'Last Update'}
-                    source='lastupdate' /> 
-                
-            </Datagrid>
-        </List>
+        <div>
+            <List {...props}
+                filters={<DiagnosticLogFilter />}
+                perPage={25}
+                sort={{field: 'started', order: 'DESC'}}
+                filterDefaultValues={{ archived: false }}>
+                <Datagrid optimized rowClick="edit">
+                <TextField source="community" label="Community"/>
+                    {/* <DateField source="started" label="Started" showTime={true}/> */}
+                    <DateField source="completed" label="Completed" showTime={true}/>
+                    <ArrayField label="Reported Issue" source="symptoms">
+                        <SingleFieldList>
+                            <ReferenceField
+                                source={'symptomId'}
+                                basePath={'/symptoms'}
+                                reference="symptoms"
+                            >
+                                <ChipField source="name"/>
+                            </ReferenceField>
+                        </SingleFieldList>
+                    </ArrayField>
+                    <ReferenceField
+                        label={"Performed By"}
+                        source={'userId'}
+                        basePath={'/users'}
+                        reference="users">
+                        <TextField source="name"/>
+                    </ReferenceField>
+                    <SelectField source="status" label="Community Reported Status" choices={[
+                        // {id: 'open', name: 'Open'},
+                        {id: 'resolved', name: 'Resolved'},
+                        // {id: 'partial', name: 'Partially Resolved'},
+                        {id: 'unresolved', name: 'Unresolved'}
+                    ]}/>
+                    <SelectField source="adminReportedStatus" label="Organization Status" choices={[
+                        {id: 'underreview', name: 'Under Review'},
+                        {id: 'issuesreported', name: 'Issues Reported'},
+                        {id: 'pendingmaintenance', name: 'Pending Maintenance'},
+                        {id: 'contactcommunity', name: 'Contact Community'},
+                        {id: 'functioning', name: 'Functioning'}
+
+                    ]}/>
+                    {/* <ReferenceField
+                        label={"Organization"}
+                        source={'organizationId'}
+                        basePath={'/organizations'}
+                        reference="organizations">
+                        <TextField source="name"/>
+                    </ReferenceField> */}
+                    
+                    {/* <ReferenceField
+                        label={"System"}
+                        source={'systemId'}
+                        basePath={'/systems'}
+                        reference="systems">
+                        <TextField source="name"/>
+                    </ReferenceField> */}
+                    
+                    <TextField source="updatedby" label={"Updated By"} reference='users'/>
+                    <DateField label={'Last Update'}
+                        source='lastupdate' /> 
+                    
+                </Datagrid>
+            </List>
+        </div>
     );
 }
 

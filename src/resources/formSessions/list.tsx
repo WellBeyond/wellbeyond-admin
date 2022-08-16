@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useTranslate } from "react-admin";
 
 import { Datagrid, 
     DateField, 
@@ -10,6 +11,7 @@ import { Datagrid,
     ReferenceInput,
     TextField} from "react-admin";
 import jsonExport from 'jsonexport/dist';
+import DashboardSectionHeader from "../../dashboard/DashboardSectionHeader";
 
 const addFormSessionData = (row:any, session:any, formType:any, formSession: any) => {
     if (formSession.formQuestionsWithAnswers) {
@@ -116,34 +118,41 @@ const UserFilter = (props:any) => (
 );
 
 const FormSessionList = (props: object) => {
+    const translate = useTranslate();
     return (
-        <List {...props}
-            exporter={exporter}
-            perPage={25}
-            sort={{field: 'started', order: 'DESC'}}
-            filters={<UserFilter/>}
-            >
-            <Datagrid optimized rowClick="edit">
-                <TextField source="community"  label="Community"/>
-                <DateField source="started" label="Submittal Date"/>
-                <ReferenceField label="Form Type" source="formTypeId" reference="formTypes" >
-                    <TextField source="name" />
-                </ReferenceField>
-                <ReferenceField label="Form Name" source="formId" reference="forms" >
-                    <TextField source="name" />
-                </ReferenceField>
-                <ReferenceField label="Submitted By" source="userId" reference="users" >
-                    <TextField source="name" />
-                </ReferenceField>
-                <ReferenceField
-                    label={"Organization"}
-                    source={'organizationId'}
-                    basePath={'/organizations'}
-                    reference="organizations">
-                    <TextField source="name"/>
-                </ReferenceField>
-            </Datagrid>
-        </List>
+        <div>
+            {/* section Title */}
+            <div style={{ marginLeft: '1%' }}>
+                <DashboardSectionHeader sectionTitle={translate('FORM SUBMITTIONS LOG')} link=''/>
+            </div>
+            <List {...props}
+                exporter={exporter}
+                perPage={25}
+                sort={{field: 'started', order: 'DESC'}}
+                filters={<UserFilter/>}
+                >
+                <Datagrid optimized rowClick="edit">
+                    <TextField source="community"  label="Community"/>
+                    <DateField source="started" label="Submittal Date"/>
+                    <ReferenceField label="Form Type" source="formTypeId" reference="formTypes" >
+                        <TextField source="name" />
+                    </ReferenceField>
+                    <ReferenceField label="Form Name" source="formId" reference="forms" >
+                        <TextField source="name" />
+                    </ReferenceField>
+                    <ReferenceField label="Submitted By" source="userId" reference="users" >
+                        <TextField source="name" />
+                    </ReferenceField>
+                    <ReferenceField
+                        label={"Organization"}
+                        source={'organizationId'}
+                        basePath={'/organizations'}
+                        reference="organizations">
+                        <TextField source="name"/>
+                    </ReferenceField>
+                </Datagrid>
+            </List>
+        </div>
     );
 }
 
