@@ -11,7 +11,6 @@ import { Datagrid,
     ReferenceInput,
     TextField} from "react-admin";
 import jsonExport from 'jsonexport/dist';
-import { translate } from "react-admin";
 import DashboardSectionHeader from "../../dashboard/DashboardSectionHeader";
 
 const addFormSessionData = (row:any, session:any, formType:any, formSession: any) => {

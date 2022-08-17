@@ -28,6 +28,9 @@ const MaintenanceLogCreate = (props: MyProps) => {
                 <ReferenceInput label="Checklist" source="checklistId" reference="checklists" fullWidth={true} allowEmpty={false}>
                     <SelectInput optionText="name" fullWidth={true} allowEmpty={false} />
                 </ReferenceInput>
+                <ReferenceInput label="Frequency" source="frequency" reference="checklists" fullWidth={true} allowEmpty={false}>
+                    <SelectInput optionText="frequency" fullWidth={true} allowEmpty={false} />
+                </ReferenceInput>
                 <DateTimeInput source="started" fullWidth={true}/>
                 <DateTimeInput source="completed" fullWidth={true}/>
             </SimpleForm>
