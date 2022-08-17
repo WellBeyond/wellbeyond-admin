@@ -106,7 +106,7 @@ const SystemOverviewComponent = () => {
         }]
       };
 
-    // you might receive data from an API, convert to list
+    // you might receive data from an API, convert to list and pass the data to the component
     const data = [
         { Community: "Anom", CommunitySystemStatus: 19, MaintenanceStatus: "Due", DiagnosticStatus: "Resolved", CheckedBy: "Clovis", LastUpdate: "7/11/22"  },
         { Community: "Megha", CommunitySystemStatus: 19, MaintenanceStatus: "Completed", DiagnosticStatus: "Pending", CheckedBy: "Bube", LastUpdate: "6/07/22"  },
