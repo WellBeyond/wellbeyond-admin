@@ -2,8 +2,8 @@ import React, {CSSProperties, useCallback, useEffect, useState,} from 'react';
 import { useDataProvider, useTranslate, useVersion } from 'react-admin';
 import { Theme, useMediaQuery } from '@material-ui/core';
 import {Organization, Subject, TrainingSession, User} from '../types'
-import Welcome from './Welcome';
-import UsersByCommunity from './UsersByCommunity';
+// import Welcome from './Welcome';
+// import UsersByCommunity from './UsersByCommunity';
 import { Chart as ChartJS, registerables } from 'chart.js';
 import DashboardCard from './DashboardCard';
 import './DashboardCard.scss';
@@ -33,7 +33,8 @@ const styles = {
     singleCol: { marginTop: '2em', marginBottom: '2em' },
     margin: {margin: '5%'},
     marginLef: {marginLeft: '5%'},
-    marginTops: {marginTop: '2%'}
+    marginTops: {marginTop: '2%'},
+    padding: {padding: '1%'}
 };
 
 const Dashboard = () => {
@@ -346,6 +347,8 @@ const Dashboard = () => {
         return accumulator + Number(org.communities.length)
     }, 0)
 
+    // console.log('=======================', {formSessions, formTypes})
+
     return isXSmall ? (
         <div>
             <div className='cardPadding'>
@@ -359,14 +362,37 @@ const Dashboard = () => {
                 {/* <DashboardCard cardContent={sessions.length} cardTitle={translate('No. of Maintenance Checklists completed')} /> */}
                 <DashboardCard cardContent={users.length} cardTitle={translate('Total No. of Users')} />
             </div> 
-            <div style={styles.flexColumn as CSSProperties}>
-                <div style={{ marginBottom: '2em' }}>
-                    <Welcome />
+            <div style={{'display': 'flex', 'flexDirection': 'column', 'flexWrap': 'wrap'}}>
+                {/* section Title */}
+                <div style={{ marginLeft: '6%' }}>
+                    {/* link in this case is '/systemOverview' */}
+                    <DashboardSectionHeader sectionTitle={translate('SYSTEM OVERVIEW')} link=''/>
                 </div>
-            </div>
-            <div style={styles.flexColumn as CSSProperties}>
-                <div style={{ marginBottom: '2em' }}>
-                    <UsersByCommunity users={users} organizations={organizations} />
+
+                <div style={{ marginLeft: '5%', 'display': 'flex', 'flexDirection': 'row', 'flexWrap': 'wrap'}} className='dashboardPieChartContainer'>
+                    {/* Piechart components */}
+                        <DashboardPieChart data={maintenanceStatusPieData} title='Maintenance Status' />
+                        <DashboardPieChart data={diagnosticStatusPieData} title='Diagnostic Status' /> 
+                </div>
+
+                {/* section Title */}
+                <div style={{ marginLeft: '6%' }}>
+                    <DashboardSectionHeader sectionTitle={translate('COMMUNITY TRAININGS')} link='/sessions'/>
+                </div>
+
+                <div style={{ marginLeft: '5%', 'display': 'flex', 'flexDirection': 'row', 'flexWrap': 'wrap' }}>
+                    <DashboardBarChart title={''} data={individualsTrainedPerSubjectBarData} />
+                    <DashboardCardOverall cardContent={totalKnowledgeGained()} cardTitle={translate('Overall Knowledge gained across all communities & all trainings')} />
+                </div>
+
+                {/* section Title */}
+                <div style={{ marginLeft: '6%' }}>
+                    <DashboardSectionHeader sectionTitle={translate('IMPACT MEASUREMENTS')} link=''/>
+                </div>
+
+                <div style={{ marginLeft: '5%', 'display': 'flex', 'width': '47%' }}>
+                    {/* barchart components */}
+                    <DashboardBarChart title={''} data={impactMeasurementBarData}/>
                 </div>
             </div>
         </div>
@@ -387,12 +413,38 @@ const Dashboard = () => {
                     <DashboardCard cardContent={users.length} cardTitle={translate('Total No. of Users')} />
                 </div>
             </div> 
-            <div style={styles.singleCol}>
-                <Welcome />
-            </div>
-            <div style={styles.flexColumn as CSSProperties}>
-                <div style={styles.singleCol}>
-                    <UsersByCommunity users={users} organizations={organizations} />
+            
+            <div style={{'display': 'flex', 'flexDirection': 'column', 'flexWrap': 'wrap'}}>
+                {/* section Title */}
+                <div style={{ marginLeft: '6%' }}>
+                    {/* link in this case is '/systemOverview' */}
+                    <DashboardSectionHeader sectionTitle={translate('SYSTEM OVERVIEW')} link=''/>
+                </div>
+
+                <div style={{ marginLeft: '5%', 'display': 'flex', 'flexDirection': 'row', 'flexWrap': 'wrap'}} className='dashboardPieChartContainer'>
+                    {/* Piechart components */}
+                        <DashboardPieChart data={maintenanceStatusPieData} title='Maintenance Status' />
+                        <DashboardPieChart data={diagnosticStatusPieData} title='Diagnostic Status' /> 
+                </div>
+
+                {/* section Title */}
+                <div style={{ marginLeft: '6%' }}>
+                    <DashboardSectionHeader sectionTitle={translate('COMMUNITY TRAININGS')} link='/sessions'/>
+                </div>
+
+                <div style={{ marginLeft: '5%', 'display': 'flex', 'flexDirection': 'row', 'flexWrap': 'wrap' }}>
+                    <DashboardBarChart title={''} data={individualsTrainedPerSubjectBarData} />
+                    <DashboardCardOverall cardContent={totalKnowledgeGained()} cardTitle={translate('Overall Knowledge gained across all communities & all trainings')} />
+                </div>
+
+                {/* section Title */}
+                <div style={{ marginLeft: '6%' }}>
+                    <DashboardSectionHeader sectionTitle={translate('IMPACT MEASUREMENTS')} link=''/>
+                </div>
+
+                <div style={{ marginLeft: '5%', 'display': 'flex', 'width': '47%' }}>
+                    {/* barchart components */}
+                    <DashboardBarChart title={''} data={impactMeasurementBarData}/>
                 </div>
             </div>
         </div>
