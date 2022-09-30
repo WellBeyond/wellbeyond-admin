@@ -30,7 +30,7 @@
     "react-firebaseui": "^4.2.0",
     "react-scripts": "3.4.1",
     "rechart": "0.0.1",
-    "recharts": "^2.0.9",
+    "recharts": "^2.1.14",
     "recompose": "^0.30.0",
     "sass": "^1.52.3",
     "typescript": "^3.9.10",
