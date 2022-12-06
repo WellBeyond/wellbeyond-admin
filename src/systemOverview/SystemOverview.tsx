@@ -16,6 +16,7 @@ const SystemOverviewComponent = () => {
     const maintenanceStatuses = () => {
         let totalCompliant = 0
         let totalNonCompliant = 0
+        
 
         const complianceStatus = checklists && maintenanceLogs && maintenanceLogs.map((log: any)=> {
             const lastChecklistUpdate = new Date(log.started)
@@ -133,6 +134,7 @@ const SystemOverviewComponent = () => {
                 {/* List table components */}
                 <SystemOverviewListTable data={data}/>
             </div>
+            
 
         </div>
     );

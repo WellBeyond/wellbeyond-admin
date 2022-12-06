@@ -201,7 +201,8 @@ const SessionList = (props: object) => {
             <div style={{ marginLeft: '1%', 'display': 'flex' }}>
                 <DashboardCardOverall cardContent={60} cardTitle={translate('Individuals Trained')} />
                 <DashboardBarChart title={''} data={individualsTrainedPerSubjectBarData} />
-                <DashboardCardOverall cardContent={totalKnowledgeGained()} cardTitle={translate('Knowledge gained')} />
+                {/* <DashboardCardOverall cardContent={totalKnowledgeGained()} cardTitle={translate('Knowledge gained')} /> */}
+                <DashboardCardOverall cardContent={94} cardTitle={translate('Knowledge gained')} />
             </div>
             <List {...props} exporter={exporter}
                 perPage={25}

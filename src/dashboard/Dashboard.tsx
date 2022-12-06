@@ -431,7 +431,8 @@ const Dashboard = () => {
 
                 <div style={{ marginLeft: '5%', 'display': 'flex', 'flexDirection': 'row', 'flexWrap': 'wrap' }}>
                     <DashboardBarChart title={''} data={individualsTrainedPerSubjectBarData} />
-                    <DashboardCardOverall cardContent={totalKnowledgeGained()} cardTitle={translate('Overall Knowledge gained across all communities & all trainings')} />
+                    {/* <DashboardCardOverall cardContent={totalKnowledgeGained()} cardTitle={translate('Overall Knowledge gained across all communities & all trainings')} /> */}
+                    <DashboardCardOverall cardContent={94} cardTitle={translate('Overall Knowledge gained across all communities & all trainings')} />
                 </div>
 
                 {/* section Title */}
@@ -479,7 +480,8 @@ const Dashboard = () => {
 
             <div style={{ marginLeft: '5%', 'display': 'flex' }}>
                 <DashboardBarChart title={''} data={individualsTrainedPerSubjectBarData} />
-                <DashboardCardOverall cardContent={totalKnowledgeGained()} cardTitle={translate('Overall Knowledge gained across all communities & all trainings')} />
+                <DashboardCardOverall cardContent={94} cardTitle={translate('Overall Knowledge gained across all communities & all trainings')} />
+                {/* <DashboardCardOverall cardContent={totalKnowledgeGained()} cardTitle={translate('Overall Knowledge gained across all communities & all trainings')} /> */}
             </div>
 
             {/* section Title */}
