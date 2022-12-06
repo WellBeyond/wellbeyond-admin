@@ -227,7 +227,7 @@ const Dashboard = () => {
 
         let averageScore = score/(scorePrescore.length)
 
-        let totKnowledgeGained = Math.round(((averageScore - averagePrescore)/(100 - averageScore)) * 100)
+        let totKnowledgeGained = Math.round(100-(((averageScore - averagePrescore)/(100 - averageScore)) * 100))
         return totKnowledgeGained
     }
 
@@ -280,15 +280,12 @@ const Dashboard = () => {
     }
 
     const communitySystemStatusPieData = {
-        labels:["Functioning", "Maintenance Checklist Overdue", "Unresolved Diagnostics", "Maintenance & Diagnostic needs"],
+        labels:["Functioning", "Maintenance & Diagnostic needs"],
         datasets:[{
-         data: [2, 3, 1, 1],
+         data: [1,1],
          backgroundColor: [
             "#FF5A5E",
-            "#5AD3D1",
-            "#FFC870",
-            "#A8B3C5",
-            "#616774"
+            "#5AD3D1"
           ],
          borderWidth: 1
         }]
@@ -299,8 +296,8 @@ const Dashboard = () => {
         datasets:[{
          data: [maintenanceStatuses().totalCompliant, maintenanceStatuses().totalNonCompliant],
          backgroundColor: [
+            "#5AD3D1",
             "#FF5A5E",
-            "#5AD3D1"
           ],
          borderWidth: 1
         }]
@@ -317,8 +314,8 @@ const Dashboard = () => {
             ],
          backgroundColor: [
             "#FF5A5E",
-            "#5AD3D1",
             "#FFC870",
+            "#5AD3D1",
             "#A8B3C5",
             "#616774",
           ],
@@ -492,7 +489,8 @@ const Dashboard = () => {
 
             <div style={{ marginLeft: '5%', 'display': 'flex', 'width': '47%' }}>
                 {/* barchart components */}
-                <DashboardBarChart title={''} data={impactMeasurementBarData}/>
+                {/* <DashboardBarChart title={''} data={impactMeasurementBarData}/> */}
+                <img style={{'width': '100%'}} src='https://res.cloudinary.com/wellbeyond/image/upload/v1670335144/images/Screenshot_2022-12-06_at_2.50.24_PM.png'></img>
             </div>
         </div>
     );

@@ -163,6 +163,32 @@ const SessionList = (props: object) => {
         return accumulator + Number(session.groupSizeNum)
     }, 0)
 
+    const totalKnowledgeGained = () => {
+        let allLessons = sessions && sessions.map((session) => {
+            return session.lessons
+        })
+
+        let score = 0
+        let preScore = 0
+
+        let scorePrescore = allLessons.map((lesson) => {
+            let scorePrescoreArray = lesson && Object.keys(lesson).map((key) => {
+                preScore = preScore + (lesson[key].preScore || 0)
+                score = score + (lesson[key].score || 0)
+                return {preScore, score}
+              })
+              return scorePrescoreArray
+        }).flat()
+        //show scores
+
+        let averagePrescore = preScore/(scorePrescore.length)
+
+        let averageScore = score/(scorePrescore.length)
+
+        let totKnowledgeGained = Math.round(100-(((averageScore - averagePrescore)/(100 - averageScore)) * 100))
+        return totKnowledgeGained
+    }
+
     const totalCommunities = organizations.reduce((accumulator, org) => {
         return accumulator + Number(org.communities.length)
     }, 0)
@@ -175,8 +201,7 @@ const SessionList = (props: object) => {
             <div style={{ marginLeft: '1%', 'display': 'flex' }}>
                 <DashboardCardOverall cardContent={60} cardTitle={translate('Individuals Trained')} />
                 <DashboardBarChart title={''} data={individualsTrainedPerSubjectBarData} />
-                <DashboardCardOverall cardContent={totalCommunities} cardTitle={translate('Knowledge gained')} />
-                {/* <DashboardBarChart title={''} data={KnowledgeGainedBarData} /> */}
+                <DashboardCardOverall cardContent={totalKnowledgeGained()} cardTitle={translate('Knowledge gained')} />
             </div>
             <List {...props} exporter={exporter}
                 perPage={25}
