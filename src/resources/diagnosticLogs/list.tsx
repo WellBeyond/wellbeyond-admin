@@ -61,11 +61,10 @@ const DiagnosticLogList = (props: object) => {
                         {id: 'unresolved', name: 'Unresolved'}
                     ]}/>
                     <SelectField source="adminReportedStatus" label="Organization Status" choices={[
+                        {id: 'functioning', name: 'Functioning'},
                         {id: 'underreview', name: 'Under Review'},
                         {id: 'issuesreported', name: 'Issues Reported'},
                         {id: 'pendingmaintenance', name: 'Pending Maintenance'},
-                        {id: 'contactcommunity', name: 'Contact Community'},
-                        {id: 'functioning', name: 'Functioning'}
 
                     ]}/>
                     {/* <ReferenceField

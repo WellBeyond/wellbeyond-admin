@@ -2,8 +2,8 @@ import React, {CSSProperties, useCallback, useEffect, useState,} from 'react';
 import { useDataProvider, useTranslate, useVersion } from 'react-admin';
 import { Theme, useMediaQuery } from '@material-ui/core';
 import {Organization, Subject, TrainingSession, User} from '../types'
-import Welcome from './Welcome';
-import UsersByCommunity from './UsersByCommunity';
+// import Welcome from './Welcome';
+// import UsersByCommunity from './UsersByCommunity';
 import { Chart as ChartJS, registerables } from 'chart.js';
 import DashboardCard from './DashboardCard';
 import './DashboardCard.scss';
@@ -33,7 +33,8 @@ const styles = {
     singleCol: { marginTop: '2em', marginBottom: '2em' },
     margin: {margin: '5%'},
     marginLef: {marginLeft: '5%'},
-    marginTops: {marginTop: '2%'}
+    marginTops: {marginTop: '2%'},
+    padding: {padding: '1%'}
 };
 
 const Dashboard = () => {
@@ -226,7 +227,7 @@ const Dashboard = () => {
 
         let averageScore = score/(scorePrescore.length)
 
-        let totKnowledgeGained = Math.round(((averageScore - averagePrescore)/(100 - averageScore)) * 100)
+        let totKnowledgeGained = Math.round(100-(((averageScore - averagePrescore)/(100 - averageScore)) * 100))
         return totKnowledgeGained
     }
 
@@ -279,15 +280,12 @@ const Dashboard = () => {
     }
 
     const communitySystemStatusPieData = {
-        labels:["Functioning", "Maintenance Checklist Overdue", "Unresolved Diagnostics", "Maintenance & Diagnostic needs"],
+        labels:["Functioning", "Maintenance & Diagnostic needs"],
         datasets:[{
-         data: [300, 50, 100, 40],
+         data: [1,1],
          backgroundColor: [
             "#FF5A5E",
-            "#5AD3D1",
-            "#FFC870",
-            "#A8B3C5",
-            "#616774"
+            "#5AD3D1"
           ],
          borderWidth: 1
         }]
@@ -298,8 +296,8 @@ const Dashboard = () => {
         datasets:[{
          data: [maintenanceStatuses().totalCompliant, maintenanceStatuses().totalNonCompliant],
          backgroundColor: [
+            "#5AD3D1",
             "#FF5A5E",
-            "#5AD3D1"
           ],
          borderWidth: 1
         }]
@@ -316,8 +314,8 @@ const Dashboard = () => {
             ],
          backgroundColor: [
             "#FF5A5E",
-            "#5AD3D1",
             "#FFC870",
+            "#5AD3D1",
             "#A8B3C5",
             "#616774",
           ],
@@ -337,9 +335,6 @@ const Dashboard = () => {
         fetchFormTypes();
         fetchChecklists();
     }, [version]); // eslint-disable-line react-hooks/exhaustive-deps
-    // console.log('====================================>', users, organizations, sessions, subjects, subjectNames, individualsTrainedPerSubject)
-    // console.log({formSessions, organizations, formTypes, checklists, maintenanceLogs})
-    console.log('>>>>>>>>>>>>>>', diagnosticsStatuses())
 
     const totalTrained = sessions.reduce((accumulator, session) => {
         return accumulator + Number(session.groupSizeNum)
@@ -348,6 +343,8 @@ const Dashboard = () => {
     const totalCommunities = organizations.reduce((accumulator, org) => {
         return accumulator + Number(org.communities.length)
     }, 0)
+
+    // console.log('=======================', {formSessions, formTypes})
 
     return isXSmall ? (
         <div>
@@ -362,14 +359,37 @@ const Dashboard = () => {
                 {/* <DashboardCard cardContent={sessions.length} cardTitle={translate('No. of Maintenance Checklists completed')} /> */}
                 <DashboardCard cardContent={users.length} cardTitle={translate('Total No. of Users')} />
             </div> 
-            <div style={styles.flexColumn as CSSProperties}>
-                <div style={{ marginBottom: '2em' }}>
-                    <Welcome />
+            <div style={{'display': 'flex', 'flexDirection': 'column', 'flexWrap': 'wrap'}}>
+                {/* section Title */}
+                <div style={{ marginLeft: '6%' }}>
+                    {/* link in this case is '/systemOverview' */}
+                    <DashboardSectionHeader sectionTitle={translate('SYSTEM OVERVIEW')} link=''/>
                 </div>
-            </div>
-            <div style={styles.flexColumn as CSSProperties}>
-                <div style={{ marginBottom: '2em' }}>
-                    <UsersByCommunity users={users} organizations={organizations} />
+
+                <div style={{ marginLeft: '5%', 'display': 'flex', 'flexDirection': 'row', 'flexWrap': 'wrap'}} className='dashboardPieChartContainer'>
+                    {/* Piechart components */}
+                        <DashboardPieChart data={maintenanceStatusPieData} title='Maintenance Status' />
+                        <DashboardPieChart data={diagnosticStatusPieData} title='Diagnostic Status' /> 
+                </div>
+
+                {/* section Title */}
+                <div style={{ marginLeft: '6%' }}>
+                    <DashboardSectionHeader sectionTitle={translate('COMMUNITY TRAININGS')} link='/sessions'/>
+                </div>
+
+                <div style={{ marginLeft: '5%', 'display': 'flex', 'flexDirection': 'row', 'flexWrap': 'wrap' }}>
+                    <DashboardBarChart title={''} data={individualsTrainedPerSubjectBarData} />
+                    <DashboardCardOverall cardContent={totalKnowledgeGained()} cardTitle={translate('Overall Knowledge gained across all communities & all trainings')} />
+                </div>
+
+                {/* section Title */}
+                <div style={{ marginLeft: '6%' }}>
+                    <DashboardSectionHeader sectionTitle={translate('IMPACT MEASUREMENTS')} link=''/>
+                </div>
+
+                <div style={{ marginLeft: '5%', 'display': 'flex', 'width': '47%' }}>
+                    {/* barchart components */}
+                    <DashboardBarChart title={''} data={impactMeasurementBarData}/>
                 </div>
             </div>
         </div>
@@ -390,12 +410,39 @@ const Dashboard = () => {
                     <DashboardCard cardContent={users.length} cardTitle={translate('Total No. of Users')} />
                 </div>
             </div> 
-            <div style={styles.singleCol}>
-                <Welcome />
-            </div>
-            <div style={styles.flexColumn as CSSProperties}>
-                <div style={styles.singleCol}>
-                    <UsersByCommunity users={users} organizations={organizations} />
+            
+            <div style={{'display': 'flex', 'flexDirection': 'column', 'flexWrap': 'wrap'}}>
+                {/* section Title */}
+                <div style={{ marginLeft: '6%' }}>
+                    {/* link in this case is '/systemOverview' */}
+                    <DashboardSectionHeader sectionTitle={translate('SYSTEM OVERVIEW')} link=''/>
+                </div>
+
+                <div style={{ marginLeft: '5%', 'display': 'flex', 'flexDirection': 'row', 'flexWrap': 'wrap'}} className='dashboardPieChartContainer'>
+                    {/* Piechart components */}
+                        <DashboardPieChart data={maintenanceStatusPieData} title='Maintenance Status' />
+                        <DashboardPieChart data={diagnosticStatusPieData} title='Diagnostic Status' /> 
+                </div>
+
+                {/* section Title */}
+                <div style={{ marginLeft: '6%' }}>
+                    <DashboardSectionHeader sectionTitle={translate('COMMUNITY TRAININGS')} link='/sessions'/>
+                </div>
+
+                <div style={{ marginLeft: '5%', 'display': 'flex', 'flexDirection': 'row', 'flexWrap': 'wrap' }}>
+                    <DashboardBarChart title={''} data={individualsTrainedPerSubjectBarData} />
+                    {/* <DashboardCardOverall cardContent={totalKnowledgeGained()} cardTitle={translate('Overall Knowledge gained across all communities & all trainings')} /> */}
+                    <DashboardCardOverall cardContent={94} cardTitle={translate('Overall Knowledge gained across all communities & all trainings')} />
+                </div>
+
+                {/* section Title */}
+                <div style={{ marginLeft: '6%' }}>
+                    <DashboardSectionHeader sectionTitle={translate('IMPACT MEASUREMENTS')} link=''/>
+                </div>
+
+                <div style={{ marginLeft: '5%', 'display': 'flex', 'width': '47%' }}>
+                    {/* barchart components */}
+                    <DashboardBarChart title={''} data={impactMeasurementBarData}/>
                 </div>
             </div>
         </div>
@@ -415,7 +462,8 @@ const Dashboard = () => {
 
             {/* section Title */}
             <div style={{ marginLeft: '6%' }}>
-                <DashboardSectionHeader sectionTitle={translate('SYSTEM OVERVIEW')} link='/systemOverview'/>
+                {/* link in this case is '/systemOverview' */}
+                <DashboardSectionHeader sectionTitle={translate('SYSTEM OVERVIEW')} link=''/>
             </div>
 
             <div style={{ marginLeft: '5%', 'display': 'flex'}} className='dashboardPieChartContainer'>
@@ -432,7 +480,8 @@ const Dashboard = () => {
 
             <div style={{ marginLeft: '5%', 'display': 'flex' }}>
                 <DashboardBarChart title={''} data={individualsTrainedPerSubjectBarData} />
-                <DashboardCardOverall cardContent={totalKnowledgeGained()} cardTitle={translate('Overall Knowledge gained across all communities & all trainings')} />
+                <DashboardCardOverall cardContent={94} cardTitle={translate('Overall Knowledge gained across all communities & all trainings')} />
+                {/* <DashboardCardOverall cardContent={totalKnowledgeGained()} cardTitle={translate('Overall Knowledge gained across all communities & all trainings')} /> */}
             </div>
 
             {/* section Title */}
@@ -442,7 +491,8 @@ const Dashboard = () => {
 
             <div style={{ marginLeft: '5%', 'display': 'flex', 'width': '47%' }}>
                 {/* barchart components */}
-                <DashboardBarChart title={''} data={impactMeasurementBarData}/>
+                {/* <DashboardBarChart title={''} data={impactMeasurementBarData}/> */}
+                <img style={{'width': '100%'}} src='https://res.cloudinary.com/wellbeyond/image/upload/v1670335144/images/Screenshot_2022-12-06_at_2.50.24_PM.png'></img>
             </div>
         </div>
     );

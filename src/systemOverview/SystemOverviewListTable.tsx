@@ -4,6 +4,12 @@ interface SystemOverviewListTableProps {
     data: any;
 }
 
+const data = [
+    { Community: "Anom", CommunitySystemStatus: 19, MaintenanceStatus: "Due", DiagnosticStatus: "Resolved", CheckedBy: "Clovis", LastUpdate: "Male"  },
+    { Community: "Megha", CommunitySystemStatus: 19, MaintenanceStatus: "Completed", DiagnosticStatus: "Pending", CheckedBy: "Bube", LastUpdate: "Male"  },
+    { Community: "Subham", CommunitySystemStatus: 25, MaintenanceStatus: "Completed", DiagnosticStatus: "Pending", CheckedBy: "Kathryn", LastUpdate: "Male" },
+]
+
 const SystemOverviewListTable: React.FC<SystemOverviewListTableProps> = ({ data}, probObject:object) => {
     return (
         <div>
@@ -38,4 +44,4 @@ const SystemOverviewListTable: React.FC<SystemOverviewListTableProps> = ({ data}
     );
 }
 
-export default SystemOverviewListTable;
+export default SystemOverviewListTable; 
