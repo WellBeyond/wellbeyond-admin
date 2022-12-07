@@ -103,7 +103,8 @@ const SessionList = (props: object) => {
             backgroundColor: 'rgba(0, 99, 155, 1)',
             borderColor: 'rgba(0,0,0,1)',
             borderWidth: 2,
-            data: individualsTrainedPerSubject
+            // data: individualsTrainedPerSubject
+            data: [70, 81, 35, 47, 75, 64, 39]
           }
         ]
     }

@@ -175,9 +175,11 @@ const Dashboard = () => {
 
     const individualsTrainedPerSubject = subjects.map((sub) => {
         let filteredTrainees = sessions.filter((v) => (v.subjectId === sub.id)).length;
+        console.log("data from table " + filteredTrainees);
         return filteredTrainees
     } )
 
+    console.log("data from table before filter" + individualsTrainedPerSubject);
 
     const individualsTrainedPerSubjectBarData = {
         labels: subjectNames,
@@ -187,10 +189,13 @@ const Dashboard = () => {
             backgroundColor: 'rgba(0, 99, 155, 1)',
             borderColor: 'rgba(0,0,0,1)',
             borderWidth: 2,
-            data: individualsTrainedPerSubject
+            // data: individualsTrainedPerSubject
+            data: [70, 81, 35, 47, 75, 64, 39]
           }
         ]
     }
+
+    console.log("data from table after filter " + individualsTrainedPerSubjectBarData);
 
     const impactMeasurementBarData = {
         labels: organizations.map((organization) => organization.name ),
