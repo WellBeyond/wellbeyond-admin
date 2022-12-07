@@ -78,7 +78,8 @@ const SystemOverviewComponent = () => {
       const maintenanceStatusPieData = {
         labels:["Compliant", "Overdue"],
         datasets:[{
-         data: [maintenanceStatuses().totalCompliant, maintenanceStatuses().totalNonCompliant],
+        //  data: [maintenanceStatuses().totalCompliant, maintenanceStatuses().totalNonCompliant],
+        data: [75, 25],
          backgroundColor: [
             "#FF5A5E",
             "#5AD3D1"
@@ -90,12 +91,20 @@ const SystemOverviewComponent = () => {
       const diagnosticStatusPieData = {
         labels:["Issue Reported", "Under Review", "Functioning", "Pending Maintenace", "Contact Community"],
         datasets:[{
-         data: [diagnosticsStatuses().totalIssueReported,
-                diagnosticsStatuses().totalUnderReview,
-                diagnosticsStatuses().totalFunctioning,
-                diagnosticsStatuses().totalPendingMaintenance,
-                diagnosticsStatuses().totalContactCommunity
-            ],
+        // data: [
+        //     diagnosticsStatuses().totalIssueReported,
+        //     diagnosticsStatuses().totalUnderReview,
+        //     diagnosticsStatuses().totalFunctioning,
+        //     diagnosticsStatuses().totalPendingMaintenance,
+        //     diagnosticsStatuses().totalContactCommunity
+        // ],
+        data: [
+            10,
+            5,
+            70,
+            10,
+            15
+        ],
          backgroundColor: [
             "#FF5A5E",
             "#5AD3D1",

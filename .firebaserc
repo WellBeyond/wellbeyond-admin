@@ -1,5 +1,9 @@
 {
   "projects": {
-    "default": "wellbeyond-wash-training"
-  }
+    "default": "wellbeyond-wash-training",
+    "development": "wellbeyond-development",
+    "wellbeyond-wash-app": "wellbeyond-wash-training"
+  },
+  "targets": {},
+  "etags": {}
 }
