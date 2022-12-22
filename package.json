@@ -17,7 +17,7 @@
     "cloudinary-core": "^2.11.4",
     "cloudinary-react": "^1.7.0",
     "firebase": "^7.24.0",
-    "firebase-admin": "^8.13.0",
+    "firebase-admin": "^11.4.1",
     "lodash": "^4.17.21",
     "lodash.get": "^4.4.2",
     "ra-input-rich-text": "^3.14.0",
